@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="TheAdmin - Responsive Bootstrap 4 Admin, Dashboard &amp; WebApp Template">
+    <meta name="keywords" content="dashboard, index, main">
+
+    <title>SYS APAE</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,300i|Dosis:300,500" rel="stylesheet">
+
+    <!-- Styles -->
+    {% load static %}
+    <link href="{% static 'assets/css/core.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/app.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/style.min.css' %}" rel="stylesheet">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="{% static 'assets/img/apple-touch-icon.png' %}">
+    <link rel="icon" href="{% static 'assets/img/logo-icon-light.png' %}">
+
+    <!--  Open Graph Tags -->
+    <meta property="og:title" content="The Admin Template of 2018!">
+    <meta property="og:description" content="TheAdmin is a responsive, professional, and multipurpose admin template powered with Bootstrap 4.">
+    <meta property="og:image" content="http://thetheme.io/theadmin/assets/img/og-img.jpg">
+    <meta property="og:url" content="http://thetheme.io/theadmin/">
+    <meta name="twitter:card" content="summary_large_image">
+  </head>
+
+  <body class="sidebar-folded">
+
+    <!-- Preloader -->
+    <div class="preloader">
+      <div class="spinner-dots">
+        <span class="dot1"></span>
+        <span class="dot2"></span>
+        <span class="dot3"></span>
+      </div>
+    </div>
+
+
+    <!-- Sidebar -->
+    <aside class="sidebar sidebar-icons-right sidebar-icons-boxed sidebar-expand-lg">
+      <header class="sidebar-header">
+        <a class="logo-icon" href="{% url 'polls:index'%}"><img src="{% static 'assets/img/logo-icon-light.png' %}" alt="logo icon"></a>
+        <span class="logo">
+          <a href="{% url 'polls:index'%}"><img src="{% static 'assets/img/logo.png' %}" alt="logo"></a>
+        </span>
+        <span class="sidebar-toggle-fold"></span>
+      </header>
+
+      <nav class="sidebar-navigation">
+        <ul class="menu">
+
+        
+          <li class="menu-item active open">
+            <a class="menu-link" href="#">
+              <span class="icon fa fa-address-card-o"></span>
+              <span class="title">Triagem</span>
+              <span class="arrow"></span>
+            </a>
+
+            <ul class="menu-submenu">
+            
+              <li class="menu-item active">
+                <a class="menu-link" href="{% url 'polls:triagem_realizar' %}">
+                  <span class="dot"></span>
+                  <span class="title">Realizar</span>
+                </a>
+              </li>
+
+              <li class="menu-item">
+                <a class="menu-link" href="{% url 'polls:triagem_buscar' %}">
+                  <span class="dot"></span>
+                  <span class="title">Editar</span>
+                </a>
+              </li>
+
+              <li class="menu-item">
+                <a class="menu-link" href="{% url 'polls:triagem_listar' %}">
+                  <span class="dot"></span>
+                  <span class="title">Listar</span>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+
+        </ul>
+      </nav>
+
+    </aside>
+    <!-- END Sidebar -->
+
+
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-btn sidebar-toggler"><i>&#9776;</i></span>
+
+        <a class="topbar-btn d-none d-md-block" href="#" data-provide="fullscreen tooltip" title="Fullscreen">
+          <i class="material-icons fullscreen-default">fullscreen</i>
+          <i class="material-icons fullscreen-active">fullscreen_exit</i>
+        </a>
+        
+
+        <div class="topbar-divider d-none d-md-block"></div>
+    
+      </div>
+
+
+    </header>
+    <!-- END Topbar -->
+
+
+
+
+
+
+<!-- 
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+
+Menu para Trocar
+
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+-->
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Main container -->
+    <main>
+
+      <div class="main-content">
+        <div class="row">
+
+          
+          <div class="col-12 text-center">
+            <div class="card card-round card-body">
+              <br><br>
+              <h1 class="font-dosis fw-500">Triagem</h1><br>
+                
+
+
+            <div class="text-left">
+              <form class="card" action="{% url 'polls:cadastrar_triagem'%}" method="post">
+                {% csrf_token %}
+
+                <div class="card-body">
+                 
+
+                  <h5 class="text-uppercase">Usuário</h5>
+                  <hr class="hr-sm mb-2">
+
+                  <div class="form-group">
+                    <label>Nome</label>
+                    <input class="form-control" type="text" name="nome">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Data de nascimento</label>
+                     <small class="sidetitle">dd/mm/yyyy</small>
+                  <input name="datanascimento" type="text" class="form-control" data-format="&#123;&#123;99&#125;&#125;/&#123;&#123;99&#125;&#125;/&#123;&#123;9999&#125;&#125;">
+                  </div>
+
+                  <div class="form-group">
+                    <label>SUS</label>
+                    <input name="sus" class="form-control" type="text">
+                  </div>
+
+                  <div class="form-group">
+                    <label>CID</label>
+                    <input name="cid" class="form-control" type="text">
+                  </div>
+
+
+
+
+
+                  <h5 class="text-uppercase mt-3">Acompanhamento com especialista</h5>
+                  <hr class="hr-sm mb-2">
+                  
+                  <h6 class="text-uppercase mt-3">É Acompanhado</h6>
+                  <hr class="hr-sm mb-2">
+                  
+                  
+                    <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="acompanhado" value="s"> Sim
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="acompanhado" value="n" checked="checked"> Não
+                  </label>
+                </div>
+                  
+                  <div class="form-group">
+                    <label>Especialista acompanhante</label>
+                    <input name="especialista" class="form-control" type="text">
+                  </div>
+
+
+
+                  <h5 class="text-uppercase mt-3">Familiares</h5>
+                  <hr class="hr-sm mb-2">
+
+                  <h6 class="text-uppercase mt-3">Pai</h6>
+                  <hr class="hr-sm mb-2">
+
+                  <div class="form-group">
+                    <label>Nome</label>
+                    <input name="painome" class="form-control" type="text">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Idade</label>
+                    <input name="paiidade" class="form-control" type="text">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Profissão</label>
+                    <input name="paiprofissao" class="form-control" type="text">
+                  </div>
+
+                  <h6 class="text-uppercase mt-3">Mãe</h6>
+                  <hr class="hr-sm mb-2">
+
+                  <div class="form-group">
+                    <label>Nome</label>
+                    <input name="maenome" class="form-control" type="text">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Idade</label>
+                    <input name="maeidade" class="form-control" type="text">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Profissão</label>
+                    <input name="maeprofissao" class="form-control" type="text">
+                  </div>
+                
+
+
+                  <h5 class="text-uppercase mt-3">Renda familiar</h5>
+                  <hr class="hr-sm mb-2">
+
+                  <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    <input name="bpc" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="s"> BPC
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    <input name="bolsafamilia" class="form-check-input" type="checkbox" id="inlineCheckbox2" value="s"> Bolsa Família
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    <input name="aposentadoria" class="form-check-input" type="checkbox" id="inlineCheckbox3" value="s"> Aposentadoria
+                  </label>
+                </div>
+
+                  <div class="form-group">
+                    <label>Valor R$</label>
+                    <input name="valor" class="form-control" type="text">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Beneficiário</label>
+                    <input name="beneficiario" class="form-control" type="text">
+                  </div>
+
+
+
+
+                  <h5 class="text-uppercase mt-3">Endereço</h5>
+                  <hr class="hr-sm mb-2">
+
+                  <div class="form-group">
+                    <label>Rua</label>
+                    <input name="rua" class="form-control" type="text">
+                  </div>
+
+                  <div class="form-group">
+                    <label>N°</label>
+                    <input name="numero" class="form-control" type="text">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Bairro</label>
+                    <input name="bairro" class="form-control" type="text">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Ponto de Referência</label>
+                    <input name="ponto" class="form-control" type="text">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Cidade</label>
+                    <input name="cidade" class="form-control" type="text">
+                  </div>
+
+
+
+
+
+                  <h5 class="text-uppercase mt-3">Contato</h5>
+                  <hr class="hr-sm mb-2">
+
+                  <div class="form-group">
+                    <label>Telefone</label>
+                     <small class="sidetitle">E.g. (87) 3831-0000</small>
+                    <input name="telefone" type="text" class="form-control" data-format="(&#123;&#123;99&#125;&#125;) &#123;&#123;9999&#125;&#125;-&#123;&#123;9999&#125;&#125;">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Celular</label>
+                     <small class="sidetitle">E.g. (87) 9.9999-9999</small>
+                  <input name="celular" type="text" class="form-control" data-format="(&#123;&#123;99&#125;&#125;) &#123;&#123;9&#125;&#125;.&#123;&#123;9999&#125;&#125;-&#123;&#123;9999&#125;&#125;">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input name="email" class="form-control" type="text">
+                  </div>
+
+
+
+
+
+
+                  <h5 class="text-uppercase mt-3">Ensino</h5>
+                  <hr class="hr-sm mb-2">
+
+                  <h6 class="text-uppercase mt-3">Estudo em ensino Regular</h6>
+                  <hr class="hr-sm mb-2">
+
+                  
+                   <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="estuda" value="s"> Sim
+                  </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="estuda" value="n" checked="checked"> Não
+                    </label>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label>Qual</label>
+                    <input name="qual" class="form-control" type="text">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Ano</label>
+                    <input name="ano" class="form-control" type="text">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Turma</label>
+                    <input name="turma" class="form-control" type="text">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Turno</label>
+                    <input name="turno" class="form-control" type="text">
+                  </div>
+
+                 
+                  <h5 class="text-uppercase mt-3">Observações</h5>
+                  <hr class="hr-sm mb-2">
+
+                  <div class="form-group">
+                    <label>OBS:</label>
+                    <input name="obs" class="form-control" type="text">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Assinatura do Proficional</label>
+                    <input name="assinatura" class="form-control" type="text">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Data de Realização</label>
+                    <input name="datarealizacao" id="datar" class="form-control" type="text" >
+                  </div>
+
+                  <script type="text/javascript">
+                    data = new Date();
+                    document.getElementById("datar").value = data.toLocaleString();
+                  </script>
+
+
+                </div>
+
+                <footer class="card-footer text-right">
+                  <a href="{% url 'polls:index'%}" class="btn btn-secondary" type="reset">Cancelar</a>
+                  <button class="btn btn-primary" type="submit">Realizar</button>
+                </footer>
+              </form>
+            </div>
+
+              <br>
+              
+
+
+            </div>
+            <br><br>
+          </div>
+
+        </div>
+
+
+        <br><br><br>
+
+          <div class="w-100"></div>
+
+
+        </div>
+
+        <br>
+
+      </div><!--/.main-content -->
+
+
+      <!-- Footer -->
+      <footer class="site-footer">
+        <div class="row">
+          <div class="col-md-6">
+            <p class="text-center text-md-left">Copyright © 2017 <a href="http://thetheme.io/theadmin">TheAdmin</a>. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+      <!-- END Footer -->
+
+    </main>
+    <!-- END Main container -->
+
+
+  
+
+    <!-- Global quickview -->
+    <div id="qv-global" class="quickview" data-url="{% static 'assets/data/quickview-global-for-index.html' %}">
+      <div class="spinner-linear">
+        <div class="line"></div>
+      </div>
+    </div>
+    <!-- END Global quickview -->
+
+
+
+    <!-- Scripts -->
+    <script src="{% static 'assets/js/core.min.js' %}"></script>
+    <script src="{% static 'assets/js/app.min.js' %}"></script>
+    <script src="{% static 'assets/js/script.min.js' %}"></script>
+
+  </body>
+</html>
+
+<!--
+nome=
+datanascimento=++%2F++%2F++++
+sus=
+cid=
+exampleRadios=n
+especialista=
+painome=
+paiidade=
+paiprofissao=
+maenome=
+maeidade=
+maeprofissao=
+bpc=s
+bolsafamilia=s
+aposentadoria=s
+valor=
+beneficiario=
+rua=
+numero=
+bairro=
+ponto=
+cidade=
+telefone=%28++%29+++++-++++
+celular=%28++%29++.++++-++++
+email=
+inlineRadioOptions=n
+qual=
+ano=
+turma=
+turno=
+obs=
+assinatura=
+datarealizacao=162F09%2F2018+21%3A36%3A46
+-->

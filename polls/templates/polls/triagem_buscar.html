@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="TheAdmin - Responsive Bootstrap 4 Admin, Dashboard &amp; WebApp Template">
+    <meta name="keywords" content="dashboard, index, main">
+
+    <title>SYS APAE</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,300i|Dosis:300,500" rel="stylesheet">
+
+    <!-- Styles -->
+    {% load static %}
+    <link href="{% static 'assets/css/core.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/app.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/style.min.css' %}" rel="stylesheet">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="{% static 'assets/img/apple-touch-icon.png' %}">
+    <link rel="icon" href="{% static 'assets/img/logo-icon-light.png' %}">
+
+    <!--  Open Graph Tags -->
+    <meta property="og:title" content="The Admin Template of 2018!">
+    <meta property="og:description" content="TheAdmin is a responsive, professional, and multipurpose admin template powered with Bootstrap 4.">
+    <meta property="og:image" content="http://thetheme.io/theadmin/assets/img/og-img.jpg">
+    <meta property="og:url" content="http://thetheme.io/theadmin/">
+    <meta name="twitter:card" content="summary_large_image">
+  </head>
+
+  <body class="sidebar-folded">
+
+    <!-- Preloader -->
+    <div class="preloader">
+      <div class="spinner-dots">
+        <span class="dot1"></span>
+        <span class="dot2"></span>
+        <span class="dot3"></span>
+      </div>
+    </div>
+
+
+    <!-- Sidebar -->
+    <aside class="sidebar sidebar-icons-right sidebar-icons-boxed sidebar-expand-lg">
+      <header class="sidebar-header">
+        <a class="logo-icon" href="{% url 'polls:index'%}"><img src="{% static 'assets/img/logo-icon-light.png' %}" alt="logo icon"></a>
+        <span class="logo">
+          <a href="{% url 'polls:index'%}"><img src="{% static 'assets/img/logo.png' %}" alt="logo"></a>
+        </span>
+        <span class="sidebar-toggle-fold"></span>
+      </header>
+
+      <nav class="sidebar-navigation">
+        <ul class="menu">
+
+        
+          <li class="menu-item active open">
+            <a class="menu-link" href="#">
+              <span class="icon fa fa-address-card-o"></span>
+              <span class="title">Triagem</span>
+              <span class="arrow"></span>
+            </a>
+
+            <ul class="menu-submenu">
+            
+              <li class="menu-item">
+                <a class="menu-link" href="{% url 'polls:triagem_realizar' %}">
+                  <span class="dot"></span>
+                  <span class="title">Realizar</span>
+                </a>
+              </li>
+
+              <li class="menu-item active">
+                <a class="menu-link" href="{% url 'polls:triagem_buscar' %}">
+                  <span class="dot"></span>
+                  <span class="title">Editar</span>
+                </a>
+              </li>
+
+              <li class="menu-item">
+                <a class="menu-link" href="{% url 'polls:triagem_listar' %}">
+                  <span class="dot"></span>
+                  <span class="title">Listar</span>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+
+        </ul>
+      </nav>
+
+    </aside>
+    <!-- END Sidebar -->
+
+
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-btn sidebar-toggler"><i>&#9776;</i></span>
+
+        <a class="topbar-btn d-none d-md-block" href="#" data-provide="fullscreen tooltip" title="Fullscreen">
+          <i class="material-icons fullscreen-default">fullscreen</i>
+          <i class="material-icons fullscreen-active">fullscreen_exit</i>
+        </a>
+        
+
+        <div class="topbar-divider d-none d-md-block"></div>
+    
+      </div>
+
+
+    </header>
+    <!-- END Topbar -->
+
+
+
+
+
+
+<!-- 
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+
+Menu para Trocar
+
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+-->
+
+
+
+
+
+
+
+
+
+    <!-- Main container -->
+    <main>
+
+      <div class="main-content">
+        <div class="row">
+
+          
+          <div class="col-12 text-center">
+            <div class="card card-round card-body">
+              <br><br>
+                             
+              <div class="card">
+                <h1 class="font-dosis fw-500">Triagens</h1><br>
+
+                <div class="card-body">
+                  <p></p>
+                  <br>
+
+                  <table class="table table-striped table-bordered" cellspacing="0" data-provide="datatables">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Usuário</th>
+                        <th>Data de Nascimento</th>
+                        <th>CID</th>
+                        <th>Pai</th>
+                        <th>Mãe</th>
+                        <th>Profissio</th>
+                        <th>Editar</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th>ID</th>
+                        <th>Usuário</th>
+                        <th>Data de Nascimento</th>
+                        <th>CID</th>
+                        <th>Pai</th>
+                        <th>Mãe</th>
+                        <th>Profissional</th>
+                        <th>Editar</th>
+                      </tr>
+                    </tfoot>
+                    <tbody>
+                      
+                      {% for t in triagens%}
+                        
+                        <tr>
+                          <th>{{t.id}}</th>
+                          <td>{{t.usuario.nome}}</td>
+                          <td>{{t.usuario.data_nacimento}}</td>
+                          <td>{{t.usuario.cid}}</td>
+                          <td>{{t.nome_pai}}</td>
+                          <td>{{t.nome_mae}}</td>
+                          <td>{{t.assinatura_proficinal.nome}}</td>
+                          <td> <a style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true" href="{%url 'polls:triagem_editar' t.id %}"></a></td>
+                        
+                      </tr>
+                       {% endfor %}
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+              <br>
+              
+
+
+            </div>
+            <br><br>
+          </div>
+
+        </div>
+
+
+        <br><br><br>
+
+
+        
+          <div class="w-100"></div>
+
+
+          <!--
+          <div class="ml-auto col-md-10 col-lg-8 mr-auto">
+            <br>
+            <div class="callout callout-danger" role="alert">
+              <h5>Limited Offer</h5>
+              <p><strong>It's a bargain!</strong> An introductory price for a week, ends on 20 September.<br>Regular price is <u>$29</u> for Regular license and <u>$1300</u> for Extended license.</p>
+            </div>
+          </div>
+-->
+
+        </div>
+
+        <br>
+
+      </div><!--/.main-content -->
+
+
+      <!-- Footer -->
+      <footer class="site-footer">
+        <div class="row">
+          <div class="col-md-6">
+            <p class="text-center text-md-left">Copyright © 2017 <a href="http://thetheme.io/theadmin">TheAdmin</a>. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+      <!-- END Footer -->
+
+    </main>
+    <!-- END Main container -->
+
+
+  
+
+    <!-- Global quickview -->
+    <div id="qv-global" class="quickview" data-url="{% static 'assets/data/quickview-global-for-index.html' %}">
+      <div class="spinner-linear">
+        <div class="line"></div>
+      </div>
+    </div>
+    <!-- END Global quickview -->
+
+
+
+    <!-- Scripts -->
+    <script src="{% static 'assets/js/core.min.js' %}"></script>
+    <script src="{% static 'assets/js/app.min.js' %}"></script>
+    <script src="{% static 'assets/js/script.min.js' %}"></script>
+
+  </body>
+</html>
+
+<!--
+nome=
+datanascimento=++%2F++%2F++++
+sus=
+cid=
+exampleRadios=n
+especialista=
+painome=
+paiidade=
+paiprofissao=
+maenome=
+maeidade=
+maeprofissao=
+bpc=s
+bolsafamilia=s
+aposentadoria=s
+valor=
+beneficiario=
+rua=
+numero=
+bairro=
+ponto=
+cidade=
+telefone=%28++%29+++++-++++
+celular=%28++%29++.++++-++++
+email=
+inlineRadioOptions=n
+qual=
+ano=
+turma=
+turno=
+obs=
+assinatura=
+datarealizacao=162F09%2F2018+21%3A36%3A46
+-->
