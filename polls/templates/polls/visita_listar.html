@@ -55,7 +55,7 @@
         <ul class="menu">
 
         
-          <li class="menu-item active open">
+          <li class="menu-item">
             <a class="menu-link" href="#">
               <span class="icon fa fa-address-card-o"></span>
               <span class="title">Triagem</span>
@@ -78,7 +78,7 @@
                 </a>
               </li>
 
-              <li class="menu-item active">
+              <li class="menu-item">
                 <a class="menu-link" href="{% url 'polls:triagem_listar' %}">
                   <span class="dot"></span>
                   <span class="title">Listar</span>
@@ -92,7 +92,7 @@
 
 
 
-          <li class="menu-item">
+          <li class="menu-item active open">
             <a class="menu-link" href="#">
               <span class="icon fa fa-location-arrow"></span>
               <span class="title">Visita</span>
@@ -108,7 +108,7 @@
                 </a>
               </li>
 
-              <li class="menu-item">
+              <li class="menu-item active">
                 <a class="menu-link" href="{% url 'polls:visita_listar' %}">
                   <span class="dot"></span>
                   <span class="title">Listar</span>
@@ -190,38 +190,23 @@ Menu para Trocar
             <div class="card card-round card-body">
               <br><br>
                              
-              <div class="card" style="overflow-x:auto;">
-                <h1 class="font-dosis fw-500">Triagens</h1><br>
+              <div class="card">
+                <h1 class="font-dosis fw-500">Visitas</h1><br>
 
-                <div class="card-body" >
+                <div class="card-body">
                   <p></p>
                   <br>
 
-                  <table  class="table table-striped table-bordered table-responsive bs-select" cellspacing="0" data-provide="datatables">
+                  <table class="table table-striped table-bordered" cellspacing="0" data-provide="datatables">
                     <thead>
                       <tr>
                         <th>ID</th>
                         <th>Usuário</th>
-                        <th>Data de Nascimento</th>
-                        <th>CID</th>
-                        <th>SUS</th>
-                        <th>Acompanhamento</th>
-                        <th>Pai</th>
-                        <th>Mãe</th>
-                        <th>BPC</th>
-                        <th>Bolsa Família</th>
-                        <th>Aposentadoria</th>
-                        <th>Beneficiário</th>
-                        <th>Rua</th>
-                        <th>Bairro</th>
-                        <th>Cidade</th>
-                        <th>Telefone</th>
-                        <th>Celular</th>
-                        <th>Email</th>
-                        <th>Ensino Regular</th>
-                        <th>Ano</th>
+                        <th>Data da Visita</th>
+                        <th>Status</th>
+                        <th>Local</th>
                         <th>Proficional</th>
-                        <th>Data da Triagem</th>
+                        <th>Observações</th>
                         <th>Editar</th>
                       </tr>
                     </thead>
@@ -229,56 +214,28 @@ Menu para Trocar
                       <tr>
                         <th>ID</th>
                         <th>Usuário</th>
-                        <th>Data de Nascimento</th>
-                        <th>CID</th>
-                        <th>SUS</th>
-                        <th>Acompanhamento</th>
-                        <th>Pai</th>
-                        <th>Mãe</th>
-                        <th>BPC</th>
-                        <th>Bolsa Família</th>
-                        <th>Aposentadoria</th>
-                        <th>Beneficiário</th>
-                        <th>Rua</th>
-                        <th>Bairro</th>
-                        <th>Cidade</th>
-                        <th>Telefone</th>
-                        <th>Celular</th>
-                        <th>Email</th>
-                        <th>Ensino Regular</th>
-                        <th>Ano</th>
+                        <th>Data da Visita</th>
+                        <th>Status</th>
+                        <th>Local</th>
                         <th>Proficional</th>
-                        <th>Data da Triagem</th>
+                        <th>Observações</th>
                         <th>Editar</th>
                       </tr>
                     </tfoot>
                     <tbody>
                       
-                      {% for t in triagens%}
+                      {% for t in visitas%}
                         
                         <tr>
                           <th>{{t.id}}</th>
                           <td>{{t.usuario.nome}}</td>
-                          <td>{{t.usuario.data_nacimento}}</td>
-                          <td>{{t.usuario.cid}}</td>
-                          <td>{{t.sus}}</td>
-                          <td>{% if t.acompanhamento_com_especialista %} Acompanhado {% else %} Sem Acompanhamento {% endif %}</td>
-                          <td>{{t.nome_pai}}</td>
-                          <td>{{t.nome_mae}}</td>
-                          <td>{% if t.bpc %} Possui {% else %} Não Possui {% endif %}</td>
-                          <td>{% if t.bolsa_familia %} Possui {% else %} Não Possui {% endif %}</td>
-                          <td>{% if t.aposentadoria %} Possui {% else %} Não Possui {% endif %}</td>
-                          <td>{{t.benediciario}}</td>
-                          <td>{{t.rua}} {{t.numero_da_rua}}</td>
-                          <td>{{t.bairro}}</td>
-                          <td>{{t.cidade}}</td>
-                          <td>{{t.telefone}}</td>
-                          <td>{{t.elular}}</td>
-                          <td>{{t.email}}</td>
-                          <td>{% if t.estuda_ensino_regular %} Estuda {% else %} Não Estuda {% endif %}</td>
-                          <td>{{t.ano_estuda}}</td>
-                          <td>{{t.assinatura_proficinal.nome}}</td>
-                          <td>{{t.data_da_triagem.day}}/{{t.data_da_triagem.month}}/{{t.data_da_triagem.year}}</td>
+                          <td>{{t.data_visita}}</td>
+                          <td>{% if t.realizada %} Realizado {% else %} Não Realizada {% endif %}</td>
+                          <td></td>
+                          <td>{{t.funcionario}}</td>
+                          <td>{{t.observacoes}}</td>
+                          
+                          
                           <td> <a style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true" href="{%url 'polls:triagem_editar' t.id %}"></a></td>
                         
                       </tr>

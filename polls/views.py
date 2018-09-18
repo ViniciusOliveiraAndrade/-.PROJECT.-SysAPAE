@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.template import loader
-from polls.models import Usuario, Funcionario, Triagem
+from polls.models import Usuario, Funcionario, Triagem, Visita
 import datetime
 
 # Views
@@ -48,6 +48,24 @@ def triagem_listar(request):
 		raise e
 
 	return render(request,'polls/triagem_listar.html', {'triagens' : triagens})
+
+def visita_agendar(request):
+	return render(request,'polls/visita_agendar.html', {})
+
+def visita_listar(request):
+	try:
+		visitas = Visita.objects.all()
+	except Exception as e:
+		u = Usuario()
+		f = Funcionario()
+		v = Visita()
+		v.usuario = u
+		v.funcionario = f
+		visitas = [v]
+		raise e
+
+	return render(request,'polls/visita_listar.html', {'visitas' : visitas})
+
 
 #controle de Tricagem
 def cadastrar_triagem(request):
