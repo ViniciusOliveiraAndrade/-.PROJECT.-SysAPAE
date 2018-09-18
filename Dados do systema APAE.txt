@@ -1,0 +1,7 @@
+Email:
+	Login: systemapae@gmail.com
+	Senha: APAE2018
+	
+Systema ADM:
+	Login: sysapae
+	Senha: APAE2018
