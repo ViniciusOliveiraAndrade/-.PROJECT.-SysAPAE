@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
                 ('turno_estuda', models.CharField(max_length=50)),
                 ('observacoes', models.CharField(max_length=50)),
                 ('data_da_triagem', models.DateTimeField(verbose_name='Data da Triagem')),
-                ('assinatura_proficinal', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='polls.Funcionario')),
+                ('assinatura_proficinal', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='social.Funcionario')),
             ],
         ),
         migrations.CreateModel(
@@ -71,13 +71,13 @@ class Migration(migrations.Migration):
                 ('data_visita', models.DateTimeField(verbose_name='Data de Nascimento')),
                 ('observacoes', models.CharField(max_length=300)),
                 ('realizada', models.BooleanField(default=False)),
-                ('funcionario', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='polls.Funcionario')),
-                ('usuario', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='polls.Usuario')),
+                ('funcionario', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='social.Funcionario')),
+                ('usuario', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='social.Usuario')),
             ],
         ),
         migrations.AddField(
             model_name='triagem',
             name='usuario',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='polls.Usuario'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='social.Usuario'),
         ),
     ]
