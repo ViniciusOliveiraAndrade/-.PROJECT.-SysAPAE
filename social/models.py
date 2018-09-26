@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 #Models: Usuario, Funcionario, Triagem, Visita
-from core.models import Usuario, Funcionario
+from core.models import *
 
 OP_SIM_NAO = (
     ('sim', u'SIM'),
