@@ -1,4 +1,4 @@
-{% extends 'social/layout_base.html' %}
+{% extends 'social/layout/layout_base.html' %}
 
 {% block main %}
 <div class="card"> 
@@ -8,6 +8,10 @@
     <br>
 
     <div class="card-body card-round">
+
+        
+
+
 
         
     </div>
@@ -20,12 +24,12 @@
 
 
 {% block js %}
-<!--
 <script type="text/javascript">
     data = new Date();
-    document.getElementById("datar").value = data.toLocaleString();
+    // document.getElementById("datar").value = data.toLocaleString();
+    document.getElementById("u").className = document.getElementById("u").className + " active open"
+    document.getElementById("ul").className = document.getElementById("ul").className + " active"
 </script>
--->
 {% endblock %}
 
 <!-- Comentei o form para fazer um Teste -->
