@@ -4,6 +4,7 @@ from django.db import models
 
 # Create your models here.
 class Usuario(models.Model):
+    imagem = models.ImageField(u'Logo', blank=True, upload_to='media/usuarios/')
     nome = models.CharField(max_length=200)
     cid = models.CharField(max_length=20)
     data_nacimento = models.DateTimeField(u'Data de Nascimento')
@@ -20,12 +21,12 @@ class Cargo(models.Model):
 
 
 class Funcionario(models.Model):
-    class Meta:
-        verbose_name = 'Usuario'
-        verbose_name_plural = 'Usuarios'
-        ordering = ('nome',)
+    # class Meta:
+    #     verbose_name = 'Funcionario'
+    #     verbose_name_plural = 'Funcionarios'
+    #     ordering = ('nome',)
 
-    user = models.OneToOneField(User, on_delete=models.PROTECT, related_name='user_profile', null=True)
+    # user = models.OneToOneField(User, on_delete=models.PROTECT, related_name='user_profile', null=True)
     nome = models.CharField(max_length=255, help_text='nome e sobrenome')
     cargo = models.ForeignKey(Cargo, on_delete=models.PROTECT)
 
