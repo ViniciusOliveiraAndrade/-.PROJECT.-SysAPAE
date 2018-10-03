@@ -13,9 +13,10 @@
 
   <!-- Styles -->
   {% load static %}
-  <link href="{% static 'assets/css/core.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/css/app.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/css/style.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/core.min.css' %}" media="screen" rel="stylesheet">
+  <link href="{% static 'assets/css/app.min.css' %}" media="screen" rel="stylesheet">
+  <link href="{% static 'assets/css/style.min.css' %}" media="screen" rel="stylesheet">
+  <link href="{% static 'assets/css/print.css' %}" media="print" rel="stylesheet">
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" href="{% static 'assets/img/apple-touch-icon.png' %}">
@@ -42,7 +43,7 @@
 
 
   <!-- Sidebar -->
-  <aside class="sidebar sidebar-icons-right sidebar-icons-boxed sidebar-expand-lg">
+  <aside class="sidebar sidebar-icons-right sidebar-icons-boxed sidebar-expand-lg no-print">
     <header class="sidebar-header">
       <a class="logo-icon" href="{% url 'social:index'%}">
         <img src="{% static 'assets/img/logo-icon-light.png' %}" alt="logo icon">
@@ -124,7 +125,7 @@
 
 
   <!-- Topbar -->
-  <header class="topbar" style="background-color: #3f4a59;">
+  <header class="topbar no-print" style="background-color: #3f4a59;">
     <div class="topbar-left">
       <span class="topbar-btn sidebar-toggler"><i>&#9776;</i></span>
 
@@ -182,7 +183,7 @@ Menu para Trocar
 
 
   <!-- Footer -->
-  <footer class="site-footer">
+  <footer class="site-footer no-print">
     <div class="row">
       <div class="col-md-6">
         <p class="text-center text-md-left">Copyright © 2018 <a href="">APAE</a>. Todos os direitos reservados.</p>
