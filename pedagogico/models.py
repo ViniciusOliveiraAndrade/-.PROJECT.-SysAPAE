@@ -5,10 +5,9 @@ from core.models import *
 class Turma(models.Model):
     nome = models.CharField(max_length=50)
     turno = models.BooleanField()
-    professor = models.ForeignKey(Funcionario, on_delete=models.PROTECT)
 
     def __str__(self):
-        return "Turma: "+self.nome+"\nProfessor: "+self.professor.nome
+        return "Turma: "+self.nome
 
 class Aula(models.Model):
     data = models.DateTimeField('Data da Aula')

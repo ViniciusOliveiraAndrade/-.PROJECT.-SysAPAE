@@ -22,3 +22,21 @@ def frequencia(request):
 
 def triagem_pedagogica(request):
     return render(request, 'pedagogico/triagem_pedagogica.html')
+
+def cadastrar_turmas(request):
+    professor = Funcionario.objects.get(nome=request.POST["professor"])
+
+    if request.POST['turno'] == "tarde":
+        turno = False
+    else:
+        turno = True
+    turma = Turma(nome=request.POST['nome'],turno= turno);
+    turma.save()
+    protuma = ProfessorTurma(professor=professor, turma=turma)
+    protuma.save()
+    return render(request, 'pedagogico/index.html')
+
+    print("veioaqui")
+    print(request.POST)
+
+
