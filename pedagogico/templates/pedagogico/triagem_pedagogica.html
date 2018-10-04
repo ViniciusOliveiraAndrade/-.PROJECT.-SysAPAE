@@ -1,0 +1,82 @@
+{% extends 'pedagogico/layout/layout_base.html' %}
+
+{% block main %}
+    <div style="background-color: #e8e8e8" class="main-content">
+        <h1 class="font-dosis fw-500">Triagem Pedagógica</h1><br>
+
+          <div class="row">
+              <div class="col-4  text-center">
+                    <div class="card card-round card-body">
+                        <div class="form-group">
+                            <h4 align="left"><strong>Data da Triagem:</strong></h4>
+                            <input type="text" class="form-control" data-provide="datepicker" data-date-today-highlight="true">
+                        </div>
+                    </div>
+              </div>
+
+              <div class="col-4 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>Estuda</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="sim"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="nso"> Não
+                            </label>
+                        </div>
+                    </div>
+                 </div>
+
+              <div class="col-4 text-center">
+                    <div class="card card-round card-body">
+                      <h4 align="left"><strong>Ano Escolar</strong></h4>
+{#                      <label for="input-normal"></label>#}
+                      <input type="text" class="form-control" id="input-normal" placeholder="Ano">
+                    </div>
+               </div>
+
+              <div class="col-8 text-center">
+                    <div class="card card-round card-body">
+                      <h4 align="left"><strong>Nome da Escola</strong></h4>
+{#                      <label for="input-normal"></label>#}
+                      <input type="text" class="form-control" id="input-normal" placeholder="Escola">
+                    </div>
+              </div>
+
+              <div class="col-4 text-center">
+                    <div class="card card-round card-body">
+                      <h4 align="left"><strong>Municipio</strong></h4>
+{#                      <label for="input-normal"></label>#}
+                      <input type="text" class="form-control" id="input-normal" placeholder="Cidade">
+                    </div>
+              </div>
+
+              <div class="col-4 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>Turno na APAE</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="manha"> Manhã &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="tarde"> Tarde
+                            </label>
+                        </div>
+                    </div>
+              </div>
+          </div>
+      </div>
+
+    </div>
+
+{% endblock %}
+
