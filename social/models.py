@@ -1,31 +1,15 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-#Models: Usuario, Funcionario, Triagem, Visita
-from core.models import Usuario, Funcionario
-
-OP_SIM_NAO = (
-    ('sim', u'SIM'),
-    ('nao', u'NÃO'),
-)
-
-
-
-SITUACAO_PARTICIPANTE = (
-    ('Perdedora', u'Perdedora'),
-    ('Vencedora', u'Vencedora'),
-)
-
-
+from core.models import *
 
 class Triagem(models.Model):
-    imagem = models.ImageField(u'Logo', blank=True, upload_to='media/logo')
     usuario =  models.ForeignKey(Usuario, on_delete=models.PROTECT)
     sus = models.CharField(max_length=20)
 
     #dados se é acompanhado com especialista
-    acompanhamento_com_especialista = models.CharField(choices=OP_SIM_NAO, max_length=5)
-    especialista = models.CharField(max_length=200, blank=True)
+    acompanhamento_com_especialista = models.BooleanField()
+    especialista = models.CharField(max_length=200)
 
     #Dados do pai
     nome_pai = models.CharField(max_length=200)
@@ -66,7 +50,7 @@ class Triagem(models.Model):
     observacoes = models.CharField(max_length=50)
     assinatura_proficinal = models.ForeignKey(Funcionario, on_delete=models.PROTECT)
 
-    data_da_triagem = models.DateTimeField(u'Data da Triagem')
+    data_da_triagem = models.DateTimeField('Data da Triagem')
 
     def __str__(self):
         return "Nome: "+self.usuario.nome+"\n Pai: "+self.nome_pai+"\n Mãe: "+self.nome_mae

@@ -1,13 +1,12 @@
 from django.urls import path
 
-from social.views import TriagemCreateView
 from . import views
 
 app_name = 'social'
 urlpatterns = [
     path('', views.index, name='index'),
     
-    path('Realizar_Triagem', TriagemCreateView.as_view(), name='triagem_realizar'),
+    path('Realizar_Triagem', views.triagem_realizar, name='triagem_realizar'),
     path('Cadastrar_Triagem', views.cadastrar_triagem, name='cadastrar_triagem'),
 
     path('Bucar_Triagem', views.triagem_buscar, name='triagem_buscar'),

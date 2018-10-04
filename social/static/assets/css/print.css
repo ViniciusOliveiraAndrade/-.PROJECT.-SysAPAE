@@ -1,0 +1,8 @@
+.no-print, .dataTables_length, .dataTables_filter, .dataTables_info, .dataTables_paginate, .paging_simple_numbers, .butoes{display: none;}
+
+table, th, td {
+    border: 1px solid black;
+    text-align: center;
+}
+
+

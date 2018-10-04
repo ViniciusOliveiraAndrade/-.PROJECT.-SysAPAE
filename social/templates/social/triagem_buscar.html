@@ -44,9 +44,9 @@
     <!-- Sidebar -->
     <aside class="sidebar sidebar-icons-right sidebar-icons-boxed sidebar-expand-lg">
       <header class="sidebar-header">
-        <a class="logo-icon" href="{% url 'polls:index'%}"><img src="{% static 'assets/img/logo-icon-light.png' %}" alt="logo icon"></a>
+        <a class="logo-icon" href="{% url 'social:index'%}"><img src="{% static 'assets/img/logo-icon-light.png' %}" alt="logo icon"></a>
         <span class="logo">
-          <a href="{% url 'polls:index'%}"><img src="{% static 'assets/img/logo.png' %}" alt="logo"></a>
+          <a href="{% url 'social:index'%}"><img src="{% static 'assets/img/logo.png' %}" alt="logo"></a>
         </span>
         <span class="sidebar-toggle-fold"></span>
       </header>
@@ -65,21 +65,21 @@
             <ul class="menu-submenu">
             
               <li class="menu-item">
-                <a class="menu-link" href="{% url 'polls:triagem_realizar' %}">
+                <a class="menu-link" href="{% url 'social:triagem_realizar' %}">
                   <span class="dot"></span>
                   <span class="title">Realizar</span>
                 </a>
               </li>
 
               <li class="menu-item active">
-                <a class="menu-link" href="{% url 'polls:triagem_buscar' %}">
+                <a class="menu-link" href="{% url 'social:triagem_buscar' %}">
                   <span class="dot"></span>
                   <span class="title">Editar</span>
                 </a>
               </li>
 
               <li class="menu-item">
-                <a class="menu-link" href="{% url 'polls:triagem_listar' %}">
+                <a class="menu-link" href="{% url 'social:triagem_listar' %}">
                   <span class="dot"></span>
                   <span class="title">Listar</span>
                 </a>
@@ -102,14 +102,14 @@
             <ul class="menu-submenu">
             
               <li class="menu-item">
-                <a class="menu-link" href="{% url 'polls:visita_agendar' %}">
+                <a class="menu-link" href="{% url 'social:visita_agendar' %}">
                   <span class="dot"></span>
                   <span class="title">Agendar</span>
                 </a>
               </li>
 
               <li class="menu-item">
-                <a class="menu-link" href="{% url 'polls:visita_listar' %}">
+                <a class="menu-link" href="{% url 'social:visita_listar' %}">
                   <span class="dot"></span>
                   <span class="title">Listar</span>
                 </a>
@@ -233,7 +233,7 @@ Menu para Trocar
                           <td>{{t.nome_pai}}</td>
                           <td>{{t.nome_mae}}</td>
                           <td>{{t.assinatura_proficinal.nome}}</td>
-                          <td> <a style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true" href="{%url 'polls:triagem_editar' t.id %}"></a></td>
+                          <td> <a style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true" href="{%url 'social:triagem_editar' t.id %}"></a></td>
                         
                       </tr>
                        {% endfor %}
