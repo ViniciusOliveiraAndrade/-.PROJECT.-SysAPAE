@@ -18,26 +18,12 @@ def index(request):
     
     return render(request,'social/index.html', dados)
 
-
+#
 #Views da Triagem
+#
 def triagem_realizar(request):
     return render(request,'social/triagem_realizar.html', {})
 
-
-
-def triagem_buscar(request):
-    try:
-        triagens = Triagem.objects.all()
-    except Exception as e:
-        u = Usuario()
-        f = Funcionario()
-        t = Triagem()
-        t.usuario = u
-        t.assinatura_proficinal = f
-        triagens = [t]
-        raise e
-
-    return render(request,'social/triagem_buscar.html', {'triagens' : triagens})
 
 def triagem_editar(request,triagem_id):
     t = get_object_or_404(Triagem,pk=triagem_id)
@@ -57,7 +43,32 @@ def triagem_listar(request):
 
     return render(request,'social/triagem_listar.html', {'triagens' : triagens})
 
-def visita_agendar(request):
+#
+#Views do usuario
+#
+def usuarios_listar(request,delete=False,id=0):
+    try:
+        triagens = Triagem.objects.all()
+    except Exception as e:
+        u = Usuario()
+        f = Funcionario()
+        t = Triagem()
+        t.usuario = u
+        t.assinatura_proficinal = f
+        triagens = [t]
+        raise e
+    if "delete" in request.GET:
+        u = get_object_or_404(Usuario,pk=request.GET['id'])
+        u.delete()
+
+    return render(request,'social/usuario_listar.html', {'triagens' : triagens})
+
+
+
+#
+#views da visita
+#
+def visita_agendar(request,usuario_id):
     return render(request,'social/visita_agendar.html', {})
 
 def visita_listar(request):
@@ -81,7 +92,7 @@ def cadastrar_triagem(request):
     data = data.split('/')
 
     datanascimento = datetime.datetime(int(data[2]),int(data[1]),int(data[0]))
-    usuario = Usuario(nome=request.POST['nome'], cid=request.POST['cid'], data_nacimento=datanascimento)
+    usuario = Usuario(nome=request.POST['nome'], cid=request.POST['cid'], data_nacimento=datanascimento, imagem=request.FILES['imagem'])
     usuario.save()
 
     triagem = Triagem()

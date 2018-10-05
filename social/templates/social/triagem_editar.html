@@ -28,7 +28,7 @@
       <div class="form-group">
         <label>Data de nascimento</label>
         <small class="sidetitle">dd/mm/yyyy</small>
-        <input name="datanascimento" type="text" class="form-control" data-format="&#123;&#123;99&#125;&#125;/&#123;&#123;99&#125;&#125;/&#123;&#123;9999&#125;&#125;" value="{{t.usuario.data_nacimento.day}}/{{t.usuario.data_nacimento.month}}/{{t.usuario.data_nacimento.year}}">
+        <input name="datanascimento" type="text" class="form-control" data-format="&#123;&#123;99&#125;&#125;/&#123;&#123;99&#125;&#125;/&#123;&#123;9999&#125;&#125;" value="{% if t.usuario.data_nacimento.day < 10 %} 0{{t.usuario.data_nacimento.day}} {% else %} {{t.usuario.data_nacimento.day}} {% endif %}/{% if t.usuario.data_nacimento.month < 10 %} 0{{t.usuario.data_nacimento.month}} {% else %} {{t.usuario.data_nacimento.month}} {% endif %}/{{t.usuario.data_nacimento.year}}">
       </div>
 
       <div class="form-group">

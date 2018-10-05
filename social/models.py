@@ -4,7 +4,7 @@ from django.db import models
 from core.models import *
 
 class Triagem(models.Model):
-    usuario =  models.ForeignKey(Usuario, on_delete=models.PROTECT)
+    usuario =  models.ForeignKey(Usuario, on_delete=models.CASCADE)
     sus = models.CharField(max_length=20)
 
     #dados se é acompanhado com especialista
