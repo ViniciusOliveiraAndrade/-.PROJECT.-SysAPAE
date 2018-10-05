@@ -4,7 +4,7 @@ from django.db import models
 
 # Create your models here.
 class Usuario(models.Model):
-    imagem = models.ImageField(u'Logo', blank=True, upload_to='media/usuarios/')
+    imagem = models.ImageField(u'Logo', blank=True, upload_to='usuarios/')
     nome = models.CharField(max_length=200)
     cid = models.CharField(max_length=20)
     data_nacimento = models.DateTimeField(u'Data de Nascimento')
