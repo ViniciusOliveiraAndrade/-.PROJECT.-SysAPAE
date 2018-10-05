@@ -64,15 +64,17 @@ class Visita(models.Model):
     def __str__(self):
         return "Nome do usuário: "+self.usuario.nome+"\n Data da visita: "+self.data_visita+"\n Nome do proficinal: "+self.funcionario.nome
 
+class Lista(models.Model):
+    posicao = models.IntegerField(default=0)
+    Usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+
 class Evento(models.Model):
     nome = models.CharField(max_length=100)
     data_inicio = models.DateTimeField('Data de início')
     data_fim = models.DateTimeField('Data do término')
-    lista = models.ManyToManyField(Lista, on_delete=models.CASCADE)
+    lista = models.ManyToManyField(Lista)
 
-class Lista(models.Model):
-    posicao = mmodels.IntegerField(default=0)
-    Usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+
 
 
 # class Choice(models.Model):
