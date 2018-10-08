@@ -274,15 +274,16 @@ def editar_triagem(request):
 #Eventos
 def evento_cadastrar(request):
 
-    data = request.POST['datainicio']
-    data = data.split('/')
-    dataa = data[2]+"-"+data[1]+"-"+data[0]
-
-    data = request.POST['datafim']
-    data = data.split('/')
-    datab = data[2]+"-"+data[1]+"-"+data[0]
-
     if "nome" in request.POST:
+        data = request.POST['datainicio']
+        data = data.split('/')
+        dataa = data[2]+"-"+data[1]+"-"+data[0]
+
+        data = request.POST['datafim']
+        data = data.split('/')
+        datab = data[2]+"-"+data[1]+"-"+data[0]
+
+    
         e = Evento(nome = request.POST['nome'], data_inicio = dataa, data_fim = datab)
         e.save()
         return HttpResponseRedirect(reverse('social:index' ))
