@@ -21,12 +21,12 @@
 
                         <div class="form-check form-check-inline">
                           <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="sim"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" value="sim"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
                           </label>
                             <label class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="nso"> Não
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" value="nso"> Não
                             </label>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                     </div>
                </div>
 
-              <div class="col-8 text-center">
+              <div class="col-12 text-center">
                     <div class="card card-round card-body">
                       <h4 align="left"><strong>Nome da Escola</strong></h4>
 {#                      <label for="input-normal"></label>#}
@@ -56,24 +56,476 @@
                     </div>
               </div>
 
-              <div class="col-4 text-center">
+              <div class="col-5 text-center">
                     <div class="card card-round card-body">
 
                         <h4 align="left"><strong>Turno na APAE</strong></h4>
 
                         <div class="form-check form-check-inline">
                           <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="manha"> Manhã &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" value="manha"> Manhã &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
                           </label>
                             <label class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="tarde"> Tarde
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" value="tarde"> Tarde
                             </label>
                         </div>
                     </div>
               </div>
+
+              <div class="col-8 ">
+                  <div class="card card-round card-body">
+                      <div class="form-group">
+                          <h5 align="left"><strong>Alimentação</strong></h5>
+                          <textarea  id="alimentacao" name="alimentacao" cols="110"></textarea>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-8 ">
+                  <div class="card card-round card-body">
+                      <div class="form-group">
+                          <h5 align="left"><strong>Medicação</strong></h5>
+                          <textarea  id="medicacao" name="mediacao" cols="110"></textarea>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-8 ">
+                  <div class="card card-round card-body">
+                      <div class="form-group">
+                          <h5 align="left"><strong>Composição Familiar</strong></h5>
+                          <textarea  id="composicaoFamiliar" name="composicaoFamiliar" cols="110"></textarea>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-5 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>Controle Urinário</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="simUrinario"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="naoUrinario"> Não
+                            </label>
+                        </div>
+                    </div>
+              </div>
+
+              <div class="col-5 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>Controle Esfíncter</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="simEsfincter"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="naoEsfincter"> Não
+                            </label>
+                        </div>
+                    </div>
+              </div>
+
+              <div class="col-5 ">
+                  <div class="card card-round card-body">
+                      <div class="form-group">
+                          <h5 align="left"><strong>Observação</strong></h5>
+                          <textarea  id="observacaoControle" name="observacaoControle" cols="60"></textarea>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-8 text-center">
+                    <div class="card card-round card-body">
+                      <h4 align="left"><strong>A criança passa a maior parte do tempo com:</strong></h4>
+{#                      <label for="input-normal"></label>#}
+                      <input type="text" class="form-control" id="input-normal" name="cuidador" placeholder="Cuidador">
+                    </div>
+              </div>
+
+              <div class="col-8 text-center">
+                    <div class="card card-round card-body">
+                      <h4 align="left"><strong>Quem toma as decisões a respeito da criança:</strong></h4>
+{#                      <label for="input-normal"></label>#}
+                      <input type="text" class="form-control" id="input-normal" name="responsavel" placeholder="Responsável">
+                    </div>
+              </div>
+
+              <div class="col-md-5 text-right">
+                <div class="card card-round card-body">
+                    <div class="form-group">
+                        <h5 align="left"><strong>Horario de Dormir</strong></h5>
+                        <input style="background-color: #e8e8e8" type="text" class="form-control"
+                               data-provide="timepicker" data-show-meridian="false" name="horaDormir">
+                    </div>
+                </div>
+            </div>
+
+              <div class="col-md-5 text-right">
+                <div class="card card-round card-body">
+                    <div class="form-group">
+                        <h5 align="left"><strong>Horario de Acordar</strong></h5>
+                        <input style="background-color: #e8e8e8" type="text" class="form-control"
+                               data-provide="timepicker" data-show-meridian="false" name="horaAcordar">
+                    </div>
+                </div>
+            </div>
+
+              <div class="col-8 text-center">
+                    <div class="card card-round card-body">
+                      <h4 align="left"><strong>Dorme com quem:</strong></h4>
+{#                      <label for="input-normal"></label>#}
+                      <input type="text" class="form-control" id="input-normal" name="dormeCom">
+                    </div>
+              </div>
+
           </div>
+
+    <br><h3 class="font-dosis fw-500">Aspecto de Desenvolvimento</h3><br>
+
+        <div class="row">
+            <div class="col-5 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>Fala Bem</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="simFala"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="naoFala"> Não
+                            </label>
+                        </div>
+                    </div>
+              </div>
+
+            <div class="col-5 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>Comunica-se utilizando gestos</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="simComunica"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="naoComunica"> Não
+                            </label>
+                        </div>
+                    </div>
+              </div>
+
+            <div class="col-5 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>Apresenta gagueira</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="simGago"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="naoGago"> Não
+                            </label>
+                        </div>
+                    </div>
+              </div>
+
+            <div class="col-5 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>Enxerga Bem</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="simEnxerga"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="naoEnxerga"> Não
+                            </label>
+                        </div>
+                    </div>
+              </div>
+
+            <div class="col-5 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>Usa a mão</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="direta"> Direita &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="esquerda"> Esquerda
+                            </label>
+                        </div>
+                    </div>
+              </div>
+
+            <div class="col-5 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>Faz balbucio</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="simBalbucio"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="naoBalbucio"> Não
+                            </label>
+                        </div>
+                    </div>
+              </div>
+        </div>
+
+    <br><h3 class="font-dosis fw-500">Aspecto Fisico Motor</h3><br>
+
+        <div class="row">
+            <div class="col-5 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>Anda Naturalmente</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="simAnda"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="naoAnda"> Não
+                            </label>
+                        </div>
+                    </div>
+              </div>
+
+            <div class="col-5 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>Segura corretamente o lápis</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="simSegura"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="naoSegura"> Não
+                            </label>
+                        </div>
+                    </div>
+              </div>
+
+            <div class="col-5 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>Senta-se corretamente</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="simSenta"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="naoSenta"> Não
+                            </label>
+                        </div>
+                    </div>
+              </div>
+
+            <div class="col-5 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>Cai Muito</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="simCai"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="naoCai"> Não
+                            </label>
+                        </div>
+                    </div>
+              </div>
+
+            <div class="col-5 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>Cansa Facilmente</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="simCansa"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="naoCansa"> Não
+                            </label>
+                        </div>
+                    </div>
+              </div>
+        </div>
+
+    <br><h3 class="font-dosis fw-500">Aspecto Emocional</h3><br>
+
+        <div class="row">
+            <div class="col-5 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>Demonstra Afeto</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="simDemonstra"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="naoDemonstra"> Não
+                            </label>
+                        </div>
+                    </div>
+              </div>
+
+            <div class="col-5 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>Solicita Afeto</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="simSolicita"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="naoSsolicita"> Não
+                            </label>
+                        </div>
+                    </div>
+              </div>
+
+            <div class="col-5 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>É Medroso</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="simMedo"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="naoMedo"> Não
+                            </label>
+                        </div>
+                    </div>
+              </div>
+
+            <div class="col-5 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>É agressivo</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="simAgressivo"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="naoAgressivo"> Não
+                            </label>
+                        </div>
+                    </div>
+              </div>
+
+            <div class="col-5 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>Reage quando contrariado</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="simReage"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="naoReage"> Não
+                            </label>
+                        </div>
+                    </div>
+              </div>
+
+            <div class="col-5 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>Apresenta algum tique</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="simTique"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="naoTique"> Não
+                            </label>
+                        </div>
+                    </div>
+              </div>
+
+            <div class="col-5 text-center">
+                    <div class="card card-round card-body">
+
+                        <h4 align="left"><strong>Chora com facilidade</strong></h4>
+
+                        <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" name="simChora"> Sim &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                          </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="inlineCheckbox2" name="naoChora"> Não
+                            </label>
+                        </div>
+                    </div>
+              </div>
+        </div>
       </div>
 
     </div>
