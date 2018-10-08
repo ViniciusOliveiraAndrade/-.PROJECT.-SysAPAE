@@ -1,0 +1,83 @@
+{% extends 'social/layout/layout_listar.html' %}
+
+{% block titulo %} Usuários {% endblock %}
+
+{% block adcionar %}
+<a class="btn btn-label btn-primary btn-round float-right" href="{% url 'social:triagem_realizar' %}">
+  <label>
+    <i class="ti-plus""></i>
+  </label> Adicionar Usuário
+</a>
+{% endblock %}
+
+
+
+{% block tabela %}
+{% load static %}
+<thead>
+  <tr>
+    <th>ID</th>
+    <th>Imagem</th>
+    <th>Usuário</th>
+    <th>Data de Nascimento</th>
+    <th>CID</th>
+    <th class="no-print">Ações</th>
+  </tr>
+</thead>
+<tfoot>
+  <tr>
+    <th>ID</th>
+    <th>Imagem</th>
+    <th>Usuário</th>
+    <th>Data de Nascimento</th>
+    <th>CID</th>
+    <th class="no-print">Ações</th>
+  </tr>
+</tfoot>
+<tbody>
+
+  {% for usuario in usuarios%}
+
+  <tr>
+    <th>{{usuario.id}}</th>
+    <td> <img src="{% ifequal usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{usuario.imagem_url}} {% endifequal %}" width="70" height="100"> </td>
+    <td>{{usuario.nome}}</td>
+    <td>{{usuario.data_nacimento|date:"d M Y" }}</td>
+    <td>{{usuario.cid}}</td>
+    <td class="no-print"> 
+      <div>
+        <a data-provide="tooltip" data-tooltip-color="primary" title="Editar Triagem" style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true" href="{%url 'social:triagem_editar' usuario.id %}"></a>
+      </div>
+      <div>
+        <a data-provide="tooltip" data-tooltip-color="primary" title="Agendar Visita" style="font-size: 25px;" class="fa fa-location-arrow" aria-hidden="true" href="{%url 'social:triagem_editar' usuario.id %}"></a>  
+      </div>
+      <div>
+        <a id="{%url 'social:usuarios_listar'%}?delete=true&id={{usuario.id}}" onclick="deletar(this.id);" style="font-size: 25px;" data-provide="tooltip" data-tooltip-color="danger" title="Deletar" class="deletbutton fa fa-trash-o" aria-hidden="true" href="#"></a>  
+      </div>
+      
+    </td>
+
+  </tr>
+  {% endfor %}
+
+</tbody>
+
+
+{% endblock %}
+
+
+{% block jsa %}
+
+<script type="text/javascript">
+
+  function deletar (url) {
+    var r = confirm("Isto apagará permanentemente o úsuário do sistema!\n Deseja continuar com a açao?");
+    if (r == true) {
+      window.location.assign(url);
+    } else {
+      
+    }
+
+  }
+</script>
+{% endblock %}
