@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="TheAdmin - Responsive Bootstrap 4 Admin, Dashboard &amp; WebApp Template">
@@ -24,171 +24,168 @@
 
     <!--  Open Graph Tags -->
     <meta property="og:title" content="The Admin Template of 2018!">
-    <meta property="og:description" content="TheAdmin is a responsive, professional, and multipurpose admin template powered with Bootstrap 4.">
+    <meta property="og:description"
+          content="TheAdmin is a responsive, professional, and multipurpose admin template powered with Bootstrap 4.">
     <meta property="og:image" content="http://thetheme.io/theadmin/assets/img/og-img.jpg">
     <meta property="og:url" content="http://thetheme.io/theadmin/">
     <meta name="twitter:card" content="summary_large_image">
-  </head>
+</head>
 
-  <body class="sidebar-folded">
+<body class="sidebar-folded">
 
-    <!-- Preloader -->
-    <div class="preloader">
-      <div class="spinner-dots">
+<!-- Preloader -->
+<div class="preloader">
+    <div class="spinner-dots">
         <span class="dot1"></span>
         <span class="dot2"></span>
         <span class="dot3"></span>
-      </div>
     </div>
+</div>
 
 
-    <!-- Sidebar -->
+<!-- Sidebar -->
 
-    {% load static %}
-    <aside style="background-color: #010b6b" class="sidebar sidebar-icons-right sidebar-icons-boxed sidebar-expand-lg">
-      <header style="background-color: #ffffff" class="sidebar-header">
-        <a class="logo-icon" href="{% url 'pedagogico:index' %}"><img src="{% static 'assets/img/logo-icon-light.png' %}" alt="logo icon"></a>
+{% load static %}
+<aside style="background-color: #010b6b" class="sidebar sidebar-icons-right sidebar-icons-boxed sidebar-expand-lg">
+    <header style="background-color: #ffffff" class="sidebar-header">
+        <a class="logo-icon" href="{% url 'pedagogico:index' %}"><img
+                src="{% static 'assets/img/logo-icon-light.png' %}" alt="logo icon"></a>
         <span class="logo">
           <a href="{% url 'pedagogico:index' %}"><img src="{% static 'assets/img/nome.png' %}" alt="logo"></a>
         </span>
         <span class="sidebar-toggle-fold"></span>
-      </header>
+    </header>
 
-      <nav class="sidebar-navigation">
+    <nav class="sidebar-navigation">
         <ul class="menu">
 
-        <li class="menu-category">Pedagógico</li>
+            <li class="menu-category">Pedagógico</li>
             <li class="menu-item">
-            <a class="menu-link" href="{% url 'pedagogico:triagem_pedagogica' %}">
-              <span class="icon fa fa-group"></span>
-              <span class="title">Triagem</span>
-              <span class="arrow"></span>
-            </a>
-
-          <li class="menu-item">
-            <a class="menu-link" href="#">
-              <span class="icon fa fa-mortar-board"></span>
-              <span class="title">Turmas</span>
-              <span class="arrow"></span>
-            </a>
-
-            <ul class="menu-submenu">
-              <li class="menu-item">
-                <a class="menu-link" href="{% url 'pedagogico:criar_turma' %}">
-                  <span class="dot"></span>
-                  <span class="title">Criar Turma</span>
+                <a class="menu-link" href="{% url 'pedagogico:triagem_pedagogica' %}">
+                    <span class="icon fa fa-group"></span>
+                    <span class="title">Triagem</span>
+                    <span class="arrow"></span>
                 </a>
-              </li>
-            </ul>
-          </li>
 
-                     <li class="menu-item">
-                      <a class="menu-link" href="#">
-                        <span class="icon fa fa-book"></span>
-                        <span class="title">Aulas</span>
-                        <span class="arrow"></span>
-                      </a>
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <span class="icon fa fa-mortar-board"></span>
+                    <span class="title">Cadastro</span>
+                    <span class="arrow"></span>
+                </a>
 
-                      <ul class="menu-submenu">
-                        <li class="menu-item">
-                          <a class="menu-link" href="{% url 'pedagogico:cadastrar_aula' %}">
+                <ul class="menu-submenu">
+                    <li class="menu-item">
+                        <a class="menu-link" href="{% url 'pedagogico:criar_turma' %}">
                             <span class="dot"></span>
-                            <span class="title">Cadastrar Aula</span>
-                          </a>
-                        </li>
-
-                      </ul>
-                    </li>
+                            <span class="title">Turma</span>
+                        </a>
 
                     <li class="menu-item">
-                      <a class="menu-link" href="{% url 'pedagogico:frequencia' %}">
-                        <span class="icon fa fa-address-book-o"></span>
-                        <span class="title">Frequência</span>
-                        <span class="arrow"></span>
-                      </a>
+                        <a class="menu-link" href="{% url 'pedagogico:cadastrar_aula' %}">
+                            <span class="dot"></span>
+                            <span class="title">Aula</span>
+                        </a>
                     </li>
 
+                     <li class="menu-item">
+                        <a class="menu-link" href="">
+                            <span class="dot"></span>
+                            <span class="title">Professor</span>
+                        </a>
+                    </li>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="menu-item">
+                <a class="menu-link" href="{% url 'pedagogico:frequencia' %}">
+                    <span class="icon fa fa-address-book-o"></span>
+                    <span class="title">Frequência</span>
+                    <span class="arrow"></span>
+                </a>
+            </li>
 
 
         </ul>
-      </nav>
+    </nav>
 
-    </aside>
-    <!-- END Sidebar -->
+</aside>
+<!-- END Sidebar -->
 
 
-    <!-- Topbar -->
-    <header class="topbar">
-      <div class="topbar-left">
+<!-- Topbar -->
+<header class="topbar">
+    <div class="topbar-left">
         <span class="topbar-btn sidebar-toggler"><i>&#9776;</i></span>
 
         <a class="topbar-btn d-none d-md-block" href="#" data-provide="fullscreen tooltip" title="Fullscreen">
-          <i class="material-icons fullscreen-default">fullscreen</i>
-          <i class="material-icons fullscreen-active">fullscreen_exit</i>
+            <i class="material-icons fullscreen-default">fullscreen</i>
+            <i class="material-icons fullscreen-active">fullscreen_exit</i>
         </a>
-      </div>
-    </header>
-    <!-- END Topbar -->
+    </div>
+</header>
+<!-- END Topbar -->
 
 
-    <!-- Main container -->
-    <main>
+<!-- Main container -->
+<main>
 
-      <div style="background-color: #e8e8e8" class="main-content">
+    <div style="background-color: #e8e8e8" class="main-content">
 
 
         {% block main %}
-          {% endblock %}
-      </div><!--/.main-content -->
+        {% endblock %}
+    </div><!--/.main-content -->
 
 
-      <!-- Footer -->
-      <footer class="site-footer">
-         <div class="row">
-          <div class="col-md-6">
-            <p class="text-center text-md-left">Copyright © 2018 <a href="http://thetheme.io/theadmin">APAE</a>. Todos os direitos reservados.</p>
-          </div>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="row">
+            <div class="col-md-6">
+                <p class="text-center text-md-left">Copyright © 2018 <a href="http://thetheme.io/theadmin">APAE</a>.
+                    Todos os direitos reservados.</p>
+            </div>
 
-{#          <div class="col-md-6">#}
-{#            <ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">#}
-{#              <li class="nav-item">#}
-{#                <a class="nav-link" href="help/articles.html">Documentation</a>#}
-{#              </li>#}
-{#              <li class="nav-item">#}
-{#                <a class="nav-link" href="help/faq.html">FAQ</a>#}
-{#              </li>#}
-{#              <li class="nav-item">#}
-{#                <a class="nav-link" href="https://themeforest.net/item/theadmin-responsive-bootstrap-4-admin-dashboard-webapp-template/20475359?license=regular&amp;open_purchase_for_item_id=20475359&amp;purchasable=source&amp;ref=thethemeio">Purchase Now</a>#}
-{#              </li>#}
-{#            </ul>#}
-{#          </div>#}
+            {#          <div class="col-md-6">#}
+            {#            <ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">#}
+            {#              <li class="nav-item">#}
+            {#                <a class="nav-link" href="help/articles.html">Documentation</a>#}
+            {#              </li>#}
+            {#              <li class="nav-item">#}
+            {#                <a class="nav-link" href="help/faq.html">FAQ</a>#}
+            {#              </li>#}
+            {#              <li class="nav-item">#}
+            {#                <a class="nav-link" href="https://themeforest.net/item/theadmin-responsive-bootstrap-4-admin-dashboard-webapp-template/20475359?license=regular&amp;open_purchase_for_item_id=20475359&amp;purchasable=source&amp;ref=thethemeio">Purchase Now</a>#}
+            {#              </li>#}
+            {#            </ul>#}
+            {#          </div>#}
         </div>
 
 
-      </footer>
-      <!-- END Footer -->
+    </footer>
+    <!-- END Footer -->
 
-    </main>
-    <!-- END Main container -->
+</main>
+<!-- END Main container -->
 
 
-
-    <!-- Global quickview -->
-    <div id="qv-global" class="quickview" data-url="assets/data/quickview-global-for-index.html">
-      <div class="spinner-linear">
+<!-- Global quickview -->
+<div id="qv-global" class="quickview" data-url="assets/data/quickview-global-for-index.html">
+    <div class="spinner-linear">
         <div class="line"></div>
-      </div>
     </div>
-    <!-- END Global quickview -->
+</div>
+<!-- END Global quickview -->
 
 
+<!-- Scripts -->
+{% block js %}
+{% endblock %}
+<script src="{% static 'assets/js/core.min.js' %}"></script>
+<script src="{% static 'assets/js/app.min.js' %}"></script>
+<script src="{% static 'assets/js/script.min.js' %}"></script>
 
-    <!-- Scripts -->
-    {% block js %}
-    {% endblock %}
-    <script src="{% static 'assets/js/core.min.js' %}"></script>
-    <script src="{% static 'assets/js/app.min.js' %}"></script>
-    <script src="{% static 'assets/js/script.min.js' %}"></script>
-
-  </body>
+</body>
 </html>
