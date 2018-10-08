@@ -7,7 +7,7 @@ from django.urls import reverse_lazy, reverse
 
 from django.views import generic
 
-from social.models import Usuario, Funcionario, Triagem, Visita
+from social.models import *
 from core.models import *
 
 import datetime
@@ -270,6 +270,24 @@ def editar_triagem(request):
     triagem.data_da_triagem = datatriagem
     triagem.save()
     return triagem_editar(request,triagem.id)
+
+#Eventos
+def evento_cadastrar(request):
+
+    data = request.POST['datainicio']
+    data = data.split('/')
+    dataa = data[2]+"-"+data[1]+"-"+data[0]
+
+    data = request.POST['datafim']
+    data = data.split('/')
+    datab = data[2]+"-"+data[1]+"-"+data[0]
+
+    if "nome" in request.POST:
+        e = Evento(nome = request.POST['nome'], data_inicio = dataa, data_fim = datab)
+        e.save()
+        return HttpResponseRedirect(reverse('social:index' ))
+    return render(request,'social/evento_cadastrar.html',{})
+
 
 
 class Test_view_generica(generic.ListView):

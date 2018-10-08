@@ -70,8 +70,8 @@ class Lista(models.Model):
 
 class Evento(models.Model):
     nome = models.CharField(max_length=100, blank=True)
-    data_inicio = models.DateTimeField('Data de início', blank=True)
-    data_fim = models.DateTimeField('Data do término', blank=True)
+    data_inicio = models.DateField('Data de início', blank=True)
+    data_fim = models.DateField('Data do término', blank=True)
     lista = models.ManyToManyField(Lista, blank=True)
 
 # class Choice(models.Model):

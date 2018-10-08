@@ -22,6 +22,9 @@ urlpatterns = [
     path('Listar_Visita', views.visita_listar, name='visita_listar'),
 
 
+    #Eventos
+    path('Cadastrar_Eventos', views.evento_cadastrar, name='evento_cadastrar'),
+
     # Viewa genericas test.
     path('TEST', views.Test_view_generica.as_view(), name='teste_view_generica'),
     path('TEST/<int:pk>', views.Test_view_generica_a.as_view(), name='teste_view_generica_a'),
