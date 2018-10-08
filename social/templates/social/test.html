@@ -21,10 +21,6 @@
     <th>Usuário</th>
     <th>Data de Nascimento</th>
     <th>CID</th>
-    <th>SUS</th>
-    <th>Parentes</th>
-    <th>Endereço</th>
-    <th>Contatos</th>
     <th class="no-print">Ações</th>
   </tr>
 </thead>
@@ -35,37 +31,28 @@
     <th>Usuário</th>
     <th>Data de Nascimento</th>
     <th>CID</th>
-    <th>SUS</th>
-    <th>Parentes</th>
-    <th>Endereço</th>
-    <th>Contatos</th>
     <th class="no-print">Ações</th>
   </tr>
 </tfoot>
 <tbody>
 
-  {% for t in triagens%}
+  {% for usuario in usuarios%}
 
   <tr>
-    <th>{{t.id}}</th>
-    <td> <img src="{{t.usuario.imagem}}"> </td>
-    <td>{{t.usuario.nome}}</td>
-    <td>{{t.usuario.data_nacimento|date:"d M Y" }}</td>
-    <td>{{t.usuario.cid}}</td>
-    <td>{{t.sus}}</td>
-    <td>Pai: {{t.nome_pai}}<br>Mãe:{{t.nome_mae}} </td>    
-    <td>Rua: {{t.rua}} N°:{{t.numero_da_rua}} <br> Bairro: {{t.bairro}} Cidade: {{t.cidade}} </td>
-    <td>Telefone: {{t.telefone}} <br> Celular:{{t.elular}} <br> Email: {{t.email}}</td>
-
+    <th>{{usuario.id}}</th>
+    <td> <img src="{% ifequal usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{usuario.imagem_url}} {% endifequal %}" width="70" height="100"> </td>
+    <td>{{usuario.nome}}</td>
+    <td>{{usuario.data_nacimento|date:"d M Y" }}</td>
+    <td>{{usuario.cid}}</td>
     <td class="no-print"> 
       <div>
-        <a data-provide="tooltip" data-tooltip-color="primary" title="Editar Triagem" style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true" href="{%url 'social:triagem_editar' t.id %}"></a>
+        <a data-provide="tooltip" data-tooltip-color="primary" title="Editar Triagem" style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true" href="{%url 'social:triagem_editar' usuario.id %}"></a>
       </div>
       <div>
-        <a data-provide="tooltip" data-tooltip-color="primary" title="Agendar Visita" style="font-size: 25px;" class="fa fa-location-arrow" aria-hidden="true" href="{%url 'social:triagem_editar' t.id %}"></a>  
+        <a data-provide="tooltip" data-tooltip-color="primary" title="Agendar Visita" style="font-size: 25px;" class="fa fa-location-arrow" aria-hidden="true" href="{%url 'social:triagem_editar' usuario.id %}"></a>  
       </div>
       <div>
-        <a id="{%url 'social:usuarios_listar'%}?delete=true&id={{t.id}}" onclick="deletar(this.id);" style="font-size: 25px;" data-provide="tooltip" data-tooltip-color="danger" title="Deletar" class="deletbutton fa fa-trash-o" aria-hidden="true" href="#"></a>  
+        <a id="{%url 'social:usuarios_listar'%}?delete=true&id={{usuario.id}}" onclick="deletar(this.id);" style="font-size: 25px;" data-provide="tooltip" data-tooltip-color="danger" title="Deletar" class="deletbutton fa fa-trash-o" aria-hidden="true" href="#"></a>  
       </div>
       
     </td>

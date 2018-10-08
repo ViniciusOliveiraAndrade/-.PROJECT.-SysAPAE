@@ -28,7 +28,7 @@
 <thead>
   <tr>
     <th>ID</th>
-    <th>Imagem</th>
+    <th class="no-print">Imagem</th>
     <th>Usuário</th>
     <th>Data de Nascimento</th>
     <th>CID</th>
@@ -42,7 +42,7 @@
 <tfoot>
   <tr>
     <th>ID</th>
-    <th>Imagem</th>
+    <th class="no-print">Imagem</th>
     <th>Usuário</th>
     <th>Data de Nascimento</th>
     <th>CID</th>
@@ -59,7 +59,7 @@
 
   <tr>
     <th>{{t.id}}</th>
-    <td> <img src="{{t.usuario.imagem_url}}"> </td>
+    <td class="no-print"> <img src="{% ifequal t.usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{t.usuario.imagem_url}} {% endifequal %}" width="70" height="100"> </td>
     <td>{{t.usuario.nome}}</td>
     <td>{{t.usuario.data_nacimento|date:"d M Y" }}</td>
     <td>{{t.usuario.cid}}</td>

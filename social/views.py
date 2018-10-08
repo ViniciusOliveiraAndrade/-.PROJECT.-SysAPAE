@@ -274,11 +274,11 @@ def editar_triagem(request):
 
 class Test_view_generica(generic.ListView):
     template_name = 'social/test.html'
-    context_object_name = 'all user'
+    context_object_name = 'usuarios'
 
     def get_queryset(self):
         """Return the last five published questions."""
-        return Visita.objects.order_by('-realizada')[:5]
+        return Usuario.objects.all()
 
 class Test_view_generica_a(generic.DetailView):
     model = Usuario
