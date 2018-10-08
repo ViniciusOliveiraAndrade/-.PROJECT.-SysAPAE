@@ -62,7 +62,7 @@ class Visita(models.Model):
     observacoes = models.CharField(max_length=300)
     realizada = models.BooleanField(default=False)
     def __str__(self):
-        return "Nome do usuário: "+self.usuario.nome+"\n Data da visita: "+self.data_visita+"\n Nome do proficinal: "+self.funcionario.nome
+        return "Nome do usuário: "+self.usuario.nome+"\n Data da visita: "+str(self.data_visita.day)+"/"+str(self.data_visita.month)+"/"+str(self.data_visita.year)+"\n Nome do proficinal: "+self.funcionario.nome
 
 class Lista(models.Model):
     posicao = models.IntegerField(default=0)

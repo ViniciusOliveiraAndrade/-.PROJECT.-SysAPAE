@@ -1,9 +1,11 @@
 from django import forms
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
-from django.urls import reverse_lazy
-from django.views.generic import CreateView, FormView
+from django.urls import reverse_lazy, reverse
+# from django.views.generic import CreateView, FormView
+
+from django.views import generic
 
 from social.models import Usuario, Funcionario, Triagem, Visita
 from core.models import *
@@ -268,3 +270,16 @@ def editar_triagem(request):
     triagem.data_da_triagem = datatriagem
     triagem.save()
     return triagem_editar(request,triagem.id)
+
+
+class Test_view_generica(generic.ListView):
+    template_name = 'social/test.html'
+    context_object_name = 'all user'
+
+    def get_queryset(self):
+        """Return the last five published questions."""
+        return Visita.objects.order_by('-realizada')[:5]
+
+class Test_view_generica_a(generic.DetailView):
+    model = Usuario
+    template_name = 'social/testa.html'

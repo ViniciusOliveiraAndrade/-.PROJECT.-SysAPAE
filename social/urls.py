@@ -21,4 +21,9 @@ urlpatterns = [
     path('Agendar_Visita', views.visita_agendar, name='visita_agendar'),
     path('Listar_Visita', views.visita_listar, name='visita_listar'),
 
+
+    # Viewa genericas test.
+    path('TEST', views.Test_view_generica.as_view(), name='teste_view_generica'),
+    path('TEST/<int:pk>', views.Test_view_generica_a.as_view(), name='teste_view_generica_a'),
+
 ]

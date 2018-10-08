@@ -4,11 +4,18 @@ from django.db import models
 
 # Create your models here.
 class Usuario(models.Model):
-    imagem = models.ImageField(u'Logo', blank=True, upload_to='usuarios/')
+    imagem = models.ImageField(u'Imagem', blank=True, upload_to='usuarios/')
     nome = models.CharField(max_length=200)
     cid = models.CharField(max_length=20)
-    data_nacimento = models.DateTimeField(u'Data de Nascimento')
+    data_nacimento = models.DateField(u'Data de Nascimento',blank=True)
 
+    @property
+    def imagem_url(self):
+        if self.imagem:
+            return self.imagem.url
+        else:
+            return None
+    
     def __str__(self):
         return "Nome: " + self.nome + "\n CID: " + self.cid
 
