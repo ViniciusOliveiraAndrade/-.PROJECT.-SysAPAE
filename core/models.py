@@ -3,10 +3,25 @@ from django.db import models
 
 
 # Create your models here.
+
+class Cargo(models.Model):
+    nome = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.nome
+
+class CID(models.Model):
+    codigo = models.CharField(max_length=10, blank=True)
+    descricao = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return "Código: " + self.codigo + "   Descrição: " + self.descricao
+
+
 class Usuario(models.Model):
     imagem = models.ImageField(u'Imagem', blank=True, upload_to='usuarios/')
     nome = models.CharField(max_length=200, blank=True)
-    cid = models.CharField(max_length=20, blank=True)
+    cid = models.ForeignKey(CID, on_delete=models.PROTECT, blank=True)
     data_nacimento = models.DateField(u'Data de Nascimento', blank=True)
 
     @property
@@ -17,14 +32,7 @@ class Usuario(models.Model):
             return None
     
     def __str__(self):
-        return "Nome: " + self.nome + "\n CID: " + self.cid
-
-
-class Cargo(models.Model):
-    descricao = models.CharField(max_length=255, help_text='nome e sobrenome', blank=True)
-
-    def __str__(self):
-        return self.descricao
+        return "Nome: " + self.nome + "\n CID: " + self.cid.codigo
 
 
 class Funcionario(models.Model):
@@ -34,8 +42,9 @@ class Funcionario(models.Model):
     #     ordering = ('nome',)
 
     # user = models.OneToOneField(User, on_delete=models.PROTECT, related_name='user_profile', null=True)
+    user = models.OneToOneField(User, on_delete=models.PROTECT)
     nome = models.CharField(max_length=255, help_text='nome e sobrenome', blank=True)
     cargo = models.ForeignKey(Cargo, on_delete=models.PROTECT, blank=True)
 
     def __str__(self):
-        return self.nome
+        return "Nome: " + self.nome + "    Cargo: " + self.cargo.nome

@@ -1,8 +1,9 @@
 from django.contrib import admin
 
 from .models import *
-from core.models import *
+# from core.models import *
 
+admin.site.register(CID)
 admin.site.register(Usuario)
 admin.site.register(Cargo)
 admin.site.register(Funcionario)

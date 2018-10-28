@@ -10,13 +10,13 @@ class Turma(models.Model):
         return "Turma: "+self.nome
 
 class Aula(models.Model):
-    data = models.DateTimeField('Data da Aula')
+    data = models.DateField('Data da Aula')
     conteudo = models.CharField(max_length=500)
     turma = models.ForeignKey(Turma, on_delete=models.CASCADE)
 
 
 class Frequencia(models.Model):
-    dataFrequencia = models.DateTimeField('Data da Frequencia', null=True, blank=True)
+    dataFrequencia = models.DateField('Data da Frequencia', null=True, blank=True)
     presente = models.BooleanField()
     abono = models.BooleanField()
     aula = models.ForeignKey(Aula, on_delete=models.CASCADE)

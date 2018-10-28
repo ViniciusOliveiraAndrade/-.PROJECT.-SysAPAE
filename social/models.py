@@ -50,7 +50,7 @@ class Triagem(models.Model):
     observacoes = models.CharField(max_length=50, blank=True)
     assinatura_proficinal = models.ForeignKey(Funcionario, on_delete=models.PROTECT, blank=True)
 
-    data_da_triagem = models.DateTimeField('Data da Triagem', blank=True)
+    data_da_triagem = models.DateField('Data da Triagem', blank=True)
 
     def __str__(self):
         return "Nome: "+self.usuario.nome+"\n Pai: "+self.nome_pai+"\n Mãe: "+self.nome_mae
@@ -58,7 +58,7 @@ class Triagem(models.Model):
 class Visita(models.Model):
     usuario =  models.ForeignKey(Usuario, on_delete=models.PROTECT, blank=True)
     funcionario = models.ForeignKey(Funcionario, on_delete=models.PROTECT, blank=True)
-    data_visita = models.DateTimeField('Data Visita', blank=True)
+    data_visita = models.DateField('Data Visita', blank=True)
     observacoes = models.CharField(max_length=300, blank=True)
     realizada = models.BooleanField(default=False, blank=True)
     def __str__(self):
@@ -73,6 +73,8 @@ class Evento(models.Model):
     data_inicio = models.DateField('Data de início', blank=True)
     data_fim = models.DateField('Data do término', blank=True)
     lista = models.ManyToManyField(Lista, blank=True)
+    def __str__(self):
+        return "Evento: "+self.nome
 
 # class Choice(models.Model):
 #     question = models.ForeignKey(Question, on_delete=models.CASCADE)

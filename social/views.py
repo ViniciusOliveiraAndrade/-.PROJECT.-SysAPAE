@@ -161,9 +161,9 @@ def cadastrar_triagem(request):
 
     #Observacoes
     triagem.observacoes = request.POST['obs']
-    funcionario = Funcionario(nome= request.POST['assinatura'], cargo= "Assistente Social")
-    funcionario.save()
-    triagem.assinatura_proficinal = funcionario
+    # funcionario = Funcionario(nome= request.POST['assinatura'])
+    # funcionario.save()
+    triagem.assinatura_proficinal = Funcionario.objects.get(nome=request.POST['assinatura'])
     
     data = request.POST['datarealizacao']
     data = data.split(' ')
