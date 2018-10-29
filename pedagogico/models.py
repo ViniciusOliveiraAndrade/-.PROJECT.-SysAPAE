@@ -1,38 +1,42 @@
 from django.db import models
 from core.models import *
+from social.models import Triagem
 # Create your models here.
 
 class Turma(models.Model):
     nome = models.CharField(max_length=50)
     turno = models.BooleanField()
+    ususario = models.ManyToManyField(Usuario, blank=True)
+    # aulas = models.ManyToManyField()
+    professor = models.ManyToManyField(Funcionario)
 
     def __str__(self):
         return "Turma: "+self.nome
 
-class Aula(models.Model):
-    data = models.DateTimeField('Data da Aula')
-    conteudo = models.CharField(max_length=500)
-    turma = models.ForeignKey(Turma, on_delete=models.CASCADE)
-
 
 class Frequencia(models.Model):
-    dataFrequencia = models.DateTimeField('Data da Frequencia', null=True, blank=True)
     presente = models.BooleanField()
-    abono = models.BooleanField()
-    aula = models.ForeignKey(Aula, on_delete=models.CASCADE)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
 
-class UsuarioTurma(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    turma = models.ForeignKey(Turma, on_delete=models.CASCADE)
+    def __str__(self):
+        return "Aula: "+self.conteudo
 
-class ProfessorTurma(models.Model):
-    professor = models.ForeignKey(Funcionario, on_delete=models.CASCADE)
-    turma = models.ForeignKey(Turma, on_delete=models.CASCADE)
+class Aula(models.Model):
+    data = models.DateField('Data da Aula')
+    conteudo = models.CharField(max_length=500)
+    titulo = models.CharField(max_length=50)
+    turma = models.ForeignKey(Turma, on_delete=models.CASCADE, blank=False)
+    frequencia = models.ManyToManyField(Frequencia)
+    avaliacaoAula = models.CharField(max_length=500, blank=True)
+    situacao = models.BooleanField(default='True')
+
+    def __str__(self):
+        return "Aula: "+self.titulo
 
 
 class TriagemPedagogica(models.Model):
+    usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT, blank=False)
     data = models.DateField()
     estuda = models.BooleanField()
     anoEscolar = models.IntegerField()
@@ -61,7 +65,7 @@ class TriagemPedagogica(models.Model):
     gagueira = models.BooleanField()
     enxergaBem = models.BooleanField()
     destro = models.BooleanField()
-    fazBarulho = models.BooleanField()
+    fazBalbucio = models.BooleanField()
 
 #     Aspecto fisico motor
 

@@ -1,27 +1,26 @@
-{% extends "pedagogico/layout/layout_base.html" %} <!--Extendendo o bloco criado-->
-<!--Iniciando o bloco-->
+{% extends "pedagogico/layout/layout_base.html" %}
 {% block main %}
 
     <div class="card">
         <br>
-        <h1 class="font-dosis fw-500">Cadastro da Turma</h1><br>
+        <h1 class="font-dosis fw-500">Edição da Turma</h1><br>
         <br>
 
 
-        <form style="padding-right: 15px" id="formmm" class="card" action="{% url 'pedagogico:cadastrar_turmas' %}"
+        <form style="padding-right: 15px" id="formmm" class="card" action="{% url 'pedagogico:editar_turma' turma.id %}"
               method="post">
             {% csrf_token %}
 
 
             <label><b>Nome</b></label>
             <div class="form-group">
-                <input type="text"  id="input-normal" placeholder=" Nome da Turma" size="50" name="nome">
+                <input type="text"  id="input-normal" placeholder="Nome da Turma" size="50" name="nome" value="{{ turma.nome }}">
             </div>
 
 
             <label><b>Professor</b></label>
             <div class="form-group">
-                <select data-provide="selectpicker" name="professor">
+                <select data-provide="selectpicker" multiple name="professor">
                     {% for professor in professores %}
                         <option>{{ professor.nome }}</option>
                     {% endfor %}
@@ -43,7 +42,7 @@
 
 
             <div class="text-right">
-                <button class="btn btn-primary" type="submit">Registrar</button>
+                <button style="margin-bottom: 15px" class="btn btn-primary" type="submit">Salvar</button>
             </div>
         </form>
     </div>
