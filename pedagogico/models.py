@@ -13,8 +13,8 @@ class Turma(models.Model):
     def __str__(self):
         return "Turma: "+self.nome
 
-
 class Frequencia(models.Model):
+    dataFrequencia = models.DateField('Data da Frequencia', null=True, blank=True)
     presente = models.BooleanField()
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 

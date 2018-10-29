@@ -1,11 +1,13 @@
 from django.urls import path
-
+from django.conf.urls import url
+from django.contrib.auth.views import login
 from . import views
 
 app_name = 'social'
 urlpatterns = [
-    path('', views.index, name='index'),
     
+    path('', views.index, name='index'),
+        
     #Triagens
     path('Realizar_Triagem', views.triagem_realizar, name='triagem_realizar'),
     path('Cadastrar_Triagem', views.cadastrar_triagem, name='cadastrar_triagem'),

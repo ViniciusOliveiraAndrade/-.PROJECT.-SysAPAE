@@ -4,119 +4,152 @@
 <div class="card"> 
 
     <br>
-    <h1 class="font-dosis fw-500">Relizar Triagem</h1>
+    <h1 class="font-dosis fw-500  text-center">Relizar Triagem</h1>
     <br>
 
     <div class="card-body card-round">
 
 
-    	<form id="formmm" class="card" action="{% url 'social:cadastrar_triagem'%}" method="post" enctype="multipart/form-data">
+        <form id="formmm" class="card text-dark" action="{% url 'social:cadastrar_triagem'%}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-
+            <!--  .......................................................................................................  -->  
             <h5 class="text-uppercase">Usuário</h5>
             <hr class="hr-sm mb-2">
-
-            <div class="col-md-6">
-                <p>Enviar Imagem</p>
-                <div class="input-group file-group">
-                  <input type="text" class="form-control file-value" placeholder="Choose file..." readonly>
-                  <input type="file" multiple name="imagem">
-                  <span class="input-group-btn">
-                    <button class="btn btn-light file-browser" type="button"><i class="fa fa-upload"></i></button>
-                  </span>
+            <div class="row"> 
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <label>Enviar Imagem</label>
+                    <div class="input-group file-group">
+                      <input type="text" class="form-control file-value" placeholder="Choose file..." readonly>
+                      <input type="file" multiple name="imagem">
+                      <span class="input-group-btn">
+                        <button class="btn btn-light file-browser" type="button"><i class="fa fa-upload"></i></button>
+                    </span>
                 </div>
-              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input class="form-control" type="text" name="nome">
+                </div>
+            </div>  
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label>Data de nascimento</label>
+                    <small class="sidetitle">dd/mm/yyyy</small>
+                    <input name="datanascimento" type="text" class="form-control" data-format="&#123;&#123;99&#125;&#125;/&#123;&#123;99&#125;&#125;/&#123;&#123;9999&#125;&#125;">
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label>SUS</label>
+                    <input name="sus" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label>CID</label>
 
-          <div class="form-group">
-            <label>Nome</label>
-            <input class="form-control" type="text" name="nome">
+                    <select data-provide="selectpicker" name="cid">
+                        {% for cid in cids %}
+                            <option>{{cid.codigo}}</option>                        
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>  
         </div>
 
-        <div class="form-group">
-                <label>Data de nascimento</label>
-                <small class="sidetitle">dd/mm/yyyy</small>
-                <input name="datanascimento" type="text" class="form-control" data-format="&#123;&#123;99&#125;&#125;/&#123;&#123;99&#125;&#125;/&#123;&#123;9999&#125;&#125;">
-        </div>
-
-        <div class="form-group">
-            <label>SUS</label>
-            <input name="sus" class="form-control" type="text">
-        </div>
-
-        <div class="form-group">
-            <label>CID</label>
-            <input name="cid" class="form-control" type="text">
-        </div>
-
-
+        <!--  .......................................................................................................  -->
 
         <h5 class="text-uppercase mt-3">Acompanhamento com especialista</h5>
         <hr class="hr-sm mb-2">
-
-        <h6 class="text-uppercase mt-3">É Acompanhado</h6>
-        <hr class="hr-sm mb-2">
-
-
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="acompanhado" value="s"> Sim
-            </label>
+        <div class="row"> 
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label>É Acompanhado</label>
+                    <div>
+                     <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="acompanhado" value="s"> Sim
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="acompanhado" value="n" checked="checked"> Não
+                        </label>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="acompanhado" value="n" checked="checked"> Não
-            </label>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="form-group">
+                <label>Especialista acompanhante</label>
+                <input name="especialista" class="form-control" type="text">
+            </div>
         </div>
+    </div>
 
-        <div class="form-group">
-            <label>Especialista acompanhante</label>
-            <input name="especialista" class="form-control" type="text">
-        </div>
+    <!--  .......................................................................................................  -->
 
 
+    <h5 class="text-uppercase mt-3">Familiares</h5>
+    <hr class="hr-sm mb-2">
+    <h6 class="text-uppercase mt-3">Pai</h6>
+    <hr class="hr-sm mb-2">
 
-        <h5 class="text-uppercase mt-3">Familiares</h5>
-        <hr class="hr-sm mb-2">
+    <div class="row"> 
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="form-group">
+               <label>Nome</label>
+               <input name="painome" class="form-control" type="text">
+           </div>
+       </div>
 
-        <h6 class="text-uppercase mt-3">Pai</h6>
-        <hr class="hr-sm mb-2">
-
-        <div class="form-group">
-            <label>Nome</label>
-            <input name="painome" class="form-control" type="text">
-        </div>
-
+       <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Idade</label>
-            <input name="paiidade" class="form-control" type="text">
+            <input name="paiidade" class="form-control" type="number" value="0">
         </div>
-
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Profissão</label>
             <input name="paiprofissao" class="form-control" type="text">
         </div>
+    </div> 
+</div>
 
-        <h6 class="text-uppercase mt-3">Mãe</h6>
-        <hr class="hr-sm mb-2">
+<h6 class="text-uppercase mt-3">Mãe</h6>
+<hr class="hr-sm mb-2">
 
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Nome</label>
             <input name="maenome" class="form-control" type="text">
         </div>
-
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Idade</label>
-            <input name="maeidade" class="form-control" type="text">
+            <input name="maeidade" class="form-control" type="number" value="0">
         </div>
-
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Profissão</label>
             <input name="maeprofissao" class="form-control" type="text">
         </div>
+    </div>
+</div>
 
-        <h5 class="text-uppercase mt-3">Renda familiar</h5>
-        <hr class="hr-sm mb-2">
+<!--  .......................................................................................................  -->
+
+
+<h5 class="text-uppercase mt-3">Renda familiar</h5>
+<hr class="hr-sm mb-2">
+
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12">
 
         <div class="form-check form-check-inline">
             <label class="form-check-label">
@@ -136,134 +169,177 @@
             </label>
         </div>
 
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Valor R$</label>
-            <input name="valor" class="form-control" type="text">
+            <input name="valor" class="form-control" type="text" value="000.00">
         </div>
-
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Beneficiário</label>
             <input name="beneficiario" class="form-control" type="text">
         </div>
+    </div>
+</div>
+
+<!--  .......................................................................................................  -->
 
 
+<h5 class="text-uppercase mt-3">Endereço</h5>
+<hr class="hr-sm mb-2">
 
-        <h5 class="text-uppercase mt-3">Endereço</h5>
-        <hr class="hr-sm mb-2">
-
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Rua</label>
             <input name="rua" class="form-control" type="text">
         </div>
-
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>N°</label>
             <input name="numero" class="form-control" type="text">
         </div>
-
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Bairro</label>
             <input name="bairro" class="form-control" type="text">
         </div>
-
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Ponto de Referência</label>
             <input name="ponto" class="form-control" type="text">
         </div>
-
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Cidade</label>
             <input name="cidade" class="form-control" type="text">
         </div>
+    </div>
 
+</div>
 
+<!--  .......................................................................................................  -->
 
-        <h5 class="text-uppercase mt-3">Contato</h5>
-        <hr class="hr-sm mb-2">
+<h5 class="text-uppercase mt-3">Contato</h5>
+<hr class="hr-sm mb-2">
+
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12">
 
         <div class="form-group">
             <label>Telefone</label>
             <small class="sidetitle">E.g. (87) 3831-0000</small>
             <input name="telefone" type="text" class="form-control" data-format="(&#123;&#123;99&#125;&#125;) &#123;&#123;9999&#125;&#125;-&#123;&#123;9999&#125;&#125;">
         </div>
-
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Celular</label>
             <small class="sidetitle">E.g. (87) 9.9999-9999</small>
             <input name="celular" type="text" class="form-control" data-format="(&#123;&#123;99&#125;&#125;) &#123;&#123;9&#125;&#125;.&#123;&#123;9999&#125;&#125;-&#123;&#123;9999&#125;&#125;">
         </div>
-
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Email</label>
             <input name="email" class="form-control" type="text">
         </div>
+    </div>
+</div>
 
 
+<!--  .......................................................................................................  -->
 
-        <h5 class="text-uppercase mt-3">Ensino</h5>
-        <hr class="hr-sm mb-2">
+<h5 class="text-uppercase mt-3">Ensino</h5>
+<hr class="hr-sm mb-2">
 
-        <h6 class="text-uppercase mt-3">Estudo em ensino Regular</h6>
-        <hr class="hr-sm mb-2">
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12">
 
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="estuda" value="s"> Sim
-            </label>
+        <div class="form-group">
+            <label> Estuda em ensino Regular</label>
+            <div>
+
+
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="estuda" value="s"> Sim
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="estuda" value="n" checked="checked"> Não
+                    </label>
+                </div>
+            </div>
         </div>
-
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="estuda" value="n" checked="checked"> Não
-            </label>
-        </div>
-
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Qual</label>
             <input name="qual" class="form-control" type="text">
         </div>
-
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Ano</label>
             <input name="ano" class="form-control" type="text">
         </div>
-
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Turma</label>
             <input name="turma" class="form-control" type="text">
         </div>
-
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Turno</label>
             <input name="turno" class="form-control" type="text">
         </div>
+    </div>
+</div>
+
+<!--  .......................................................................................................  -->
 
 
-        <h5 class="text-uppercase mt-3">Observações</h5>
-        <hr class="hr-sm mb-2">
+<h5 class="text-uppercase mt-3">Observações</h5>
+<hr class="hr-sm mb-2">
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
 
         <div class="form-group">
             <label>OBS:</label>
             <input name="obs" class="form-control" type="text">
         </div>
-
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Assinatura do Proficional</label>
-            <input name="assinatura" class="form-control" type="text">
+            <input name="assinatura" class="form-control" type="text" value="{{funcionario.nome}}">
         </div>
-
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Data de Realização</label>
             <input name="datarealizacao" id="datar" class="form-control" type="text" >
         </div>
+    </div>
+</div>
 
+<footer class="card-footer text-right">
+    <a href="{% url 'social:index'%}" class="btn btn-secondary" type="reset">Cancelar</a>
+    <button class="btn btn-primary" type="submit">Realizar</button>
+</footer>
 
-        <footer class="card-footer text-right">
-            <a href="{% url 'social:index'%}" class="btn btn-secondary" type="reset">Cancelar</a>
-            <button class="btn btn-primary" type="submit">Realizar</button>
-        </footer>
-
-    </form>
+</form>
 
 </div>
 
@@ -276,265 +352,10 @@
 
 {% block js %}
 <script type="text/javascript">
-    data = new Date();
-    // document.getElementById("datar").value = data.toLocaleString();
-    document.getElementById("u").className = document.getElementById("u").className + " active open";
-    document.getElementById("ul").className = document.getElementById("ul").className + " active";
+data = new Date();
+document.getElementById("datar").value = data.toLocaleString();
+document.getElementById("u").className = document.getElementById("u").className + " active open";
+document.getElementById("ut").className = document.getElementById("ut").className + " active";
 </script>
 {% endblock %}
 
-<!-- Comentei o form para fazer um Teste -->
-<!--
-<form class="card" action="{% url 'social:cadastrar_triagem'%}" method="post">
-            {% csrf_token %}
-
-           
-            <h5 class="text-uppercase">Usuário</h5>
-            <hr class="hr-sm mb-2">
-
-            <div class="form-group">
-                <label>Nome</label>
-                <input class="form-control" type="text" name="nome">
-            </div>
-
-            <div class="form-group">
-                <label>Data de nascimento</label>
-                <small class="sidetitle">dd/mm/yyyy</small>
-                <input name="datanascimento" type="text" class="form-control" data-format="&#123;&#123;99&#125;&#125;/&#123;&#123;99&#125;&#125;/&#123;&#123;9999&#125;&#125;">
-            </div>
-
-            <div class="form-group">
-                <label>SUS</label>
-                <input name="sus" class="form-control" type="text">
-            </div>
-
-            <div class="form-group">
-                <label>CID</label>
-                <input name="cid" class="form-control" type="text">
-            </div>
-
-
-           
-            <h5 class="text-uppercase mt-3">Acompanhamento com especialista</h5>
-            <hr class="hr-sm mb-2">
-
-            <h6 class="text-uppercase mt-3">É Acompanhado</h6>
-            <hr class="hr-sm mb-2">
-
-
-            <div class="form-check form-check-inline">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="acompanhado" value="s"> Sim
-                </label>
-            </div>
-
-            <div class="form-check form-check-inline">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="acompanhado" value="n" checked="checked"> Não
-                </label>
-            </div>
-
-            <div class="form-group">
-                <label>Especialista acompanhante</label>
-                <input name="especialista" class="form-control" type="text">
-            </div>
-
-
-          
-            <h5 class="text-uppercase mt-3">Familiares</h5>
-            <hr class="hr-sm mb-2">
-
-            <h6 class="text-uppercase mt-3">Pai</h6>
-            <hr class="hr-sm mb-2">
-
-            <div class="form-group">
-                <label>Nome</label>
-                <input name="painome" class="form-control" type="text">
-            </div>
-
-            <div class="form-group">
-                <label>Idade</label>
-                <input name="paiidade" class="form-control" type="text">
-            </div>
-
-            <div class="form-group">
-                <label>Profissão</label>
-                <input name="paiprofissao" class="form-control" type="text">
-            </div>
-
-            <h6 class="text-uppercase mt-3">Mãe</h6>
-            <hr class="hr-sm mb-2">
-
-            <div class="form-group">
-                <label>Nome</label>
-                <input name="maenome" class="form-control" type="text">
-            </div>
-
-            <div class="form-group">
-                <label>Idade</label>
-                <input name="maeidade" class="form-control" type="text">
-            </div>
-
-            <div class="form-group">
-                <label>Profissão</label>
-                <input name="maeprofissao" class="form-control" type="text">
-            </div>
-
-            <h5 class="text-uppercase mt-3">Renda familiar</h5>
-            <hr class="hr-sm mb-2">
-
-            <div class="form-check form-check-inline">
-                <label class="form-check-label">
-                    <input name="bpc" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="s"> BPC
-                </label>
-            </div>
-
-            <div class="form-check form-check-inline">
-                <label class="form-check-label">
-                    <input name="bolsafamilia" class="form-check-input" type="checkbox" id="inlineCheckbox2" value="s"> Bolsa Família
-                </label>
-            </div>
-
-            <div class="form-check form-check-inline">
-                <label class="form-check-label">
-                    <input name="aposentadoria" class="form-check-input" type="checkbox" id="inlineCheckbox3" value="s"> Aposentadoria
-                </label>
-            </div>
-
-            <div class="form-group">
-                <label>Valor R$</label>
-                <input name="valor" class="form-control" type="text">
-            </div>
-
-            <div class="form-group">
-                <label>Beneficiário</label>
-                <input name="beneficiario" class="form-control" type="text">
-            </div>
-
-
-           
-            <h5 class="text-uppercase mt-3">Endereço</h5>
-            <hr class="hr-sm mb-2">
-
-            <div class="form-group">
-                <label>Rua</label>
-                <input name="rua" class="form-control" type="text">
-            </div>
-
-            <div class="form-group">
-                <label>N°</label>
-                <input name="numero" class="form-control" type="text">
-            </div>
-
-            <div class="form-group">
-                <label>Bairro</label>
-                <input name="bairro" class="form-control" type="text">
-            </div>
-
-            <div class="form-group">
-                <label>Ponto de Referência</label>
-                <input name="ponto" class="form-control" type="text">
-            </div>
-
-            <div class="form-group">
-                <label>Cidade</label>
-                <input name="cidade" class="form-control" type="text">
-            </div>
-
-
-          
-            <h5 class="text-uppercase mt-3">Contato</h5>
-            <hr class="hr-sm mb-2">
-
-            <div class="form-group">
-                <label>Telefone</label>
-                <small class="sidetitle">E.g. (87) 3831-0000</small>
-                <input name="telefone" type="text" class="form-control" data-format="(&#123;&#123;99&#125;&#125;) &#123;&#123;9999&#125;&#125;-&#123;&#123;9999&#125;&#125;">
-            </div>
-
-            <div class="form-group">
-                <label>Celular</label>
-                <small class="sidetitle">E.g. (87) 9.9999-9999</small>
-                <input name="celular" type="text" class="form-control" data-format="(&#123;&#123;99&#125;&#125;) &#123;&#123;9&#125;&#125;.&#123;&#123;9999&#125;&#125;-&#123;&#123;9999&#125;&#125;">
-            </div>
-
-            <div class="form-group">
-                <label>Email</label>
-                <input name="email" class="form-control" type="text">
-            </div>
-            
-
-          
-            <h5 class="text-uppercase mt-3">Ensino</h5>
-            <hr class="hr-sm mb-2">
-
-            <h6 class="text-uppercase mt-3">Estudo em ensino Regular</h6>
-            <hr class="hr-sm mb-2">
-
-            <div class="form-check form-check-inline">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="estuda" value="s"> Sim
-                </label>
-            </div>
-
-            <div class="form-check form-check-inline">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="estuda" value="n" checked="checked"> Não
-                </label>
-            </div>
-
-            <div class="form-group">
-                <label>Qual</label>
-                <input name="qual" class="form-control" type="text">
-            </div>
-
-            <div class="form-group">
-                <label>Ano</label>
-                <input name="ano" class="form-control" type="text">
-            </div>
-
-            <div class="form-group">
-                <label>Turma</label>
-                <input name="turma" class="form-control" type="text">
-            </div>
-
-            <div class="form-group">
-                <label>Turno</label>
-                <input name="turno" class="form-control" type="text">
-            </div>
-
-         
-            <h5 class="text-uppercase mt-3">Observações</h5>
-            <hr class="hr-sm mb-2">
-
-            <div class="form-group">
-                <label>OBS:</label>
-                <input name="obs" class="form-control" type="text">
-            </div>
-
-            <div class="form-group">
-                <label>Assinatura do Proficional</label>
-                <input name="assinatura" class="form-control" type="text">
-            </div>
-
-            <div class="form-group">
-                <label>Data de Realização</label>
-                <input name="datarealizacao" id="datar" class="form-control" type="text" >
-            </div>
-
-
-            <footer class="card-footer text-right">
-                <a href="{% url 'social:index'%}" class="btn btn-secondary" type="reset">Cancelar</a>
-                <button class="btn btn-primary" type="submit">Realizar</button>
-            </footer>
-
-        </form>
-
-    -->
-
-
-    <!-- 
-    <button class="btn btn-w-md btn-round btn-info">Info</button> 
-    <button class="btn btn-label btn-primary"><label><i class="ti-plus""></i></label> Nova Triagem</button>
-    <button class="btn btn-float btn-sm btn-primary"><i class="ti-plus"></i></button>
-    -->

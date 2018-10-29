@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-	# path('', include('core.urls')),
+	path('', include('core.urls')),
     path('social/', include('social.urls')),
     path('pedagogico/', include('pedagogico.urls')),
     path('admin/', admin.site.urls),

@@ -3,6 +3,7 @@
 ./sysapae/local.py
 ./sysapae/productions.py
 *.sqlite3
+core/media/
 core/migrations/
 core/__pycache__/
 social/migrations/
@@ -10,3 +11,4 @@ social/__pycache__/
 pedagogico/migrations/
 pedagogico/__pycache__/
 sysapae/__pycache__/
+
