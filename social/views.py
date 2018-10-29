@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse_lazy, reverse
+from django.contrib.auth.decorators import login_required
 # from django.views.generic import CreateView, FormView
 
 from django.views import generic
@@ -15,22 +16,24 @@ import datetime
 
 
 # Views
+@login_required
 def index(request):
     dados = {}
     
     return render(request,'social/index.html', dados)
 
-#
+#----------------------------------------------------------------------------------------
 #Views da Triagem
-#
+@login_required
 def triagem_realizar(request):
     return render(request,'social/triagem_realizar.html', {})
 
-
+@login_required
 def triagem_editar(request,triagem_id):
     t = get_object_or_404(Triagem,pk=triagem_id)
     return render(request,'social/triagem_editar.html', {'t':t})
 
+@login_required
 def triagem_listar(request):
     try:
         triagens = Triagem.objects.all()
@@ -45,9 +48,12 @@ def triagem_listar(request):
 
     return render(request,'social/triagem_listar.html', {'triagens' : triagens})
 
-#
+
+
+
+#--------------------------------------------------------------------------------------------
 #Views do usuario
-#
+@login_required
 def usuarios_listar(request,delete=False,id=0):
     try:
         triagens = Triagem.objects.all()
@@ -69,10 +75,11 @@ def usuarios_listar(request,delete=False,id=0):
 
 #
 #views da visita
-#
+@login_required
 def visita_agendar(request,usuario_id):
     return render(request,'social/visita_agendar.html', {})
 
+@login_required
 def visita_listar(request):
     try:
         visitas = Visita.objects.all()
@@ -89,6 +96,7 @@ def visita_listar(request):
 
 
 #controle de Tricagem
+@login_required
 def cadastrar_triagem(request):
     data = request.POST['datanascimento']
     data = data.split('/')
@@ -181,6 +189,7 @@ def cadastrar_triagem(request):
     triagem.save()
     return triagem_editar(request,triagem.id)
 
+@login_required
 def editar_triagem(request):
 
     triagem = get_object_or_404(Triagem,pk=request.POST['id'])
@@ -272,6 +281,7 @@ def editar_triagem(request):
     return triagem_editar(request,triagem.id)
 
 #Eventos
+@login_required
 def evento_cadastrar(request):
 
     if "nome" in request.POST:
@@ -298,6 +308,7 @@ class Test_view_generica(generic.ListView):
     def get_queryset(self):
         """Return the last five published questions."""
         return Usuario.objects.all()
+
 
 class Test_view_generica_a(generic.DetailView):
     model = Usuario

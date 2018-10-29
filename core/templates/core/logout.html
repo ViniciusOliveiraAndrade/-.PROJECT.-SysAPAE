@@ -32,18 +32,25 @@
 <body class="min-h-fullscreen bg-img center-vh p-20" style="background-image: url({% static 'assets/img/bg.png' %}); background-size:100% 100%;" data-overlay="7">
 
   <div class="card card-round card-shadowed px-50 py-30 w-400px mb-0" style="max-width: 100%; color: black;">
-
-  Tuta no index do core troxa.
-
-  {% if request.user.is_authenticated %}
-  <br><br>
-    Usuario esta logado
-  {% endif%}
-
-
+    <h5 class="text-uppercase">Você saiu do sistema!</h5>
+    <br>
+    <h4>Até uma proxima!</h5>
 
   </div>
-  <!-- Scripts -->
+
+  <script type="text/javascript" charset="utf-8" async defer>
+  
+
+  // window.setTimeout('funcao()', intervalo_em_milisegundos);
+  
+  window.onload = function() {
+
+    window.location.assign({% url 'core:login'%});
+  };
+  </script>
+
+
+
   <script src="{% static 'assets/js/core.min.js' %}"></script>
   <script src="{% static 'assets/js/app.min.js' %}"></script>
   <script src="{% static 'assets/js/script.min.js' %}"></script>
