@@ -50,6 +50,9 @@ class Funcionario(models.Model):
     def __str__(self):
         return "Nome: " + self.nome
 
+
+
+# triger para criar funcionário
 def criar_funcionario(sender, **kwargs):
     if kwargs['created']:
         funcionario = Funcionario.objects.create(user=kwargs['instance'])
