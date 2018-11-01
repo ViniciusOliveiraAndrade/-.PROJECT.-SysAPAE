@@ -9,7 +9,7 @@
     <i class="ti-search"></i>
   </button>
 </form>
- -->
+-->
 
 {% endblock %}
 
@@ -26,41 +26,41 @@
 {% block tabela %}
 {% load static %}
 <thead>
-  <tr>
-    <th>ID</th>
-    <th class="no-print">Imagem</th>
-    <th>Usuário</th>
-    <th>Data de Nascimento</th>
-    <th>CID</th>
-    <th>SUS</th>
-    <th>Acompanhamento</th>
-    <th>Parentes</th>
-    <th>Renda Familiar</th>
-    <th>Endereço</th>
-    <th>Contatos</th>
-    <th>Ensino Regular</th>
-    <th>Proficional</th>
-    <th>Data da Triagem</th>
-    <th class="no-print">Editar</th>
-  </tr>
+ <tr>
+  <th class="border-dark text-dark">ID</th>
+  <th class="no-print border-dark text-dark">Imagem</th>
+  <th class="border-dark text-dark">Usuário</th>
+  <th class="border-dark text-dark">Data de Nascimento</th>
+  <th class="border-dark text-dark">CID</th>
+  <th class="border-dark text-dark">SUS</th>
+  <th class="border-dark text-dark">Acompanhamento</th>
+  <th class="border-dark text-dark">Parentes</th>
+  <th class="border-dark text-dark">Renda Familiar</th>
+  <th class="border-dark text-dark" >Endereço</th>
+  <th class="border-dark text-dark">Contatos</th>
+  <th class="border-dark text-dark">Ensino Regular</th>
+  <th class="border-dark text-dark">Proficional</th>
+  <th class="border-dark text-dark">Data da Triagem</th>
+  <th class="no-print border-dark text-dark">Editar</th>
+</tr>
 </thead>
-<tfoot>
+<tfoot class="no-print">
   <tr>
-    <th>ID</th>
-    <th class="no-print">Imagem</th>
-    <th>Usuário</th>
-    <th>Data de Nascimento</th>
-    <th>CID</th>
-    <th>SUS</th>
-    <th>Acompanhamento</th>
-    <th>Parentes</th>
-    <th>Renda Familiar</th>
-    <th>Endereço</th>
-    <th>Contatos</th>
-    <th>Ensino Regular</th>
-    <th>Proficional</th>
-    <th>Data da Triagem</th>
-    <th class="no-print">Editar</th>
+    <th class="border-dark text-dark">ID</th>
+    <th class="no-print border-dark text-dark">Imagem</th>
+    <th class="border-dark text-dark">Usuário</th>
+    <th class="border-dark text-dark">Data de Nascimento</th>
+    <th class="border-dark text-dark">CID</th>
+    <th class="border-dark text-dark">SUS</th>
+    <th class="border-dark text-dark">Acompanhamento</th>
+    <th class="border-dark text-dark">Parentes</th>
+    <th class="border-dark text-dark">Renda Familiar</th>
+    <th class="border-dark text-dark" >Endereço</th>
+    <th class="border-dark text-dark">Contatos</th>
+    <th class="border-dark text-dark">Ensino Regular</th>
+    <th class="border-dark text-dark">Proficional</th>
+    <th class="border-dark text-dark">Data da Triagem</th>
+    <th class="no-print border-dark text-dark">Editar</th>
   </tr>
 </tfoot>
 <tbody>
@@ -68,17 +68,17 @@
   {% for t in triagens%}
 
   <tr>
-    <th>{{t.id}}</th>
-    <th class="no-print"><img src="{% ifequal t.usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{t.usuario.imagem_url}} {% endifequal %}" width="70" height="100"></th>
+    <th class="border-dark text-dark">{{t.id}}</th>
+    <th class="no-print border-dark text-dark"><img src="{% ifequal t.usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{t.usuario.imagem_url}} {% endifequal %}" width="70" height="100"></th>
 
-    <td>{{t.usuario.nome}}</td>
-    <td>{{t.usuario.data_nacimento|date:"d M Y" }}</td>
-    <td>{{t.usuario.cid}}</td>
-    <td>{{t.sus}}</td>
-    <td>{% if t.acompanhamento_com_especialista %} Acompanhado {% else %} Sem Acompanhamento {% endif %}</td>
-    <td>Pai: {{t.nome_pai}}<br>Mãe:{{t.nome_mae}} </td>
+    <td class="border-dark text-dark">{{t.usuario.nome}}</td>
+    <td class="border-dark text-dark">{{t.usuario.data_nacimento|date:"d M Y" }}</td>
+    <td class="border-dark text-dark">{{t.usuario.cid}}</td>
+    <td class="border-dark text-dark">{{t.sus}}</td>
+    <td class="border-dark text-dark">{% if t.acompanhamento_com_especialista %} Acompanhado {% else %} Sem Acompanhamento {% endif %}</td>
+    <td class="border-dark text-dark">Pai: {{t.nome_pai}}<br>Mãe:{{t.nome_mae}} </td>
 
-    <td> {% if t.bpc or t.bolsa_familia or t.aposentadoria %}Possui: {% endif %} 
+    <td class="border-dark text-dark"> {% if t.bpc or t.bolsa_familia or t.aposentadoria %}Possui: {% endif %} 
       {% if t.bpc %}BPC{% endif %} <br>
       {% if t.bolsa_familia %}Bolsa Família{% endif %} <br>
       {% if t.aposentadoria %} Aposentadoria{% endif %}<br>
@@ -86,15 +86,15 @@
     </td>
 
     
-    <td>Rua: {{t.rua}} N°:{{t.numero_da_rua}} <br> Bairro: {{t.bairro}} Cidade: {{t.cidade}} </td>
+    <td class="border-dark text-dark">Rua: {{t.rua}} N°:{{t.numero_da_rua}} <br> Bairro: {{t.bairro}} Cidade: {{t.cidade}} </td>
 
-    <td>Telefone: {{t.telefone}} <br> Celular:{{t.elular}} <br> Email: {{t.email}}</td>
+    <td class="border-dark text-dark">Telefone: {{t.telefone}} <br> Celular:{{t.elular}} <br> Email: {{t.email}}</td>
 
-    <td>{% if t.estuda_ensino_regular %} Estuda: {{t.qual}} Ano:{{t.ano_estuda}} <br> Turma: {{t.turma_estuda}} Turno: {{t.turno_estuda}} {% else %} Não informado {% endif %}</td>
+    <td class="border-dark text-dark">{% if t.estuda_ensino_regular %} Estuda: {{t.qual}} Ano:{{t.ano_estuda}} <br> Turma: {{t.turma_estuda}} Turno: {{t.turno_estuda}} {% else %} Não informado {% endif %}</td>
     
-    <td>{{t.assinatura_proficinal.nome}}</td>
-    <td>{{t.data_da_triagem|date:"d M Y" }}</td>
-    <td class="no-print"> <a style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true" href="{%url 'social:triagem_editar' t.id %}"></a></td>
+    <td class="border-dark text-dark">{{t.assinatura_proficinal.nome}}</td>
+    <td class="border-dark text-dark">{{t.data_da_triagem|date:"d M Y" }}</td>
+    <td class="no-print border-dark text-dark"> <a style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true" href="{%url 'social:triagem_editar' t.id %}"></a></td>
 
   </tr>
   {% endfor %}
@@ -106,45 +106,8 @@
 
 {% block js %}
 <script type="text/javascript">
-   
-    document.getElementById("u").className = document.getElementById("u").className + " active open";
-    document.getElementById("ut").className = document.getElementById("ut").className + " active";
+
+document.getElementById("u").className = document.getElementById("u").className + " active open";
+document.getElementById("ut").className = document.getElementById("ut").className + " active";
 </script>
 {% endblock %}
-
-
-<!--
-nome=
-datanascimento=++%2F++%2F++++
-sus=
-cid=
-exampleRadios=n
-especialista=
-painome=
-paiidade=
-paiprofissao=
-maenome=
-maeidade=
-maeprofissao=
-bpc=s
-bolsafamilia=s
-aposentadoria=s
-valor=
-beneficiario=
-rua=
-numero=
-bairro=
-ponto=
-cidade=
-telefone=%28++%29+++++-++++
-celular=%28++%29++.++++-++++
-email=
-inlineRadioOptions=n
-qual=
-ano=
-turma=
-turno=
-obs=
-assinatura=
-datarealizacao=162F09%2F2018+21%3A36%3A46
--->

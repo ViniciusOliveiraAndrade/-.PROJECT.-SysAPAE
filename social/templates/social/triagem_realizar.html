@@ -17,13 +17,18 @@
             <hr class="hr-sm mb-2">
             <div class="row"> 
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <label>Enviar Imagem</label>
-                    <div class="input-group file-group">
-                      <input type="text" class="form-control file-value" placeholder="Choose file..." readonly>
-                      <input type="file" multiple name="imagem">
-                      <span class="input-group-btn">
-                        <button class="btn btn-light file-browser" type="button"><i class="fa fa-upload"></i></button>
-                    </span>
+
+                    <div class="form-group">
+
+
+                        <label >Enviar Imagem</label>
+                        <div class="input-group file-group">
+                            <input type="text" class="form-control file-value" placeholder="Choose file..." readonly>
+                          <input  type="file" multiple name="imagem">
+                          <span class="input-group-btn">
+                            <button class="btn btn-light file-browser visivel" type="button"><i class="fa fa-upload"></i></button>
+                        </span>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12">
@@ -48,12 +53,13 @@
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="form-group">
                     <label>CID</label>
-
-                    <select data-provide="selectpicker" name="cid">
-                        {% for cid in cids %}
-                            <option>{{cid.codigo}}</option>                        
-                        {% endfor %}
-                    </select>
+                    <div>
+                        <select class="visivel" data-provide="selectpicker" name="cid">
+                            {% for cid in cids %}
+                            <option class="visivel">{{cid.codigo}}</option>                        
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
             </div>  
         </div>
@@ -235,14 +241,14 @@
         <div class="form-group">
             <label>Telefone</label>
             <small class="sidetitle">E.g. (87) 3831-0000</small>
-            <input name="telefone" type="text" class="form-control" data-format="(&#123;&#123;99&#125;&#125;) &#123;&#123;9999&#125;&#125;-&#123;&#123;9999&#125;&#125;">
+            <input name="telefone" type="text" class="form-control" data-format="({{e}}{{e}}99{{d}}{{d}}) {{e}}{{e}}9999{{d}}{{d}}-{{e}}{{e}}9999{{d}}{{d}}">
         </div>
     </div>
     <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Celular</label>
             <small class="sidetitle">E.g. (87) 9.9999-9999</small>
-            <input name="celular" type="text" class="form-control" data-format="(&#123;&#123;99&#125;&#125;) &#123;&#123;9&#125;&#125;.&#123;&#123;9999&#125;&#125;-&#123;&#123;9999&#125;&#125;">
+            <input name="celular" type="text" class="form-control" data-format="({{e}}{{e}}99{{d}}{{d}}) {{e}}{{e}}9{{d}}{{d}}.{{e}}{{e}}9999{{d}}{{d}}-{{e}}{{e}}9999{{d}}{{d}}">
         </div>
     </div>
     <div class="col-lg-4 col-md-6 col-sm-12">
@@ -323,7 +329,7 @@
     <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <label>Assinatura do Proficional</label>
-            <input name="assinatura" class="form-control" type="text" value="{{funcionario.nome}}">
+            <input name="assinatura" class="form-control" type="text" value="{{request.user.first_name}} {{request.user.last_name}}">
         </div>
     </div>
     <div class="col-lg-4 col-md-6 col-sm-12">

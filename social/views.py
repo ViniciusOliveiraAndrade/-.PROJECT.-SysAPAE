@@ -27,8 +27,7 @@ def index(request):
 @login_required
 def triagem_realizar(request):
     cids= CID.objects.all()
-    funcionario = request.user.funcionario
-    args = {'cids':cids, 'funcionario': funcionario}
+    args = {'cids':cids, "e":'{', 'd':'}'}
     return render(request,'social/triagem_realizar.html', args)
 
 @login_required
