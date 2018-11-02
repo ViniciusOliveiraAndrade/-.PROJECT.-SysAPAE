@@ -275,6 +275,20 @@ def usuarios_listar(request):
 #views da visita
 
 @login_required
+def visita_listar(request):
+    try:
+        visitas = Visita.objects.all()
+    except Exception as e:
+        u = Usuario()
+        f = Funcionario()
+        v = Visita()
+        v.usuario = u
+        v.funcionario = f
+        visitas = [v]
+        raise e
+    return render(request,'social/visita_listar.html', {'visitas' : visitas})
+
+@login_required
 def visita_agendar(request,usuario_id):
     u = Usuario.objects.get(pk=usuario_id)
     f = Funcionario.objects.filter(cargo__nome="Assistente social")
@@ -350,9 +364,6 @@ def visita_editar(request,visita_id):
         return HttpResponseRedirect(reverse('social:visita_editar', args=(visita.id,)))
 
     return render(request,'social/visita_editar.html', {'visita' : visita, 'funcionario': f})
-
-
-
 
 #----------------------------------------------------------------------------------------------------
 #Eventos
