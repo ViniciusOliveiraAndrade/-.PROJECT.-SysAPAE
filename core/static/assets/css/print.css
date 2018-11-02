@@ -19,13 +19,9 @@ table, th, td {
     margin-top: auto;
 }
 
-
 .text-center{
 	text-align: center;
 }
-
-
-
 
 .holdbox::after {
     content: "";
@@ -44,4 +40,27 @@ table, th, td {
 .box2 p{
 	margin-top: 0px;
 	margin-bottom: 0px;
+}
+
+.emlinha{
+    margin-right: 40px; 
+    padding-left: 10px; 
+    border-left: 1px black solid;
+    display: inline-block;
+    font-size: 12px;
+    color: black;
+    line-height: 6px;
+}
+
+.emlinha2{
+    margin-right: 40px; 
+    padding-left: 10px; 
+    border-left: 1px black solid;
+    font-size: 12px;
+    color: black;
+    line-height: 6px;
+}
+
+.levantar{
+    line-height: 0px;
 }
