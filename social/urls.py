@@ -20,15 +20,11 @@ urlpatterns = [
     path('Listar_Usuarios/(?<delete>)(&<id>)', views.usuarios_listar, name='usuarios_listar'),
     
     #visitas
-    path('Agendar_Visita', views.visita_agendar, name='visita_agendar'),
+    path('Agendar_Visita/<int:usuario_id>', views.visita_agendar, name='visita_agendar'),
     path('Listar_Visita', views.visita_listar, name='visita_listar'),
-
+    path('Editar_Visita/<int:visita_id>', views.visita_listar, name='visita_editar'),
 
     #Eventos
     path('Cadastrar_Eventos', views.evento_cadastrar, name='evento_cadastrar'),
-
-    # Viewa genericas test.
-    path('TEST', views.Test_view_generica.as_view(), name='teste_view_generica'),
-    path('TEST/<int:pk>', views.Test_view_generica_a.as_view(), name='teste_view_generica_a'),
 
 ]
