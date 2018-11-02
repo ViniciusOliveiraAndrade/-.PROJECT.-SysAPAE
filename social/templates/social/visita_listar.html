@@ -3,7 +3,7 @@
 {% block titulo %} Visitas {% endblock %}
 
 {% block adcionar %}
-<a class="btn btn-label btn-primary btn-round float-right" href="{% url 'social:visita_agendar' %}">
+<a class="btn btn-label btn-primary btn-round float-right" href="{% url 'social:usuarios_listar' %}">
   <label>
     <i class="ti-plus"></i>
   </label> Agendar Visita
@@ -59,50 +59,10 @@
 
 {% endblock %}
 
+{% block js %}
+<script type="text/javascript">
 
-<table class="table table-striped table-bordered" cellspacing="0" data-provide="datatables">
-  <thead style="background-color: #3f4a59;">
-    <tr>
-      <th>ID</th>
-      <th>Usuário</th>
-      <th>Data da Visita</th>
-      <th>Status</th>
-      <th>Local</th>
-      <th>Proficional</th>
-      <th>Observações</th>
-      <th>Editar</th>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <th>ID</th>
-      <th>Usuário</th>
-      <th>Data da Visita</th>
-      <th>Status</th>
-      <th>Local</th>
-      <th>Proficional</th>
-      <th>Observações</th>
-      <th>Editar</th>
-    </tr>
-  </tfoot>
-  <tbody>
-
-    {% for t in visitas%}
-
-    <tr>
-      <th>{{t.id}}</th>
-      <td>{{t.usuario.nome}}</td>
-      <td>{{t.data_visita}}</td>
-      <td>{% if t.realizada %} Realizado {% else %} Não Realizada {% endif %}</td>
-      <td></td>
-      <td>{{t.funcionario}}</td>
-      <td>{{t.observacoes}}</td>
-
-
-      <td> <a style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true" href="{%url 'social:triagem_editar' t.id %}"></a></td>
-
-    </tr>
-    {% endfor %}
-
-  </tbody>
-</table>
+document.getElementById("u").className = document.getElementById("u").className + " active open";
+document.getElementById("uv").className = document.getElementById("uv").className + " active";
+</script>
+{% endblock %}

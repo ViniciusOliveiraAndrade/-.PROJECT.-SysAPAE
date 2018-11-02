@@ -17,12 +17,11 @@ urlpatterns = [
 
     #Usuario
     path('Listar_Usuarios/', views.usuarios_listar, name='usuarios_listar'),
-    path('Listar_Usuarios/(?<delete>)(&<id>)', views.usuarios_listar, name='usuarios_listar'),
     
     #visitas
     path('Agendar_Visita/<int:usuario_id>', views.visita_agendar, name='visita_agendar'),
     path('Listar_Visita', views.visita_listar, name='visita_listar'),
-    path('Editar_Visita/<int:visita_id>', views.visita_listar, name='visita_editar'),
+    path('Editar_Visita/<int:visita_id>', views.visita_editar, name='visita_editar'),
 
     #Eventos
     path('Cadastrar_Eventos', views.evento_cadastrar, name='evento_cadastrar'),

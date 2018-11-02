@@ -288,10 +288,8 @@ def visita_agendar(request,usuario_id):
         
         try:
             data = request.POST['datavisita']
-            print(data)
-            data = data.split('/')
-
-            datavisita = datetime.datetime(int(data[2]),int(data[1]),int(data[0]))
+            data = data.split('-')
+            datavisita = datetime.datetime(int(data[0]),int(data[1]),int(data[2]))
         except Exception as e:
             datavisita = datetime.datetime(2000,1,1)
 
@@ -335,10 +333,14 @@ def visita_editar(request,visita_id):
     try:
         visita = Visita.objects.get(pk=visita_id)
     except Exception as e:
-        visitas = {}
+        visita = {}
         raise e
+    f = Funcionario.objects.filter(cargo__nome="Assistente social")
 
-    return render(request,'social/visita_listar.html', {'visitas' : visitas})
+    if request.method == "POST":
+        pass
+
+    return render(request,'social/visita_editar.html', {'visita' : visita, 'funcionario': f})
 
 #----------------------------------------------------------------------------------------------------
 #Eventos
