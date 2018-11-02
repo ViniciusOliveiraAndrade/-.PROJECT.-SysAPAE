@@ -56,13 +56,10 @@ def triagem_listar(request):
 #Views do usuario
 @login_required
 def usuarios_listar(request,delete=False,id=0):
-    if "delete" in request.GET:
-        u = get_object_or_404(Usuario,pk=request.GET['id'])
-        u.situacao = "Inativo"
-        gerar_acao(request.user.funcionario,"Inativo","Usuario",u.id)
+    
 
     try:
-        triagens = Triagem.objects.filter
+        triagens = Triagem.objects.filter(usuario__situacao="Ativo")
     except Exception as e:
         u = Usuario()
         f = Funcionario()
@@ -71,7 +68,13 @@ def usuarios_listar(request,delete=False,id=0):
         t.assinatura_proficinal = f
         triagens = [t]
         raise e
-        
+    if request.method == 'POST':
+        u = get_object_or_404(Usuario,pk=request.POST['id'])
+        u.situacao = "Inativo"
+        u.save()
+        gerar_acao(request.user.funcionario,"Inativar","Usuario",u.id)
+        return redirect("social:usuarios_listar")
+
     return render(request,'social/usuario_listar.html', {'triagens' : triagens})
 
 #

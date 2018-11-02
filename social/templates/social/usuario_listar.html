@@ -75,8 +75,11 @@
       <a data-provide="tooltip" data-tooltip-color="primary" title="Editar Triagem" style="font-size: 25px;" class="fa fa-pencil d-inline" aria-hidden="true" href="{%url 'social:triagem_editar' t.id %}"></a>
 
       <a data-provide="tooltip" data-tooltip-color="primary" title="Agendar Visita" style="font-size: 25px;" class="fa fa-location-arrow d-inline" aria-hidden="true" href="{%url 'social:triagem_editar' t.id %}"></a>  
-
-      <a id="{%url 'social:usuarios_listar'%}?delete=true&id={{t.id}}" onclick="deletar(this.id);" style="font-size: 25px;" data-provide="tooltip" data-tooltip-color="danger" title="Deletar" class="deletbutton fa fa-trash-o d-inline" aria-hidden="true" href="#"></a>  
+      <form class="d-inline" action="{% url 'social:usuarios_listar'%}" method="post" accept-charset="utf-8" id="inativar">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{t.id}}">
+      </form>
+      <a onclick="inativar();" style="font-size: 25px;" data-provide="tooltip" data-tooltip-color="danger" title="Deletar" class="deletbutton fa fa-trash-o d-inline" aria-hidden="true" href="#"></a>  
 
     </td>
 
@@ -93,15 +96,10 @@
 
 <script type="text/javascript">
 
-function deletar (url) {
-  var r = confirm("Isto apagará permanentemente o úsuário do sistema!\n Deseja continuar com a açao?");
-  if (r == true) {
-    window.location.assign(url);
-  } else {
-
-  }
-
+function inativar () {
+  document.getElementById("inativar").submit();
 }
+
 document.getElementById("u").className = document.getElementById("u").className + " active open";
 document.getElementById("ul").className = document.getElementById("ul").className + " active";
 </script>
