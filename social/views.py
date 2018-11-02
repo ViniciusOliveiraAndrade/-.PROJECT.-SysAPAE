@@ -273,6 +273,7 @@ def usuarios_listar(request):
 
 #--------------------------------------------------------------------------------------------
 #views da visita
+
 @login_required
 def visita_agendar(request,usuario_id):
     u = Usuario.objects.get(pk=usuario_id)
@@ -283,7 +284,6 @@ def visita_agendar(request,usuario_id):
         usuario = Usuario.objects.get(pk=request.POST['usuario_id'])
         
         first_name, last_name = getNomeFuncionario(request.POST['funcionario'])
-        print(getNomeFuncionario(request.POST['funcionario']))
         funcionario = Funcionario.objects.get(user__first_name=first_name, user__last_name=last_name)
         
         try:
@@ -314,21 +314,6 @@ def visita_agendar(request,usuario_id):
     return render(request,'social/visita_agendar.html', {'usuario':u, 'funcionario':f})
 
 @login_required
-def visita_listar(request):
-    try:
-        visitas = Visita.objects.all()
-    except Exception as e:
-        u = Usuario()
-        f = Funcionario()
-        v = Visita()
-        v.usuario = u
-        v.funcionario = f
-        visitas = [v]
-        raise e
-
-    return render(request,'social/visita_listar.html', {'visitas' : visitas})
-
-@login_required
 def visita_editar(request,visita_id):
     try:
         visita = Visita.objects.get(pk=visita_id)
@@ -338,9 +323,36 @@ def visita_editar(request,visita_id):
     f = Funcionario.objects.filter(cargo__nome="Assistente social")
 
     if request.method == "POST":
-        pass
+        visita = Visita.objects.get(pk=request.POST['id'])
+        first_name, last_name = getNomeFuncionario(request.POST['funcionario'])
+        funcionario = Funcionario.objects.get(user__first_name=first_name, user__last_name=last_name)
+        
+        try:
+            data = request.POST['datavisita']
+            data = data.split('-')
+            datavisita = datetime.datetime(int(data[0]),int(data[1]),int(data[2]))
+        except Exception as e:
+            datavisita = datetime.datetime(2000,1,1)
+
+        if request.POST['realizada'] == 'Sim':
+            realizada = True
+        else:
+            realizada = False
+
+        observacoes = request.POST['obs']
+
+        visita.funcionario=funcionario
+        visita.data_visita=datavisita
+        visita.observacoes=observacoes
+        visita.realizada=realizada
+
+        gerar_acao(request.user.funcionario,"Edição","Visita",visita.id)
+        return HttpResponseRedirect(reverse('social:visita_editar', args=(visita.id,)))
 
     return render(request,'social/visita_editar.html', {'visita' : visita, 'funcionario': f})
+
+
+
 
 #----------------------------------------------------------------------------------------------------
 #Eventos

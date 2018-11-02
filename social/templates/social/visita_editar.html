@@ -58,8 +58,8 @@
                     <div class="form-group">
                         <label>Realizada</label>
                         <select data-provide="selectpicker" name="realizada" style="color: black; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded">
-                            <option class="visivel text-dark">Não</option>
-                            <option class="visivel text-dark">Sim</option>                        
+                            <option {% if not visita.realizada %} selected="selected" {% endif %} class="visivel text-dark">Não</option>
+                            <option {% if visita.realizada %} selected="selected" {% endif %}class="visivel text-dark">Sim</option>                        
 
                         </select>
                     </div>
