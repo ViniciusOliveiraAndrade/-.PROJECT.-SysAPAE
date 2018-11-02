@@ -70,7 +70,7 @@
 
     <td class="no-print border-dark text-dark"> 
 
-      <a data-provide="tooltip" data-tooltip-color="primary" title="Detalhes" style="font-size: 25px;" class="fa fa-eye d-inline" aria-hidden="true" href="{%url 'social:triagem_editar' t.id %}"></a>
+      <a data-provide="tooltip" data-tooltip-color="primary" title="Detalhes" style="font-size: 25px;" class="fa fa-eye d-inline" aria-hidden="true" href="{%url 'social:triagem_detalhe' t.id %}"></a>
 
       <a data-provide="tooltip" data-tooltip-color="primary" title="Editar Triagem" style="font-size: 25px;" class="fa fa-pencil d-inline" aria-hidden="true" href="{%url 'social:triagem_editar' t.id %}"></a>
 
@@ -79,7 +79,7 @@
         {% csrf_token %}
         <input type="hidden" name="id" value="{{t.id}}">
       </form>
-      <a onclick="inativar();" style="font-size: 25px;" data-provide="tooltip" data-tooltip-color="danger" title="Deletar" class="deletbutton fa fa-trash-o d-inline" aria-hidden="true" href="#"></a>  
+      <a onclick="inativar();" style="font-size: 25px;" data-provide="tooltip" data-tooltip-color="danger" title="Inativar" class="deletbutton fa fa-trash-o d-inline" aria-hidden="true" href="#"></a>  
 
     </td>
 

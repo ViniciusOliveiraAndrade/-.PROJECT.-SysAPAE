@@ -21,6 +21,8 @@ def index(request):
     dados = {}
     return render(request,'social/index.html', dados)
 
+
+
 #----------------------------------------------------------------------------------------
 #Views da Triagem
 @login_required
@@ -35,6 +37,11 @@ def triagem_editar(request,triagem_id):
     cids= CID.objects.all()
     args = {'cids':cids, 't':t}
     return render(request,'social/triagem_editar.html', args)
+
+@login_required
+def triagem_detalhe(request,triagem_id):
+    t = get_object_or_404(Triagem,pk=triagem_id)
+    return render(request,'social/triagem_detalhe.html', {'t':t})
 
 @login_required
 def triagem_listar(request):

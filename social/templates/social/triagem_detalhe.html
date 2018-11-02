@@ -1,0 +1,292 @@
+{% extends 'social/layout/layout_base.html' %}
+
+{% block main %}
+
+
+<div class="card"> 
+
+  <br>
+  <h1 class="font-dosis fw-500  text-center">Editar Triagem</h1>
+  <br>
+
+  <div class="card-body card-round">
+
+
+
+      <!--  .......................................................................................................  -->  
+      <h5 class="text-uppercase">Usuário</h5>
+      <hr class="hr-sm mb-2">
+      <div class="row"> 
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Nome : {{t.usuario.nome}}</label>
+          </div>
+        </div>  
+
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Data de nascimento : {% if t.usuario.data_nacimento.day < 10 %} 0{{t.usuario.data_nacimento.day}} {% else %} {{t.usuario.data_nacimento.day}} {% endif %}/{% if t.usuario.data_nacimento.month < 10 %} 0{{t.usuario.data_nacimento.month}} {% else %} {{t.usuario.data_nacimento.month}} {% endif %}/{{t.usuario.data_nacimento.year}}</label>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>SUS : {{t.sus}}</label>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>CID : {{t.usuario.cid.codigo}}</label>
+          </div>
+        </div>  
+      </div>
+
+      <!--  .......................................................................................................  -->
+
+      <h5 class="text-uppercase mt-3">Acompanhamento com especialista</h5>
+      <hr class="hr-sm mb-2">
+      <div class="row"> 
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>É Acompanhado : {% if t.acompanhamento_com_especialista %} Sim {% else %} Não {% endif %}</label>
+
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Especialista acompanhante : {{t.especialista}}</label>
+          </div>
+        </div>
+      </div>
+
+      <!--  .......................................................................................................  -->
+
+
+      <h5 class="text-uppercase mt-3">Familiares</h5>
+      <hr class="hr-sm mb-2">
+      <h6 class="text-uppercase mt-3">Pai</h6>
+      <hr class="hr-sm mb-2">
+
+      <div class="row"> 
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Nome : {{t.nome_pai}}</label>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Idade : {{t.idade_pai}}</label>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Profissão : {{t.profissao_pai}}</label>
+          </div>
+        </div> 
+      </div>
+
+      <h6 class="text-uppercase mt-3">Mãe</h6>
+      <hr class="hr-sm mb-2">
+
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Nome : {{t.nome_mae}}</label>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Idade : {{t.idade_mae}}</label>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Profissão : {{t.profissao_mae}}</label>
+          </div>
+        </div>
+      </div>
+
+      <!--  .......................................................................................................  -->
+
+
+      <h5 class="text-uppercase mt-3">Renda familiar</h5>
+      <hr class="hr-sm mb-2">
+
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+
+          <div class="form-group">
+            <label> BPC : {% if t.bpc %} Possui {% else %} Não Possui {% endif %}</label>
+          </div>
+
+          <div class="form-group">
+            <label> Bolsa Família : {% if t.bolsa_familia %} Possui {% else %} Não Possui {% endif %}</label>
+          </div>
+          <div class="form-group">
+            <label> Aposentadoria : {% if t.aposentadoria %} Possui {% else %} Não Possui {% endif %}</label>
+          </div>
+       
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Beneficiário : {{t.benediciario}}</label>
+          </div>
+        </div>
+
+       
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Valor R$ : {{t.renda_familiar}}</label>
+          </div>
+        </div>
+        
+      </div>
+
+      <!--  .......................................................................................................  -->
+
+
+      <h5 class="text-uppercase mt-3">Endereço</h5>
+      <hr class="hr-sm mb-2">
+
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Rua : {{t.rua}}</label>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>N° : {{t.numero_da_rua}}</label>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Bairro : {{t.bairro}}</label>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Ponto de Referência : {{t.ponto_de_referencia}}</label>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Cidade : {{t.cidade}}</label>
+          </div>
+        </div>
+
+      </div>
+
+      <!--  .......................................................................................................  -->
+
+      <h5 class="text-uppercase mt-3">Contato</h5>
+      <hr class="hr-sm mb-2">
+
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+
+          <div class="form-group">
+            <label>Telefone : {{t.telefone}}</label>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Celular : {{t.celular}}</label>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Email : {{t.email}}</label>
+          </div>
+        </div>
+      </div>
+
+
+      <!--  .......................................................................................................  -->
+
+      <h5 class="text-uppercase mt-3">Ensino</h5>
+      <hr class="hr-sm mb-2">
+
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+
+          <div class="form-group">
+            <label> Estuda em ensino Regular : {% if t.estuda_ensino_regular %} Estuda {% else %} Não estuda {% endif %}</label>
+          </div>
+        </div>
+
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Qual : {{t.qual}}</label>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Ano : {{t.ano_estuda}}</label>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Turma : {{t.turma_estuda}}</label>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Turno : {{t.turno_estuda}}</label>
+          </div>
+        </div>
+      </div>
+
+      <!--  .......................................................................................................  -->
+
+
+      <h5 class="text-uppercase mt-3">Observações</h5>
+      <hr class="hr-sm mb-2">
+
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+
+          <div class="form-group">
+            <label>OBS : {{t.observacoes}}</label>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Assinatura do Proficional : {{t.assinatura_proficinal.user.first_name}} {{t.assinatura_proficinal.user.last_name}}</label>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Data de Realização : {{t.data_da_triagem.day}}/{{t.data_da_triagem.month}}/{{t.data_da_triagem.year}}</label>
+          </div>
+        </div>
+      </div>
+
+      <footer class="card-footer text-right no-print">
+        <a onclick="window.history.back();" class="btn btn-secondary" type="reset">Voltar</a>
+        <button class="btn btn-w-md btn-round btn-info float-right mr-3 ml-3" onclick="window.print();">Imprimir</button>
+      </footer>
+
+
+  </div>
+
+</div>
+
+
+
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+
+document.getElementById("u").className = document.getElementById("u").className + " active open";
+document.getElementById("ut").className = document.getElementById("ut").className + " active";
+</script>
+{% endblock %}

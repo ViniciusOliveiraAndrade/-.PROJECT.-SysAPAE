@@ -13,3 +13,10 @@
 	color: black;
 	font-size: 15px;
 }
+
+.form-group label{
+	color: black;
+	font-size: 15px;
+	border-color: #444;
+
+}
