@@ -19,7 +19,6 @@ import datetime
 @login_required
 def index(request):
     dados = {}
-    
     return render(request,'social/index.html', dados)
 
 #----------------------------------------------------------------------------------------
@@ -27,13 +26,15 @@ def index(request):
 @login_required
 def triagem_realizar(request):
     cids= CID.objects.all()
-    args = {'cids':cids, "e":'{', 'd':'}'}
+    args = {'cids':cids}
     return render(request,'social/triagem_realizar.html', args)
 
 @login_required
 def triagem_editar(request,triagem_id):
     t = get_object_or_404(Triagem,pk=triagem_id)
-    return render(request,'social/triagem_editar.html', {'t':t})
+    cids= CID.objects.all()
+    args = {'cids':cids, 't':t}
+    return render(request,'social/triagem_editar.html', args)
 
 @login_required
 def triagem_listar(request):
@@ -51,14 +52,17 @@ def triagem_listar(request):
     return render(request,'social/triagem_listar.html', {'triagens' : triagens})
 
 
-
-
 #--------------------------------------------------------------------------------------------
 #Views do usuario
 @login_required
 def usuarios_listar(request,delete=False,id=0):
+    if "delete" in request.GET:
+        u = get_object_or_404(Usuario,pk=request.GET['id'])
+        u.situacao = "Inativo"
+        gerar_acao(request.user.funcionario,"Inativo","Usuario",u.id)
+
     try:
-        triagens = Triagem.objects.all()
+        triagens = Triagem.objects.filter
     except Exception as e:
         u = Usuario()
         f = Funcionario()
@@ -67,13 +71,8 @@ def usuarios_listar(request,delete=False,id=0):
         t.assinatura_proficinal = f
         triagens = [t]
         raise e
-    if "delete" in request.GET:
-        u = get_object_or_404(Usuario,pk=request.GET['id'])
-        u.delete()
-
+        
     return render(request,'social/usuario_listar.html', {'triagens' : triagens})
-
-
 
 #
 #views da visita
@@ -203,7 +202,7 @@ def cadastrar_triagem(request):
     usuario.save()
     triagem.usuario = usuario
     triagem.save()
-
+    gerar_acao(request.user.funcionario,"Cadastro","Triagem",triagem.id)
     return HttpResponseRedirect(reverse('social:triagem_editar', args=(triagem.id,)))
 
 
@@ -217,10 +216,10 @@ def editar_triagem(request):
     datanascimento = datetime.datetime(int(data[2]),int(data[1]),int(data[0]))
 
     triagem.usuario.nome=request.POST['nome']
-    triagem.usuario.cid=request.POST['cid']
+    cid = CID.objects.get(codigo=request.POST['cid'])
+    triagem.usuario.cid=cid
     triagem.usuario.data_nacimento=datanascimento
     triagem.usuario.save()
-
     
     triagem.sus = request.POST['sus']
     
@@ -284,18 +283,8 @@ def editar_triagem(request):
 
     #Observacoes
     triagem.observacoes = request.POST['obs']
-    triagem.assinatura_proficinal.nome = request.POST['assinatura']
-    triagem.assinatura_proficinal.save()
-    
-    data = request.POST['datarealizacao']
-    data = data.split('/')
-
-    datatriagem = datetime.datetime(int(data[2]),int(data[1]),int(data[0]))
-    
-
-
-    triagem.data_da_triagem = datatriagem
     triagem.save()
+    gerar_acao(request.user.funcionario,"Edição","Triagem",triagem.id)
     return triagem_editar(request,triagem.id)
 
 #----------------------------------------------------------------------------------------------------
@@ -315,6 +304,7 @@ def evento_cadastrar(request):
     
         e = Evento(nome = request.POST['nome'], data_inicio = dataa, data_fim = datab)
         e.save()
+        gerar_acao(request.user.funcionario,"Cadastro","Evento",e.id)
         return HttpResponseRedirect(reverse('social:index' ))
     return render(request,'social/evento_cadastrar.html',{})
 
@@ -332,3 +322,6 @@ class Test_view_generica(generic.ListView):
 class Test_view_generica_a(generic.DetailView):
     model = Usuario
     template_name = 'social/testa.html'
+
+def gerar_acao(user,tipo_acao,dado_acao,iddado):
+    Registro_acao.objects.create(usuario=user,tipo=tipo_acao,dado=dado_acao, id_dado=iddado)

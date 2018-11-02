@@ -25,6 +25,7 @@ class Usuario(models.Model):
     nome = models.CharField(max_length=200, blank=True)
     cid = models.ForeignKey(CID, on_delete=models.PROTECT, blank=True)
     data_nacimento = models.DateField(u'Data de Nascimento', blank=True)
+    situacao = models.CharField(max_length=15, blank=True,default="Ativo")
 
     @property
     def imagem_url(self):
@@ -52,7 +53,7 @@ class Registro_acesso(models.Model):
         return "Nome: " + self.usuario.user.first_name +" "+self.usuario.user.last_name+ "   | Data: "+ data
 
 class Registro_acao(models.Model):
-    data_acao = models.DateTimeField(auto_now_add=True)
+    data_acao = models.DateTimeField(default=datetime.now)
     usuario = models.ForeignKey(Funcionario, on_delete=models.CASCADE)
     tipo = models.CharField(max_length=50)    
     dado = models.CharField(max_length=50)
