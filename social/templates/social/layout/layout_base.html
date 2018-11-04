@@ -1,5 +1,11 @@
 {% extends 'core/layout/layout_base.html' %}
 
+
+{% block home %}{% url 'social:index' %}{% endblock %}
+{% block home2 %}{% url 'social:index' %}{% endblock %}
+
+{% block perfil %}{% url 'social:perfil' %}{% endblock %}
+
 {% block menu_lateral %}
 
 <ul class="menu">
@@ -64,13 +70,6 @@
 </ul>
 
 {% endblock %}
-
-
-{% block menu_superior %}
-
-
-{% endblock %}
-
 
 
 {% block main %}{% endblock %}

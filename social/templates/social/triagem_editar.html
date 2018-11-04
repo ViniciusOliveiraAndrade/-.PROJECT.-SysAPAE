@@ -50,9 +50,9 @@
           <div class="form-group">
             <label>CID</label>
             <div>
-              <select data-provide="selectpicker" name="cid" style="color: black; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded">
+              <select data-provide="selectpicker" name="cid" style="color: #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded">
                 {% for cid in cids %}
-                <option class="visivel text-dark" {% if t.usuario.cid.codigo == cid.codigo %}selected="selected"{% endif %}>{{cid.codigo}}</option>                        
+                <option class="visivel text-dark" style="color:#000;" {% if t.usuario.cid.codigo == cid.codigo %}selected="selected"{% endif %}>{{cid.codigo}}</option>                        
                 {% endfor %}
               </select>
             </div>
@@ -322,7 +322,7 @@
 
           <div class="form-group">
             <label>OBS:</label>
-            <input name="obs" class="form-control" type="text" value="{{t.observacoes}}">
+            <textarea name="obs" class="form-control  text-dark" id="obs" rows="6" style="color:#000;" value=""></textarea>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -357,6 +357,7 @@
 
 {% block js %}
 <script type="text/javascript">
+document.getElementById("obs").value = "{{t.observacoes}}";
 
 document.getElementById("u").className = document.getElementById("u").className + " active open";
 document.getElementById("ut").className = document.getElementById("ut").className + " active";

@@ -19,10 +19,24 @@
             <input type="hidden" name="id" value="{{visita.id}}">
 
             <div class="row"> 
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="form-group">
                         <label>Usuário</label>
-                        <input class="form-control text-dark" type="text" disabled value="{{visita.usuario.nome}}">
+                        <input class="form-control text-dark" style="color:#000;" type="text" disabled value="{{visita.usuario.nome}}">
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label>Data da visita</label>
+                        <input id="dv" name="datavisita" type="date" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <label>local</label>
+                        <input class="form-control" type="text" name="local" value="{{visita.local}}">
                     </div>
                 </div>
 
@@ -34,29 +48,21 @@
                                 {% for f in funcionario %}
                                 <option class="visivel text-dark" 
                                 {% if visita.funcionario.user.first_name == f.user.first_name %}
-                                    selected="selected"
+                                selected="selected"
                                 {% endif %}>
 
-                                {{f.user.first_name}} {{f.user.last_name}}</option>                        
-                                
+                            {{f.user.first_name}} {{f.user.last_name}}</option>                        
 
-
-                                {% endfor %}
-                            </select>
-                        </div>
+                            {% endfor %}
+                        </select>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="form-group">
-                        <label>Data da visita</label>
-                        <input id="dv" name="datavisita" type="date" class="form-control">
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="form-group">
-                        <label>Realizada</label>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label>Realizada</label>
+                    <div>
                         <select data-provide="selectpicker" name="realizada" style="color: black; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded">
                             <option {% if not visita.realizada %} selected="selected" {% endif %} class="visivel text-dark">Não</option>
                             <option {% if visita.realizada %} selected="selected" {% endif %}class="visivel text-dark">Sim</option>                        
@@ -64,25 +70,26 @@
                         </select>
                     </div>
                 </div>
-
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="form-group">
-                        <label>Observações</label>
-                        <textarea name="obs" class="form-control  text-dark" id="textarea" rows="6"></textarea>
-                    </div>
-                </div>
-
-
-
             </div>
-            <footer class="card-footer text-right">
-                <a href="{% url 'social:index'%}" class="btn btn-secondary" type="reset">Cancelar</a>
-                <button class="btn btn-primary" type="submit">Editar</button>
-            </footer>
 
-        </form>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label>Observações</label>
+                    <textarea name="obs" class="form-control  text-dark" id="obs" rows="6" style="color:#000;"></textarea>
+                </div>
+            </div>
 
-    </div>
+
+
+        </div>
+        <footer class="card-footer text-right">
+            <a href="{% url 'social:index'%}" class="btn btn-secondary" type="reset">Cancelar</a>
+            <button class="btn btn-primary" type="submit">Editar</button>
+        </footer>
+
+    </form>
+
+</div>
 
 </div>
 
@@ -93,6 +100,7 @@
 
 {% block js %}
 <script type="text/javascript">
+document.getElementById("obs").value = "{{visita.observacoes}}";
 
 document.getElementById('dv').value = "{{visita.data_visita.year}}-{% if visita.data_visita.month < 10 %}0{{visita.data_visita.month}}{% else %}{{visita.data_visita.month}}{% endif %}-{% if visita.data_visita.day < 10 %}0{{visita.data_visita.day}}{% else %}{{visita.data_visita.day}}{% endif %}"
 document.getElementById("u").className = document.getElementById("u").className + " active open";

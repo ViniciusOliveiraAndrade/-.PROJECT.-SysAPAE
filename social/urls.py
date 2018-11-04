@@ -6,6 +6,9 @@ app_name = 'social'
 urlpatterns = [
     
     path('', views.index, name='index'),
+
+    path('Perfil', views.perfil, name='perfil'),
+
         
     #Triagens
     path('Realizar_Triagem', views.triagem_realizar, name='triagem_realizar'),

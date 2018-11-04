@@ -10,6 +10,7 @@ from django.views import generic
 
 from social.models import *
 from core.models import *
+from core.utilidades import *
 
 import datetime
 
@@ -20,6 +21,19 @@ import datetime
 def index(request):
     dados = {}
     return render(request,'social/index.html', dados)
+
+#----------------------------------------------------------------------------------------
+#Perfil
+@login_required
+def perfil(request):
+    if request.method == "POST":
+        pnome, unome = getNomeFuncionario(request.POST['nome'])
+        request.user.first_name = pnome
+        request.user.last_name = unome
+        request.user.email = request.POST['email']
+        request.user.save()
+    return render(request,'social/perfil.html')
+
 
 #----------------------------------------------------------------------------------------
 #Views da Triagem
@@ -59,7 +73,6 @@ def triagem_listar(request):
 #controle de Tricagem
 @login_required
 def cadastrar_triagem(request):
-    
     cid = CID.objects.get(codigo=request.POST['cid'])
     usuario = Usuario(nome=request.POST['nome'], cid=cid)
 
@@ -167,7 +180,6 @@ def cadastrar_triagem(request):
 
 @login_required
 def editar_triagem(request):
-
     triagem = get_object_or_404(Triagem,pk=request.POST['id'])
 
     data = request.POST['datanascimento']
@@ -250,7 +262,6 @@ def editar_triagem(request):
 #Views do usuario
 @login_required
 def usuarios_listar(request):
-    
 
     try:
         triagens = Triagem.objects.filter(usuario__situacao="Ativo")
@@ -292,6 +303,8 @@ def visita_listar(request):
 def visita_agendar(request,usuario_id):
     u = Usuario.objects.get(pk=usuario_id)
     f = Funcionario.objects.filter(cargo__nome="Assistente social")
+    t = Triagem.objects.get(usuario=u)
+    local = "Rua: "+t.rua+", N° "+t.numero_da_rua+"  |Bairro: "+t.bairro+"   |Ponto de Referencia: "+t.ponto_de_referencia+"   |Cidade: "+t.cidade
 
     if request.method == "POST":
         
@@ -313,19 +326,21 @@ def visita_agendar(request,usuario_id):
             realizada = False
 
         observacoes = request.POST['obs']
+        local = request.POST['local']
 
         visita = Visita.objects.create(
             usuario=usuario,
             funcionario=funcionario,
             data_visita=datavisita,
             observacoes=observacoes,
-            realizada=realizada
+            realizada=realizada,
+            local=local
             )
 
         gerar_acao(request.user.funcionario,"Cadastro","Visita",visita.id)
         return HttpResponseRedirect(reverse('social:visita_editar', args=(visita.id,)))
 
-    return render(request,'social/visita_agendar.html', {'usuario':u, 'funcionario':f})
+    return render(request,'social/visita_agendar.html', {'usuario':u, 'funcionario':f, 'local': local})
 
 @login_required
 def visita_editar(request,visita_id):
@@ -354,12 +369,14 @@ def visita_editar(request,visita_id):
             realizada = False
 
         observacoes = request.POST['obs']
-
+        local = request.POST['local']
         visita.funcionario=funcionario
         visita.data_visita=datavisita
         visita.observacoes=observacoes
         visita.realizada=realizada
-
+        visita.local=local
+        
+        visita.save()
         gerar_acao(request.user.funcionario,"Edição","Visita",visita.id)
         return HttpResponseRedirect(reverse('social:visita_editar', args=(visita.id,)))
 
@@ -369,7 +386,6 @@ def visita_editar(request,visita_id):
 #Eventos
 @login_required
 def evento_cadastrar(request):
-
     if "nome" in request.POST:
         data = request.POST['datainicio']
         data = data.split('/')
@@ -386,12 +402,4 @@ def evento_cadastrar(request):
         return HttpResponseRedirect(reverse('social:index' ))
     return render(request,'social/evento_cadastrar.html',{})
 
-def gerar_acao(user,tipo_acao,dado_acao,iddado):
-    Registro_acao.objects.create(usuario=user,tipo=tipo_acao,dado=dado_acao, id_dado=iddado)
 
-def getNomeFuncionario(requestPost):
-    nome_funcionario = requestPost
-    nome_funcionario = nome_funcionario.split(' ')
-    first_name = nome_funcionario[0]
-    last_name = " ".join(nome_funcionario[1:])
-    return first_name, last_name

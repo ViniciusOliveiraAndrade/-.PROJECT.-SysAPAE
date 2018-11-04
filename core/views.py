@@ -4,11 +4,16 @@ from django.contrib.auth import authenticate, login as login_f, logout as logout
 from django.contrib.auth.decorators import login_required
 from core.models import *
 
+from core.utilidades import *
+
 # Create your views here.
 @login_required
 def index(request):
-    dados = {'request':request}
-    
+    if request.user.funcionario.cargo.nome == "Coordenador(a) pedagógica" or request.user.funcionario.cargo.nome == "Educador(a)": 
+        return redirect('pedagogico:index')
+    else:
+        return redirect('social:index')
+
     return render(request,'core/index.html', dados)
 
 

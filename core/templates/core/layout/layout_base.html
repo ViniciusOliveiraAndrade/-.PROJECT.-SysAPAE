@@ -46,11 +46,11 @@
   <!-- Sidebar -->
   <aside class="sidebar sidebar-icons-right sidebar-icons-boxed sidebar-expand-lg no-print">
     <header class="sidebar-header" style="background-color: #010b6b;">
-      <a class="logo-icon" href="{% url 'social:index'%}">
+      <a class="logo-icon" href="{% block home %}{% endblock %}">
         <img src="{% static 'assets/img/logo-icon-light.png' %}" alt="logo icon">
       </a>
       <span class="logo">
-        <a href="{% url 'social:index'%}"><img src="{% static 'assets/img/logo.png' %}" alt="logo"></a>
+        <a href="{% block home2 %}{% endblock %}"><img src="{% static 'assets/img/logo.png' %}" alt="logo"></a>
       </span>
       <span class="sidebar-toggle-fold"></span>
 

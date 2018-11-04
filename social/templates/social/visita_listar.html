@@ -46,10 +46,10 @@
     <td class="border-dark text-dark">{{t.usuario.nome}}</td>
     <td class="border-dark text-dark">{{t.data_visita}}</td>
     <td class="border-dark text-dark">{% if t.realizada %} Realizado {% else %} Não Realizada {% endif %}</td>
-    <td class="border-dark text-dark"></td>
+    <td class="border-dark text-dark">{{t.local}}</td>
     <td class="border-dark text-dark">{{t.funcionario}}</td>
     <td class="border-dark text-dark">{{t.observacoes}}</td>
-    <td class="no-print border-dark text-dark"> <a style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true" href="{%url 'social:triagem_editar' t.id %}"></a></td>
+    <td class="no-print border-dark text-dark"> <a style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true" href="{%url 'social:visita_editar' t.id %}"></a></td>
 
   </tr>
   {% endfor %}
