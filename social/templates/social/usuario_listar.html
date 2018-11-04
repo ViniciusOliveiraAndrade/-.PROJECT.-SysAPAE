@@ -59,7 +59,13 @@
 
   <tr>
     <th class="border-dark text-dark">{{t.id}}</th>
-    <td class="no-print border-dark text-dark"> <img src="{% ifequal t.usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{t.usuario.imagem_url}} {% endifequal %}" width="70" height="100"> </td>
+    <td class="no-print border-dark text-dark">
+      <div class="row no-gutters" data-provide="photoswipe">
+        <figure class="img-hov-zoomin">
+          <img src="{% ifequal t.usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{t.usuario.imagem_url}} {% endifequal %}" alt="..." class="img-thumbnail">
+        </figure>
+      </div>
+    </td>
     <td class="border-dark text-dark">{{t.usuario.nome}}</td>
     <td class="border-dark text-dark">{{t.usuario.data_nacimento|date:"d M Y" }}</td>
     <td class="border-dark text-dark">{{t.usuario.cid}}</td>
