@@ -129,7 +129,10 @@ def cadastrar_triagem(request):
     else:
         triagem.aposentadoria = True
 
-    triagem.renda_familiar = request.POST['valor']
+
+    valor = request.POST['valor']
+    valor = valor.replace(',','.')
+    triagem.renda_familiar = valor
     triagem.benediciario = request.POST['beneficiario']
 
     #Endereco
@@ -227,7 +230,9 @@ def editar_triagem(request):
     else:
         triagem.aposentadoria = True
 
-    triagem.renda_familiar = request.POST['valor']
+    valor = request.POST['valor']
+    valor = valor.replace(',','.')
+    triagem.renda_familiar = valor
     triagem.benediciario = request.POST['beneficiario']
 
     #Endereco
