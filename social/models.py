@@ -61,8 +61,10 @@ class Visita(models.Model):
     data_visita = models.DateField('Data Visita', blank=True)
     observacoes = models.CharField(max_length=300, blank=True)
     realizada = models.BooleanField(default=False, blank=True)
+    local = models.CharField(max_length=300, blank=True, default='')
+    
     def __str__(self):
-        return "Nome do usuário: "+self.usuario.nome+"\n Data da visita: "+str(self.data_visita.day)+"/"+str(self.data_visita.month)+"/"+str(self.data_visita.year)+"\n Nome do proficinal: "+self.funcionario.nome
+        return "Nome do usuário: "+self.usuario.nome+"\n Data da visita: "+str(self.data_visita.day)+"/"+str(self.data_visita.month)+"/"+str(self.data_visita.year)+"\n Nome do proficinal: "+self.funcionario.user.first_name
 
 class Lista(models.Model):
     posicao = models.IntegerField(default=0, blank=True)
@@ -76,8 +78,3 @@ class Evento(models.Model):
     def __str__(self):
         return "Evento: "+self.nome
 
-# class Choice(models.Model):
-#     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-#     choice_text = models.CharField(max_length=200)
-#     votes = models.IntegerField(default=0)
-#     

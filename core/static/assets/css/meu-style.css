@@ -1,0 +1,22 @@
+.logomarca{
+	display: none;
+}
+
+.form-group input, .visivel{
+	color: black;
+	font-size: 15px;
+	border-color: #444;
+
+}
+
+.form-group{
+	color: black;
+	font-size: 15px;
+}
+
+.form-group label{
+	color: black;
+	font-size: 15px;
+	border-color: #444;
+
+}

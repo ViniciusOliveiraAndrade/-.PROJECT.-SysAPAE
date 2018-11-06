@@ -1,343 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="TheAdmin - Responsive Bootstrap 4 Admin, Dashboard &amp; WebApp Template">
-    <meta name="keywords" content="dashboard, index, main">
+{% extends 'social/layout/layout_base.html' %}
 
-    <title>SYS APAE</title>
+{% block main %}
+<div class="card"> 
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,300i|Dosis:300,500" rel="stylesheet">
+    <br>
+    <h1 class="font-dosis fw-500 text-center">Editar Visita</h1>
+    <br>
 
-    <!-- Styles -->
-    {% load static %}
-    <link href="{% static 'assets/css/core.min.css' %}" rel="stylesheet">
-    <link href="{% static 'assets/css/app.min.css' %}" rel="stylesheet">
-    <link href="{% static 'assets/css/style.min.css' %}" rel="stylesheet">
-
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="{% static 'assets/img/apple-touch-icon.png' %}">
-    <link rel="icon" href="{% static 'assets/img/logo-icon-light.png' %}">
-
-    <!--  Open Graph Tags -->
-    <meta property="og:title" content="The Admin Template of 2018!">
-    <meta property="og:description" content="TheAdmin is a responsive, professional, and multipurpose admin template powered with Bootstrap 4.">
-    <meta property="og:image" content="http://thetheme.io/theadmin/assets/img/og-img.jpg">
-    <meta property="og:url" content="http://thetheme.io/theadmin/">
-    <meta name="twitter:card" content="summary_large_image">
-  </head>
-
-  <body class="sidebar-folded">
-
-    <!-- Preloader -->
-    <div class="preloader">
-      <div class="spinner-dots">
-        <span class="dot1"></span>
-        <span class="dot2"></span>
-        <span class="dot3"></span>
-      </div>
-    </div>
+    <div class="card-body card-round">
 
 
-    <!-- Sidebar -->
-    <aside class="sidebar sidebar-icons-right sidebar-icons-boxed sidebar-expand-lg">
-      <header class="sidebar-header">
-        <a class="logo-icon" href="{% url 'social:index'%}"><img src="{% static 'assets/img/logo-icon-light.png' %}" alt="logo icon"></a>
-        <span class="logo">
-          <a href="{% url 'social:index'%}"><img src="{% static 'assets/img/logo.png' %}" alt="logo"></a>
-        </span>
-        <span class="sidebar-toggle-fold"></span>
-      </header>
+        <form id="formmm" class="card" action="{% url 'social:visita_editar' visita.usuario.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
 
-      <nav class="sidebar-navigation">
-        <ul class="menu">
+            <h5 class="text-uppercase ">Evento</h5>
+            <hr class="hr-sm mb-2">
 
-        
-          <li class="menu-item">
-            <a class="menu-link" href="#">
-              <span class="icon fa fa-address-card-o"></span>
-              <span class="title">Triagem</span>
-              <span class="arrow"></span>
-            </a>
+            <input type="hidden" name="id" value="{{visita.id}}">
 
-            <ul class="menu-submenu">
-            
-              <li class="menu-item">
-                <a class="menu-link" href="{% url 'social:triagem_realizar' %}">
-                  <span class="dot"></span>
-                  <span class="title">Realizar</span>
-                </a>
-              </li>
-
-              <li class="menu-item">
-                <a class="menu-link" href="{% url 'social:triagem_buscar' %}">
-                  <span class="dot"></span>
-                  <span class="title">Editar</span>
-                </a>
-              </li>
-
-              <li class="menu-item">
-                <a class="menu-link" href="{% url 'social:triagem_listar' %}">
-                  <span class="dot"></span>
-                  <span class="title">Listar</span>
-                </a>
-              </li>
-
-            </ul>
-          </li>
-
-
-
-
-
-          <li class="menu-item active open">
-            <a class="menu-link" href="#">
-              <span class="icon fa fa-location-arrow"></span>
-              <span class="title">Visita</span>
-              <span class="arrow"></span>
-            </a>
-
-            <ul class="menu-submenu">
-            
-              <li class="menu-item active">
-                <a class="menu-link" href="{% url 'social:visita_agendar' %}">
-                  <span class="dot"></span>
-                  <span class="title">Agendar</span>
-                </a>
-              </li>
-
-              <li class="menu-item">
-                <a class="menu-link" href="{% url 'social:visita_listar' %}">
-                  <span class="dot"></span>
-                  <span class="title">Listar</span>
-                </a>
-              </li>
-
-            </ul>
-          </li>
-
-
-
-
-
-
-
-
-
-        </ul>
-      </nav>
-
-    </aside>
-    <!-- END Sidebar -->
-
-
-
-    <!-- Topbar -->
-    <header class="topbar">
-      <div class="topbar-left">
-        <span class="topbar-btn sidebar-toggler"><i>&#9776;</i></span>
-
-        <a class="topbar-btn d-none d-md-block" href="#" data-provide="fullscreen tooltip" title="Fullscreen">
-          <i class="material-icons fullscreen-default">fullscreen</i>
-          <i class="material-icons fullscreen-active">fullscreen_exit</i>
-        </a>
-        
-
-        <div class="topbar-divider d-none d-md-block"></div>
-    
-      </div>
-
-
-    </header>
-    <!-- END Topbar -->
-
-
-
-
-
-
-<!-- 
-************************************************************************
-************************************************************************
-************************************************************************
-************************************************************************
-
-Menu para Trocar
-
-************************************************************************
-************************************************************************
-************************************************************************
-************************************************************************
--->
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Main container -->
-    <main>
-
-      <div class="main-content">
-        <div class="row">
-
-          
-          <div class="col-12 text-center">
-            <div class="card card-round card-body">
-              <br><br>
-              <h1 class="font-dosis fw-500">Visita</h1><br>
+            <div class="row"> 
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label>Usuário</label>
+                        <input class="form-control text-dark" style="color:#000;" type="text" disabled value="{{visita.usuario.nome}}">
+                    </div>
+                </div>
                 
-
-
-            <div class="text-left">
-              <form class="card" action="{% url 'social:cadastrar_triagem'%}" method="post">
-                {% csrf_token %}
-
-                <div class="card-body">
-                 
-
-                  <div class="form-group">
-                    <label>Usuário</label>
-                    <input class="form-control" type="text" name="nome">
-                  </div>
-
-                  <div class="form-group">
-                    <label>Data da visita</label>
-                     <small class="sidetitle">dd/mm/yyyy</small>
-                  <input name="datanascimento" type="text" class="form-control" data-format="&#123;&#123;99&#125;&#125;/&#123;&#123;99&#125;&#125;/&#123;&#123;9999&#125;&#125;">
-                  </div>
-                  
-                  <h6 class="text-uppercase mt-3">Realizda</h6>
-                  <hr class="hr-sm mb-2">
-                  
-                  
-                    <div class="form-check form-check-inline">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="acompanhado" value="s"> Sim
-                  </label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="acompanhado" value="n" checked="checked"> Não
-                  </label>
-                </div>
-                  
-                  <div class="form-group">
-                    <label>Observações:</label>
-                    <input name="obs" class="form-control" type="text">
-                  </div>
-
-                  <div class="form-group">
-                    <label>Proficional Responsavel</label>
-                    <input name="assinatura" class="form-control" type="text">
-                  </div>
-
-
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label>Data da visita</label>
+                        <input id="dv" name="datavisita" type="date" class="form-control">
+                    </div>
                 </div>
 
-                <footer class="card-footer text-right">
-                  <a href="{% url 'social:index'%}" class="btn btn-secondary" type="reset">Cancelar</a>
-                  <button class="btn btn-primary" type="submit">Agendar</button>
-                </footer>
-              </form>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <label>local</label>
+                        <input class="form-control" type="text" name="local" value="{{visita.local}}">
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label>Funcionário</label>
+                        <div>
+                            <select data-provide="selectpicker" name="funcionario" style="color: black; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded">
+                                {% for f in funcionario %}
+                                <option class="visivel text-dark" 
+                                {% if visita.funcionario.user.first_name == f.user.first_name %}
+                                selected="selected"
+                                {% endif %}>
+
+                            {{f.user.first_name}} {{f.user.last_name}}</option>                        
+
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
             </div>
 
-              <br>
-              
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label>Realizada</label>
+                    <div>
+                        <select data-provide="selectpicker" name="realizada" style="color: black; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded">
+                            <option {% if not visita.realizada %} selected="selected" {% endif %} class="visivel text-dark">Não</option>
+                            <option {% if visita.realizada %} selected="selected" {% endif %}class="visivel text-dark">Sim</option>                        
 
-
+                        </select>
+                    </div>
+                </div>
             </div>
-            <br><br>
-          </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label>Observações</label>
+                    <textarea name="obs" class="form-control  text-dark" id="obs" rows="6" style="color:#000;"></textarea>
+                </div>
+            </div>
+
+
 
         </div>
+        <footer class="card-footer text-right">
+            <a href="{% url 'social:index'%}" class="btn btn-secondary" type="reset">Cancelar</a>
+            <button class="btn btn-primary" type="submit">Editar</button>
+        </footer>
+
+    </form>
+
+</div>
+
+</div>
 
 
-        <br><br><br>
-
-          <div class="w-100"></div>
-
-
-        </div>
-
-        <br>
-
-      </div><!--/.main-content -->
-
-
-      <!-- Footer -->
-      <footer class="site-footer">
-        <div class="row">
-          <div class="col-md-6">
-            <p class="text-center text-md-left">Copyright © 2017 <a href="http://thetheme.io/theadmin">TheAdmin</a>. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-      <!-- END Footer -->
-
-    </main>
-    <!-- END Main container -->
-
-
-  
-
-    <!-- Global quickview -->
-    <div id="qv-global" class="quickview" data-url="{% static 'assets/data/quickview-global-for-index.html' %}">
-      <div class="spinner-linear">
-        <div class="line"></div>
-      </div>
-    </div>
-    <!-- END Global quickview -->
+{% endblock %}
 
 
 
-    <!-- Scripts -->
-    <script src="{% static 'assets/js/core.min.js' %}"></script>
-    <script src="{% static 'assets/js/app.min.js' %}"></script>
-    <script src="{% static 'assets/js/script.min.js' %}"></script>
+{% block js %}
+<script type="text/javascript">
+document.getElementById("obs").value = "{{visita.observacoes}}";
 
-  </body>
-</html>
+document.getElementById('dv').value = "{{visita.data_visita.year}}-{% if visita.data_visita.month < 10 %}0{{visita.data_visita.month}}{% else %}{{visita.data_visita.month}}{% endif %}-{% if visita.data_visita.day < 10 %}0{{visita.data_visita.day}}{% else %}{{visita.data_visita.day}}{% endif %}"
+document.getElementById("u").className = document.getElementById("u").className + " active open";
+document.getElementById("uv").className = document.getElementById("uv").className + " active";
+</script>
+{% endblock %}
 
-<!--
-nome=
-datanascimento=++%2F++%2F++++
-sus=
-cid=
-exampleRadios=n
-especialista=
-painome=
-paiidade=
-paiprofissao=
-maenome=
-maeidade=
-maeprofissao=
-bpc=s
-bolsafamilia=s
-aposentadoria=s
-valor=
-beneficiario=
-rua=
-numero=
-bairro=
-ponto=
-cidade=
-telefone=%28++%29+++++-++++
-celular=%28++%29++.++++-++++
-email=
-inlineRadioOptions=n
-qual=
-ano=
-turma=
-turno=
-obs=
-assinatura=
-datarealizacao=162F09%2F2018+21%3A36%3A46
--->

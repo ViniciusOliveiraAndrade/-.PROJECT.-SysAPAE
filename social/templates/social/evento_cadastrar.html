@@ -4,7 +4,7 @@
 <div class="card"> 
 
     <br>
-    <h1 class="font-dosis fw-500">Cadastrar  Evento</h1>
+    <h1 class="font-dosis fw-500 text-center">Cadastrar  Evento</h1>
     <br>
 
     <div class="card-body card-round">
@@ -13,35 +13,40 @@
     	<form id="formmm" class="card" action="{% url 'social:evento_cadastrar'%}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
-            <h5 class="text-uppercase">Evento</h5>
+            <h5 class="text-uppercase ">Evento</h5>
             <hr class="hr-sm mb-2">
 
+            <div class="row"> 
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input class="form-control" type="text" name="nome">
+                    </div>
+                </div>
+                <!--  data-format="&#123;&#123;99&#125;&#125;/&#123;&#123;99&#125;&#125;/&#123;&#123;9999&#125;&#125;" -->
 
-          <div class="form-group">
-            <label>Nome</label>
-            <input class="form-control" type="text" name="nome">
-        </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label>Data de Início</label>
+                        <input name="datainicio" type="date" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label>Data de Fim</label>
+                        <input name="datafim" type="date" class="form-control">
+                    </div>
 
-        <div class="form-group">
-                <label>Data de Início</label>
-                <small class="sidetitle">dd/mm/yyyy</small>
-                <input name="datainicio" type="text" class="form-control" data-format="&#123;&#123;99&#125;&#125;/&#123;&#123;99&#125;&#125;/&#123;&#123;9999&#125;&#125;">
-        </div>
-        <div class="form-group">
-                <label>Data de Fim</label>
-                <small class="sidetitle">dd/mm/yyyy</small>
-                <input name="datafim" type="text" class="form-control" data-format="&#123;&#123;99&#125;&#125;/&#123;&#123;99&#125;&#125;/&#123;&#123;9999&#125;&#125;">
-        </div>
+                </div>
+            </div>
+            <footer class="card-footer text-right">
+                <a href="{% url 'social:index'%}" class="btn btn-secondary" type="reset">Cancelar</a>
+                <button class="btn btn-primary" type="submit">Cadastrar</button>
+            </footer>
 
+        </form>
 
-        <footer class="card-footer text-right">
-            <a href="{% url 'social:index'%}" class="btn btn-secondary" type="reset">Cancelar</a>
-            <button class="btn btn-primary" type="submit">Cadastrar</button>
-        </footer>
-
-    </form>
-
-</div>
+    </div>
 
 </div>
 
@@ -52,9 +57,9 @@
 
 {% block js %}
 <script type="text/javascript">
-   
-    document.getElementById("e").className = document.getElementById("e").className + " active open";
-    document.getElementById("el").className = document.getElementById("el").className + " active";
+
+document.getElementById("e").className = document.getElementById("e").className + " active open";
+document.getElementById("el").className = document.getElementById("el").className + " active";
 </script>
 {% endblock %}
 

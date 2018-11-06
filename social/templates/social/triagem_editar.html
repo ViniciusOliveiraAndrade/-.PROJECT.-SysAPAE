@@ -1,262 +1,378 @@
 {% extends 'social/layout/layout_base.html' %}
 
 {% block main %}
+{% load static %}
+
 <div class="card"> 
 
   <br>
-  <h1 class="font-dosis fw-500">Editar Triagem</h1>
+  <h1 class="font-dosis fw-500  text-center">Editar Triagem</h1>
   <br>
 
   <div class="card-body card-round">
 
 
 
-
-    <form class="card" action="{% url 'social:editar_triagem'%}" method="post">
+    <form id="formmm" class="card text-dark" action="{% url 'social:editar_triagem'%}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
-
-
+      inpu
+      <input type="hidden" name="id" value="{{ t.id }}">
+      <!--  .......................................................................................................  -->  
       <h5 class="text-uppercase">Usuário</h5>
       <hr class="hr-sm mb-2">
+     
+      <div class="row"> 
+        <div class="col-lg-12 col-md-12 col-sm-12 no-gutters text-center" data-provide="photoswipe">
+            <figure class="img-hov-zoomin">
+              <img src="{% ifequal t.usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{t.usuario.imagem_url}} {% endifequal %}" alt="..." class="rounded avatar-xxxl">
+            </figure>
+        </div>
+      </div>
+     
 
-      <div class="form-group">
-        <input class="form-control" type="text" name="id" value="{{t.id}}" style="display: none;">
-        <label>Nome</label>
-        <input class="form-control" type="text" name="nome" value="{{t.usuario.nome}}">
+
+
+
+      <div class="row"> 
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Nome</label>
+            <input class="form-control" type="text" name="nome" value="{{t.usuario.nome}}">
+          </div>
+        </div>  
+
+    
+
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Data de nascimento</label>
+            <small class="sidetitle">dd/mm/aaaa</small>
+            <input name="datanascimento" type="text" data-format="&#123;&#123;99&#125;&#125;/&#123;&#123;99&#125;&#125;/&#123;&#123;9999&#125;&#125;" class="form-control" value="{% if t.usuario.data_nacimento.day < 10 %} 0{{t.usuario.data_nacimento.day}} {% else %} {{t.usuario.data_nacimento.day}} {% endif %}/{% if t.usuario.data_nacimento.month < 10 %} 0{{t.usuario.data_nacimento.month}} {% else %} {{t.usuario.data_nacimento.month}} {% endif %}/{{t.usuario.data_nacimento.year}}">
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>SUS</label>
+            <input name="sus" class="form-control" type="text" value="{{t.sus}}">
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>CID</label>
+            <div>
+              <select data-provide="selectpicker" name="cid" style="color: #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded">
+                {% for cid in cids %}
+                <option class="visivel text-dark" style="color:#000;" {% if t.usuario.cid.codigo == cid.codigo %}selected="selected"{% endif %}>{{cid.codigo}}</option>                        
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>  
       </div>
 
-      <div class="form-group">
-        <label>Data de nascimento</label>
-        <small class="sidetitle">dd/mm/yyyy</small>
-        <input name="datanascimento" type="text" class="form-control" data-format="&#123;&#123;99&#125;&#125;/&#123;&#123;99&#125;&#125;/&#123;&#123;9999&#125;&#125;" value="{% if t.usuario.data_nacimento.day < 10 %} 0{{t.usuario.data_nacimento.day}} {% else %} {{t.usuario.data_nacimento.day}} {% endif %}/{% if t.usuario.data_nacimento.month < 10 %} 0{{t.usuario.data_nacimento.month}} {% else %} {{t.usuario.data_nacimento.month}} {% endif %}/{{t.usuario.data_nacimento.year}}">
-      </div>
-
-      <div class="form-group">
-        <label>SUS</label>
-        <input name="sus" class="form-control" type="text" value="{{t.sus}}">
-      </div>
-
-      <div class="form-group">
-        <label>CID</label>
-        <input name="cid" class="form-control" type="text" value="{{t.usuario.cid}}">
-      </div>
-
+      <!--  .......................................................................................................  -->
 
       <h5 class="text-uppercase mt-3">Acompanhamento com especialista</h5>
       <hr class="hr-sm mb-2">
-
-      <h6 class="text-uppercase mt-3">É Acompanhado</h6>
-      <hr class="hr-sm mb-2">
-
-
-      <div class="form-check form-check-inline">
-        <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="acompanhado" value="s" {% if t.acompanhamento_com_especialista %} checked="checked" {% endif %}> Sim
-        </label>
+      <div class="row"> 
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>É Acompanhado</label>
+            <div>
+              <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="acompanhado" value="s" {% if t.acompanhamento_com_especialista %} checked="checked" {% endif %}> Sim
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="acompanhado" value="n" {% if not t.acompanhamento_com_especialista %} checked="checked" {% endif %}> Não
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Especialista acompanhante</label>
+            <input name="especialista" class="form-control" type="text" value="{{t.especialista}}">
+          </div>
+        </div>
       </div>
-      <div class="form-check form-check-inline">
-        <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="acompanhado" value="n" {% if not t.acompanhamento_com_especialista %} checked="checked" {% endif %}> Não
-        </label>
-      </div>
 
-      <div class="form-group">
-        <label>Especialista acompanhante</label>
-        <input name="especialista" class="form-control" type="text" value="{{t.especialista}}">
-      </div>
+      <!--  .......................................................................................................  -->
+
 
       <h5 class="text-uppercase mt-3">Familiares</h5>
       <hr class="hr-sm mb-2">
-
       <h6 class="text-uppercase mt-3">Pai</h6>
       <hr class="hr-sm mb-2">
 
-      <div class="form-group">
-        <label>Nome</label>
-        <input name="painome" class="form-control" type="text" value="{{t.nome_pai}}">
-      </div>
+      <div class="row"> 
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Nome</label>
+            <input name="painome" class="form-control" type="text" value="{{t.nome_pai}}">
+          </div>
+        </div>
 
-      <div class="form-group">
-        <label>Idade</label>
-        <input name="paiidade" class="form-control" type="text" value="{{t.idade_pai}}">
-      </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Idade</label>
+            <input name="paiidade" class="form-control" type="number" value="{{t.idade_pai}}">
+          </div>
+        </div>
 
-      <div class="form-group">
-        <label>Profissão</label>
-        <input name="paiprofissao" class="form-control" type="text" value="{{t.profissao_pai}}">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Profissão</label>
+            <input name="paiprofissao" class="form-control" type="text" value="{{t.profissao_pai}}">
+          </div>
+        </div> 
       </div>
 
       <h6 class="text-uppercase mt-3">Mãe</h6>
       <hr class="hr-sm mb-2">
 
-      <div class="form-group">
-        <label>Nome</label>
-        <input name="maenome" class="form-control" type="text" value="{{t.nome_mae}}">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Nome</label>
+            <input name="maenome" class="form-control" type="text" value="{{t.nome_mae}}">
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Idade</label>
+            <input name="maeidade" class="form-control" type="number"  value="{{t.idade_mae}}">
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Profissão</label>
+            <input name="maeprofissao" class="form-control" type="text" value="{{t.profissao_mae}}">
+          </div>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label>Idade</label>
-        <input name="maeidade" class="form-control" type="text" value="{{t.idade_mae}}">
-      </div>
+      <!--  .......................................................................................................  -->
 
-      <div class="form-group">
-        <label>Profissão</label>
-        <input name="maeprofissao" class="form-control" type="text" value="{{t.profissao_mae}}">
-      </div>
 
       <h5 class="text-uppercase mt-3">Renda familiar</h5>
       <hr class="hr-sm mb-2">
 
-      <div class="form-check form-check-inline">
-        <label class="form-check-label">
-          <input name="bpc" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="s" {% if t.bpc %} checked="checked" {% endif %}> BPC
-        </label>
-      </div>
-      <div class="form-check form-check-inline">
-        <label class="form-check-label">
-          <input name="bolsafamilia" class="form-check-input" type="checkbox" id="inlineCheckbox2" value="s" {% if t.bolsa_familia %} checked="checked" {% endif %}> Bolsa Família
-        </label>
-      </div>
-      <div class="form-check form-check-inline">
-        <label class="form-check-label">
-          <input name="aposentadoria" class="form-check-input" type="checkbox" id="inlineCheckbox3" value="s" {% if t.aposentadoria %} checked="checked" {% endif %}> Aposentadoria
-        </label>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input name="bpc" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="s" {% if t.bpc %} checked="checked" {% endif %}> BPC
+            </label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input name="bolsafamilia" class="form-check-input" type="checkbox" id="inlineCheckbox2" value="s" {% if t.bolsa_familia %} checked="checked" {% endif %}> Bolsa Família
+            </label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input name="aposentadoria" class="form-check-input" type="checkbox" id="inlineCheckbox3" value="s" {% if t.aposentadoria %} checked="checked" {% endif %}> Aposentadoria
+            </label>
+          </div>
+
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Valor R$</label>
+            <input name="valor" class="form-control" type="text" value="{{t.renda_familiar}}">
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Beneficiário</label>
+            <input name="beneficiario" class="form-control" type="text" value="{{t.benediciario}}">
+          </div>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label>Valor R$</label>
-        <input name="valor" class="form-control" type="text" value="{{t.renda_familiar}}">
-      </div>
+      <!--  .......................................................................................................  -->
 
-      <div class="form-group">
-        <label>Beneficiário</label>
-        <input name="beneficiario" class="form-control" type="text" value="{{t.benediciario}}">
-      </div>
 
       <h5 class="text-uppercase mt-3">Endereço</h5>
       <hr class="hr-sm mb-2">
 
-      <div class="form-group">
-        <label>Rua</label>
-        <input name="rua" class="form-control" type="text" value="{{t.rua}}">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Rua</label>
+            <input name="rua" class="form-control" type="text"  value="{{t.rua}}">
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>N°</label>
+            <input name="numero" class="form-control" type="text" value="{{t.numero_da_rua}}">
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Bairro</label>
+            <input name="bairro" class="form-control" type="text"  value="{{t.bairro}}">
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Ponto de Referência</label>
+            <input name="ponto" class="form-control" type="text"  value="{{t.ponto_de_referencia}}">
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Cidade</label>
+            <input name="cidade" class="form-control" type="text"  value="{{t.cidade}}">
+          </div>
+        </div>
+
       </div>
 
-      <div class="form-group">
-        <label>N°</label>
-        <input name="numero" class="form-control" type="text" value="{{t.numero_da_rua}}">
-      </div>
-
-      <div class="form-group">
-        <label>Bairro</label>
-        <input name="bairro" class="form-control" type="text" value="{{t.bairro}}">
-      </div>
-
-      <div class="form-group">
-        <label>Ponto de Referência</label>
-        <input name="ponto" class="form-control" type="text" value="{{t.ponto_de_referencia}}">
-      </div>
-
-      <div class="form-group">
-        <label>Cidade</label>
-        <input name="cidade" class="form-control" type="text" value="{{t.cidade}}">
-      </div>
+      <!--  .......................................................................................................  -->
 
       <h5 class="text-uppercase mt-3">Contato</h5>
       <hr class="hr-sm mb-2">
 
-      <div class="form-group">
-        <label>Telefone</label>
-        <small class="sidetitle">E.g. (87) 3831-0000</small>
-        <input name="telefone" type="text" class="form-control" data-format="(&#123;&#123;99&#125;&#125;) &#123;&#123;9999&#125;&#125;-&#123;&#123;9999&#125;&#125;" value="{{t.telefone}}">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+
+          <div class="form-group">
+            <label>Telefone</label>
+            <small class="sidetitle">E.g. (87) 3831-0000</small>
+            <input name="telefone" type="text" class="form-control" data-format="(&#123;&#123;99&#125;&#125;) &#123;&#123;9999&#125;&#125;-&#123;&#123;9999&#125;&#125;" value="{{t.telefone}}">
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Celular</label>
+            <small class="sidetitle">E.g. (87) 9.9999-9999</small>
+            <input name="celular" type="text" class="form-control" data-format="(&#123;&#123;99&#125;&#125;) &#123;&#123;9&#125;&#125;.&#123;&#123;9999&#125;&#125;-&#123;&#123;9999&#125;&#125;" value="{{t.celular}}">
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Email</label>
+            <input name="email" class="form-control" type="email" value="{{t.email}}">
+          </div>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label>Celular</label>
-        <small class="sidetitle">E.g. (87) 9.9999-9999</small>
-        <input name="celular" type="text" class="form-control" data-format="(&#123;&#123;99&#125;&#125;) &#123;&#123;9&#125;&#125;.&#123;&#123;9999&#125;&#125;-&#123;&#123;9999&#125;&#125;" value="{{t.celular}}">
-      </div>
 
-      <div class="form-group">
-        <label>Email</label>
-        <input name="email" class="form-control" type="text" value="{{t.email}}">
-      </div>
-
+      <!--  .......................................................................................................  -->
 
       <h5 class="text-uppercase mt-3">Ensino</h5>
       <hr class="hr-sm mb-2">
 
-      <h6 class="text-uppercase mt-3">Estudo em ensino Regular</h6>
-      <hr class="hr-sm mb-2">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+
+          <div class="form-group">
+            <label> Estuda em ensino Regular</label>
+            <div>
 
 
-      <div class="form-check form-check-inline">
-        <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="estuda" value="s" {% if t.estuda_ensino_regular %} checked="checked" {% endif %}> Sim
-        </label>
-      </div>
-      <div class="form-check form-check-inline">
-        <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="estuda" value="n" {% if not t.estuda_ensino_regular %} checked="checked" {% endif %}> Não
-        </label>
+              <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="estuda" value="s" {% if t.estuda_ensino_regular %} checked="checked" {% endif %}> Sim
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="estuda" value="n" {% if not t.estuda_ensino_regular %} checked="checked" {% endif %}> Não
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Qual</label>
+            <input name="qual" class="form-control" type="text" value="{{t.qual}}">
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Ano</label>
+            <input name="ano" class="form-control" type="text" value="{{t.ano_estuda}}">
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Turma</label>
+            <input name="turma" class="form-control" type="text" value="{{t.turma_estuda}}">
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Turno</label>
+            <input name="turno" class="form-control" type="text" value="{{t.turno_estuda}}">
+          </div>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label>Qual</label>
-        <input name="qual" class="form-control" type="text" value="{{t.qual}}">
-      </div>
-
-      <div class="form-group">
-        <label>Ano</label>
-        <input name="ano" class="form-control" type="text" value="{{t.ano_estuda}}">
-      </div>
-
-      <div class="form-group">
-        <label>Turma</label>
-        <input name="turma" class="form-control" type="text" value="{{t.turma_estuda}}">
-      </div>
-
-      <div class="form-group">
-        <label>Turno</label>
-        <input name="turno" class="form-control" type="text" value="{{t.turno_estuda}}">
-      </div>
+      <!--  .......................................................................................................  -->
 
 
       <h5 class="text-uppercase mt-3">Observações</h5>
       <hr class="hr-sm mb-2">
 
-      <div class="form-group">
-        <label>OBS:</label>
-        <input name="obs" class="form-control" type="text" value="{{t.observacoes}}">
-      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
 
-      <div class="form-group">
-        <label>Assinatura do Proficional</label>
-        <input name="assinatura" class="form-control" type="text" value="{{t.assinatura_proficinal.nome}}">
-      </div>
-
-      <div class="form-group">
-        <label>Data de Realização</label>
-        <input name="datarealizacao" id="datar" class="form-control" type="text" value="{{t.data_da_triagem.day}}/{{t.data_da_triagem.month}}/{{t.data_da_triagem.year}}">
+          <div class="form-group">
+            <label>OBS:</label>
+            <textarea name="obs" class="form-control  text-dark" id="obs" rows="6" style="color:#000;" value=""></textarea>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Assinatura do Proficional</label>
+            <input name="assinatura" class="form-control" type="text" value="{{t.assinatura_proficinal.user.first_name}} {{t.assinatura_proficinal.user.last_name}}">
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Data de Realização</label>
+            <input name="datarealizacao" id="datar" class="form-control" type="text" value="{{t.data_da_triagem.day}}/{{t.data_da_triagem.month}}/{{t.data_da_triagem.year}}">
+          </div>
+        </div>
       </div>
 
       <footer class="card-footer text-right">
         <a href="{% url 'social:index'%}" class="btn btn-secondary" type="reset">Cancelar</a>
         <button class="btn btn-primary" type="submit">Editar</button>
       </footer>
-    </form>
 
+    </form>
 
   </div>
 
 </div>
 
 
+
+
 {% endblock %}
 
 {% block js %}
 <script type="text/javascript">
-   
-    document.getElementById("u").className = document.getElementById("u").className + " active open";
-    document.getElementById("ut").className = document.getElementById("ut").className + " active";
+document.getElementById("obs").value = "{{t.observacoes}}";
+
+document.getElementById("u").className = document.getElementById("u").className + " active open";
+document.getElementById("ut").className = document.getElementById("ut").className + " active";
 </script>
 {% endblock %}

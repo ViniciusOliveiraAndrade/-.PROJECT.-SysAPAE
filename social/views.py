@@ -10,6 +10,7 @@ from django.views import generic
 
 from social.models import *
 from core.models import *
+from core.utilidades import *
 
 import datetime
 
@@ -19,22 +20,41 @@ import datetime
 @login_required
 def index(request):
     dados = {}
-    
     return render(request,'social/index.html', dados)
 
+#----------------------------------------------------------------------------------------
+#Perfil
+@login_required
+def perfil(request):
+    if request.method == "POST":
+        pnome, unome = getNomeFuncionario(request.POST['nome'])
+        request.user.first_name = pnome
+        request.user.last_name = unome
+        request.user.email = request.POST['email']
+        request.user.save()
+        gerar_acao(request.user.funcionario,"Edição","Funcionario",request.user.funcionario.id)
+    return render(request,'social/perfil.html')
+
+    
 #----------------------------------------------------------------------------------------
 #Views da Triagem
 @login_required
 def triagem_realizar(request):
     cids= CID.objects.all()
-    funcionario = request.user.funcionario
-    args = {'cids':cids, 'funcionario': funcionario}
+    args = {'cids':cids}
     return render(request,'social/triagem_realizar.html', args)
 
 @login_required
 def triagem_editar(request,triagem_id):
     t = get_object_or_404(Triagem,pk=triagem_id)
-    return render(request,'social/triagem_editar.html', {'t':t})
+    cids= CID.objects.all()
+    args = {'cids':cids, 't':t}
+    return render(request,'social/triagem_editar.html', args)
+
+@login_required
+def triagem_detalhe(request,triagem_id):
+    t = get_object_or_404(Triagem,pk=triagem_id)
+    return render(request,'social/triagem_detalhe.html', {'t':t})
 
 @login_required
 def triagem_listar(request):
@@ -51,57 +71,9 @@ def triagem_listar(request):
 
     return render(request,'social/triagem_listar.html', {'triagens' : triagens})
 
-
-
-
-#--------------------------------------------------------------------------------------------
-#Views do usuario
-@login_required
-def usuarios_listar(request,delete=False,id=0):
-    try:
-        triagens = Triagem.objects.all()
-    except Exception as e:
-        u = Usuario()
-        f = Funcionario()
-        t = Triagem()
-        t.usuario = u
-        t.assinatura_proficinal = f
-        triagens = [t]
-        raise e
-    if "delete" in request.GET:
-        u = get_object_or_404(Usuario,pk=request.GET['id'])
-        u.delete()
-
-    return render(request,'social/usuario_listar.html', {'triagens' : triagens})
-
-
-
-#
-#views da visita
-@login_required
-def visita_agendar(request,usuario_id):
-    return render(request,'social/visita_agendar.html', {})
-
-@login_required
-def visita_listar(request):
-    try:
-        visitas = Visita.objects.all()
-    except Exception as e:
-        u = Usuario()
-        f = Funcionario()
-        v = Visita()
-        v.usuario = u
-        v.funcionario = f
-        visitas = [v]
-        raise e
-
-    return render(request,'social/visita_listar.html', {'visitas' : visitas})
-
-#---------------------------------------------------------------------------------------------------------------
 #controle de Tricagem
 @login_required
 def cadastrar_triagem(request):
-    
     cid = CID.objects.get(codigo=request.POST['cid'])
     usuario = Usuario(nome=request.POST['nome'], cid=cid)
 
@@ -158,7 +130,10 @@ def cadastrar_triagem(request):
     else:
         triagem.aposentadoria = True
 
-    triagem.renda_familiar = request.POST['valor']
+
+    valor = request.POST['valor']
+    valor = valor.replace(',','.')
+    triagem.renda_familiar = valor
     triagem.benediciario = request.POST['beneficiario']
 
     #Endereco
@@ -204,13 +179,11 @@ def cadastrar_triagem(request):
     usuario.save()
     triagem.usuario = usuario
     triagem.save()
-
+    gerar_acao(request.user.funcionario,"Cadastro","Triagem",triagem.id)
     return HttpResponseRedirect(reverse('social:triagem_editar', args=(triagem.id,)))
-
 
 @login_required
 def editar_triagem(request):
-
     triagem = get_object_or_404(Triagem,pk=request.POST['id'])
 
     data = request.POST['datanascimento']
@@ -218,10 +191,10 @@ def editar_triagem(request):
     datanascimento = datetime.datetime(int(data[2]),int(data[1]),int(data[0]))
 
     triagem.usuario.nome=request.POST['nome']
-    triagem.usuario.cid=request.POST['cid']
+    cid = CID.objects.get(codigo=request.POST['cid'])
+    triagem.usuario.cid=cid
     triagem.usuario.data_nacimento=datanascimento
     triagem.usuario.save()
-
     
     triagem.sus = request.POST['sus']
     
@@ -258,7 +231,9 @@ def editar_triagem(request):
     else:
         triagem.aposentadoria = True
 
-    triagem.renda_familiar = request.POST['valor']
+    valor = request.POST['valor']
+    valor = valor.replace(',','.')
+    triagem.renda_familiar = valor
     triagem.benediciario = request.POST['beneficiario']
 
     #Endereco
@@ -285,25 +260,138 @@ def editar_triagem(request):
 
     #Observacoes
     triagem.observacoes = request.POST['obs']
-    triagem.assinatura_proficinal.nome = request.POST['assinatura']
-    triagem.assinatura_proficinal.save()
-    
-    data = request.POST['datarealizacao']
-    data = data.split('/')
-
-    datatriagem = datetime.datetime(int(data[2]),int(data[1]),int(data[0]))
-    
-
-
-    triagem.data_da_triagem = datatriagem
     triagem.save()
+    gerar_acao(request.user.funcionario,"Edição","Triagem",triagem.id)
     return triagem_editar(request,triagem.id)
+
+#--------------------------------------------------------------------------------------------
+#Views do usuario
+@login_required
+def usuarios_listar(request):
+
+    try:
+        triagens = Triagem.objects.filter(usuario__situacao="Ativo")
+    except Exception as e:
+        u = Usuario()
+        f = Funcionario()
+        t = Triagem()
+        t.usuario = u
+        t.assinatura_proficinal = f
+        triagens = [t]
+        raise e
+    if request.method == 'POST':
+        u = get_object_or_404(Usuario,pk=request.POST['id'])
+        u.situacao = "Inativo"
+        u.save()
+        gerar_acao(request.user.funcionario,"Inativar","Usuario",u.id)
+        return redirect("social:usuarios_listar")
+
+    return render(request,'social/usuario_listar.html', {'triagens' : triagens})
+
+#--------------------------------------------------------------------------------------------
+#views da visita
+
+@login_required
+def visita_listar(request):
+    try:
+        visitas = Visita.objects.all()
+    except Exception as e:
+        u = Usuario()
+        f = Funcionario()
+        v = Visita()
+        v.usuario = u
+        v.funcionario = f
+        visitas = [v]
+        raise e
+    return render(request,'social/visita_listar.html', {'visitas' : visitas})
+
+@login_required
+def visita_agendar(request,usuario_id):
+    u = Usuario.objects.get(pk=usuario_id)
+    f = Funcionario.objects.filter(cargo__nome="Assistente social")
+    t = Triagem.objects.get(usuario=u)
+    local = "Rua: "+t.rua+", N° "+t.numero_da_rua+"  |Bairro: "+t.bairro+"   |Ponto de Referencia: "+t.ponto_de_referencia+"   |Cidade: "+t.cidade
+
+    if request.method == "POST":
+        
+        usuario = Usuario.objects.get(pk=request.POST['usuario_id'])
+        
+        first_name, last_name = getNomeFuncionario(request.POST['funcionario'])
+        funcionario = Funcionario.objects.get(user__first_name=first_name, user__last_name=last_name)
+        
+        try:
+            data = request.POST['datavisita']
+            data = data.split('-')
+            datavisita = datetime.datetime(int(data[0]),int(data[1]),int(data[2]))
+        except Exception as e:
+            datavisita = datetime.datetime(2000,1,1)
+
+        if request.POST['realizada'] == 'Sim':
+            realizada = True
+        else:
+            realizada = False
+
+        observacoes = request.POST['obs']
+        local = request.POST['local']
+
+        visita = Visita.objects.create(
+            usuario=usuario,
+            funcionario=funcionario,
+            data_visita=datavisita,
+            observacoes=observacoes,
+            realizada=realizada,
+            local=local
+            )
+
+        gerar_acao(request.user.funcionario,"Cadastro","Visita",visita.id)
+        return HttpResponseRedirect(reverse('social:visita_editar', args=(visita.id,)))
+
+    return render(request,'social/visita_agendar.html', {'usuario':u, 'funcionario':f, 'local': local})
+
+@login_required
+def visita_editar(request,visita_id):
+    try:
+        visita = Visita.objects.get(pk=visita_id)
+    except Exception as e:
+        visita = {}
+        raise e
+    f = Funcionario.objects.filter(cargo__nome="Assistente social")
+
+    if request.method == "POST":
+        visita = Visita.objects.get(pk=request.POST['id'])
+        first_name, last_name = getNomeFuncionario(request.POST['funcionario'])
+        funcionario = Funcionario.objects.get(user__first_name=first_name, user__last_name=last_name)
+        
+        try:
+            data = request.POST['datavisita']
+            data = data.split('-')
+            datavisita = datetime.datetime(int(data[0]),int(data[1]),int(data[2]))
+        except Exception as e:
+            datavisita = datetime.datetime(2000,1,1)
+
+        if request.POST['realizada'] == 'Sim':
+            realizada = True
+        else:
+            realizada = False
+
+        observacoes = request.POST['obs']
+        local = request.POST['local']
+        visita.funcionario=funcionario
+        visita.data_visita=datavisita
+        visita.observacoes=observacoes
+        visita.realizada=realizada
+        visita.local=local
+        
+        visita.save()
+        gerar_acao(request.user.funcionario,"Edição","Visita",visita.id)
+        return HttpResponseRedirect(reverse('social:visita_editar', args=(visita.id,)))
+
+    return render(request,'social/visita_editar.html', {'visita' : visita, 'funcionario': f})
 
 #----------------------------------------------------------------------------------------------------
 #Eventos
 @login_required
 def evento_cadastrar(request):
-
     if "nome" in request.POST:
         data = request.POST['datainicio']
         data = data.split('/')
@@ -316,20 +404,8 @@ def evento_cadastrar(request):
     
         e = Evento(nome = request.POST['nome'], data_inicio = dataa, data_fim = datab)
         e.save()
+        gerar_acao(request.user.funcionario,"Cadastro","Evento",e.id)
         return HttpResponseRedirect(reverse('social:index' ))
     return render(request,'social/evento_cadastrar.html',{})
 
 
-
-class Test_view_generica(generic.ListView):
-    template_name = 'social/test.html'
-    context_object_name = 'usuarios'
-
-    def get_queryset(self):
-        """Return the last five published questions."""
-        return Usuario.objects.all()
-
-
-class Test_view_generica_a(generic.DetailView):
-    model = Usuario
-    template_name = 'social/testa.html'
