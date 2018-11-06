@@ -6,59 +6,109 @@
         <h1 class="font-dosis fw-500">Cadastro da Aula</h1><br>
         <br>
 
-        <form style="padding-right: 15px" id="formulario" class="card" action="{% url 'pedagogico:cadastrar_aulas' %}"
+        <form id="formulario" class="card" action="{% url 'pedagogico:cadastrar_aulas' %}"
               method="post">
             {% csrf_token %}
+            <input type="hidden" name="id_turma" value="{{ turma }}">
+
+            <div class="row">
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+
+                    <label><b>Data</b></label>
+                    <div class="form-group">
+                        <div class="form-group" style="margin-left: 40px">
+                            <input name="dataAula" class="form-control" type="date">
+{#                                   data-format="&#123;&#123;99&#125;&#125;/&#123;&#123;99&#125;&#125;/&#123;&#123;9999&#125;&#125;">#}
+                        </div>
+                    </div>
+
+                </div>
+
+{#                <div class="col-lg-4 col-md-6 col-sm-12">#}
+{##}
+{#                    <label><b>Turma</b></label>#}
+{#                    <div class="form-group">#}
+{#                        <select style="background-color: #e8e8e8" data-provide="selectpicker" name="turma">#}
+{#                            {% for turma in turmas %}#}
+{#                                <option>{{ turma.nome }}</option>#}
+{#                            {% endfor %}#}
+{#                        </select>#}
+{#                    </div>#}
+{##}
+{#                </div>#}
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+
+                    <label>Situação</label><br>
+                    <div class="form-check form-check-inline">
+                        {#                        <label class="form-check-label">#}
+                        {#                            <input class="form-check-input" type="radio" id="inlineCheckbox1" value="aberto"#}
+                        {#                                   name="situacao"#}
+                        {#                                   checked> Aberto#}
+                        {#                            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#}
+                        {#                        </label>#}
+                        {#                        <label class="form-check form-check-inline">#}
+                        {#                            <input class="form-check-input" type="radio" id="inlineCheckbox2" value="finalizado"#}
+                        {#                                   name="situacao"> Finalizado#}
+                        {#                        </label>#}
+
+                        <div class="color-selector">
+                            <label>
+                                <input type="radio" name="situacao" checked title="Aberto" value="aberto">
+                                <span style="background-color:#48b0f7" title="Aberto"></span>
+                            </label>
+                            <label>
+                                <input type="radio" name="situacao" value="finalizado">
+                                <span style="background-color:#f96868" title="Finalizado"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
 
 
-            <label><b>Data</b></label>
-            <div class="form-group">
-                <input name="dataAula" type="text"
-                       data-format="&#123;&#123;99&#125;&#125;/&#123;&#123;99&#125;&#125;/&#123;&#123;9999&#125;&#125;">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <br>
+                    <h4 class="text-uppercase text-center">Conteúdo</h4>
+
+                    <label>Titulo</label>
+                    <div class="form-group">
+                        <div class="card-body card-round tabelaSemflow flowww">
+                            <input name="tituloAula" class="form-control" type="text"
+                                   placeholder=" Nomeie suas aulas"><br>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card-body card-round tabelaSemflow flowww">
+                        <div class="form-group">
+                            <textarea style="background-color: #e8e8e8" data-provide="summernote"
+                                      data-min-height="180" id="conteudoAula" name="conteudo"></textarea>
+                        </div>
+                        {#                    </div>#}
+                    </div>
+
+                    <div class="col-lg-12 col-md-6 col-sm-12">
+                        <div class="card-body card-round tabelaSemflow flowww">
+                            <label>Avaliação da Aula</label>
+
+                            <div class="form-group">
+{#                                <textarea name="avaliacao" class="form-control" type="text" rows="3">#}
+                                 <textarea class="form-control" id="textarea" rows="3" name="avaliacao"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
 
-            <label><b>Turma</b></label>
-            <div class="form-group">
-                <select style="background-color: #e8e8e8" data-provide="selectpicker" multiple name="turma">
-                    {% for turma in turmas %}
-                        <option>{{ turma.nome }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-
-            <label>Situação</label>
-            <div class="form-check form-check-inline">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" id="inlineCheckbox1" value="aberto" name="situacao" checked> Aberto
-                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </label>
-                <label class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="inlineCheckbox2" value="finalizado" name="situacao"> Finalizado
-                </label>
-            </div>
-
-            <br>
-            <h4 class="text-uppercase">Conteúdo</h4>
-            <br>
-
-             <label>Titulo</label>
-            <div class="form-group">
-                <input id="tituloAula" type="text" name="tituloAula" size="50"></input><br><br>
-            </div>
-             <div class="form-group">
-                <textarea  style="background-color: #e8e8e8" data-provide="summernote"
-                          data-min-height="150" id="conteudoAula" name="conteudo"></textarea>
-            </div>
-
-            <label>Avaliação da Aula</label>
-            <div class="form-group">
-                <input id="avaliacaoAula" type="text" name="avalicao" size="70"></input>
-            </div>
-
-            <div class="text-right">
-                <button style="margin-bottom: 15px" class="btn btn-primary" type="submit">Registrar</button>
-            </div>
+            <footer class="card-footer text-right">
+                <a href="{% url 'pedagogico:listar_aulas' turma %}" class="btn btn-secondary" type="reset">Cancelar</a>
+                <button class="btn btn-primary" type="submit">Registrar</button>
+            </footer>
         </form>
         <br>
     </div>

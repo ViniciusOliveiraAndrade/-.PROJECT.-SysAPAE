@@ -10,192 +10,300 @@
 
         <div class="card-body card-round">
 
-            <form style="padding-right: 15px" id="formulario" class="card"
+            <form id="formulario" class="card"
                   action="{% url 'pedagogico:cadastrar_aulas' %}"
                   method="post">
                 {% csrf_token %}
 
-                <h4 class="text-uppercase">Ficha Pedagógica</h4>
-                <hr class="hr-sm mb-2">
+                <h4 class="text-uppercase mt-3 text-left">Informações Básicas</h4>
 
-                <label><b>Usuário</b></label>
-                <div class="form-group">
-                <input type="text" class="form-control" value="{{ usuario.nome }}" readonly>
+                <div class="row">
+
+                    <div class="col-lg-8 col-md-6 col-sm-12 text-left">
+                        <label>Usuário</label>
+                        <div class="form-group">
+                            <input style="border-color: #aeaeae" type="text" class="form-control"
+                                   value="{{ usuario.nome }}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-sm-12 text-left">
+                        <label>Município</label>
+                        <div class="form-group">
+                            <input style="border-color: #aeaeae" type="text" class="form-control"
+                                   value="#" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 text-left">
+                        <label>Pai</label>
+                        <div class="form-group">
+                            <input style="border-color: #aeaeae" type="text" class="form-control"
+                                   value="#" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 text-left">
+                        <label>Mãe</label>
+                        <div class="form-group">
+                            <input style="border-color: #aeaeae" type="text" class="form-control"
+                                   value="#" readonly>
+                        </div>
+                    </div>
+
+                    {#                    <div class="col-lg-4 col-md-6 col-sm-12">#}
+                    {#                        <label>Estuda</label><br>#}
+                    {##}
+                    {#                        <div class="form-check form-check-inline">#}
+                    {#                            <label class="custom-control custom-radio">#}
+                    {#                                <input type="radio" class="custom-control-input" value="sim" name="estuda">#}
+                    {#                                <span class="custom-control-indicator"></span>#}
+                    {#                                <span class="custom-control-description">Sim</span>#}
+                    {#                            </label>#}
+                    {##}
+                    {#                            <label class="custom-control custom-radio">#}
+                    {#                                <input type="radio" class="custom-control-input" value="não" name="estuda">#}
+                    {#                                <span class="custom-control-indicator"></span>#}
+                    {#                                <span class="custom-control-description">Não</span>#}
+                    {#                            </label>#}
+                    {##}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {##}
+                    {#                    <div class="col-lg-8 col-md-6 col-sm-12 text-left">#}
+                    {#                        <label>Nome da Escola</label>#}
+                    {#                        <div class="form-group">#}
+                    {#                            <input type="text" class="form-control" id="input-normal" placeholder="Escola">#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {##}
+                    {#                    <div class="col-lg-4 col-md-6 col-sm-12 text-left">#}
+                    {#                        <label>Ano Escolar</label>#}
+                    {#                        <div class="form-group">#}
+                    {#                            <select class="form-control" id="select">#}
+                    {#                                <option>1º Ano</option>#}
+                    {#                                <option>2º Ano</option>#}
+                    {#                                <option>3º Ano</option>#}
+                    {#                                <option>4º Ano</option>#}
+                    {#                                <option>5º Ano</option>#}
+                    {#                                <option>6º Ano</option>#}
+                    {#                                <option>7º Ano</option>#}
+                    {#                                <option>8º Ano</option>#}
+                    {#                                <option>9º Ano</option>#}
+                    {#                            </select>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {##}
+                    {#                    <div class="col-lg-4 col-md-6 col-sm-12 text-left">#}
+                    {#                        <label>Município</label>#}
+                    {#                        <div class="form-group">#}
+                    {#                            <select class="form-control" id="select">#}
+                    {#                                <option>Serra Talhada - PE</option>#}
+                    {#                                <option>Triunfo - PE</option>#}
+                    {#                                <option>Flores - PE</option>#}
+                    {#                                <option>Custódia - PE</option>#}
+                    {#                            </select>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {##}
+                    {#                    <div class="col-lg-4 col-md-6 col-sm-12 text-left">#}
+                    {#                        <label>Composição Familiar</label>#}
+                    {#                        <div class="form-group">#}
+                    {#                            <input type="text" class="form-control" id="composicaoFamiliar" name="composicaoFamiliar"#}
+                    {#                                   placeholder="Ex: Pai, Mãe"></input>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
                 </div>
 
-                <label><b>Estuda</b></label>
+                <br>
+                <h4 class="text-uppercase mt-3 text-left">Informações Especificas</h4>
 
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" id="inlineCheckbox1" name="estuda" checked> Sim
-                        &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </label>
-                    <label class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="inlineCheckbox2" name="estuda"> Não
-                    </label>
-                </div>
+                <div class="row">
+                    {#                    <div class="col-lg-6 col-md-6 col-sm-12 text-left">#}
+                    {#                        <label>Alimentação</label>#}
+                    {#                        <div class="form-group">#}
+                    {#                            <input class="form-control" type="text" id="alimentacao" name="alimentacao"#}
+                    {#                                   placeholder="Alimentação"></input>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {##}
+                    {#                    <div class="col-lg-6 col-md-6 col-sm-12 text-left">#}
+                    {#                        <label>Medicação</label>#}
+                    {#                        <div class="form-group">#}
+                    {#                            <input type="text" class="form-control" id="medicacao" name="mediacao"#}
+                    {#                                   placeholder="Medicação"></input>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
 
+                    <div class="col-lg-3 col-md-6 col-sm-12 text-left">
+                        <label>Controle Urináro</label><br>
 
-                <label><b>Ano Escolar</b></label>
-                <div class="form-group">
-                    <select class="form-control" id="select">
-                        <option>1º Ano</option>
-                        <option>2º Ano</option>
-                        <option>3º Ano</option>
-                        <option>4º Ano</option>
-                        <option>5º Ano</option>
-                        <option>6º Ano</option>
-                        <option>7º Ano</option>
-                        <option>8º Ano</option>
-                        <option>9º Ano</option>
-                    </select>
-                </div>
+                        <div class="form-check form-check-inline">
 
+                            <div class="form-check form-check-inline">
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim" name="urinario">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
+                                </label>
 
-                <label><b>Nome da Escola</b></label>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="input-normal" placeholder="Escola">
-                </div>
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não" name="urinario">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
+                                </label>
 
+                            </div>
+                        </div>
+                    </div>
 
-                <label><b>Município</b></label>
-                <div class="form-group">
-                    <select class="form-control" id="select">
-                        <option>Serra Talhada - PE</option>
-                        <option>Triunfo - PE</option>
-                        <option>Flores - PE</option>
-                        <option>Custódia - PE</option>
-                    </select>
-                </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 text-left">
+                        <label>Controle Esfíncter</label><br>
 
+                        <div class="form-check form-check-inline">
 
-                <label><b>Turno na APAE</b></label>
+                            <div class="form-check form-check-inline">
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim" name="esfincter">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
+                                </label>
 
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" id="inlineCheckbox1" value="manha" name="turno" checked> Manhã
-                        &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </label>
-                    <label class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="inlineCheckbox2" value="tarde" name="turno"> Tarde
-                    </label>
-                </div>
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não" name="esfincter">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
+                                </label>
 
-                <label><b>Dias na APAE</b></label>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="segunda"> Segunda&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </label>
-                    <label class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="terca"> Terça&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </label>
-                    <label class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="quarta"> Quarta&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </label>
-                    <label class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="quinta"> Quinta&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </label>
-                    <label class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="sexta"> Sexta&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </label>
-                </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 text-left">
+                        <label>A criança passa a maior parte do tempo com:</label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="input-normal" name="cuidador"
+                                   placeholder="Cuidador">
+                        </div>
+                    </div>
 
 
-                <label><b>Alimentação</b></label>
-                <div class="form-group">
-                    <input class="form-control" type="text" id="alimentacao" name="alimentacao"
-                           placeholder="Alimentação"></input>
-                </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 text-left">
+                        <label>Turno na APAE</label><br>
+
+                        <div class="form-check form-check-inline">
+
+                            <div class="form-check form-check-inline">
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="manha" name="turno">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Manhã</span>
+                                </label>
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="tarde" name="turno">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Tarde</span>
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 text-left">
+                        <label>Quem toma as decisões a respeito da criança:</label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="input-normal" name="responsavel"
+                                   placeholder="Responsável">
+                        </div>
+                    </div>
 
 
-                <label><b>Medicação</b></label>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="medicacao" name="mediacao"
-                           placeholder="Medicação"></input>
-                </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 text-left">
+                        <label>Dias na APAE</label><br>
+
+                        <div class="form-check form-check-inline">
+                            {#                            <label class="form-check-label">#}
+                            <label class="custom-control no-border custom-control-lg custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="checkbox-size"
+                                       value="segunda">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Segunda</span>
+                            </label>
+
+                            {#                            </label>#}
+
+                            <label class="custom-control no-border custom-control-lg custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="checkbox-size"
+                                       value="terça">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Terça</span>
+                            </label>
 
 
-                <label><b>Composição Familiar</b></label>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="composicaoFamiliar" name="composicaoFamiliar"
-                           placeholder="Ex: Pai, Mãe"></input>
-                </div>
+                            <label class="custom-control no-border custom-control-lg custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="checkbox-size"
+                                       value="quarta">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Quarta</span>
+                            </label>
 
 
-                <label><b>Controle Urináro</b></label>
-
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" id="inlineCheckbox1" name="urinario" checked> Sim
-                        &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </label>
-                    <label class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="inlineCheckbox2" name="urinario"> Não
-                    </label>
-                </div>
+                            <label class="custom-control no-border custom-control-lg custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="checkbox-size"
+                                       value="quinta">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Quinta</span>
+                            </label>
 
 
-                <label><b>Controle Esfíncter</b></label>
+                            <label class="custom-control no-border custom-control-lg custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="checkbox-size"
+                                       value="sexta">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Sexta</span>
+                            </label>
 
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" id="inlineCheckbox1" name="esfincter" checked> Sim
-                        &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                    </label>
-                    <label class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="inlineCheckbox2" name="esfincter"> Não
-                    </label>
-                </div>
+                        </div>
+                    </div>
 
 
-                <label><b>Observação</b></label>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="observacaoControle" name="observacaoControle"></input>
-                </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 text-left">
+                        <label>Dorme com quem:</label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="input-normal" name="dormeCom">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 text-left">
+                        <label>Horário de Dormir</label>
+                        <div class="form-group">
+                            <input type="text" class="form-control"
+                                   data-provide="timepicker" data-show-meridian="false" name="horaDormir">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 text-left">
+                        <label>Horário de Acordar</label>
+                        <div class="form-group">
+                            <input type="text" class="form-control"
+                                   data-provide="timepicker" data-show-meridian="false" name="horaAcordar">
+                        </div>
+                    </div>
 
 
-                <label class="text-uppercase"><b>A criança passa a maior parte do tempo com:</b></label>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="input-normal" name="cuidador" placeholder="Cuidador">
-                </div>
+                    <div class="col-lg-12 col-md-6 col-sm-12 text-left">
+                        <label>OBS:</label>
+                        <div class="form-group">
+                            <textarea class="form-control" id="textarea" rows="3" name="observacao"></textarea>
+                        </div>
+                    </div>
 
-
-                <label class="text-uppercase"><b>Quem toma as decisões a respeito da criança:</b></label>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="input-normal" name="responsavel"
-                           placeholder="Responsável">
-                </div>
-
-
-                <label><b>Horário de Dormir</b></label>
-                <div class="form-group">
-                    <input type="text" class="form-control"
-                           data-provide="timepicker" data-show-meridian="false" name="horaDormir">
-                </div>
-
-
-                <label><b>Horario de Acordar</b></label>
-                <div class="form-group">
-                    <input type="text" class="form-control"
-                           data-provide="timepicker" data-show-meridian="false" name="horaAcordar">
-                </div>
-
-
-                <label><b>Dorme com quem:</b></label>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="input-normal" name="dormeCom">
                 </div>
 
 
                 <br>
-                <h4 class="text-uppercase">Aspecto de Desenvolvimento</h4>
+                <h4 class="text-uppercase text-left">Aspecto de Desenvolvimento</h4>
                 <br>
 
 
@@ -212,19 +320,30 @@
                         <td align="left"><b>Fala Bem</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="falabem" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="falabem"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="falabem"> Às vezes
-                                </label>
+
+                                <div class="form-check form-check-inline">
+                                    <label class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" value="sim"
+                                               name="estuda">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">Sim</span>
+                                    </label>
+
+                                    <label class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" value="não"
+                                               name="estuda">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">Não</span>
+                                    </label>
+
+                                    <label class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" value="asVezes"
+                                               name="estuda">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">Às vezes</span>
+                                    </label>
+
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -233,18 +352,26 @@
                         <td align="left"><b>Comunica-se utilizando gestos</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="comunica" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="comunica">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="comunica"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="comunica">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="comunica"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="comunica">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -254,18 +381,26 @@
                         <td align="left"><b>Apresenta gagueira</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="gago" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="gago">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="gago"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="gago">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="gago"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="gago">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -275,18 +410,25 @@
                         <td align="left"><b>Enxerga Bem</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="enxerga" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="enxerga">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="enxerga"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="enxerga">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="enxerga"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="enxerga">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -296,18 +438,25 @@
                         <td align="left"><b>Usa a mão direita</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="direita" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="direita">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="direita"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="direita">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="direita"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="direita">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -317,18 +466,25 @@
                         <td align="left"><b>Usa a mão esquerda</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="esquerda" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="esquerda">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="esquerda"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="esquerda">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="esquerda"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="esquerda">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -338,18 +494,25 @@
                         <td align="left"><b>Faz balbucio</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="balbucio" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="balbucio">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="balbucio"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="balbucio">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="balbucio"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="balbucio">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -359,7 +522,7 @@
 
 
                 <br>
-                <h4 class="text-uppercase">Aspecto Fisico Motor</h4>
+                <h4 class="text-uppercase text-left">Aspecto Fisico Motor</h4>
                 <br>
 
                 <table class="table table-bordered">
@@ -375,18 +538,25 @@
                         <td align="left"><b>Anda naturalmente</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="anda" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="anda">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="anda"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="anda">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="anda"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="anda">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -396,18 +566,25 @@
                         <td align="left"><b>Segura corretamente o lápis</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="segura" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="segura">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="segura"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="segura">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="segura"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="segura">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -417,18 +594,25 @@
                         <td align="left"><b>Senta corretamente</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="senta" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="senta">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="senta"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="senta">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="senta"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="senta">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -438,18 +622,25 @@
                         <td align="left"><b>Cai muito</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="cai" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="cai">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="cai"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="cai">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="cai"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="cai">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -459,18 +650,25 @@
                         <td align="left"><b>Cansa facilmente</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="cansa" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="cansa">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="cansa"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="cansa">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="cansa"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="cansa">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -480,7 +678,7 @@
 
 
                 <br>
-                <h4 class="text-uppercase">Aspecto Emocional</h4>
+                <h4 class="text-uppercase text-left">Aspecto Emocional</h4>
                 <br>
 
                 <table class="table table-bordered">
@@ -496,18 +694,25 @@
                         <td align="left"><b>Demonstra afeto</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="demonstra" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="demonstra">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="demonstra"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="demonstra">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="ademonstra"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="demonstra">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -517,18 +722,25 @@
                         <td align="left"><b>Solicita afeto</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="solicita" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="solicita">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="solicita"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="solicita">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="solicita"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="solicita">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -538,18 +750,25 @@
                         <td align="left"><b>É medroso</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="medroso" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="medroso">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="medroso" > Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="medroso">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="medroso"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="medroso">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -559,18 +778,25 @@
                         <td align="left"><b>É agressivo</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="agressivo" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="agressivo">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="agressivo"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="agressivo">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="agressivo"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="agressivo">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -580,18 +806,25 @@
                         <td align="left"><b>Reage quando contrariado</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="reage" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="reage">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="reage"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="reage">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="reage"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="reage">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -601,18 +834,25 @@
                         <td align="left"><b>Possui algum tique</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="simTique" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="tique">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="tique" > Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="tique">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="tique"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="tique">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -622,18 +862,25 @@
                         <td align="left"><b>Chora com facilidade</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="chora" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="chora">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="chora"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="chora">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="chora"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="chora">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -642,7 +889,7 @@
                 </table>
 
                 <br>
-                <h4 class="text-uppercase">Aspecto Social</h4>
+                <h4 class="text-uppercase text-left">Aspecto Social</h4>
                 <br>
 
 
@@ -659,18 +906,25 @@
                         <td align="left"><b>Sabe esperar sua vez</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="espera" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="espera">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="espera"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="espera">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="espera"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="espera">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -680,18 +934,25 @@
                         <td align="left"><b>Obedece as ordens dadas</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="obedece" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="obedece">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="obedece"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="obedece">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="obedece"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="obedece">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -701,18 +962,25 @@
                         <td align="left"><b>Procura fazer amizades</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="amizade" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="amizades">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="amizade"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="amizades">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="amizade"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="amizades">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -722,18 +990,25 @@
                         <td align="left"><b>Isola-se</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="isola" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="isola">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="isola"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="isola">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="isola"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="isola">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -743,18 +1018,25 @@
                         <td align="left"><b>Divide suas coisas</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="divide" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="divide">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="divide"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="divide">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="divide"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="divide">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -764,18 +1046,25 @@
                         <td align="left"><b>Se relaciona com o grupo</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="relaciona" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="relaciona">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="relaciona"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="relaciona">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="relaciona"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="relaciona">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -785,7 +1074,7 @@
 
 
                 <br>
-                <h4 class="text-uppercase">Aspecto Intelectual</h4>
+                <h4 class="text-uppercase text-left">Aspecto Intelectual</h4>
                 <br>
 
                 <table class="table table-bordered">
@@ -801,18 +1090,25 @@
                         <td align="left"><b>Pronucia corretamente as palavras</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="pronucia" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="pronucia">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="pronucia"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="pronucia">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="pronucia"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="pronucia">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -822,18 +1118,25 @@
                         <td align="left"><b>Expressa seu pensamento de forma clara</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="expressa" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="expressa">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="expressa"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="expressa">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="expressa"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="expressa">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -843,18 +1146,25 @@
                         <td align="left"><b>Consegue transmitir recados</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="recados" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="recado">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="ecados"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="recado">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="ecados"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="recado">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -864,18 +1174,25 @@
                         <td align="left"><b>Atenta para instruções fazendo o que é pedido</b></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox1"
-                                           name="instruções" checked> Sim
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="sim"
+                                           name="instruções">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sim</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="instruções"> Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="não"
+                                           name="instruções">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Não</span>
                                 </label>
-                                <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="inlineCheckbox2"
-                                           name="instruções"> Às vezes
+
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" value="asVezes"
+                                           name="instruções">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Às vezes</span>
                                 </label>
                             </div>
                         </td>
@@ -885,21 +1202,40 @@
 
                 <br>
                 <br>
-                <label><b>Descrição de forma sucinta do usuário</b></label>
 
-                <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Breve descrição" name="descricaoUsuario">
+                <div class="row">
+
+                    <div class="col-lg-12 col-md-6 col-sm-12 text-left">
+                        <label><b>Descrição do usuário</b></label>
+
+                        <div class="form-group">
+                            <textarea class="form-control" id="textarea" rows="4" name="descricao"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 text-left">
+                        <label>Turma</label>
+                        <div class="form-group">
+                            <select class="form-control" id="select">
+                                <option>Turma A</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 text-left">
+                        <label><b>Data da Triagem:</b></label>
+
+                        <div class="form-group">
+                            <input name="data" type="text" class="form-control"
+                                   data-format="&#123;&#123;99&#125;&#125;/&#123;&#123;99&#125;&#125;/&#123;&#123;9999&#125;&#125;">
+                        </div>
+                    </div>
+
                 </div>
 
-                <label><b>Data da Triagem:</b></label>
-
-                <div class="form-group">
-                    <input name="data" type="text" class="form-control"
-                           data-format="&#123;&#123;99&#125;&#125;/&#123;&#123;99&#125;&#125;/&#123;&#123;9999&#125;&#125;">
-                </div>
 
                 <footer class="card-footer text-right">
-{#                    <a href="{% url 'social:index' %}" class="btn btn-secondary" type="reset">Cancelar</a>#}
+                    <a href="{% url 'pedagogico:listar_triagemSocial' %}" class="btn btn-secondary" type="reset">Cancelar</a>
                     <button class="btn btn-primary" type="submit">Realizar</button>
                 </footer>
             </form>

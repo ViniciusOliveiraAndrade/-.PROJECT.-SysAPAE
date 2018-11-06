@@ -3,61 +3,102 @@
 
     <div class="card">
         <br>
-        <h1 class="font-dosis fw-500">Lista das Aulas</h1><br>
+        <h1 class="font-dosis fw-500">Minhas Aulas</h1><br>
         <br>
+
+        {#        <form id="formulario" class="card" action="{% url 'pedagogico:cadastrar_aulas' %}"#}
+        {#              method="post">#}
+        {#            {% csrf_token %}#}
+
+        <div align="rigth" style="margin-right: 20px">
+            {% block adcionar %}
+                <a class="btn btn-label btn-primary btn-round float-right"
+                   href="{% url 'pedagogico:cadastrar_aula' id_turma %}">
+                    <label>
+                        <i class="ti-plus"></i>
+                    </label> Adicionar
+                </a>
+            {% endblock %}
+        </div>
 
         <div class="form-group">
 
-
-            <table class="table table-striped table-bordered table-responsive bs-select" cellspacing="0"
-                   data-provide="datatables">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Data</th>
-                     <th>Turma</th>
-                    <th>Titulo</th>
-                    <th>Situação</th>
-                    <th>Ação</th>
-                </tr>
-                </thead>
-{#                <tfoot>#}
-{#                <tr>#}
-{#                    <th>ID</th>#}
-{#                    <th>Data</th>#}
-{#                     <th>Turma</th>#}
-{#                    <th>Titulo</th>#}
-{#                    <th>Situação</th>#}
-{#                    <th>Ação</th>#}
-{#                </tr>#}
-{#                </tfoot>#}
-                <tbody>
-
-                {% for aula in aulas %}
-
+            <div class="card-body card-round tabelaSemflow flowww">
+                <table class="table table-striped table-bordered table-responsive bs-select print" cellspacing="0"
+                       data-provide="datatables">
+                    <thead>
                     <tr>
-                        <td>{{ aula.id }}</td>
-                        <td>{{ aula.data }}</td>
-                        <td>{{ aula.turma.nome }}</td>
-                        <td>{{ aula.titulo }}</td>
-                        <td>{% if aula.situacao %} Aberto {% else %} Finalizado {% endif %}</td>
-                        <td>
-                            <div>
-                                <a data-provide="tooltip" data-tooltip-color="primary" title="Editar"
-                                   style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true"
-                                   href="{% url 'pedagogico:editar_aula' aula.id %}"></a>
-                            </div>
-                            <a href="{% url 'pedagogico:deletar_aula' aula.id %}"
-                                    {# style="font-size: 25px;" data-provide="tooltip"
-                                    {# data-tooltip-color="danger" title="Excluir" class="deletbutton fa fa-trash-o"
-                                    {# aria-hidden="true"></a>
-                        </td>
+                        {#                            <th>ID</th>#}
+                        <th>Data</th>
+                        {#                            <th>Turma</th>#}
+                        <th>Titulo</th>
+                        <th>Situação</th>
+                        <th>Ação</th>
                     </tr>
-                {% endfor %}
+                    </thead>
+                    {#                <tfoot>#}
+                    {#                <tr>#}
+                    {#                    <th>ID</th>#}
+                    {#                    <th>Data</th>#}
+                    {#                     <th>Turma</th>#}
+                    {#                    <th>Titulo</th>#}
+                    {#                    <th>Situação</th>#}
+                    {#                    <th>Ação</th>#}
+                    {#                </tr>#}
+                    {#                </tfoot>#}
+                    <tbody>
 
-                </tbody>
-            </table>
+                    {% for aula in aulas %}
+
+                        <tr>
+                            {#                                <td>{{ aula.id }}</td>#}
+                            <td>{{ aula.data }}</td>
+                            {#                                <td>{{ aula.turma.nome }}</td>#}
+                            <td>{{ aula.titulo }}</td>
+                            <td>{% if aula.situacao %} Aberto {% else %} Finalizado {% endif %}</td>
+
+                            <th class="w-50px text-center">
+                                <div align="center">
+                                    <a data-provide="tooltip" data-tooltip-color="primary" title="Detalhes"
+                                       style="font-size: 25px;" class="fa fa-eye" aria-hidden="true"
+                                       href="{% url 'pedagogico:frequencia' aula.frequencia.id %}"></a>
+                                </div>
+                            </th>
+                            <th class="w-50px text-center">
+                                <div align="center">
+                                    <a data-provide="tooltip" data-tooltip-color="primary" title="Frequência"
+                                       style="font-size: 25px;" class="fa fa-address-book-o" aria-hidden="true"
+                                       href="{% url 'pedagogico:frequencia' aula.frequencia.id %}"></a>
+                                </div>
+                            </th>
+                            <th class="w-50px text-center">
+                                <div>
+                                    <a data-provide="tooltip" data-tooltip-color="primary" title="Editar"
+                                       style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true"
+                                       href="{% url 'pedagogico:editar_aula' aula.id %}"></a>
+                                </div>
+                            </th>
+                            <th class="w-50px text-center">
+                                <a href="{% url 'pedagogico:deletar_aula' aula.id %}"
+                                        {# style="font-size: 25px;" data-provide="tooltip"
+                                        {# data-tooltip-color="danger" title="Excluir"
+                                   class="deletbutton fa fa-trash-o"
+                                        {# aria-hidden="true"></a>
+                            </th>
+                        </tr>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+        <footer class="card-footer text-right">
+            <a href="{% url 'pedagogico:minhas_turmas' %}" class="btn btn-secondary" type="reset">Voltar</a>
+            {#                <button class="btn btn-primary" type="submit">Registrar</button>#}
+        </footer>
+        {#        </form>#}
     </div>
 
 {% endblock %}

@@ -3,36 +3,35 @@ from core.models import *
 from social.models import Triagem
 # Create your models here.
 
-class Turma(models.Model):
-    nome = models.CharField(max_length=50)
-    turno = models.BooleanField()
-    ususario = models.ManyToManyField(Usuario, blank=True)
-    # aulas = models.ManyToManyField()
-    professor = models.ManyToManyField(Funcionario)
-
-    def __str__(self):
-        return "Turma: "+self.nome
-
 class Frequencia(models.Model):
-    dataFrequencia = models.DateField('Data da Frequencia', null=True, blank=True)
-    presente = models.BooleanField()
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    presente = models.BooleanField(default=False)
+    usuario = models.ManyToManyField(Usuario)
 
 
     def __str__(self):
-        return "Aula: "+self.conteudo
+        return "Aula: "+str(self.presente)
 
 class Aula(models.Model):
     data = models.DateField('Data da Aula')
     conteudo = models.CharField(max_length=500)
     titulo = models.CharField(max_length=50)
-    turma = models.ForeignKey(Turma, on_delete=models.CASCADE, blank=False)
-    frequencia = models.ManyToManyField(Frequencia)
+    frequencia = models.ForeignKey(Frequencia, on_delete=models.CASCADE, blank=True)
     avaliacaoAula = models.CharField(max_length=500, blank=True)
     situacao = models.BooleanField(default='True')
 
     def __str__(self):
         return "Aula: "+self.titulo
+
+class Turma(models.Model):
+    nome = models.CharField(max_length=50)
+    turno = models.BooleanField()
+    ususario = models.ManyToManyField(Usuario, blank=True)
+    professor = models.ForeignKey(Funcionario,on_delete=models.PROTECT)
+    aula = models.ManyToManyField(Aula)
+
+    def __str__(self):
+        return "Turma: "+self.nome
+
 
 
 class TriagemPedagogica(models.Model):

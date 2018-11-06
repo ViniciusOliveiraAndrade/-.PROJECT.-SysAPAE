@@ -47,19 +47,21 @@
 
 {% load static %}
 <aside style=" background-color: #010b6b" class="sidebar sidebar-icons-right sidebar-icons-boxed sidebar-expand-lg">
-    <header style="color: black; background-color: #ffffff" class="sidebar-header">
-        <a class="logo-icon" href="{% url 'pedagogico:index' %}"><img
-                src="{% static 'assets/img/logo-icon-light.png' %}" alt="logo icon"></a>
-        <span class="logo">
-          <a href="{% url 'pedagogico:index' %}"><img src="{% static 'assets/img/nome.png' %}" alt="logo"></a>
-        </span>
-        <span class="sidebar-toggle-fold" style="color: #2c009f"></span>
+    <header class="sidebar-header" style="background-color: #010b6b;">
+      <a class="logo-icon" href="{% url 'pedagogico:index'%}">
+        <img src="{% static 'assets/img/logo-icon-light.png' %}" alt="logo icon">
+      </a>
+      <span class="logo">
+        <a href="{% url 'pedagogico:index'%}"><img src="{% static 'assets/img/logo.png' %}" alt="logo"></a>
+      </span>
+      <span class="sidebar-toggle-fold text-white"></span>
+
     </header>
 
-    <nav class="sidebar-navigation">
+    <nav class="sidebar-navigation" style="background-color: #010b6b;">
         <ul class="menu">
 
-            <li class="menu-category">Coordenadora</li>
+            <li class="menu-category">Coordenação</li>
             <li class="menu-item">
                 <a class="menu-link" href="#">
                     <span class="icon fa fa-group"></span>
@@ -71,7 +73,14 @@
                     <li class="menu-item">
                         <a class="menu-link" href="{% url 'pedagogico:listar_triagemSocial' %}">
                             <span class="dot"></span>
-                            <span class="title">Listar</span>
+                            <span class="title">Social</span>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a class="menu-link" href="#">
+                            <span class="dot"></span>
+                            <span class="title">Pedagógica </span>
                         </a>
                     </li>
                 </ul>
@@ -84,12 +93,12 @@
                 </a>
 
                 <ul class="menu-submenu">
-                    <li class="menu-item">
-                        <a class="menu-link" href="{% url 'pedagogico:criar_turma' %}">
-                            <span class="dot"></span>
-                            <span class="title">Cadastrar</span>
-                        </a>
-                    </li>
+{#                    <li class="menu-item">#}
+{#                        <a class="menu-link" href="{% url 'pedagogico:criar_turma' %}">#}
+{#                            <span class="dot"></span>#}
+{#                            <span class="title">Cadastrar</span>#}
+{#                        </a>#}
+{#                    </li>#}
 
                     <li class="menu-item">
                         <a class="menu-link" href="{% url 'pedagogico:listar_turmas' %}">
@@ -104,42 +113,42 @@
             <li class="menu-item">
                 <a class="menu-link" href="#">
                     <span class="icon fa fa-mortar-board"></span>
-                    <span class="title">Aulas</span>
+                    <span class="title">Caderneta</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="menu-submenu">
+{#                    <li class="menu-item">#}
+{#                        <a class="menu-link" href="{% url 'pedagogico:cadastrar_aula' %}">#}
+{#                            <span class="dot"></span>#}
+{#                            <span class="title">Cadastrar</span>#}
+{#                        </a>#}
+{#                    </li>#}
                     <li class="menu-item">
-                        <a class="menu-link" href="{% url 'pedagogico:cadastrar_aula' %}">
+                        <a class="menu-link" href="{% url 'pedagogico:minhas_turmas' %}">
                             <span class="dot"></span>
-                            <span class="title">Cadastrar</span>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a class="menu-link" href="{% url 'pedagogico:listar_aulas' %}">
-                            <span class="dot"></span>
-                            <span class="title">Listar</span>
+                            <span class="title">Minhas Turmas</span>
                         </a>
                     </li>
                 </ul>
             </li>
 
-            <li class="menu-item">
-                <a class="menu-link" href="#">
-                    <span class="icon fa fa-address-book-o"></span>
-                    <span class="title">Frequência</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="menu-submenu">
-                    <li class="menu-item">
-                        <a class="menu-link" href="{% url 'pedagogico:frequencia' %}">
-                            <span class="dot"></span>
-                            <span class="title">Realizar</span>
-                        </a>
-                    </li>
-
-                    </li>
-                </ul>
-            </li>
+{#            <li class="menu-item">#}
+{#                <a class="menu-link" href="#">#}
+{#                    <span class="icon fa fa-address-book-o"></span>#}
+{#                    <span class="title">Frequência</span>#}
+{#                    <span class="arrow"></span>#}
+{#                </a>#}
+{#                <ul class="menu-submenu">#}
+{#                    <li class="menu-item">#}
+{#                        <a class="menu-link" href="{% url 'pedagogico:frequencia' %}">#}
+{#                            <span class="dot"></span>#}
+{#                            <span class="title">Realizar</span>#}
+{#                        </a>#}
+{#                    </li>#}
+{##}
+{#                    </li>#}
+{#                </ul>#}
+{#            </li>#}
 
 
         </ul>
@@ -150,14 +159,14 @@
 
 
 <!-- Topbar -->
-<header class="topbar">
+<header class="topbar" style="background-color:  black;">
     <div class="topbar-left">
-        <span class="topbar-btn sidebar-toggler"><i>&#9776;</i></span>
+        <span style="color: #ffffff;" class="topbar-btn sidebar-toggler"><i>&#9776;</i></span>
 
         <a class="topbar-btn d-none d-md-block" href="#" data-provide="fullscreen tooltip" title="Fullscreen">
-            <i class="material-icons fullscreen-default">fullscreen</i>
-            <i class="material-icons fullscreen-active">fullscreen_exit</i>
-        </a>
+        <i style="color: #ffffff;" class="material-icons fullscreen-default" >fullscreen</i>
+        <i style="color: #ffffff;" class="material-icons fullscreen-active" >fullscreen_exit</i>
+      </a>
     </div>
 </header>
 <!-- END Topbar -->
@@ -176,7 +185,7 @@
 
             <br><br><br>
 
-            <div class="w-100"></div>
+{#            <div class="w-100"></div>#}
         </div>
 
     </div><!--/.main-content -->
@@ -186,7 +195,7 @@
     <footer class="site-footer">
         <div class="row">
             <div class="col-md-6">
-                <p class="text-center text-md-left">Copyright © 2018 <a href="http://thetheme.io/theadmin">APAE</a>.
+                <p class="text-center text-md-left">Copyright © 2018 <a href="http://thetheme.io/theadmin">APAE de Serra Talhada - PE</a>.
                     Todos os direitos reservados.</p>
             </div>
         </div>
@@ -217,3 +226,5 @@
 
 </body>
 </html>
+
+

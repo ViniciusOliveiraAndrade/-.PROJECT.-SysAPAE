@@ -1,0 +1,70 @@
+{% extends "pedagogico/layout/layout_base.html" %} <!--Extendendo o bloco criado-->
+<!--Iniciando o bloco-->
+{% block main %}
+
+    <div class="card">
+        <br>
+        <h1 class="font-dosis fw-500">Cadastro da Turma</h1><br>
+        <br>
+
+
+        <form style="padding-right: 15px" id="formmm" class="card" action="{% url 'pedagogico:cadastrar_turmas' %}"
+              method="post">
+            {% csrf_token %}
+
+
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+
+                    <label><b>Nome</b></label>
+
+                    <div class="form-group" style="margin-left: 40px">
+                        <input name="nome" class="form-control" type="text" placeholder=" Nome da Turma">
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+
+                    <label><b>Professor</b></label>
+                    <div class="form-group">
+                        <select data-provide="selectpicker" name="professor">
+                            {% for professor in professores %}
+                                <option>{{ professor.nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+
+                    <label><b>Turno</b></label><br>
+
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" value="manha" name="turno"
+                                   checked> Manhã
+                            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </label>
+                        <label class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox2" value="tarde"
+                                   name="turno"> Tarde
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <footer class="card-footer text-right">
+                <a href="{% url 'pedagogico:listar_turmas' %}" class="btn btn-secondary" type="reset">Cancelar</a>
+                <button class="btn btn-primary" type="submit">Registrar</button>
+            </footer>
+        </form>
+    </div>
+
+{% endblock %}

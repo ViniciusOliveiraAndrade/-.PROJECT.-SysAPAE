@@ -1,0 +1,69 @@
+{% extends "pedagogico/layout/layout_base.html" %}
+{% block main %}
+
+    <div class="card">
+        <br>
+        <h1 class="font-dosis fw-500">Edição da Turma</h1><br>
+        <br>
+
+
+        <form style="padding-right: 15px" id="formmm" class="card" action="{% url 'pedagogico:editar_turma' turma.id %}"
+              method="post">
+            {% csrf_token %}
+
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <label><b>Nome</b></label>
+{#                    <div class="form-group">#}
+{#                        <input type="text" id="input-normal" placeholder="Nome da Turma" name="nome"#}
+{#                               value=" {{ turma.nome }}">#}
+{#                    </div>#}
+
+                    <div class="form-group" style="margin-left: 40px">
+                        <input name="nome" class="form-control" type="text" value="{{ turma.nome }}">
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <label><b>Professor</b></label>
+                    <div class="form-group">
+                        <select data-provide="selectpicker" name="professor">
+                            {% for professor in professores %}
+                                <option>{{ professor.nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+
+                    <label><b>Turno</b></label><br>
+
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox1" value="manha" name="turno"
+                                   {% if turma.turno %}checked {% endif %}> Manhã
+                            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </label>
+                        <label class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox2" value="tarde" name="turno"
+                                   {% if not turma.turno %}checked {% endif %}> Tarde
+                        </label>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <footer class="card-footer text-right">
+                <a href="{% url 'pedagogico:listar_turmas' %}" class="btn btn-secondary" type="reset">Cancelar</a>
+                <button  class="btn btn-primary" type="submit">Salvar</button>
+            </footer>
+        </form>
+    </div>
+
+{% endblock %}
