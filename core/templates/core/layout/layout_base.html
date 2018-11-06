@@ -94,7 +94,7 @@
 
 
           <li class="dropdown">
-            <span class="topbar-btn" data-toggle="dropdown"><img class="avatar" src="{% static 'assets/img/avatar/default.jpg' %}" alt="..."></span>
+            <span class="topbar-btn" data-toggle="dropdown"><img class="avatar" src="{% ifequal request.user.funcionario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{request.user.funcionario.imagem_url}} {% endifequal %}" alt="..."></span>
             <div class="dropdown-menu dropdown-menu-right">
               <a class="dropdown-item" href=" {% block perfil %}{% endblock %}"><i class="ti-user"></i> Perfil</a>
               <!--

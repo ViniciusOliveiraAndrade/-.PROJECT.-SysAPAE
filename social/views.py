@@ -32,9 +32,10 @@ def perfil(request):
         request.user.last_name = unome
         request.user.email = request.POST['email']
         request.user.save()
+        gerar_acao(request.user.funcionario,"Edição","Funcionario",request.user.funcionario.id)
     return render(request,'social/perfil.html')
 
-
+    
 #----------------------------------------------------------------------------------------
 #Views da Triagem
 @login_required
