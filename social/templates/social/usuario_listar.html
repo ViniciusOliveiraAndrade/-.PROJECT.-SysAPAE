@@ -86,7 +86,7 @@
         {% csrf_token %}
         <input type="hidden" name="id" value="{{t.id}}">
       </form>
-      <a onclick="inativar();" style="font-size: 25px;" data-provide="tooltip" data-tooltip-color="danger" title="Inativar" class="deletbutton fa fa-trash-o d-inline" aria-hidden="true" href="#"></a>  
+      <a onclick="inativar(this.id);" id="{{t.usuario.nome}}" style="font-size: 25px;" data-provide="tooltip" data-tooltip-color="danger" title="Inativar" class="deletbutton fa fa-trash-o d-inline" aria-hidden="true" href="#"></a>  
 
     </td>
 
@@ -103,8 +103,13 @@
 
 <script type="text/javascript">
 
-function inativar () {
-  document.getElementById("inativar").submit();
+function inativar (nomeUsuario) {
+
+  nome = nomeUsuario;
+  var r = confirm("Isto INATIVARÁ o Usuário: "+nome+"!\n Deseja continuar com a açao?");
+  if (r == true) {
+    document.getElementById("inativar").submit();
+  }
 }
 
 document.getElementById("u").className = document.getElementById("u").className + " active open";
