@@ -61,6 +61,16 @@ table, th, td {
     line-height: 6px;
 }
 
+.emlinha3{
+    margin-right: 40px; 
+    padding-left: 10px; 
+    border-left: 1px black solid;
+    display: inline-block;
+    font-size: 12px;
+    color: black;
+    line-height: 12px;
+}
+
 .levantar{
     line-height: 0px;
 }
