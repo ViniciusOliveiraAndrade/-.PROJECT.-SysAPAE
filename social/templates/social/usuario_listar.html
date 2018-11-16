@@ -80,13 +80,9 @@
 
       <a data-provide="tooltip" data-tooltip-color="primary" title="Editar Triagem" style="font-size: 25px;" class="fa fa-pencil d-inline" aria-hidden="true" href="{%url 'social:triagem_editar' t.id %}"></a>
 
-      <a data-provide="tooltip" data-tooltip-color="primary" title="Agendar Visita" style="font-size: 25px;" class="fa fa-location-arrow d-inline" aria-hidden="true" href="{% url 'social:visita_agendar' t.usuario.id %}"></a>  
+      <a data-provide="tooltip" data-tooltip-color="primary" title="Agendar Visita" style="font-size: 25px;" class="fa fa-book d-inline" aria-hidden="true" href="{% url 'social:visita_agendar' t.usuario.id %}"></a>  
 
-      <form class="d-inline" action="{% url 'social:usuarios_listar' %}" method="post" accept-charset="utf-8" id="inativar">
-        {% csrf_token %}
-        <input type="hidden" name="id" value="{{t.id}}">
-      </form>
-      <a onclick="inativar(this.id);" id="{{t.usuario.nome}}" style="font-size: 25px;" data-provide="tooltip" data-tooltip-color="danger" title="Inativar" class="deletbutton fa fa-trash-o d-inline" aria-hidden="true" href="#"></a>  
+      <a onclick="inativar(this.id);" style="font-size: 25px;" data-provide="tooltip" data-tooltip-color="danger" title="Inativar" class="deletbutton fa fa-window-close d-inline text-danger" aria-hidden="true" href="{%url 'social:inativar_usuario' t.usuario.id %}"></a>  
 
     </td>
 

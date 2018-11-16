@@ -98,7 +98,7 @@ def cadastrar_triagem(request):
     triagem.sus = request.POST['sus']
     
     #Especialista
-    if request.POST['exampleRadios'] == 'n':
+    if request.POST['acompanhado'] == 'NÂO':
         triagem.acompanhamento_com_especialista = False
     else:
         triagem.acompanhamento_com_especialista = True
@@ -149,19 +149,70 @@ def cadastrar_triagem(request):
     triagem.email = request.POST['email']
 
     #Ensino
-    if request.POST['inlineRadioOptions'] == 'n':
+    if request.POST['ensino'] == 'NÂO':
         triagem.estuda_ensino_regular = False
     else:
         triagem.estuda_ensino_regular = True
+
     triagem.qual = request.POST['qual']
     triagem.ano_estuda = request.POST['ano']
     triagem.turma_estuda = request.POST['turma']
     triagem.turno_estuda = request.POST['turno']
 
+    #saude
+    triagem.medicacao = request.POST['medicacao']
+
+    if request.POST['fisio'] == 'NÂO':
+        triagem.e_i_fisio = False
+    else:
+        triagem.e_i_fisio = True
+
+    if request.POST['hidro'] == 'NÂO':
+        triagem.e_i_hidro = False
+    else:
+        triagem.e_i_hidro = True
+    
+    if request.POST['fono'] == 'NÂO':
+        triagem.e_i_fono = False
+    else:
+        triagem.e_i_fono = True
+
+    if request.POST['to'] == 'NÂO':
+        triagem.e_i_to = False
+    else:
+        triagem.e_i_to = True
+
+    if request.POST['psi'] == 'NÂO':
+        triagem.e_i_psi = False
+    else:
+        triagem.e_i_psi = True
+
+    if request.POST['ondonto'] == 'NÂO':
+        triagem.e_i_ondonto = False
+    else:
+        triagem.e_i_ondonto = True
+
+    if request.POST['medico'] == 'NÂO':
+        triagem.e_i_medico = False
+    else:
+        triagem.e_i_medico = True
+
+
+    if request.POST['psicopedagoga'] == 'NÂO':
+        triagem.e_i_psicopedagoga = False
+    else:
+        triagem.e_i_psicopedagoga = True
+
+
+
+    if request.POST['pedagogia'] == 'NÂO':
+        triagem.e_i_pedagogia = False
+    else:
+        triagem.e_i_pedagogia = True
+
+
     #Observacoes
     triagem.observacoes = request.POST['obs']
-    # funcionario = Funcionario(nome= request.POST['assinatura'])
-    # funcionario.save()
     funcionario = request.user.funcionario
     triagem.assinatura_proficinal = funcionario
     
@@ -199,7 +250,7 @@ def editar_triagem(request):
     triagem.sus = request.POST['sus']
     
     #Especialista
-    if request.POST['exampleRadios'] == 'n':
+    if request.POST['acompanhado'] == 'NÂO':
         triagem.acompanhamento_com_especialista = False
     else:
         triagem.acompanhamento_com_especialista = True
@@ -249,14 +300,69 @@ def editar_triagem(request):
     triagem.email = request.POST['email']
 
     #Ensino
-    if request.POST['inlineRadioOptions'] == 'n':
+    if request.POST['ensino'] == 'NÂO':
         triagem.estuda_ensino_regular = False
     else:
         triagem.estuda_ensino_regular = True
+    
     triagem.qual = request.POST['qual']
     triagem.ano_estuda = request.POST['ano']
     triagem.turma_estuda = request.POST['turma']
     triagem.turno_estuda = request.POST['turno']
+
+
+    #saude
+    triagem.medicacao = request.POST['medicacao']
+
+    if request.POST['fisio'] == 'NÂO':
+        triagem.e_i_fisio = False
+    else:
+        triagem.e_i_fisio = True
+
+    if request.POST['hidro'] == 'NÂO':
+        triagem.e_i_hidro = False
+    else:
+        triagem.e_i_hidro = True
+    
+    if request.POST['fono'] == 'NÂO':
+        triagem.e_i_fono = False
+    else:
+        triagem.e_i_fono = True
+
+    if request.POST['to'] == 'NÂO':
+        triagem.e_i_to = False
+    else:
+        triagem.e_i_to = True
+
+    if request.POST['psi'] == 'NÂO':
+        triagem.e_i_psi = False
+    else:
+        triagem.e_i_psi = True
+
+    if request.POST['ondonto'] == 'NÂO':
+        triagem.e_i_ondonto = False
+    else:
+        triagem.e_i_ondonto = True
+
+    if request.POST['medico'] == 'NÂO':
+        triagem.e_i_medico = False
+    else:
+        triagem.e_i_medico = True
+
+
+    if request.POST['psicopedagoga'] == 'NÂO':
+        triagem.e_i_psicopedagoga = False
+    else:
+        triagem.e_i_psicopedagoga = True
+
+
+
+    if request.POST['pedagogia'] == 'NÂO':
+        triagem.e_i_pedagogia = False
+    else:
+        triagem.e_i_pedagogia = True
+
+
 
     #Observacoes
     triagem.observacoes = request.POST['obs']
@@ -279,14 +385,17 @@ def usuarios_listar(request):
         t.assinatura_proficinal = f
         triagens = [t]
         raise e
-    if request.method == 'POST':
-        u = get_object_or_404(Usuario,pk=request.POST['id'])
-        u.situacao = "Inativo"
-        u.save()
-        gerar_acao(request.user.funcionario,"Inativar","Usuario",u.id)
-        return redirect("social:usuarios_listar")
+    
 
     return render(request,'social/usuario_listar.html', {'triagens' : triagens})
+
+@login_required
+def inativar_usuario(request,user_id):
+    u = get_object_or_404(Usuario,pk=user_id)
+    u.situacao = "Inativo"
+    u.save()
+    gerar_acao(request.user.funcionario,"Inativar","Usuario",u.id)
+    return redirect("social:usuarios_listar")
 
 #--------------------------------------------------------------------------------------------
 #views da visita

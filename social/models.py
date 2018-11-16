@@ -47,6 +47,18 @@ class Triagem(models.Model):
     turma_estuda = models.CharField(max_length=50, blank=True)
     turno_estuda = models.CharField(max_length=50, blank=True)
 
+    #dados saude
+    medicacao = models.CharField(max_length=50, blank=True)
+    e_i_fisio = models.BooleanField(blank=True)
+    e_i_hidro = models.BooleanField(blank=True)
+    e_i_fono = models.BooleanField(blank=True)
+    e_i_to = models.BooleanField(blank=True)
+    e_i_psi = models.BooleanField(blank=True)
+    e_i_ondonto = models.BooleanField(blank=True)
+    e_i_medico = models.BooleanField(blank=True)
+    e_i_psicopedagoga = models.BooleanField(blank=True)
+    e_i_pedagogia = models.BooleanField(blank=True)
+    
     observacoes = models.CharField(max_length=50, blank=True)
     assinatura_proficinal = models.ForeignKey(Funcionario, on_delete=models.PROTECT, blank=True)
 
