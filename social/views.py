@@ -19,7 +19,8 @@ import datetime
 # Views
 @login_required
 def index(request):
-    dados = {}
+    visitas = Visita.objects.filter(realizada=False)
+    dados = {"visitas":visitas}
     return render(request,'social/index.html', dados)
 
 #----------------------------------------------------------------------------------------
@@ -462,7 +463,6 @@ def visita_editar(request,visita_id):
     try:
         visita = Visita.objects.get(pk=visita_id)
     except Exception as e:
-        visita = {}
         raise e
     f = Funcionario.objects.filter(cargo__nome="Assistente social")
 
