@@ -16,7 +16,6 @@ def index(request):
 
     return render(request,'core/index.html', dados)
 
-
 def registrar(request):
     if request.method == "POST":
     	form = UserCreationForm(request.POST)
@@ -27,8 +26,6 @@ def registrar(request):
     	form = UserCreationForm()
     	return render(request,'core/registrar.html',{"form":form})
 
-
-
 def cadastrar_funcionario(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
@@ -38,7 +35,6 @@ def cadastrar_funcionario(request):
     else:
         form = UserCreationForm()
         return render(request,'core/registrar.html',{"form":form})    
-
 
 def login(request):
     #ja verifica se tem dados no banco de dados e se não cria dados base
@@ -70,4 +66,12 @@ def logout(request):
     logout_f(request)
     return render(request,'core/logout.html')
     
+def registro(request):
+    
+    dados = {}
+    return render(request,'core/registro.html',dados)
 
+def help(request):
+    
+    dados = {}
+    return render(request,'core/registro.html',dados)
