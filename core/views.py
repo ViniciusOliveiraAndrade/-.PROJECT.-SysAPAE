@@ -67,11 +67,12 @@ def logout(request):
     return render(request,'core/logout.html')
     
 def registro(request):
-    
-    dados = {}
+    acessos = Registro_acesso.objects.all().order_by('-data_acesso')
+    acoes = Registro_acao.objects.all().order_by('-data_acao')
+    dados = {"acessos":acessos, "acoes":acoes}
     return render(request,'core/registro.html',dados)
 
 def help(request):
     
     dados = {}
-    return render(request,'core/registro.html',dados)
+    return render(request,'core/help.html',dados)

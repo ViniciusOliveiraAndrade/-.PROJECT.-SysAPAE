@@ -31,17 +31,88 @@
 </head>
 <body class="min-h-fullscreen bg-img center-vh p-20" style="background-image: url({% static 'assets/img/bg.png' %}); background-size:100% 100%;" data-overlay="7">
 
-  <div class="card card-round card-shadowed px-50 py-30 w-400px mb-0" style="max-width: 100%; color: black;">
-    <h5 class="text-uppercase">Registro de Acesso</h5>
+  <div class="card card-round card-shadowed col-lg-12 col-md-12 col-sm-12" >
+    <br><br><br>
+    <h5 class="text-uppercase text-center"><b>Registro de Acesso</b></h5>
     <br>
+    <table  class="table table-striped table-bordered table-responsive bs-select print border-dark text-dark" cellspacing="0">
+      <thead>
+       <tr style="background-color: #333; color: #fff;">
+
+        <th class="border-dark"><b>Usuário</b></th>
+        <th class="border-dark "><b>Data de Acesso</b></th>
+        
+      </tr>
+    </thead>
+    <tfoot class="no-print">
+      <tr style="background-color: #333; color: #fff;">
+        
+        <th class="border-dark "><b>Usuário</b></th>
+        <th class="border-dark "><b>Data de Acesso</b></th>
+        
+      </tr>
+    </tfoot>
+    <tbody>
+
+      {% for acesso in acessos%}
+
+      <tr>
+        <th class="border-dark text-dark">{{acesso.usuario}}</th>
+        <th class="border-dark text-dark">{{acesso.data_acesso}}</th>
+
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+  <br><br><br>
+  <h5 class="text-uppercase text-center"><b>Registro de Ação</b></h5>
+  <br>
+ <table  class="table table-striped table-bordered table-responsive bs-select print border-dark text-dark" cellspacing="0">
+      <thead>
+       <tr style="background-color: #333; color: #fff;">
+
+        <th class="border-dark "><b>Data da Ação</b></th>
+        <th class="border-dark "><b>Usuário</b></th>
+        <th class="border-dark "><b>Tipo da Ação</b></th>
+        <th class="border-dark "><b>Dado Alterado</b></th>
+        <th class="border-dark "><b>ID do Dado</b></th>
+        
+      </tr>
+    </thead>
+    <tfoot class="no-print">
+      <tr style="background-color: #333; color: #fff;">
+        
+         <th class="border-dark"><b>Data da Ação</b></th>
+        <th class="border-dark"><b>Usuário</b></th>
+        <th class="border-dark"><b>Tipo da Ação</b></th>
+        <th class="border-dark"><b>Dado Alterado</b></th>
+        <th class="border-dark "><b>ID do Dado</b></th>
+        
+      </tr>
+    </tfoot>
+    <tbody>
+
+      {% for acao in acoes%}
+
+      <tr>
+        <th class="border-dark text-dark">{{acao.data_acao}}</th>
+        <th class="border-dark text-dark">{{acao.usuario}}</th>
+        <th class="border-dark text-dark">{{acao.tipo}}</th>
+        <th class="border-dark text-dark">{{acao.dado}}</th>
+        <th class="border-dark text-dark">{{acao.id_dado}}</th>
+
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
 
 
-    <h5 class="text-uppercase">Registro de Ação</h5>
-    <br>
-
-    
-    
-
+  <footer class="card-footer text-right no-print">
+    <a onclick="window.history.back();" class="btn btn-secondary" type="reset">Voltar</a>
+   <!--- <button class="btn btn-w-md btn-round btn-info float-right mr-3 ml-3" onclick="window.print();">Imprimir</button> -->
+  </footer>
 
 
 </div>
