@@ -71,6 +71,18 @@ table, th, td {
     line-height: 12px;
 }
 
+/* mechaa aqui---------------------------------------------------------------------------------- */
+
+
 .levantar{
     line-height: 0px;
+}
+
+.tabelacentralizada{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tabelaesticada{
+    width: 100%;
 }

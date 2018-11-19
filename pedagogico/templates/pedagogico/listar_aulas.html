@@ -1,104 +1,152 @@
 {% extends "pedagogico/layout/layout_base.html" %}
+
 {% block main %}
 
     <div class="card">
-        <br>
-        <h1 class="font-dosis fw-500">Minhas Aulas</h1><br>
-        <br>
 
-        {#        <form id="formulario" class="card" action="{% url 'pedagogico:cadastrar_aulas' %}"#}
-        {#              method="post">#}
-        {#            {% csrf_token %}#}
+        <nav class="no-print" aria-label="breadcrumb">
+            <ol class="breadcrumb m-15 ">
+                <li class="breadcrumb-item"><a href="{% url 'pedagogico:index' %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'pedagogico:minhas_turmas' %}">Minhas Turmas</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Minhas Aulas</li>
+            </ol>
+        </nav>
 
-        <div align="rigth" style="margin-right: 20px">
+        <br>
+        <h1 class="font-dosis fw-500 text-center">Minhas Aulas</h1><br>
+
+
+        <div class="no-print" align="rigth" style="margin-right: 20px">
             {% block adcionar %}
                 <a class="btn btn-label btn-primary btn-round float-right"
-                   href="{% url 'pedagogico:cadastrar_aula' id_turma %}">
+                   href="{% url 'pedagogico:cadastrar_aula' id_turma %}" title="Aula">
                     <label>
                         <i class="ti-plus"></i>
-                    </label> Adicionar
+                    </label> Adicionar Aula
                 </a>
+
+                <button class="btn btn-w-md btn-round btn-info float-right mr-3" onclick="window.print();"
+                        title="Relatório Semanal">Imprimir
+                </button>
             {% endblock %}
         </div>
+        <br>
 
-        <div class="form-group">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="form-group">
 
-            <div class="card-body card-round tabelaSemflow flowww">
-                <table class="table table-striped table-bordered table-responsive bs-select print" cellspacing="0"
-                       data-provide="datatables">
-                    <thead>
-                    <tr>
-                        {#                            <th>ID</th>#}
-                        <th>Data</th>
-                        {#                            <th>Turma</th>#}
-                        <th>Titulo</th>
-                        <th>Situação</th>
-                        <th>Ação</th>
-                    </tr>
-                    </thead>
-                    {#                <tfoot>#}
-                    {#                <tr>#}
-                    {#                    <th>ID</th>#}
-                    {#                    <th>Data</th>#}
-                    {#                     <th>Turma</th>#}
-                    {#                    <th>Titulo</th>#}
-                    {#                    <th>Situação</th>#}
-                    {#                    <th>Ação</th>#}
-                    {#                </tr>#}
-                    {#                </tfoot>#}
-                    <tbody>
+                    <div class="card-body card-round tabelaSemflow flowww">
+                        <table class="table table-striped table-bordered table-responsive bs-select print border-dark text-dark tabelaesticada"
+                               cellspacing="0"
+                               data-provide="datatables">
+                            <thead>
+                            <tr class="text-uppercase border-dark text-dark" style="background-color: black">
+                                <th class="border-dark text-dark w-200px"><b>Data</b></th>
+                                <th class="border-dark text-dark"><b>Título</b></th>
+                                <th class="border-dark text-dark w-100px text-center"><b>Situação</b></th>
+                                <th class="no-print border-dark text-dark text-center" colspan="4"><b>Ação</b></th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
-                    {% for aula in aulas %}
+                            {% for aula in aulas %}
 
-                        <tr>
-                            {#                                <td>{{ aula.id }}</td>#}
-                            <td>{{ aula.data }}</td>
-                            {#                                <td>{{ aula.turma.nome }}</td>#}
-                            <td>{{ aula.titulo }}</td>
-                            <td>{% if aula.situacao %} Aberto {% else %} Finalizado {% endif %}</td>
+                                <tr class="border-dark text-dark">
+                                    <td class="border-dark text-dark">{{ aula.data }}</td>
+                                    <td class="border-dark text-dark">{{ aula.titulo }}</td>
+                                    <td class="border-dark text-dark text-center">{% if aula.situacao %} Aberto {% else %}
+                                        Finalizado {% endif %}</td>
 
-                            <th class="w-50px text-center">
-                                <div align="center">
-                                    <a data-provide="tooltip" data-tooltip-color="primary" title="Detalhes"
-                                       style="font-size: 25px;" class="fa fa-eye" aria-hidden="true"
-                                       href="{% url 'pedagogico:frequencia' aula.frequencia.id %}"></a>
-                                </div>
-                            </th>
-                            <th class="w-50px text-center">
-                                <div align="center">
-                                    <a data-provide="tooltip" data-tooltip-color="primary" title="Frequência"
-                                       style="font-size: 25px;" class="fa fa-address-book-o" aria-hidden="true"
-                                       href="{% url 'pedagogico:frequencia' aula.frequencia.id %}"></a>
-                                </div>
-                            </th>
-                            <th class="w-50px text-center">
-                                <div>
-                                    <a data-provide="tooltip" data-tooltip-color="primary" title="Editar"
-                                       style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true"
-                                       href="{% url 'pedagogico:editar_aula' aula.id %}"></a>
-                                </div>
-                            </th>
-                            <th class="w-50px text-center">
-                                <a href="{% url 'pedagogico:deletar_aula' aula.id %}"
-                                        {# style="font-size: 25px;" data-provide="tooltip"
-                                        {# data-tooltip-color="danger" title="Excluir"
-                                   class="deletbutton fa fa-trash-o"
-                                        {# aria-hidden="true"></a>
-                            </th>
-                        </tr>
-                        </tr>
-                    {% endfor %}
+                                    <td class="w-50px text-center no-print ">
+                                        {#                                <div align="center">#}
+                                        <a data-provide="tooltip" data-tooltip-color="info" title="Detalhes"
+                                           style="font-size: 25px;" class="fa fa-eye" aria-hidden="true"
+                                           href="{% url 'pedagogico:detalhes_aula' aula.id %}"></a>
+                                        {#                                </div>#}
+                                    </td>
+                                    <td class="w-50px text-center no-print ">
+                                        {#                                <div align="center">#}
+                                        <a data-provide="tooltip" data-tooltip-color="primary" title="Frequência"
+                                           style="font-size: 25px;" class="fa fa-address-book-o" aria-hidden="true"
+                                           href="{% url 'pedagogico:frequencia' aula.id %}"></a>
+                                        {#                                </div>#}
+                                    </td>
+                                    <td class="w-50px text-center no-print ">
+                                        {#                                <div>#}
+                                        <a data-provide="tooltip" data-tooltip-color="primary" title="Concluir Aula"
+                                           style="font-size: 25px;" class="fa fa-calendar-check-o" aria-hidden="true"
+                                           href="{% url 'pedagogico:editar_aula' aula.id %}"></a>
+                                        {#                                </div>#}
+                                    </td>
+{#                                    <td class="w-50px text-center no-print ">#}
+{#                                        <a href="{% url 'pedagogico:deletar_aula' aula.id %}"#}
+{#                                           ?delete=true&id={{ aula.id }}" onclick="deletar(this.id);"#}
+{#                                           style="font-size: 25px;" data-provide="tooltip"#}
+{#                                           data-tooltip-color="danger" title="Excluir"#}
+{#                                           class="deletbutton fa fa-trash-o"#}
+{#                                           aria-hidden="true"></a>#}
+{#                                    </td>#}
+                                </tr>
+                                {#                                                </tr>#}
 
-                    </tbody>
-                </table>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <footer class="card-footer text-right">
+        <footer class="card-footer text-right no-print">
             <a href="{% url 'pedagogico:minhas_turmas' %}" class="btn btn-secondary" type="reset">Voltar</a>
             {#                <button class="btn btn-primary" type="submit">Registrar</button>#}
         </footer>
         {#        </form>#}
     </div>
 
+{% endblock %}
+
+{% block jsa %}
+
+    <script type="text/javascript">
+
+        function deletar(url) {
+            var r = confirm("Isto apagará permanentemente a aula do sistema!\n Deseja confirmar?");
+            if (r == true) {
+                window.location.assign(url);
+            } else {
+
+            }
+        }
+
+        var diasSemana = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado', 'Domingo'];
+
+        function diaSemana(nr) {
+            return diasSemana[nr % 7]; // dar nomes ao numero do dia de semana
+        }
+
+        function diasMes(ano, mes) {
+            ano = 2018
+            mes = 11
+
+            var semanas = []; // array a preencher
+            var semana = {};
+            var diaUm = new Date(ano, mes - 1); // dia um do mês
+            var inicioSemana = diaUm.getDay() - 1; // numero do dia da semana (começando na segunda)
+            var ultimoDia = new Date(ano, mes, -1).getDate(); // quantidade de dias no mês
+            for (var i = 1; i <= ultimoDia; i++) {
+                var dia = diaSemana(inicioSemana++); // dar nome ao dia da semana
+                semana[dia] = [i, mes].join('/'); // dia do mês / mês
+                if (i % 7 == 0) { // caso mude a semana
+                    semanas.push(semana);
+                    semana = {}
+                } else {
+                    if (i == ultimoDia) semanas.push(semana); // juntar os ultimos dias
+                }
+            }
+            return semanas;
+        }
+    </script>
 {% endblock %}

@@ -1,17 +1,18 @@
 {% extends "pedagogico/layout/layout_base.html" %}
 {% block main %}
-
+    {% load static %}
     <div class="card">
 
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
+            <ol class="breadcrumb m-15">
                 <li class="breadcrumb-item"><a href="{% url 'pedagogico:index' %}">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Triagem Social</li>
             </ol>
         </nav>
+
         <br>
-        <h1 class="font-dosis fw-500">Usuários Para Triagem<br>
-            Pedagógica</h1><br>
+        <h1 class="font-dosis fw-500 text-center">Usuários Para Realizar <br>
+            Triagem Pedagógica</h1><br>
         <br>
 
 
@@ -20,38 +21,30 @@
             <div class="col-lg-12 col-md-6 col-sm-12">
                 <div class="form-group">
                     <div class="card-body card-round tabelaSemflow flowww">
-                        <table class="table table-striped table-bordered table-responsive bs-select print"
+                        <table class="table table-striped table-bordered table-responsive bs-select print border-dark text-dark"
                                cellspacing="0"
                                data-provide="datatables">
                             <thead>
-                            <tr>
-{#                                <th>ID</th>#}
-                                <th>Nome Completo</th>
-                                <th>Data de Nascimento</th>
-                                <th class="no-print">Ação</th>
+                            <tr class="text-uppercase" style="background-color: #e5e5e5">
+                                <th class="border-dark text-dark w-200px">CID</th>
+                                <th class="border-dark text-dark"><b>Nome Completo</b></th>
+                                <th class="border-dark text-dark text-center"><b>Data de Nascimento</b></th>
+                                <th class="no-print border-dark text-dark text-center"><b>Ação</b></th>
                             </tr>
                             </thead>
-{#                            <tfoot>#}
-{#                            <tr>#}
-{#                                <th>ID</th>#}
-{#                                <th>Nome</th>#}
-{#                                <th>Nascimento</th>#}
-{#                                <th class="no-print">Ação</th>#}
-{#                            </tr>#}
-{#                            </tfoot>#}
                             <tbody>
 
-                            {% for usuario in usuarios %}
+                            {% for triagem1 in triagemSocial %}
                                 <tr>
-{#                                    <td class="w-50px text-center">{{ usuario.id }}</td>#}
-                                    <td align="left">{{ usuario.nome }}</td>
-                                    <td class="w-200px text-center">{{ usuario.data_nacimento }}</td>
-                                    <td class="w-80px text-center">
+                                    <td align="left" class="border-dark text-dark">{{ triagem1.usuario.cid }}</td>
+                                    <td align="left" class="border-dark text-dark">{{ triagem1.usuario.nome }}</td>
+                                    <td class="w-200px text-center border-dark text-dark">{{ triagem1.usuario.data_nacimento }}</td>
+                                    <td class="w-80px text-center border-dark text-dark">
                                         <div>
                                             <a data-provide="tooltip" data-tooltip-color="primary"
                                                title="Realizar Triagem Pedagógica"
                                                style="font-size: 25px;" class="fa fa-pencil-square-o" aria-hidden="true"
-                                               href="{% url 'pedagogico:triagem_pedagogica' usuario.id %}"></a>
+                                               href="{% url 'pedagogico:triagem_pedagogica' triagem1.usuario.id %}"></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -64,7 +57,7 @@
             </div>
         </div>
         <footer class="card-footer text-right">
-            <a href="{% url 'pedagogico:index' %}" class="btn btn-secondary" type="reset">Cancelar</a>
+            <a href="{% url 'pedagogico:index' %}" class="btn btn-secondary" type="reset">Voltar</a>
         </footer>
     </div>
 

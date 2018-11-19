@@ -4,15 +4,15 @@
 
     <div class="card">
 
-        <nav class="no-print" aria-label="breadcrumb">
-            <ol class="breadcrumb m-15">
-                <li class="breadcrumb-item"><a href="{% url 'pedagogico:index' %}">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Minhas Turmas</li>
-            </ol>
-        </nav>
+        {#        <nav class="no-print" aria-label="breadcrumb">#}
+        {#            <ol class="breadcrumb m-15">#}
+        {#                <li class="breadcrumb-item"><a href="{% url 'pedagogico:index' %}">Home</a></li>#}
+        {#                <li class="breadcrumb-item active" aria-current="page">Minhas Turmas</li>#}
+        {#            </ol>#}
+        {#        </nav>#}
 
         <br>
-        <h1 class="font-dosis fw-500 text-center">Minhas Turmas</h1><br>
+        <h1 class="font-dosis fw-500 text-center">Turma - {{ Turma.nome }}</h1><br>
         <br>
 
         <div class="row">
@@ -25,25 +25,27 @@
                                data-provide="datatables">
                             <thead>
                             <tr class="text-uppercase" style="background-color: black">
-                                <th class="border-dark text-dark"><b>Turma</b></th>
-                                <th class="border-dark text-dark"><b>Turno</b></th>
-                                <th class="w-50px text-center no-print border-dark text-dark text-center"><b>Ações</b></th>
+                                <th class="border-dark text-dark"><b>Nome do Aluno</b></th>
+{#                                <th class="border-dark text-dark"><b>Turno</b></th>#}
+                                <th class="w-50px text-center no-print border-dark text-dark text-center"><b>Ações</b>
+                                </th>
                             </tr>
                             </thead>
 
                             <tbody>
 
-                            {% for turma in turmas %}
+                            {% for aluno in listaAlunos %}
 
                                 <tr>
-                                    <td class="border-dark text-dark">{{ turma.nome }}</td>
-                                    <td class="border-dark text-dark">{% if turma.turno %} Manhã {% else %} Tarde {% endif %}</td>
+                                    <td class="border-dark text-dark">{{ aluno.nome }}</td>
+{#                                    <td class="border-dark text-dark">{% if aluno.turno %} Manhã {% else %}#}
+{#                                        Tarde {% endif %}</td>#}
 
                                     <th class="w-50px text-center border-dark text-dark">
                                         <div align="center">
                                             <a data-provide="tooltip" data-tooltip-color="primary" title="Aulas"
                                                style="font-size: 25px;" class="fa fa-folder-open" aria-hidden="true"
-                                               href="{% url 'pedagogico:listar_aulas' turma.id %}"></a>
+                                               href="#"></a>
                                         </div>
                                     </th>
 
@@ -58,9 +60,7 @@
             </div>
         </div>
 
-        <footer class="card-footer text-right no-print">
-            <a href="{% url 'pedagogico:index' %}" class="btn btn-secondary" type="reset">Voltar</a>
-        </footer>
+
     </div>
 
 {% endblock %}

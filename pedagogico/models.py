@@ -2,14 +2,17 @@ from django.db import models
 from core.models import *
 from social.models import Triagem
 # Create your models here.
+from datetime import datetime
+
 
 class Frequencia(models.Model):
-    presente = models.BooleanField(default=False)
+    falta = models.BooleanField(default=False)
     usuario = models.ManyToManyField(Usuario)
+    desempenho = models.CharField(max_length=100)
 
 
     def __str__(self):
-        return "Aula: "+str(self.presente)
+        return "Frequência: "
 
 class Aula(models.Model):
     data = models.DateField('Data da Aula')
@@ -36,69 +39,79 @@ class Turma(models.Model):
 
 class TriagemPedagogica(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT, blank=False)
-    data = models.DateField()
-    estuda = models.BooleanField()
-    anoEscolar = models.IntegerField()
-    nomeEscola = models.CharField(max_length=50, blank=True)
-    municipio = models.CharField(max_length=50)
-    horarioApae = models.BooleanField()
+    data = models.DateField(default=datetime.now)
+    # estuda = models.BooleanField()
+    # anoEscolar = models.IntegerField()
+    # nomeEscola = models.CharField(max_length=50, blank=True)
+    # municipio = models.CharField(max_length=50, blank=True)
+    turno = models.BooleanField(blank=True)
+
     # Aqui fica um atributo para os dias da semana
+    segunda = models.BooleanField(blank=True)
+    terca = models.BooleanField(blank=True)
+    quarta = models.BooleanField(blank=True)
+    quinta = models.BooleanField(blank=True)
+    sexta = models.BooleanField(blank=True)
 
-    alimentacao = models.TextField()
-    medicacao = models.TextField()
-    composicaoFamiliar = models.TextField()
-    controleUrinario = models.BooleanField()
-    controleEsfincter = models.BooleanField()
-    controleObservacao = models.TextField()
+    alimentacao = models.TextField(blank=True)
+    # medicacao = models.TextField()
+    composicaoFamiliar = models.TextField(blank=True)
+    controleUrinario = models.BooleanField(blank=True)
+    controleEsfincter = models.BooleanField(blank=True)
+    controleObservacao = models.TextField(blank=True)
 
-    cuidador = models.CharField(max_length=50)
-    responsavel = models.CharField(max_length=50)
-    horarioDormir = models.FloatField()
-    horarioAcordar = models.FloatField()
-    dormeCom = models.CharField(max_length=50)
+    cuidador = models.CharField(max_length=50, blank=True)
+    responsavel = models.CharField(max_length=50, blank=True)
+    horarioDormir = models.TimeField(blank=True)
+    horarioAcordar = models.TimeField(blank=True)
+    dormeCom = models.CharField(max_length=50, blank=True)
 
 #     Aspecto de Desenvolvimento
 
-    falaBem = models.BooleanField()
-    comunicacaoGestos = models.BooleanField()
-    gagueira = models.BooleanField()
-    enxergaBem = models.BooleanField()
-    destro = models.BooleanField()
-    fazBalbucio = models.BooleanField()
+    falaBem = models.CharField(max_length=1, blank=True)
+    comunicacaoGestos = models.CharField(max_length=1, blank=True)
+    gagueira = models.CharField(max_length=1, blank=True)
+    enxergaBem = models.CharField(max_length=1, blank=True)
+    destro = models.CharField(max_length=1, blank=True)
+    esquerda = models.CharField(max_length=1, blank=True)
+    fazBalbucio = models.CharField(max_length=1, blank=True)
 
 #     Aspecto fisico motor
 
-    anda = models.BooleanField()
-    seguraLapis = models.BooleanField()
-    sentaCorretamente = models.BooleanField()
-    caiMuito = models.BooleanField()
-    cansaFacil = models.BooleanField()
+    anda = models.CharField(max_length=1, blank=True)
+    seguraLapis = models.CharField(max_length=1, blank=True)
+    sentaCorretamente = models.CharField(max_length=1, blank=True)
+    caiMuito = models.CharField(max_length=1, blank=True)
+    cansaFacil = models.CharField(max_length=1, blank=True)
 
 #     Aspecto Emocional
 
-    afetuodo = models.BooleanField()
-    medroso = models.BooleanField()
-    agressivo = models.BooleanField()
-    reageContrariado = models.BooleanField()
-    tique = models.BooleanField()
-    choraFacilidade = models.BooleanField()
+    solicitaAfeto = models.CharField(max_length=1, blank=True)
+    demonstraAfeto = models.CharField(max_length=1, blank=True)
+    medroso = models.CharField(max_length=1, blank=True)
+    agressivo = models.CharField(max_length=1, blank=True)
+    reageContrariado = models.CharField(max_length=1, blank=True)
+    tique = models.CharField(max_length=1, blank=True)
+    choraFacilidade = models.CharField(max_length=1, blank=True)
 
 #     Aspecto Social
 
-    sabeEspear = models.BooleanField()
-    obedeceOrdens = models.BooleanField()
-    fazAmizade = models.BooleanField()
-    isolase = models.BooleanField()
-    compartilha = models.BooleanField()
-    seRelaciona = models.BooleanField()
+    sabeEspear = models.CharField(max_length=1, blank=True)
+    obedeceOrdens = models.CharField(max_length=1, blank=True)
+    fazAmizade = models.CharField(max_length=1, blank=True)
+    isolase = models.CharField(max_length=1, blank=True)
+    compartilha = models.CharField(max_length=1, blank=True)
+    seRelaciona = models.CharField(max_length=1, blank=True)
 
 #     Aspecto Intelectual
 
-    # pronucia corretamente as palavras
-    expressaPensanetos = models.BooleanField()
-    transmiteRecados = models.BooleanField()
-    # Atenta para instruções fazendo o que é pedido
-    descricaoUsuario = models.TextField()
+    pronuciaCorretamente = models.CharField(max_length=1, blank=True)
+    expressaPensanetos = models.CharField(max_length=1, blank=True)
+    transmiteRecados = models.CharField(max_length=1, blank=True)
+    fazPedido = models.CharField(max_length=1, blank=True)
+
+    descricaoUsuario = models.TextField(blank=True)
+    pessoaQuestionada = models.CharField(max_length=50, blank=True)
 
 
 

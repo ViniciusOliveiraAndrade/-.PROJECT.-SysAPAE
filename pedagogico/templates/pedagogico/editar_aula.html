@@ -3,77 +3,89 @@
 
     <div class="card">
 
+        <nav class="no-print" aria-label="breadcrumb">
+            <ol class="breadcrumb m-15 ">
+                <li class="breadcrumb-item"><a href="{% url 'pedagogico:index' %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'pedagogico:minhas_turmas' %}">Minhas Turmas</a></li>
+                <li class="breadcrumb-item"><a href="#">Minhas Aulas</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Edição da Aula</li>
+            </ol>
+        </nav>
+
         <br>
-        <h1 class="font-dosis fw-500">Edição da Aula</h1><br>
+        <h1 class="font-dosis fw-500 text-center">Edição da Aula</h1><br>
         <br>
 
-        <form style="padding-right: 15px" id="formulario" class="card" action="{% url 'pedagogico:editar_aula' %}"
+        <form id="formulario" class="card-body"
+              action="{% url 'pedagogico:editar_aula' aula.id %}"
               method="post">
             {% csrf_token %}
-
-
-            <inpu type="text" name="id" value="{{ aula.id }}" style="display: none;"></inpu>
 
 
             <div class="row">
 
                 <div class="col-lg-6 col-md-6 col-sm-12">
-                    <label><b>Data</b></label>
-                    <div class="form-group" style="margin-left: 40px">
-                        <input name="dataAula" type="date" class="form-control" id="da">
+
+                    <div class="form-group">
+                        <label>Data</label>
+                        <input name="dataAula" type="date" class="form-control" id="da" disabled>
                     </div>
                 </div>
 
                 <div class="col-lg-6 col-md-6 col-sm-12">
-                    <label>Situação</label><br>
-                    <div class="form-check form-check-inline">
-
-
-                        <div class="color-selector">
-                            <label>
-                                <input type="radio" name="situacao" checked title="Aberto" value="aberto" {% if aula.situacao %} checked {% endif %}>
-                                <span style="background-color:#48b0f7" title="Aberto"></span>
-                            </label>
-                            <label>
-                                <input type="radio" name="situacao" value="finalizado" {% if not aula.situacao %} checked {% endif %}>
-                                <span style="background-color:#f96868" title="Finalizado"></span>
-                            </label>
+                    <div class="form-group">
+                        <label>Situação</label><br>
+                        <div class="form-check form-check-inline">
+                            <div class="color-selector">
+                                <label>
+                                    <input type="radio" name="situacao" checked title="Aberto" value="aberto"
+                                            {% if aula.situacao %} checked {% endif %}>
+                                    <span style="background-color:#48b0f7" title="Aberto"></span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="situacao" value="finalizado" {% if not aula.situacao %}
+                                           checked {% endif %}>
+                                    <span style="background-color:#f96868" title="Finalizado"></span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
 
 
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <br>
-                    <h4 class="text-uppercase text-center">Conteúdo</h4>
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    {#                    <br>#}
+                    {#                    <h4 class="text-uppercase text-center">Conteúdo</h4>#}
 
-                    <label>Titulo</label>
+
                     <div class="form-group">
-                        <div class="card-body card-round tabelaSemflow flowww">
-                            <input name="tituloAula" class="form-control" type="text"
-                                   placeholder=" Nomeie suas aulas" value="{{ aula.titulo }}"><br>
-                        </div>
+                        <label>Titulo</label>
+                        {#                        <div class="card-body card-round tabelaSemflow flowww">#}
+                        <input name="tituloAula" class="form-control" type="text"
+                               placeholder=" Nomeie suas aulas" value="{{ aula.titulo }}" disabled>
+                        {#                        </div>#}
                     </div>
+                </div>
+
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    {#                    <div class="card-body card-round tabelaSemflow flowww">#}
+
+
+                    <div class="form-group">
+                        <label>Avaliação da Aula</label>
+                        {#                                <textarea name="avaliacao" class="form-control" type="text" rows="3">#}
+                        <textarea required class="form-control" id="ava" rows="2" name="avaliacao"></textarea>
+                    </div>
+                    {#                    </div>#}
                 </div>
 
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card-body card-round tabelaSemflow flowww">
                         <div class="form-group">
+                            <label>Conteúdo</label>
                             <textarea style="background-color: #e8e8e8" data-provide="summernote"
                                       data-min-height="180" id="con" name="conteudo"
-                                     >{{ aula.conteudo }}</textarea>
-                        </div>
-                    </div>
-
-
-                    <div class="col-lg-12 col-md-6 col-sm-12">
-                        <div class="card-body card-round tabelaSemflow flowww">
-                            <label>Avaliação da Aula</label>
-
-                            <div class="form-group">
-                                {#                                <textarea name="avaliacao" class="form-control" type="text" rows="3">#}
-                                <textarea class="form-control" id="ava" rows="3" name="avaliacao"></textarea>
-                            </div>
+                            >{{ aula.conteudo }}</textarea>
                         </div>
                     </div>
 
@@ -81,7 +93,7 @@
             </div>
 
             <footer class="card-footer text-right">
-                {#                <a href="{% url 'pedagogico:listar_aulas' turma %}" class="btn btn-secondary" type="reset">Cancelar</a>#}
+                {#                <a href="{% url 'pedagogico:listar_aulas' aula.id %}" class="btn btn-secondary" type="reset">Cancelar</a>#}
                 <button class="btn btn-primary" type="submit">Salvar</button>
             </footer>
 
@@ -90,10 +102,10 @@
         <br>
     </div>
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-document.getElementById('da').value = "{{aula.data.year}}-{% if aula.data.month < 10 %}0{{aula.data.month}}{% else %}{{aula.data.month}}{% endif %}-{% if aula.data.day < 10 %}0{{aula.data.day}}{% else %}{{aula.data.day}}{% endif %}";
-document.getElementById('ava').value = "{{aula.avaliacaoAula}}";
+        document.getElementById('da').value = "{{aula.data.year}}-{% if aula.data.month < 10 %}0{{aula.data.month}}{% else %}{{aula.data.month}}{% endif %}-{% if aula.data.day < 10 %}0{{aula.data.day}}{% else %}{{aula.data.day}}{% endif %}";
+        document.getElementById('ava').value = "{{aula.avaliacaoAula}}";
 
-</script>
+    </script>
 {% endblock %}

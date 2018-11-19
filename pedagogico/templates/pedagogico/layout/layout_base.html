@@ -1,65 +1,16 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="TheAdmin - Responsive Bootstrap 4 Admin, Dashboard &amp; WebApp Template">
-    <meta name="keywords" content="dashboard, index, main">
-
-    <title>SysAPAE 2018</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,300i|Dosis:300,500" rel="stylesheet">
-
-    <!-- Styles -->
-    {% load static %}
-    <link href="{% static 'assets/css/core.min.css' %}" rel="stylesheet">
-    <link href="{% static 'assets/css/app.min.css' %}" rel="stylesheet">
-    <link href="{% static 'assets/css/style.min.css' %}" rel="stylesheet">
-
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-    <link rel="icon" href="{% static 'assets/img/logo-icon-light.png' %}">
+{% extends 'core/layout/layout_base.html' %}
 
 
-    <!--  Open Graph Tags -->
-    <meta property="og:title" content="The Admin Template of 2018!">
-    <meta property="og:description"
-          content="TheAdmin is a responsive, professional, and multipurpose admin template powered with Bootstrap 4.">
-    <meta property="og:image" content="http://thetheme.io/theadmin/assets/img/og-img.jpg">
-    <meta property="og:url" content="http://thetheme.io/theadmin/">
-    <meta name="twitter:card" content="summary_large_image">
-</head>
+{% block home %}{% url 'pedagogico:index' %}{% endblock %}
+{% block home2 %}{% url 'pedagogico:index' %}{% endblock %}
 
-<body class="sidebar-folded">
+{% block perfil %}{% url 'pedagogico:perfil' %}{% endblock %}
 
-<!-- Preloader -->
-<div class="preloader">
-    <div class="spinner-dots">
-        <span class="dot1"></span>
-        <span class="dot2"></span>
-        <span class="dot3"></span>
-    </div>
-</div>
+{% block menu_lateral %}
 
+<ul class="menu">
 
-<!-- Sidebar -->
-
-{% load static %}
-<aside style=" background-color: #010b6b" class="sidebar sidebar-icons-right sidebar-icons-boxed sidebar-expand-lg">
-    <header class="sidebar-header" style="background-color: #010b6b;">
-      <a class="logo-icon" href="{% url 'pedagogico:index'%}">
-        <img src="{% static 'assets/img/logo-icon-light.png' %}" alt="logo icon">
-      </a>
-      <span class="logo">
-        <a href="{% url 'pedagogico:index'%}"><img src="{% static 'assets/img/logo.png' %}" alt="logo"></a>
-      </span>
-      <span class="sidebar-toggle-fold text-white"></span>
-
-    </header>
-
-    <nav class="sidebar-navigation" style="background-color: #010b6b;">
-        <ul class="menu">
+            {% ifequal request.user.funcionario.cargo.nome "Coordenador(a) pedagógica" %}
 
             <li class="menu-category">Coordenação</li>
             <li class="menu-item">
@@ -73,14 +24,14 @@
                     <li class="menu-item">
                         <a class="menu-link" href="{% url 'pedagogico:listar_triagemSocial' %}">
                             <span class="dot"></span>
-                            <span class="title">Social</span>
+                            <span class="title">Não Realizada</span>
                         </a>
                     </li>
 
                     <li class="menu-item">
-                        <a class="menu-link" href="#">
+                        <a class="menu-link" href="{% url 'pedagogico:listagem_pedagogica' %}">
                             <span class="dot"></span>
-                            <span class="title">Pedagógica </span>
+                            <span class="title">Realizada</span>
                         </a>
                     </li>
                 </ul>
@@ -93,13 +44,6 @@
                 </a>
 
                 <ul class="menu-submenu">
-{#                    <li class="menu-item">#}
-{#                        <a class="menu-link" href="{% url 'pedagogico:criar_turma' %}">#}
-{#                            <span class="dot"></span>#}
-{#                            <span class="title">Cadastrar</span>#}
-{#                        </a>#}
-{#                    </li>#}
-
                     <li class="menu-item">
                         <a class="menu-link" href="{% url 'pedagogico:listar_turmas' %}">
                             <span class="dot"></span>
@@ -108,6 +52,8 @@
                     </li>
                 </ul>
             </li>
+            {% else %}
+{#    ------------------------------------------------------------------------------------------------#}
 
             <li class="menu-category">Educador(a)</li>
             <li class="menu-item">
@@ -117,12 +63,6 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="menu-submenu">
-{#                    <li class="menu-item">#}
-{#                        <a class="menu-link" href="{% url 'pedagogico:cadastrar_aula' %}">#}
-{#                            <span class="dot"></span>#}
-{#                            <span class="title">Cadastrar</span>#}
-{#                        </a>#}
-{#                    </li>#}
                     <li class="menu-item">
                         <a class="menu-link" href="{% url 'pedagogico:minhas_turmas' %}">
                             <span class="dot"></span>
@@ -131,100 +71,12 @@
                     </li>
                 </ul>
             </li>
-
-{#            <li class="menu-item">#}
-{#                <a class="menu-link" href="#">#}
-{#                    <span class="icon fa fa-address-book-o"></span>#}
-{#                    <span class="title">Frequência</span>#}
-{#                    <span class="arrow"></span>#}
-{#                </a>#}
-{#                <ul class="menu-submenu">#}
-{#                    <li class="menu-item">#}
-{#                        <a class="menu-link" href="{% url 'pedagogico:frequencia' %}">#}
-{#                            <span class="dot"></span>#}
-{#                            <span class="title">Realizar</span>#}
-{#                        </a>#}
-{#                    </li>#}
-{##}
-{#                    </li>#}
-{#                </ul>#}
-{#            </li>#}
-
-
+            {% endifequal %}
         </ul>
-    </nav>
 
-</aside>
-<!-- END Sidebar -->
-
-
-<!-- Topbar -->
-<header class="topbar" style="background-color:  black;">
-    <div class="topbar-left">
-        <span style="color: #ffffff;" class="topbar-btn sidebar-toggler"><i>&#9776;</i></span>
-
-        <a class="topbar-btn d-none d-md-block" href="#" data-provide="fullscreen tooltip" title="Fullscreen">
-        <i style="color: #ffffff;" class="material-icons fullscreen-default" >fullscreen</i>
-        <i style="color: #ffffff;" class="material-icons fullscreen-active" >fullscreen_exit</i>
-      </a>
-    </div>
-</header>
-<!-- END Topbar -->
-
-
-<!-- Main container -->
-<main>
-
-    <div class="main-content">
-        <div class="row">
-
-            <div class="col-12 text-center">
-                {% block main %}
-                {% endblock %}
-            </div>
-
-            <br><br><br>
-
-{#            <div class="w-100"></div>#}
-        </div>
-
-    </div><!--/.main-content -->
-
-
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="row">
-            <div class="col-md-6">
-                <p class="text-center text-md-left">Copyright © 2018 <a href="http://thetheme.io/theadmin">APAE de Serra Talhada - PE</a>.
-                    Todos os direitos reservados.</p>
-            </div>
-        </div>
-
-
-    </footer>
-    <!-- END Footer -->
-
-</main>
-<!-- END Main container -->
-
-
-<!-- Global quickview -->
-<div id="qv-global" class="quickview" data-url="assets/data/quickview-global-for-index.html">
-    <div class="spinner-linear">
-        <div class="line"></div>
-    </div>
-</div>
-<!-- END Global quickview -->
-
-
-<!-- Scripts -->
-{% block js %}
 {% endblock %}
-<script src="{% static 'assets/js/core.min.js' %}"></script>
-<script src="{% static 'assets/js/app.min.js' %}"></script>
-<script src="{% static 'assets/js/script.min.js' %}"></script>
-
-</body>
-</html>
 
 
+{% block main %}{% endblock %}
+
+{% block js %}{% endblock %}

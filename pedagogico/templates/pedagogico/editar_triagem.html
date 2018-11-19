@@ -16,7 +16,7 @@
         <h1 class="font-dosis fw-500 text-center">Triagem Pedagógica</h1>
         <br>
 
-        <div class="card-body card-round">
+       <div class="card-body card-round">
 
             <form id="formulario" class="card-body"
                   action="{% url 'pedagogico:cadastro_triagemP' %}"
@@ -925,16 +925,7 @@
     <script type="text/javascript">
         data = new Date();
         document.getElementById('dataTriagem').value = data.toLocaleString();
-        document.getElementById('data').value = data.toLocaleString();
 
-        function verificarTurno() {
-            if (document.getElementById('turno').value = "manha"){
-
-            } else {
-
-            }
-        }
-        
     </script>
 
 {% endblock %}

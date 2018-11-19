@@ -42,19 +42,19 @@ def criar_dados():
 
     user2 = User.objects.create_user('cintia', 'cintia@apae.com', '123456Mm')
     user2.first_name = "Cintia"
-    user2.last_name = "de alguma coisa"
+    user2.last_name = "Cardoso"
     user2.save()
     funcionario2 = Funcionario.objects.create(user=user2, cargo=cargo2)
     
     user3 = User.objects.create_user('marilia', 'marilia@apae.com', '123456Mm')
     user3.first_name = "Marília"
-    user3.last_name = "de alguma coisa"
+    user3.last_name = "Lima"
     user3.save()
     funcionario3 = Funcionario.objects.create(user=user3, cargo=cargo3)
 
     user4 = User.objects.create_user('juliana', 'juliana@apae.com', '123456Mm')
     user4.first_name = "Juliana"
-    user4.last_name = "de alguma coisa"
+    user4.last_name = "Teles"
     user4.save()
     funcionario4 = Funcionario.objects.create(user=user4, cargo=cargo4)
 

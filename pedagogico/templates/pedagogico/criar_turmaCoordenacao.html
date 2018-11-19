@@ -3,12 +3,21 @@
 {% block main %}
 
     <div class="card">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb m-15">
+                <li class="breadcrumb-item"><a href="{% url 'pedagogico:index' %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Turmas - Coordenação</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Criar Turmas - Coordenação</li>
+            </ol>
+        </nav>
+
         <br>
-        <h1 class="font-dosis fw-500">Cadastro da Turma</h1><br>
+        <h1 class="font-dosis fw-500 text-center">Cadastro da Turma</h1><br>
         <br>
 
 
-        <form style="padding-right: 15px" id="formmm" class="card" action="{% url 'pedagogico:cadastrar_turmas' %}"
+        <form style="padding-right: 15px" id="formmm" class="card-body" action="{% url 'pedagogico:cadastrar_turmas' %}"
               method="post">
             {% csrf_token %}
 
@@ -17,22 +26,20 @@
 
                 <div class="col-lg-4 col-md-6 col-sm-12">
 
-                    <label><b>Nome</b></label>
-
-                    <div class="form-group" style="margin-left: 40px">
-                        <input name="nome" class="form-control" type="text" placeholder=" Nome da Turma">
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input required name="nome" class="form-control" type="text" placeholder=" Nome da Turma">
                     </div>
 
                 </div>
 
-
                 <div class="col-lg-4 col-md-6 col-sm-12">
 
-                    <label><b>Professor</b></label>
                     <div class="form-group">
+                        <label>Professor</label><br>
                         <select data-provide="selectpicker" name="professor">
                             {% for professor in professores %}
-                                <option>{{ professor.nome }}</option>
+                                <option>{{ professor.user.first_name }} {{ professor.user.last_name }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -41,21 +48,37 @@
 
 
                 <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label>Turno</label><br>
 
-                    <label><b>Turno</b></label><br>
+                        <div class="form-check form-check-inline">
+{#                            <label class="form-check-label">#}
+{#                                <input class="form-check-input" type="radio" id="inlineCheckbox1" value="manha"#}
+{#                                       name="turno"#}
+{#                                       checked> Manhã#}
+{#                                &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#}
+{#                            </label>#}
+{#                            <label class="form-check form-check-inline">#}
+{#                                <input class="form-check-input" type="radio" id="inlineCheckbox2" value="tarde"#}
+{#                                       name="turno"> Tarde#}
+{#                            </label>#}
 
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" id="inlineCheckbox1" value="manha" name="turno"
-                                   checked> Manhã
-                            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        </label>
-                        <label class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="inlineCheckbox2" value="tarde"
-                                   name="turno"> Tarde
-                        </label>
+
+                            <label class="custom-control custom-radio">
+                                <input required type="radio" class="custom-control-input" value="manha"
+                                        id="inlineCheckbox1" name="turno">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Manhã</span>
+                            </label>
+
+                            <label class="custom-control custom-radio">
+                                <input required type="radio" class="custom-control-input" value="tarde"
+                                        id="inlineCheckbox2" name="turno">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Tarde</span>
+                            </label>
+                        </div>
                     </div>
-
                 </div>
             </div>
 

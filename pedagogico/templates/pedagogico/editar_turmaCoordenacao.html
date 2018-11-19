@@ -2,35 +2,44 @@
 {% block main %}
 
     <div class="card">
+
+        <nav class="no-print" aria-label="breadcrumb">
+            <ol class="breadcrumb m-15 ">
+                <li class="breadcrumb-item"><a href="{% url 'pedagogico:index' %}">Home</a></li>
+                 <li class="breadcrumb-item"><a href="{% url 'pedagogico:listar_turmas' %}">Turmas - Coordenação</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Edição da Turma</li>
+            </ol>
+        </nav>
+
         <br>
-        <h1 class="font-dosis fw-500">Edição da Turma</h1><br>
+        <h1 class="font-dosis fw-500 text-center">Edição da Turma</h1><br>
         <br>
 
 
-        <form style="padding-right: 15px" id="formmm" class="card" action="{% url 'pedagogico:editar_turma' turma.id %}"
+        <form style="padding-right: 15px" id="formmm" class="card-body"
+              action="{% url 'pedagogico:editar_turma' turma.id %}"
               method="post">
             {% csrf_token %}
 
             <div class="row">
 
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <label><b>Nome</b></label>
-{#                    <div class="form-group">#}
-{#                        <input type="text" id="input-normal" placeholder="Nome da Turma" name="nome"#}
-{#                               value=" {{ turma.nome }}">#}
-{#                    </div>#}
-
-                    <div class="form-group" style="margin-left: 40px">
+                    <div class="form-group">
+                        <label>Nome</label>
                         <input name="nome" class="form-control" type="text" value="{{ turma.nome }}">
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <label><b>Professor</b></label>
                     <div class="form-group">
-                        <select data-provide="selectpicker" name="professor">
+                        <label>Professor</label><br>
+                        <select data-provide="selectpicker" name="professor"
+                                {% ifequal turma.professor.user.first_name professores.user.first_name %}
+                                selected="selected"
+                                {% endifequal %}
+                        >
                             {% for professor in professores %}
-                                <option>{{ professor.nome }}</option>
+                                <option>{{ professor.user.first_name }} {{ professor.user.last_name }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -38,21 +47,35 @@
                 </div>
 
                 <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label>Turno</label><br>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
 
-                    <label><b>Turno</b></label><br>
+                            <label class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" value="manha" name="turno" {% if turma.turno %}checked {% endif %}>
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">Manhã</span>
 
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" id="inlineCheckbox1" value="manha" name="turno"
-                                   {% if turma.turno %}checked {% endif %}> Manhã
-                            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        </label>
-                        <label class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="inlineCheckbox2" value="tarde" name="turno"
-                                   {% if not turma.turno %}checked {% endif %}> Tarde
-                        </label>
+{#                                <input class="form-check-input" type="radio" id="inlineCheckbox1" value="manha"#}
+{#                                       name="turno"#}
+{#                                       {% if turma.turno %}checked {% endif %}> Manhã#}
+                                &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>
+
+                              <label class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" value="tarde" name="turno" {% if not turma.turno %}checked {% endif %}>
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">Tarde</span>
+
+
+{#                            <label class="form-check form-check-inline">#}
+{#                                <input class="form-check-input" type="radio" id="inlineCheckbox2" value="tarde"#}
+{#                                       name="turno"#}
+{#                                       {% if not turma.turno %}checked {% endif %}> Tarde#}
+                            </label>
+                        </div>
                     </div>
-
                 </div>
 
 
@@ -61,7 +84,7 @@
 
             <footer class="card-footer text-right">
                 <a href="{% url 'pedagogico:listar_turmas' %}" class="btn btn-secondary" type="reset">Cancelar</a>
-                <button  class="btn btn-primary" type="submit">Salvar</button>
+                <button class="btn btn-primary" type="submit">Salvar</button>
             </footer>
         </form>
     </div>
