@@ -20,7 +20,7 @@
     <div class="row"> 
       <div class="col-lg-12 col-md-12 col-sm-12 no-gutters text-center" data-provide="photoswipe">
         <figure class="img-hov-zoomin">
-          <img src="{% ifequal t.usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{t.usuario.imagem_url}} {% endifequal %}" alt="..." class="rounded avatar-xxxl">
+          <img width="120px" height="200px" src="{% ifequal t.usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{t.usuario.imagem_url}} {% endifequal %}" alt="..." class="rounded avatar-xxxl">
         </figure>
       </div>
     </div>
