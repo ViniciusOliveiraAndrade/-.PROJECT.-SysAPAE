@@ -20,7 +20,7 @@
     <div class="row"> 
       <div class="col-lg-12 col-md-12 col-sm-12 no-gutters text-center" data-provide="photoswipe">
         <figure class="img-hov-zoomin">
-          <img src="{% ifequal t.usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{t.usuario.imagem_url}} {% endifequal %}" alt="..." class="rounded avatar-xxxl">
+          <img width="120px" height="200px" src="{% ifequal t.usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{t.usuario.imagem_url}} {% endifequal %}" alt="..." class="rounded avatar-xxxl">
         </figure>
       </div>
     </div>
@@ -29,7 +29,7 @@
 
     <div class="row"> 
 
-      <div class="col-lg-4 col-md-6 col-sm-12 emlinha2">
+      <div class="col-lg-12 col-md-12 col-sm-12 emlinha2">
         <div class="form-group">
           <label>Nome : {{t.usuario.nome}}</label>
         </div>
@@ -47,7 +47,7 @@
         </div>
       </div>
 
-      <div class="col-lg-4 col-md-6 col-sm-12 emlinha">
+      <div class="col-lg-3 col-md-6 col-sm-12 emlinha">
         <div class="form-group">
           <label>CID : {{t.usuario.cid.codigo}}</label>
         </div>
@@ -78,8 +78,6 @@
     <h5 class="text-uppercase mt-3 levantar">Familiares</h5>
     <hr class="hr-sm mb-2 no-print">
     <h6 class="text-uppercase mt-3">Pai</h6>
-    <hr class="hr-sm mb-2 no-print">
-
     <div class="row"> 
       <div class="col-lg-4 col-md-6 col-sm-12 emlinha2">
         <div class="form-group">
@@ -101,8 +99,6 @@
     </div>
 
     <h6 class="text-uppercase mt-3">Mãe</h6>
-    <hr class="hr-sm mb-2 no-print">
-
     <div class="row">
       <div class="col-lg-4 col-md-6 col-sm-12 emlinha2">
         <div class="form-group">
@@ -256,7 +252,90 @@
       </div>
     </div>
   </div>
+  <!--  .......................................................................................................  -->
 
+  <h5 class="text-uppercase mt-3">Saúde</h5>
+  <hr class="hr-sm mb-2">
+
+  <div class="row">
+
+    <div class="col-lg-4 col-md-6 col-sm-12 emlinha">
+      <div class="form-group">
+        <label>Medicação em uso: {{ t.medicacao }} </label>
+      </div>
+    </div>
+  </div>
+
+  <h5 class="mt-3">Equipe interdisciplinar </h5>
+
+
+  <div class="row">
+
+    <div class="col-lg-1 col-md-3 col-sm-12 emlinha">
+      <div class="form-group">
+        <label >FISIO: {% if t.e_i_fisio %} [X] {% else %} [ ] {% endif %} </label>
+
+      </div>
+    </div>
+
+
+    <div class="col-lg-2 col-md-3 col-sm-12 emlinha">
+      <div class="form-group">
+        <label >HIDRO: {% if t.e_i_hidro %} [X] {% else %} [ ] {% endif %} </label>
+
+      </div>
+    </div>
+
+    <div class="col-lg-1 col-md-3 col-sm-12 emlinha">
+      <div class="form-group">
+        <label >FONO: {% if t.e_i_fono %} [X] {% else %} [ ] {% endif %} </label>
+
+      </div>
+    </div>
+
+    <div class="col-lg-1 col-md-3 col-sm-12 emlinha">
+      <div class="form-group">
+        <label >TO: {% if t.e_i_to %} [X] {% else %} [ ] {% endif %} </label>
+
+      </div>
+    </div>
+
+    <div class="col-lg-1 col-md-3 col-sm-12 emlinha">
+      <div class="form-group">
+        <label >PSI: {% if t.e_i_psi %} [X] {% else %} [ ] {% endif %} </label>
+
+      </div>
+    </div>
+
+    <div class="col-lg-2 col-md-3 col-sm-12 emlinha">
+      <div class="form-group">
+        <label >ONDONTO: {% if t.e_i_ondonto %} [X] {% else %} [ ] {% endif %} </label>
+
+      </div>
+    </div>
+
+    <div class="col-lg-2 col-md-3 col-sm-12 emlinha">
+      <div class="form-group">
+        <label >MÉDICO: {% if t.e_i_medico %} [X] {% else %} [ ] {% endif %} </label>
+
+      </div>
+    </div>
+
+    <div class="col-lg-2 col-md-3 col-sm-12 emlinha">
+      <div class="form-group">
+        <label >PSICOPEDAGOGA: {% if t.e_i_psicopedagoga %} [X] {% else %} [ ] {% endif %} </label>
+
+      </div>
+    </div>
+
+    <div class="col-lg-2 col-md-3 col-sm-12 emlinha">
+      <div class="form-group">
+        <label >PEDAGOGIA: {% if t.e_i_pedagogia %} [X] {% else %} [ ] {% endif %} </label>
+
+      </div>
+    </div>
+
+  </div>
   <!--  .......................................................................................................  -->
 
 
@@ -264,7 +343,7 @@
   <hr class="hr-sm mb-2 no-print">
 
   <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 emlinha2">
+    <div class="col-lg-12 col-md-12 col-sm-12 emlinha3">
 
       <div class="form-group">
         <label>OBS : {{t.observacoes}}</label>

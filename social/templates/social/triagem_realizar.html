@@ -33,15 +33,15 @@
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label>Nome</label>
-                        <input class="form-control" type="text" name="nome">
+                        <label>Nome <i class="text-danger">*</i></label>
+                        <input class="form-control" type="text" name="nome" required>
                     </div>
                 </div>  
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label>Data de nascimento</label>
+                        <label>Data de nascimento <i class="text-danger">*</i></label>
                         <small class="sidetitle">dd/mm/yyyy</small>
-                        <input name="datanascimento" type="text" class="form-control" data-format="&#123;&#123;99&#125;&#125;/&#123;&#123;99&#125;&#125;/&#123;&#123;9999&#125;&#125;">
+                        <input name="datanascimento" type="text" class="form-control" data-format="&#123;&#123;99&#125;&#125;/&#123;&#123;99&#125;&#125;/&#123;&#123;9999&#125;&#125;" required>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
@@ -52,9 +52,9 @@
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label>CID</label>
+                        <label>CID <i class="text-danger">*</i></label>
                         <div>
-                            <select data-provide="selectpicker" name="cid" style="color: black; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded">
+                            <select data-provide="selectpicker" name="cid" style="color: black; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required>
                                 {% for cid in cids %}
                                 <option class="visivel text-dark">{{cid.codigo}}</option>                        
                                 {% endfor %}
@@ -69,23 +69,20 @@
             <h5 class="text-uppercase mt-3">Acompanhamento com especialista</h5>
             <hr class="hr-sm mb-2">
             <div class="row"> 
+
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label>É Acompanhado</label>
+                        <label>É Acompanhado <i class="text-danger">*</i></label>
                         <div>
-                            <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="acompanhado" value="s"> Sim
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="acompanhado" value="n" checked="checked"> Não
-                                </label>
-                            </div>
+                            <select data-provide="selectpicker" name="acompanhado" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
+
+                                <option class="visivel text-dark">SIM</option>                        
+                                <option class="visivel text-dark" selected="selected" >NÂO</option>                        
+                            </select>
                         </div>
                     </div>
-                </div>
+                </div> 
+
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="form-group">
                         <label>Especialista acompanhante</label>
@@ -178,8 +175,8 @@
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label>Valor R$</label>
-                        <input name="valor" class="form-control" type="text" value="000.00">
+                        <label>Valor R$ <i class="text-danger">*</i></label>
+                        <input name="valor" class="form-control" type="text" value="000.00" required >
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
@@ -199,20 +196,20 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label>Rua</label>
-                        <input name="rua" class="form-control" type="text">
+                        <label>Rua <i class="text-danger">*</i></label>
+                        <input name="rua" class="form-control" type="text" required >
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label>N°</label>
-                        <input name="numero" class="form-control" type="text">
+                        <label>N° <i class="text-danger">*</i></label>
+                        <input name="numero" class="form-control" type="text"  required >
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label>Bairro</label>
-                        <input name="bairro" class="form-control" type="text">
+                        <label>Bairro <i class="text-danger">*</i></label>
+                        <input name="bairro" class="form-control" type="text" required >
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
@@ -223,8 +220,8 @@
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label>Cidade</label>
-                        <input name="cidade" class="form-control" type="text">
+                        <label>Cidade <i class="text-danger">*</i></label>
+                        <input name="cidade" class="form-control" type="text" required >
                     </div>
                 </div>
 
@@ -239,16 +236,16 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
 
                     <div class="form-group">
-                        <label>Telefone</label>
+                        <label>Telefone <i class="text-danger">*</i></label>
                         <small class="sidetitle">E.g. (87) 3831-0000</small>
-                        <input name="telefone" type="text" class="form-control" data-format="(&#123;&#123;99&#125;&#125;) &#123;&#123;9999&#125;&#125;-&#123;&#123;9999&#125;&#125;">
+                        <input name="telefone" id="telefone" type="text" class="form-control" data-format="(&#123;&#123;99&#125;&#125;) &#123;&#123;9999&#125;&#125;-&#123;&#123;9999&#125;&#125;" required >
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label>Celular</label>
+                        <label>Celular <i class="text-danger">*</i></label>
                         <small class="sidetitle">E.g. (87) 9.9999-9999</small>
-                        <input name="celular" type="text" class="form-control" data-format="(&#123;&#123;99&#125;&#125;) &#123;&#123;9&#125;&#125;.&#123;&#123;9999&#125;&#125;-&#123;&#123;9999&#125;&#125;">
+                        <input name="celular" id="celular" type="text" class="form-control" data-format="(&#123;&#123;99&#125;&#125;) &#123;&#123;9&#125;&#125;.&#123;&#123;9999&#125;&#125;-&#123;&#123;9999&#125;&#125;" required >
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
@@ -266,30 +263,25 @@
             <hr class="hr-sm mb-2">
 
             <div class="row">
+
+
                 <div class="col-lg-4 col-md-6 col-sm-12">
-
                     <div class="form-group">
-                        <label> Estuda em ensino Regular</label>
+                        <label>Estuda em ensino Regular <i class="text-danger">*</i></label>
                         <div>
+                            <select data-provide="selectpicker" name="ensino" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded">
 
-
-                            <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="estuda" value="s"> Sim
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="estuda" value="n" checked="checked"> Não
-                                </label>
-                            </div>
+                                <option class="visivel text-dark">SIM</option>                        
+                                <option class="visivel text-dark" selected="selected" >NÂO</option>                        
+                            </select>
                         </div>
                     </div>
-                </div>
+                </div> 
+
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label>Qual</label>
-                        <input name="qual" class="form-control" type="text">
+                        <label>Qual <i class="text-danger">*</i></label>
+                        <input name="qual" class="form-control" type="text" required >
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
@@ -314,6 +306,148 @@
 
             <!--  .......................................................................................................  -->
 
+            <h5 class="text-uppercase mt-3">Saúde</h5>
+            <hr class="hr-sm mb-2">
+
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label>Medicação em uso <i class="text-danger">*</i></label>
+                        <input class="form-control" name="medicacao" type="text"  required >
+                    </div>
+                </div>
+            </div>
+
+            <h5 class="mt-3">Equipe interdisciplinar</h5>
+
+
+            <div class="row">
+
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label>FISIO <i class="text-danger">*</i></label>
+                        <div>
+                            <select data-provide="selectpicker" name="fisio" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
+
+                                <option class="visivel text-dark">SIM</option>                        
+                                <option class="visivel text-dark" selected="selected" >NÂO</option>                        
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label>HIDRO <i class="text-danger">*</i></label>
+                        <div>
+                            <select data-provide="selectpicker" name="hidro" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
+
+                                <option class="visivel text-dark">SIM</option>                        
+                                <option class="visivel text-dark" selected="selected" >NÂO</option>                        
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label>FONO <i class="text-danger">*</i></label>
+                        <div>
+                            <select data-provide="selectpicker" name="fono" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
+
+                                <option class="visivel text-dark">SIM</option>                        
+                                <option class="visivel text-dark" selected="selected" >NÂO</option>                        
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label>TO <i class="text-danger">*</i></label>
+                        <div>
+                            <select data-provide="selectpicker" name="to" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
+
+                                <option class="visivel text-dark">SIM</option>                        
+                                <option class="visivel text-dark" selected="selected" >NÂO</option>                        
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label>PSI <i class="text-danger">*</i></label>
+                        <div>
+                            <select data-provide="selectpicker" name="psi" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded"  required >
+
+                                <option class="visivel text-dark">SIM</option>                        
+                                <option class="visivel text-dark" selected="selected" >NÂO</option>                        
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label>ONDONTO <i class="text-danger">*</i></label>
+                        <div>
+                            <select data-provide="selectpicker" name="ondonto" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded"  required >
+
+                                <option class="visivel text-dark">SIM</option>                        
+                                <option class="visivel text-dark" selected="selected" >NÂO</option>                        
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label>MÉDICO <i class="text-danger">*</i></label>
+                        <div>
+                            <select data-provide="selectpicker" name="medico" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
+
+                                <option class="visivel text-dark">SIM</option>                        
+                                <option class="visivel text-dark" selected="selected" >NÂO</option>                        
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label>PSICOPEDAGOGA <i class="text-danger">*</i></label>
+                        <div>
+                            <select data-provide="selectpicker" name="psicopedagoga" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
+
+                                <option class="visivel text-dark">SIM</option>                        
+                                <option class="visivel text-dark" selected="selected" >NÂO</option>                        
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label>PEDAGOGIA <i class="text-danger">*</i></label>
+                        <div>
+                            <select data-provide="selectpicker" name="pedagogia" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded"  required >
+
+                                <option class="visivel text-dark">SIM</option>                        
+                                <option class="visivel text-dark" selected="selected" >NÂO</option>                        
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+            <!--  .......................................................................................................  -->
+
 
             <h5 class="text-uppercase mt-3">Observações</h5>
             <hr class="hr-sm mb-2">
@@ -329,7 +463,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="form-group">
                         <label>Assinatura do Proficional</label>
-                        <input name="assinatura" class="form-control" type="text" value="{{request.user.first_name}} {{request.user.last_name}}">
+                        <input class="form-control" type="text" value="{{request.user.first_name}} {{request.user.last_name}}">
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
@@ -358,6 +492,11 @@
 
 {% block js %}
 <script type="text/javascript">
+
+
+
+
+
 data = new Date();
 document.getElementById("datar").value = data.toLocaleString();
 document.getElementById("u").className = document.getElementById("u").className + " active open";

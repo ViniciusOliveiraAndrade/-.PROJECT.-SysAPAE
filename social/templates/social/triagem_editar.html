@@ -15,20 +15,20 @@
 
     <form id="formmm" class="card text-dark" action="{% url 'social:editar_triagem'%}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
-      inpu
+   
       <input type="hidden" name="id" value="{{ t.id }}">
       <!--  .......................................................................................................  -->  
       <h5 class="text-uppercase">Usuário</h5>
       <hr class="hr-sm mb-2">
-     
+
       <div class="row"> 
         <div class="col-lg-12 col-md-12 col-sm-12 no-gutters text-center" data-provide="photoswipe">
-            <figure class="img-hov-zoomin">
-              <img src="{% ifequal t.usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{t.usuario.imagem_url}} {% endifequal %}" alt="..." class="rounded avatar-xxxl">
-            </figure>
+          <figure class="img-hov-zoomin">
+            <img src="{% ifequal t.usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{t.usuario.imagem_url}} {% endifequal %}" alt="..." class="rounded avatar-xxxl">
+          </figure>
         </div>
       </div>
-     
+
 
 
 
@@ -37,18 +37,18 @@
 
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="form-group">
-            <label>Nome</label>
-            <input class="form-control" type="text" name="nome" value="{{t.usuario.nome}}">
+            <label>Nome <i class="text-danger">*</i></label>
+            <input class="form-control" type="text" name="nome" value="{{t.usuario.nome}}" required >
           </div>
         </div>  
 
-    
+
 
         <div class="col-lg-3 col-md-6 col-sm-12">
           <div class="form-group">
-            <label>Data de nascimento</label>
+            <label>Data de nascimento <i class="text-danger">*</i></label>
             <small class="sidetitle">dd/mm/aaaa</small>
-            <input name="datanascimento" type="text" data-format="&#123;&#123;99&#125;&#125;/&#123;&#123;99&#125;&#125;/&#123;&#123;9999&#125;&#125;" class="form-control" value="{% if t.usuario.data_nacimento.day < 10 %} 0{{t.usuario.data_nacimento.day}} {% else %} {{t.usuario.data_nacimento.day}} {% endif %}/{% if t.usuario.data_nacimento.month < 10 %} 0{{t.usuario.data_nacimento.month}} {% else %} {{t.usuario.data_nacimento.month}} {% endif %}/{{t.usuario.data_nacimento.year}}">
+            <input name="datanascimento" type="text" data-format="&#123;&#123;99&#125;&#125;/&#123;&#123;99&#125;&#125;/&#123;&#123;9999&#125;&#125;" class="form-control" value="{% if t.usuario.data_nacimento.day < 10 %} 0{{t.usuario.data_nacimento.day}} {% else %} {{t.usuario.data_nacimento.day}} {% endif %}/{% if t.usuario.data_nacimento.month < 10 %} 0{{t.usuario.data_nacimento.month}} {% else %} {{t.usuario.data_nacimento.month}} {% endif %}/{{t.usuario.data_nacimento.year}}" required >
           </div>
         </div>
 
@@ -61,9 +61,9 @@
 
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="form-group">
-            <label>CID</label>
+            <label>CID <i class="text-danger">*</i></label>
             <div>
-              <select data-provide="selectpicker" name="cid" style="color: #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded">
+              <select data-provide="selectpicker" name="cid" style="color: #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
                 {% for cid in cids %}
                 <option class="visivel text-dark" style="color:#000;" {% if t.usuario.cid.codigo == cid.codigo %}selected="selected"{% endif %}>{{cid.codigo}}</option>                        
                 {% endfor %}
@@ -78,23 +78,22 @@
       <h5 class="text-uppercase mt-3">Acompanhamento com especialista</h5>
       <hr class="hr-sm mb-2">
       <div class="row"> 
+
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="form-group">
-            <label>É Acompanhado</label>
+            <label>É Acompanhado <i class="text-danger">*</i></label>
             <div>
-              <div class="form-check form-check-inline">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="acompanhado" value="s" {% if t.acompanhamento_com_especialista %} checked="checked" {% endif %}> Sim
-                </label>
-              </div>
-              <div class="form-check form-check-inline">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="acompanhado" value="n" {% if not t.acompanhamento_com_especialista %} checked="checked" {% endif %}> Não
-                </label>
-              </div>
+              <select data-provide="selectpicker" name="acompanhado" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
+
+                <option class="visivel text-dark" 
+                {% if t.acompanhamento_com_especialista %} selected="selected" {% endif %} >SIM</option>                        
+                <option class="visivel text-dark"
+                {% if not t.acompanhamento_com_especialista %} selected="selected" {% endif %} >NÂO</option>                        
+              </select>
             </div>
           </div>
-        </div>
+        </div> 
+
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="form-group">
             <label>Especialista acompanhante</label>
@@ -188,8 +187,8 @@
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="form-group">
-            <label>Valor R$</label>
-            <input name="valor" class="form-control" type="text" value="{{t.renda_familiar}}">
+            <label>Valor R$ <i class="text-danger">*</i></label>
+            <input name="valor" class="form-control" type="text" value="{{t.renda_familiar}}" required >
           </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -209,20 +208,20 @@
       <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="form-group">
-            <label>Rua</label>
-            <input name="rua" class="form-control" type="text"  value="{{t.rua}}">
+            <label>Rua <i class="text-danger">*</i></label>
+            <input name="rua" class="form-control" type="text"  value="{{t.rua}}" required >
           </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="form-group">
-            <label>N°</label>
-            <input name="numero" class="form-control" type="text" value="{{t.numero_da_rua}}">
+            <label>N° <i class="text-danger">*</i></label>
+            <input name="numero" class="form-control" type="text" value="{{t.numero_da_rua}}" required >
           </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="form-group">
-            <label>Bairro</label>
-            <input name="bairro" class="form-control" type="text"  value="{{t.bairro}}">
+            <label>Bairro <i class="text-danger">*</i></label>
+            <input name="bairro" class="form-control" type="text"  value="{{t.bairro}}" required >
           </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -233,8 +232,8 @@
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="form-group">
-            <label>Cidade</label>
-            <input name="cidade" class="form-control" type="text"  value="{{t.cidade}}">
+            <label>Cidade <i class="text-danger">*</i></label>
+            <input name="cidade" class="form-control" type="text"  value="{{t.cidade}}" required >
           </div>
         </div>
 
@@ -249,16 +248,16 @@
         <div class="col-lg-4 col-md-6 col-sm-12">
 
           <div class="form-group">
-            <label>Telefone</label>
+            <label>Telefone <i class="text-danger">*</i></label>
             <small class="sidetitle">E.g. (87) 3831-0000</small>
-            <input name="telefone" type="text" class="form-control" data-format="(&#123;&#123;99&#125;&#125;) &#123;&#123;9999&#125;&#125;-&#123;&#123;9999&#125;&#125;" value="{{t.telefone}}">
+            <input name="telefone" type="text" class="form-control" data-format="(&#123;&#123;99&#125;&#125;) &#123;&#123;9999&#125;&#125;-&#123;&#123;9999&#125;&#125;" value="{{t.telefone}}" required >
           </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="form-group">
-            <label>Celular</label>
+            <label>Celular <i class="text-danger">*</i></label>
             <small class="sidetitle">E.g. (87) 9.9999-9999</small>
-            <input name="celular" type="text" class="form-control" data-format="(&#123;&#123;99&#125;&#125;) &#123;&#123;9&#125;&#125;.&#123;&#123;9999&#125;&#125;-&#123;&#123;9999&#125;&#125;" value="{{t.celular}}">
+            <input name="celular" type="text" class="form-control" data-format="(&#123;&#123;99&#125;&#125;) &#123;&#123;9&#125;&#125;.&#123;&#123;9999&#125;&#125;-&#123;&#123;9999&#125;&#125;" value="{{t.celular}}" required >
           </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -276,32 +275,26 @@
       <hr class="hr-sm mb-2">
 
       <div class="row">
+
         <div class="col-lg-4 col-md-6 col-sm-12">
-
           <div class="form-group">
-            <label> Estuda em ensino Regular</label>
+            <label>Estuda em ensino Regular <i class="text-danger">*</i></label>
             <div>
+              <select data-provide="selectpicker" name="ensino" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
 
-
-              <div class="form-check form-check-inline">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="estuda" value="s" {% if t.estuda_ensino_regular %} checked="checked" {% endif %}> Sim
-                </label>
-              </div>
-              <div class="form-check form-check-inline">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="estuda" value="n" {% if not t.estuda_ensino_regular %} checked="checked" {% endif %}> Não
-                </label>
-              </div>
+                <option class="visivel text-dark" 
+                {% if t.estuda_ensino_regular %} selected="selected" {% endif %} >SIM</option>                        
+                <option class="visivel text-dark"
+                {% if not t.estuda_ensino_regular %} selected="selected" {% endif %} >NÂO</option>                        
+              </select>
             </div>
           </div>
-        </div>
-
+        </div> 
 
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="form-group">
-            <label>Qual</label>
-            <input name="qual" class="form-control" type="text" value="{{t.qual}}">
+            <label>Qual <i class="text-danger">*</i></label>
+            <input name="qual" class="form-control" type="text" value="{{t.qual}}" required >
           </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -323,7 +316,171 @@
           </div>
         </div>
       </div>
+      <!--  .......................................................................................................  -->
 
+      <h5 class="text-uppercase mt-3">Saúde</h5>
+      <hr class="hr-sm mb-2">
+
+      <div class="row">
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>Medicação em uso <i class="text-danger">*</i></label>
+            <input class="form-control" name="medicacao" type="text" value="{{ t.medicacao }}" required >
+          </div>
+        </div>
+      </div>
+
+      <h5 class="mt-3">Equipe interdisciplinar</h5>
+
+
+      <div class="row">
+
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="form-group">
+            <label>FISIO <i class="text-danger">*</i></label>
+            <div>
+              <select data-provide="selectpicker" name="fisio" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
+
+                <option class="visivel text-dark" 
+                {% if t.e_i_fisio %} selected="selected" {% endif %} >SIM</option>                        
+                <option class="visivel text-dark"
+                {% if not t.e_i_fisio %} selected="selected" {% endif %} >NÂO</option>  
+
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="form-group">
+            <label>HIDRO <i class="text-danger">*</i></label>
+            <div>
+              <select data-provide="selectpicker" name="hidro" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
+
+                <option class="visivel text-dark" 
+                {% if t.e_i_hidro %} selected="selected" {% endif %} >SIM</option>                        
+                <option class="visivel text-dark"
+                {% if not t.e_i_hidro %} selected="selected" {% endif %} >NÂO</option>  
+
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="form-group">
+            <label>FONO <i class="text-danger">*</i></label>
+            <div>
+              <select data-provide="selectpicker" name="fono" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
+
+                <option class="visivel text-dark" 
+                {% if t.e_i_fono %} selected="selected" {% endif %} >SIM</option>                        
+                <option class="visivel text-dark"
+                {% if not t.e_i_fono %} selected="selected" {% endif %} >NÂO</option>  
+                                  
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="form-group">
+            <label>TO <i class="text-danger">*</i></label>
+            <div>
+              <select data-provide="selectpicker" name="to" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
+
+                <option class="visivel text-dark" 
+                {% if t.e_i_to %} selected="selected" {% endif %} >SIM</option>                        
+                <option class="visivel text-dark"
+                {% if not t.e_i_to %} selected="selected" {% endif %} >NÂO</option>  
+                              
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="form-group">
+            <label>PSI <i class="text-danger">*</i></label>
+            <div>
+              <select data-provide="selectpicker" name="psi" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
+
+                <option class="visivel text-dark" 
+                {% if t.e_i_psi %} selected="selected" {% endif %} >SIM</option>                        
+                <option class="visivel text-dark"
+                {% if not t.e_i_psi %} selected="selected" {% endif %} >NÂO</option>  
+                                  
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="form-group">
+            <label>ONDONTO <i class="text-danger">*</i></label>
+            <div>
+              <select data-provide="selectpicker" name="ondonto" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
+
+               <option class="visivel text-dark" 
+                {% if t.e_i_ondonto %} selected="selected" {% endif %} >SIM</option>                        
+                <option class="visivel text-dark"
+                {% if not t.e_i_ondonto %} selected="selected" {% endif %} >NÂO</option>  
+                                   
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="form-group">
+            <label>MÉDICO <i class="text-danger">*</i></label>
+            <div>
+              <select data-provide="selectpicker" name="medico" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
+
+                <option class="visivel text-dark" 
+                {% if t.e_i_medico %} selected="selected" {% endif %} >SIM</option>                        
+                <option class="visivel text-dark"
+                {% if not t.e_i_medico %} selected="selected" {% endif %} >NÂO</option>  
+                                 
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="form-group">
+            <label>PSICOPEDAGOGA <i class="text-danger">*</i></label>
+            <div>
+              <select data-provide="selectpicker" name="psicopedagoga" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
+
+                <option class="visivel text-dark" 
+                {% if t.e_i_psicopedagoga %} selected="selected" {% endif %} >SIM</option>                        
+                <option class="visivel text-dark"
+                {% if not t.e_i_psicopedagoga %} selected="selected" {% endif %} >NÂO</option>  
+                                  
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="form-group">
+            <label>PEDAGOGIA <i class="text-danger">*</i></label>
+            <div>
+              <select data-provide="selectpicker" name="pedagogia" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
+
+                <option class="visivel text-dark" 
+                {% if t.e_i_pedagogia %} selected="selected" {% endif %} >SIM</option>                        
+                <option class="visivel text-dark"
+                {% if not t.e_i_pedagogia %} selected="selected" {% endif %} >NÂO</option>  
+                                        
+              </select>
+            </div>
+          </div>
+        </div>
+
+      </div>
       <!--  .......................................................................................................  -->
 
 

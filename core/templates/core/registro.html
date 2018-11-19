@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="TheAdmin - Responsive Bootstrap 4 Admin, Dashboard &amp; WebApp Template">
+  <meta name="keywords" content="dashboard, index, main">
+
+  <title>SYS APAE</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,300i|Dosis:300,500" rel="stylesheet">
+
+  <!-- Styles -->
+  {% load static %}
+  <link href="{% static 'assets/css/core.min.css' %}" media="screen" rel="stylesheet">
+  <link href="{% static 'assets/css/app.min.css' %}" media="screen" rel="stylesheet">
+  <link href="{% static 'assets/css/style.min.css' %}" media="screen" rel="stylesheet">
+  <link href="{% static 'assets/css/print.css' %}" media="print" rel="stylesheet">
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" href="{% static 'assets/img/apple-touch-icon.png' %}">
+  <link rel="icon" href="{% static 'assets/img/logo-icon-light.png' %}">
+
+  <!--  Open Graph Tags -->
+  <meta property="og:title" content="The Admin Template of 2018!">
+  <meta property="og:description" content="TheAdmin is a responsive, professional, and multipurpose admin template powered with Bootstrap 4.">
+  <meta property="og:image" content="http://thetheme.io/theadmin/assets/img/og-img.jpg">
+  <meta property="og:url" content="http://thetheme.io/theadmin/">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body class="min-h-fullscreen bg-img center-vh p-20" style="background-image: url({% static 'assets/img/bg.png' %}); background-size:100% 100%;" data-overlay="7">
+
+  <div class="card card-round card-shadowed col-lg-12 col-md-12 col-sm-12" >
+    <br><br><br>
+    <h5 class="text-uppercase text-center"><b>Registro de Acesso</b></h5>
+    <br>
+    <table  class="table table-striped table-bordered table-responsive bs-select print border-dark text-dark" cellspacing="0">
+      <thead>
+       <tr style="background-color: #333; color: #fff;">
+
+        <th class="border-dark"><b>Usuário</b></th>
+        <th class="border-dark "><b>Data de Acesso</b></th>
+        
+      </tr>
+    </thead>
+    <tfoot class="no-print">
+      <tr style="background-color: #333; color: #fff;">
+        
+        <th class="border-dark "><b>Usuário</b></th>
+        <th class="border-dark "><b>Data de Acesso</b></th>
+        
+      </tr>
+    </tfoot>
+    <tbody>
+
+      {% for acesso in acessos%}
+
+      <tr>
+        <th class="border-dark text-dark">{{acesso.usuario}}</th>
+        <th class="border-dark text-dark">{{acesso.data_acesso}}</th>
+
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+  <br><br><br>
+  <h5 class="text-uppercase text-center"><b>Registro de Ação</b></h5>
+  <br>
+ <table  class="table table-striped table-bordered table-responsive bs-select print border-dark text-dark" cellspacing="0">
+      <thead>
+       <tr style="background-color: #333; color: #fff;">
+
+        <th class="border-dark "><b>Data da Ação</b></th>
+        <th class="border-dark "><b>Usuário</b></th>
+        <th class="border-dark "><b>Tipo da Ação</b></th>
+        <th class="border-dark "><b>Dado Alterado</b></th>
+        <th class="border-dark "><b>ID do Dado</b></th>
+        
+      </tr>
+    </thead>
+    <tfoot class="no-print">
+      <tr style="background-color: #333; color: #fff;">
+        
+         <th class="border-dark"><b>Data da Ação</b></th>
+        <th class="border-dark"><b>Usuário</b></th>
+        <th class="border-dark"><b>Tipo da Ação</b></th>
+        <th class="border-dark"><b>Dado Alterado</b></th>
+        <th class="border-dark "><b>ID do Dado</b></th>
+        
+      </tr>
+    </tfoot>
+    <tbody>
+
+      {% for acao in acoes%}
+
+      <tr>
+        <th class="border-dark text-dark">{{acao.data_acao}}</th>
+        <th class="border-dark text-dark">{{acao.usuario}}</th>
+        <th class="border-dark text-dark">{{acao.tipo}}</th>
+        <th class="border-dark text-dark">{{acao.dado}}</th>
+        <th class="border-dark text-dark">{{acao.id_dado}}</th>
+
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+
+
+  <footer class="card-footer text-right no-print">
+    <a onclick="window.history.back();" class="btn btn-secondary" type="reset">Voltar</a>
+   <!--- <button class="btn btn-w-md btn-round btn-info float-right mr-3 ml-3" onclick="window.print();">Imprimir</button> -->
+  </footer>
+
+
+</div>
+
+
+
+
+<!-- Scripts -->
+<script src="{% static 'assets/js/core.min.js' %}"></script>
+<script src="{% static 'assets/js/app.min.js' %}"></script>
+<script src="{% static 'assets/js/script.min.js' %}"></script>
+
+</body>
+</html>

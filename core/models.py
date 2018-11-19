@@ -19,7 +19,6 @@ class CID(models.Model):
     def __str__(self):
         return "Código: " + self.codigo + "   Descrição: " + self.descricao
 
-
 class Usuario(models.Model):
     imagem = models.ImageField(u'Imagem', blank=True, upload_to='usuarios/')
     nome = models.CharField(max_length=200, blank=True)
@@ -36,7 +35,6 @@ class Usuario(models.Model):
     
     def __str__(self):
         return "Nome: " + self.nome + "\n CID: " + self.cid.codigo
-
 
 class Funcionario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
