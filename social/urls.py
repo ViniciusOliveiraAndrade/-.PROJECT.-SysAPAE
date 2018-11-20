@@ -21,6 +21,7 @@ urlpatterns = [
     #Usuario
     path('Listar_Usuarios/', views.usuarios_listar, name='usuarios_listar'),
     path('InativarUsuario/<int:user_id>', views.inativar_usuario, name='inativar_usuario'),
+    path('AtivarUsuario/<int:user_id>', views.ativar_usuario, name='ativar_usuario'),
     
     #visitas
     path('Agendar_Visita/<int:usuario_id>', views.visita_agendar, name='visita_agendar'),

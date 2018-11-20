@@ -417,6 +417,14 @@ def inativar_usuario(request,user_id):
     gerar_acao(request.user.funcionario,"Inativar","Usuario",u.id)
     return redirect("social:usuarios_listar")
 
+@login_required
+def ativar_usuario(request,user_id):
+    u = get_object_or_404(Usuario,pk=user_id)
+    u.situacao = "Ativo"
+    u.save()
+    gerar_acao(request.user.funcionario,"Ativar","Usuario",u.id)
+    return redirect("social:triagem_listar")
+
 #--------------------------------------------------------------------------------------------
 #views da visita
 

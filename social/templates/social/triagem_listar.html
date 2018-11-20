@@ -101,7 +101,15 @@
 
     <td class="border-dark text-dark">{{t.assinatura_proficinal.nome}}</td>
     <td class="border-dark text-dark">{{t.data_da_triagem|date:"d M Y" }}</td>
-    <td class="no-print border-dark text-dark"> <a style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true" href="{%url 'social:triagem_editar' t.id %}"></a></td>
+    <td class="no-print border-dark text-dark"> 
+
+      <a data-provide="tooltip" data-tooltip-color="primary" title="Editar Triagem" style="font-size: 25px;" class="fa fa-pencil d-inline" aria-hidden="true" href="{%url 'social:triagem_editar' t.id %}"></a>
+
+      {% ifequal t.usuario.situacao "Inativo"  %} 
+      <a data-provide="tooltip" data-tooltip-color="primary" title="Ativar Usuário" style="font-size: 25px;" class="fa fa-check-square" aria-hidden="true" href="{% url 'social:ativar_usuario' t.usuario.id %}"></a> 
+      {% endifequal %}
+      
+    </td>
 
   </tr>
   {% endfor %}
