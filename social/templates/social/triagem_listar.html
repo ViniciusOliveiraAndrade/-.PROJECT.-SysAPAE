@@ -106,9 +106,9 @@
       <a data-provide="tooltip" data-tooltip-color="primary" title="Editar Triagem" style="font-size: 25px;" class="fa fa-pencil d-inline" aria-hidden="true" href="{%url 'social:triagem_editar' t.id %}"></a>
 
       {% ifequal t.usuario.situacao "Inativo"  %} 
-      <a data-provide="tooltip" data-tooltip-color="primary" title="Ativar Usuário" style="font-size: 25px;" class="fa fa-check-square" aria-hidden="true" href="{% url 'social:ativar_usuario' t.usuario.id %}"></a> 
+      <a onclick="ativar(this.id)" id="{{t.usuario.id}};{{t.usuario.nome}}" data-provide="tooltip" data-tooltip-color="primary" title="Ativar Usuário" style="font-size: 25px;" class="fa fa-check-square d-inline" aria-hidden="true" href="#"></a> 
       {% endifequal %}
-      
+
     </td>
 
   </tr>
@@ -121,6 +121,19 @@
 
 {% block js %}
 <script type="text/javascript">
+
+function ativar (nomeUsuario) {
+  var str = nomeUsuario;
+  var res = str.split(";");
+  id = res[0];
+  nome = res[1];
+  var r = confirm("Isto ATIVARÁ o Usuário: "+nome+"!\n Deseja continuar com a açao?");
+  if (r) {
+    ina = "{% url 'social:ativar_usuario' %}/";
+    url = ina+id;    
+    var myWindow = window.open(url, "_self");
+  }
+}
 
 document.getElementById("u").className = document.getElementById("u").className + " active open";
 document.getElementById("ut").className = document.getElementById("ut").className + " active";

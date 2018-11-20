@@ -82,7 +82,10 @@
 
       <a data-provide="tooltip" data-tooltip-color="primary" title="Agendar Visita" style="font-size: 25px;" class="fa fa-book d-inline" aria-hidden="true" href="{% url 'social:visita_agendar' t.usuario.id %}"></a>  
 
-      <a onclick="inativar(this.id);" style="font-size: 25px;" data-provide="tooltip" data-tooltip-color="danger" title="Inativar" class="deletbutton fa fa-window-close d-inline text-danger" aria-hidden="true" href="{%url 'social:inativar_usuario' t.usuario.id %}"></a>  
+
+      <a onclick="inativar(this.id)" id="{{t.usuario.id}};{{t.usuario.nome}}" data-provide="tooltip" data-tooltip-color="danger" title="Inativar Usuário" style="font-size: 25px;" class="fa fa-check-square d-inline text-danger" aria-hidden="true" href="#"></a> 
+
+
 
     </td>
 
@@ -100,13 +103,21 @@
 <script type="text/javascript">
 
 function inativar (nomeUsuario) {
-
-  nome = nomeUsuario;
-  var r = confirm("Isto INATIVARÁ o Usuário: "+nome+"!\n Deseja continuar com a açao?");
-  if (r == true) {
-    document.getElementById("inativar").submit();
+  var str = nomeUsuario;
+  var res = str.split(";");
+  id = res[0];
+  nome = res[1];
+  var r = confirm("Isto INTIVARÁ o Usuário: "+nome+"!\n Deseja continuar com a açao?");
+  if (r) {
+    ina = "{% url 'social:inativar_usuario' %}/";
+    url = ina+id;    
+    var myWindow = window.open(url, "_self");
   }
 }
+
+
+
+
 
 document.getElementById("u").className = document.getElementById("u").className + " active open";
 document.getElementById("ul").className = document.getElementById("ul").className + " active";

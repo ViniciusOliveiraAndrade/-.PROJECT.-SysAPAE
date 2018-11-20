@@ -20,7 +20,9 @@ urlpatterns = [
 
     #Usuario
     path('Listar_Usuarios/', views.usuarios_listar, name='usuarios_listar'),
+    path('InativarUsuario', views.inativar_usuario, name='inativar_usuario'),
     path('InativarUsuario/<int:user_id>', views.inativar_usuario, name='inativar_usuario'),
+    path('AtivarUsuario', views.ativar_usuario, name='ativar_usuario'),
     path('AtivarUsuario/<int:user_id>', views.ativar_usuario, name='ativar_usuario'),
     
     #visitas
