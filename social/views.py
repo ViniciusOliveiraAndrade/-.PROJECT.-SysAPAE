@@ -28,6 +28,13 @@ def index(request):
 @login_required
 def perfil(request):
     if request.method == "POST":
+        if request.POST['verificaimagem'] != "Sem Imagem" and request.POST['verificaimagem'] != request.user.funcionario.imagem_url:
+            try:
+                request.user.funcionario.imagem.delete(save=True)
+                request.user.funcionario.imagem = request.FILES['imagem']
+                request.user.funcionario.save()   
+            except Exception as e:
+                pass
         pnome, unome = getNomeFuncionario(request.POST['nome'])
         request.user.first_name = pnome
         request.user.last_name = unome
@@ -241,6 +248,7 @@ def editar_triagem(request):
 
     if request.POST['verificaimagem'] != "Sem Imagem" and request.POST['verificaimagem'] != triagem.usuario.imagem_url:
         try:
+            triagem.usuario.imagem.delete(save=True)
             triagem.usuario.imagem = request.FILES['imagem']   
         except Exception as e:
             pass
