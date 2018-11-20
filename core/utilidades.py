@@ -29,9 +29,11 @@ def criar_dados():
     
     cargo2 = Cargo.objects.create(nome = "Educador(a)")
     
-    cargo3 = Cargo.objects.create(nome = "Coordenador(a) social")
+    cargo3 = Cargo.objects.create(nome = "Coordenador(a) saúde")
+    
+    cargo4 = Cargo.objects.create(nome = "Coordenador(a) assistência social")
 
-    cargo4 = Cargo.objects.create(nome = "Assistente social")
+    cargo5 = Cargo.objects.create(nome = "Assistente social")
 
     #Criar usuarios e os funcionarios
     user1 = User.objects.create_user('ednaele', 'ednaele@apae.com', '123456Mm')

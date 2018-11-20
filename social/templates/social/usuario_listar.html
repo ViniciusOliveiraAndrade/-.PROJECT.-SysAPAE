@@ -62,7 +62,7 @@
     <td class="no-print border-dark text-dark">
       <div class="row no-gutters" data-provide="photoswipe">
         <figure class="img-hov-zoomin">
-          <img src="{% ifequal t.usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{t.usuario.imagem_url}} {% endifequal %}" alt="..." class="img-thumbnail">
+          <img width="220px" height="260px" src="{% ifequal t.usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{t.usuario.imagem_url}} {% endifequal %}" alt="..." class="img-thumbnail">
         </figure>
       </div>
     </td>
