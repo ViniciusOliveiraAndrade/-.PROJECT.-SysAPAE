@@ -138,6 +138,7 @@ def cadastrar_triagem(request):
     triagem.benediciario = request.POST['beneficiario']
 
     #Endereco
+    triagem.cep = request.POST['cep']
     triagem.rua = request.POST['rua']
     triagem.numero_da_rua = request.POST['numero']
     triagem.bairro = request.POST['bairro']
@@ -238,6 +239,15 @@ def cadastrar_triagem(request):
 def editar_triagem(request):
     triagem = get_object_or_404(Triagem,pk=request.POST['id'])
 
+    if request.POST['verificaimagem'] != "Sem Imagem" and request.POST['verificaimagem'] != triagem.usuario.imagem_url:
+        try:
+            triagem.usuario.imagem = request.FILES['imagem']   
+        except Exception as e:
+            pass
+
+
+
+
     data = request.POST['datanascimento']
     data = data.split('/')
     datanascimento = datetime.datetime(int(data[2]),int(data[1]),int(data[0]))
@@ -289,6 +299,7 @@ def editar_triagem(request):
     triagem.benediciario = request.POST['beneficiario']
 
     #Endereco
+    triagem.cep = request.POST['cep']
     triagem.rua = request.POST['rua']
     triagem.numero_da_rua = request.POST['numero']
     triagem.bairro = request.POST['bairro']

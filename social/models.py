@@ -29,6 +29,7 @@ class Triagem(models.Model):
     benediciario = models.CharField(max_length=200, blank=True)
 
     #Dados sobre o endereço
+    cep = models.CharField(max_length=10, blank=True)
     rua = models.CharField(max_length=300, blank=True)
     numero_da_rua = models.CharField(max_length=10, blank=True)
     bairro = models.CharField(max_length=200, blank=True)
