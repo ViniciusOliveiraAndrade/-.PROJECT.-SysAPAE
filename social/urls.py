@@ -33,4 +33,6 @@ urlpatterns = [
     #Eventos
     path('Cadastrar_Eventos', views.evento_cadastrar, name='evento_cadastrar'),
 
+    #CID
+    path('cadastrarCID', views.cadastrarCID, name='cadastrarCID'),
 ]

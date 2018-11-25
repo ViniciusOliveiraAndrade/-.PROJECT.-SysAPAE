@@ -1,6 +1,6 @@
 from django import forms
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import loader
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
@@ -48,14 +48,14 @@ def perfil(request):
 #Views da Triagem
 @login_required
 def triagem_realizar(request):
-    cids= CID.objects.all()
+    cids= CID.objects.all().order_by('-codigo')
     args = {'cids':cids}
     return render(request,'social/triagem_realizar.html', args)
 
 @login_required
 def triagem_editar(request,triagem_id):
     t = get_object_or_404(Triagem,pk=triagem_id)
-    cids= CID.objects.all()
+    cids= CID.objects.all().order_by('-codigo')
     args = {'cids':cids, 't':t}
     return render(request,'social/triagem_editar.html', args)
 
@@ -543,5 +543,28 @@ def evento_cadastrar(request):
         gerar_acao(request.user.funcionario,"Cadastro","Evento",e.id)
         return HttpResponseRedirect(reverse('social:index' ))
     return render(request,'social/evento_cadastrar.html',{})
+
+#----------------------------------------------------------------------------------------------------
+# 
+# AJAX
+# 
+# 
+#CID
+
+@login_required
+def cadastrarCID(request):
+    codigo = request.GET.get('codigo', None)
+   
+    data = {'cadastrado': False, 'codigo':codigo}
+    try:
+        
+        CID.objects.create(codigo=codigo,descricao="")
+        data['cadastrado']=True
+        return JsonResponse(data)
+
+    except Exception as e:
+        return JsonResponse(data)
+    
+
 
 

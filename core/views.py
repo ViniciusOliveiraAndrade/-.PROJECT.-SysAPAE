@@ -16,15 +16,12 @@ def index(request):
 
     return render(request,'core/index.html', dados)
 
-def registrar(request):
+def registrarFuncionario(request):
     if request.method == "POST":
-    	form = UserCreationForm(request.POST)
-    	if form.is_valid:
-    		form.save()
-    		return redirect('core:index')
+    	pass
     else:
-    	form = UserCreationForm()
-    	return render(request,'core/registrar.html',{"form":form})
+    	
+    	return render(request,'core/registrar.html',{})
 
 def cadastrar_funcionario(request):
     if request.method == "POST":

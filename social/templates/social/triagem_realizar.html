@@ -54,13 +54,16 @@
                     <div class="form-group">
                         <label>CID <i class="text-danger">*</i></label>
                         <div>
-                            <select data-provide="selectpicker" name="cid" style="color: black; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required>
+                            <select name="cid" style="height: 35px; color: black; font-size: 15px; border-color: #444; background-color: #fff;" class="visivel border border-dark text-dark rounded col-8" id="CIDS" required>
                                 {% for cid in cids %}
-                                <option class="visivel text-dark">{{cid.codigo}}</option>                        
+                                <option class="visivel text-dark" style="color: #000;">{{cid.codigo}}</option>                        
                                 {% endfor %}
                             </select>
+                             <a onclick="addCID()" data-provide="tooltip" data-tooltip-color="warning" title="Adicionar CID" style="font-size: 25px;" class="fa fa-plus-circle d-inline text-warning" aria-hidden="true" href="#"></a>
                         </div>
+
                     </div>
+
                 </div>  
             </div>
 
@@ -503,7 +506,32 @@
 <script type="text/javascript">
 
 
+function addCID(){
+    var txt;
+    var codigo = prompt("Digite o código da CID", "F");
+    if (codigo == null || codigo == "") {
+    } else {
 
+        $.ajax({
+            url: '{% url "social:cadastrarCID" %}',
+            data: {'codigo': codigo},
+            dataType: 'json',
+            success: function (data) {
+                if (data.cadastrado) {
+                    var x = document.getElementById("CIDS");
+                    var option = document.createElement("option");
+                    option.text = data.codigo;
+                    x.add(option);
+                    option.selected = true;
+
+                }else {
+                    alert("Não foi possivel cadastrar a CID");
+                }
+            }
+        });
+
+    }
+}
 
 
 data = new Date();
