@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="TheAdmin - Responsive Bootstrap 4 Admin, Dashboard &amp; WebApp Template">
+  <meta name="keywords" content="dashboard, index, main">
+
+  <title>SYS APAE</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,300i|Dosis:300,500" rel="stylesheet">
+
+  <!-- Styles -->
+  {% load static %}
+  <link href="{% static 'assets/css/core.min.css' %}" media="screen" rel="stylesheet">
+  <link href="{% static 'assets/css/app.min.css' %}" media="screen" rel="stylesheet">
+  <link href="{% static 'assets/css/style.min.css' %}" media="screen" rel="stylesheet">
+  <link href="{% static 'assets/css/print.css' %}" media="print" rel="stylesheet">
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" href="{% static 'assets/img/apple-touch-icon.png' %}">
+  <link rel="icon" href="{% static 'assets/img/logo-icon-light.png' %}">
+
+  <!--  Open Graph Tags -->
+  <meta property="og:title" content="The Admin Template of 2018!">
+  <meta property="og:description" content="TheAdmin is a responsive, professional, and multipurpose admin template powered with Bootstrap 4.">
+  <meta property="og:image" content="http://thetheme.io/theadmin/assets/img/og-img.jpg">
+  <meta property="og:url" content="http://thetheme.io/theadmin/">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body class="min-h-fullscreen bg-img center-vh p-20" style="background-image: url({% static 'assets/img/bg.png' %}); background-size:100% 100%;" data-overlay="7">
+
+  <div {% block tamanho %}{% endblock %} style="max-width: 100%; color: black;">
+
+    {% block main %}{% endblock %}
+
+
+
+  </div>
+
+
+  {% block js %}{% endblock %}
+
+  <!-- Scripts -->
+  <script src="{% static 'assets/js/core.min.js' %}"></script>
+  <script src="{% static 'assets/js/app.min.js' %}"></script>
+  <script src="{% static 'assets/js/script.min.js' %}"></script>
+
+</body>
+</html>
