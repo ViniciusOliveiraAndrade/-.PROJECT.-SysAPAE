@@ -32,6 +32,8 @@ urlpatterns = [
 
     #Eventos
     path('Cadastrar_Eventos', views.evento_cadastrar, name='evento_cadastrar'),
+    path('Editar_Eventos/<int:evento_id>', views.evento_editar, name='evento_editar'),
+    path('Listar_Eventos', views.evento_listar, name='evento_listar'),
 
     #CID
     path('cadastrarCID', views.cadastrarCID, name='cadastrarCID'),

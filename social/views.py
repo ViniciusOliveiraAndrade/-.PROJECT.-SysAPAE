@@ -5,7 +5,7 @@ from django.template import loader
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 # from django.views.generic import CreateView, FormView
-
+from django.utils.dateparse import parse_date
 from django.views import generic
 
 from social.models import *
@@ -528,22 +528,37 @@ def visita_editar(request,visita_id):
 #Eventos
 @login_required
 def evento_cadastrar(request):
-    if "nome" in request.POST:
-        data = request.POST['datainicio']
-        data = data.split('/')
-        dataa = data[2]+"-"+data[1]+"-"+data[0]
-
-        data = request.POST['datafim']
-        data = data.split('/')
-        datab = data[2]+"-"+data[1]+"-"+data[0]
-
-    
-        e = Evento(nome = request.POST['nome'], data_inicio = dataa, data_fim = datab)
-        e.save()
+    if request.method == "POST":
+        dataa = parse_date(request.POST['datainicio'])
+        datab = parse_date(request.POST['datafim'])
+        e = Evento.objects.create(nome = request.POST['nome'], data_inicio = dataa, data_fim = datab)
         gerar_acao(request.user.funcionario,"Cadastro","Evento",e.id)
-        return HttpResponseRedirect(reverse('social:index' ))
+        return HttpResponseRedirect(reverse('social:evento_editar', args=(e.id,)))
     return render(request,'social/evento_cadastrar.html',{})
 
+@login_required
+def evento_editar(request,evento_id):
+    evento = Evento.objects.get(pk=evento_id)
+    if request.method == "POST":
+
+        dataa = parse_date(request.POST['datainicio'])
+
+        datab = parse_date(request.POST['datafim'])
+        evento.nome = request.POST['nome']
+        evento.data_inicio = dataa
+        evento.data_fim = datab
+        evento.save()
+        gerar_acao(request.user.funcionario,"Edição","Evento",evento.id)
+        return HttpResponseRedirect(reverse('social:evento_editar', args=(evento.id,)))
+    
+    
+
+    return render(request,'social/evento_editar.html',{'evento':evento})
+
+@login_required
+def evento_listar(request):
+    eventos = Evento.objects.all()
+    return render(request,'social/evento_listar.html', {'eventos' : eventos})
 #----------------------------------------------------------------------------------------------------
 # 
 # AJAX

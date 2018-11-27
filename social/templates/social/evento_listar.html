@@ -1,0 +1,87 @@
+{% extends 'social/layout/layout_listar.html' %}
+
+{% block titulo %} Eventos {% endblock %}
+
+{% block buscar %}
+<!-- <form class="lookup float-left no-icon gap-items">
+<input type="text" placeholder="Buscar">
+<button class="btn btn-primary btn-round w-64px fs-22">
+<i class="ti-search"></i>
+</button>
+</form>
+-->
+
+{% endblock %}
+
+{% block adcionar %}
+<a class="btn btn-label btn-primary btn-round float-right" href="{% url 'social:evento_cadastrar' %}">
+  <label>
+    <i class="ti-plus"></i>
+  </label> Novo Evento
+</a>
+{% endblock %}
+
+
+
+{% block tabela %}
+{% load static %}
+<thead>
+  <tr>
+    <th class="border-dark text-dark">ID</th>
+    <th class="border-dark text-dark">Evento</th>
+    <th class="border-dark text-dark">Data de Início</th>
+    <th class="border-dark text-dark">Data de Término</th>
+    <th class="no-print border-dark text-dark">Editar</th>
+  </tr>
+</thead>
+<tfoot class="no-print">
+  <tr>
+    <th class="border-dark text-dark">ID</th>
+    <th class="border-dark text-dark">Evento</th>
+    <th class="border-dark text-dark">Data de Início</th>
+    <th class="border-dark text-dark">Data de Término</th>
+    <th class="no-print border-dark text-dark">Editar</th>
+  </tr>
+</tfoot>
+<tbody>
+
+  {% for evento in eventos%}
+
+  <tr>
+    <th class="border-dark text-dark">{{evento.id}}</th>
+    <td class="border-dark text-dark">{{evento.nome}}</td>
+    <td class="border-dark text-dark">{{evento.data_inicio|date:"d M Y" }}</td>
+    <td class="border-dark text-dark">{{evento.data_fim|date:"d M Y" }}</td>
+    
+    <td class="no-print border-dark text-dark"> 
+      <a data-provide="tooltip" data-tooltip-color="primary" title="Editar Triagem" style="font-size: 25px;" class="fa fa-pencil d-inline" aria-hidden="true" href="{%url 'social:evento_editar' evento.id %}"></a>
+    </td>
+
+  </tr>
+  {% endfor %}
+
+</tbody>
+
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+
+function ativar (nomeUsuario) {
+  var str = nomeUsuario;
+  var res = str.split(";");
+  id = res[0];
+  nome = res[1];
+  var r = confirm("Isto ATIVARÁ o Usuário: "+nome+"!\n Deseja continuar com a açao?");
+  if (r) {
+    ina = "{% url 'social:ativar_usuario' %}/";
+    url = ina+id;    
+    var myWindow = window.open(url, "_self");
+  }
+}
+
+document.getElementById("e").className = document.getElementById("e").className + " active open";
+document.getElementById("el").className = document.getElementById("el").className + " active";
+</script>
+{% endblock %}
