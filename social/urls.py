@@ -37,6 +37,7 @@ urlpatterns = [
     path('Subir_Lista/<int:evento_id>/<int:lista_id>', views.subir, name='subir'),
     path('Descer_Lista/<int:evento_id>/<int:lista_id>', views.descer, name='descer'),
     path('Remover_Lista/<int:evento_id>/<int:lista_id>', views.removerLista, name='removerLista'),
+    path('Adicionar_Usuario/<int:evento_id>', views.addUsuario, name='addUsuario'),
 
     #CID
     path('cadastrarCID', views.cadastrarCID, name='cadastrarCID'),

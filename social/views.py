@@ -605,6 +605,12 @@ def removerLista(request,evento_id, lista_id):
     return HttpResponseRedirect(reverse('social:evento_editar', args=(evento.id,)))
 
 @login_required
+def addUsuario(request,evento_id):
+    evento = Evento.objects.get(pk=evento_id)
+    usuarios = Usuario.objects.all()
+    return render(request,'social/evento_addUsuario.html',{'evento':evento, 'usuarios':usuarios})
+
+@login_required
 def addLista(request,evento_id, usuario_id):
     evento = Evento.objects.get(pk=evento_id)
     usuario = Usuario.objects.get(pk=usuario_id)

@@ -163,22 +163,19 @@
 <script type="text/javascript">
 
 
-document.getElementById('di').value = "{{evento.data_inicio.year}}-{% if evento.data_inicio.month < 10 %}0{{evento.data_inicio.month}}{% else %}{{evento.data_inicio.month}}{% endif %}-{% if evento.data_inicio.day < 10 %}0{{evento.data_inicio.day}}{% else %}{{evento.data_inicio.day}}{% endif %}";
+document.getElementById('di').value = "{{evento.data_inicio.year}}-{% if evento.data_inicio.month < 10 %}0{{evento.data_inicio.month}}{% else %}{{evento.data_inicio.month}}{% endif %}-{% if evento.data_inicio.day < 10 %}0{{evento.data_inicio.day}}{% else %}{{evento.data_inicio.day}}{% endif %}"
 
-document.getElementById('df').value = "{{evento.data_fim.year}}-{% if evento.data_fim.month < 10 %}0{{evento.data_fim.month}}{% else %}{{evento.data_fim.month}}{% endif %}-{% if evento.data_fim.day < 10 %}0{{evento.data_fim.day}}{% else %}{{evento.data_fim.day}}{% endif %}";
+document.getElementById('df').value = "{{evento.data_fim.year}}-{% if evento.data_fim.month < 10 %}0{{evento.data_fim.month}}{% else %}{{evento.data_fim.month}}{% endif %}-{% if evento.data_fim.day < 10 %}0{{evento.data_fim.day}}{% else %}{{evento.data_fim.day}}{% endif %}"
 
-document.getElementById('di2').value = "{{evento.data_inicio.year}}-{% if evento.data_inicio.month < 10 %}0{{evento.data_inicio.month}}{% else %}{{evento.data_inicio.month}}{% endif %}-{% if evento.data_inicio.day < 10 %}0{{evento.data_inicio.day}}{% else %}{{evento.data_inicio.day}}{% endif %}";
+document.getElementById('di2').value = "{{evento.data_inicio.year}}-{% if evento.data_inicio.month < 10 %}0{{evento.data_inicio.month}}{% else %}{{evento.data_inicio.month}}{% endif %}-{% if evento.data_inicio.day < 10 %}0{{evento.data_inicio.day}}{% else %}{{evento.data_inicio.day}}{% endif %}"
 
-document.getElementById('df2').value = "{{evento.data_fim.year}}-{% if evento.data_fim.month < 10 %}0{{evento.data_fim.month}}{% else %}{{evento.data_fim.month}}{% endif %}-{% if evento.data_fim.day < 10 %}0{{evento.data_fim.day}}{% else %}{{evento.data_fim.day}}{% endif %}";
+document.getElementById('df2').value = "{{evento.data_fim.year}}-{% if evento.data_fim.month < 10 %}0{{evento.data_fim.month}}{% else %}{{evento.data_fim.month}}{% endif %}-{% if evento.data_fim.day < 10 %}0{{evento.data_fim.day}}{% else %}{{evento.data_fim.day}}{% endif %}"
 
 document.getElementById("e").className = document.getElementById("e").className + " active open";
 document.getElementById("el").className = document.getElementById("el").className + " active";
 
 function addUsuario(){
-    var url = "{% url 'social:addUsuario' evento.id %}";
-    var w = screen.availWidth;
-    var h = screen.availHeight;
-    var myWindow = window.open(url, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width="+w+",height="+h+"");
+    var 
 
 }
 
