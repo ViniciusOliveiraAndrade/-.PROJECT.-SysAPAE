@@ -34,6 +34,9 @@ urlpatterns = [
     path('Cadastrar_Eventos', views.evento_cadastrar, name='evento_cadastrar'),
     path('Editar_Eventos/<int:evento_id>', views.evento_editar, name='evento_editar'),
     path('Listar_Eventos', views.evento_listar, name='evento_listar'),
+    path('Subir_Lista/<int:evento_id>/<int:lista_id>', views.subir, name='subir'),
+    path('Descer_Lista/<int:evento_id>/<int:lista_id>', views.descer, name='descer'),
+    path('Remover_Lista/<int:evento_id>/<int:lista_id>', views.removerLista, name='removerLista'),
 
     #CID
     path('cadastrarCID', views.cadastrarCID, name='cadastrarCID'),

@@ -550,15 +550,73 @@ def evento_editar(request,evento_id):
         evento.save()
         gerar_acao(request.user.funcionario,"Edição","Evento",evento.id)
         return HttpResponseRedirect(reverse('social:evento_editar', args=(evento.id,)))
-    
-    
-
     return render(request,'social/evento_editar.html',{'evento':evento})
 
 @login_required
 def evento_listar(request):
     eventos = Evento.objects.all()
     return render(request,'social/evento_listar.html', {'eventos' : eventos})
+
+@login_required
+def subir(request,evento_id, lista_id):
+    evento = Evento.objects.get(pk=evento_id)
+    lista = Lista.objects.get(pk=lista_id)
+    
+    listaDescer = evento.lista.get(posicao= (lista.posicao - 1))
+    listaDescer.posicao = listaDescer.posicao + 1
+    listaDescer.save()
+    
+    lista.posicao = lista.posicao - 1
+    lista.save()
+    evento.save()
+    gerar_acao(request.user.funcionario,"Edição","Evento",evento.id)
+    return HttpResponseRedirect(reverse('social:evento_editar', args=(evento.id,)))
+
+@login_required
+def descer(request,evento_id, lista_id):
+    evento = Evento.objects.get(pk=evento_id)
+    lista = Lista.objects.get(pk=lista_id)
+    
+    listaSubir = evento.lista.get(posicao= (lista.posicao + 1))
+    listaSubir.posicao = listaSubir.posicao - 1
+    listaSubir.save()
+    
+    lista.posicao = lista.posicao + 1
+    lista.save()
+    evento.save()
+    gerar_acao(request.user.funcionario,"Edição","Evento",evento.id)
+    return HttpResponseRedirect(reverse('social:evento_editar', args=(evento.id,)))
+
+@login_required
+def removerLista(request,evento_id, lista_id):
+    evento = Evento.objects.get(pk=evento_id)
+    lista = Lista.objects.get(pk=lista_id)
+    posicao_deletado = lista.posicao
+    lista.delete()
+
+    for l in evento.lista.all():
+        if l.posicao > posicao_deletado:
+            l.posicao = (l.posicao - 1)
+            l.save()
+
+    
+    evento.save()
+    gerar_acao(request.user.funcionario,"Edição","Evento",evento.id)
+    return HttpResponseRedirect(reverse('social:evento_editar', args=(evento.id,)))
+
+@login_required
+def addLista(request,evento_id, usuario_id):
+    evento = Evento.objects.get(pk=evento_id)
+    usuario = Usuario.objects.get(pk=usuario_id)
+
+    lista = Lista.objects.create(posicao=(evento.lista.all().count() + 1), usuario=usuario)
+    evento.lista.add(lista)
+    lista.save()
+    evento.save()
+
+    gerar_acao(request.user.funcionario,"Edição","Evento",evento.id)
+    return HttpResponseRedirect(reverse('social:evento_editar', args=(evento.id,)))
+
 #----------------------------------------------------------------------------------------------------
 # 
 # AJAX

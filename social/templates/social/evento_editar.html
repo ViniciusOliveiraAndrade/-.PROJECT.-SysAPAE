@@ -78,28 +78,30 @@
               {% for l in evento.lista.all %}
 
               <tr>
-                  <td class="no-print border-dark text-dark"> {% if forloop.first %}
+                  <td class="no-print border-dark text-dark"> 
 
-                    <a data-provide="tooltip" data-tooltip-color="primary" title="Descer Posição" style="font-size: 25px;" class="fa fa-arrow-circle-down d-inline" aria-hidden="true" href="#"></a>
+                    {% if forloop.first %}
+
+                    <a data-provide="tooltip" data-tooltip-color="primary" title="Descer Posição" style="font-size: 25px;" class="fa fa-arrow-circle-down d-inline" aria-hidden="true" href="{% url 'social:descer' evento.id l.id %}"></a>
 
 
                     {% elif forloop.last %}
 
-                    <a data-provide="tooltip" data-tooltip-color="primary" title="Subir Posição" style="font-size: 25px;" class="fa fa-arrow-circle-up d-inline" aria-hidden="true" href="#"></a>
+                    <a data-provide="tooltip" data-tooltip-color="primary" title="Subir Posição" style="font-size: 25px;" class="fa fa-arrow-circle-up d-inline" aria-hidden="true" href="{% url 'social:subir' evento.id l.id %}"></a>
                     
 
                     {% else %}
-                    <a data-provide="tooltip" data-tooltip-color="primary" title="Subir Posição" style="font-size: 25px;" class="fa fa-arrow-circle-up d-inline" aria-hidden="true" href="#"></a>
+                    <a data-provide="tooltip" data-tooltip-color="primary" title="Subir Posição" style="font-size: 25px;" class="fa fa-arrow-circle-up d-inline" aria-hidden="true" href="{% url 'social:subir' evento.id l.id %}"></a>
 
-                    <a data-provide="tooltip" data-tooltip-color="primary" title="Descer Posição" style="font-size: 25px;" class="fa fa-arrow-circle-down d-inline" aria-hidden="true" href="#"></a>
+                    <a data-provide="tooltip" data-tooltip-color="primary" title="Descer Posição" style="font-size: 25px;" class="fa fa-arrow-circle-down d-inline" aria-hidden="true" href="{% url 'social:descer' evento.id l.id %}"></a>
 
                     {% endif %} 
                 </td>
                 <td class="border-dark text-dark">{{l.posicao}}°</td>
-                <td class="border-dark text-dark">{{l.Usuario.nome}}</td>
+                <td class="border-dark text-dark">{{l.usuario.nome}}</td>
                 <td class="no-print border-dark text-dark">
 
-                    <a onclick="" id="" data-provide="tooltip" data-tooltip-color="danger" title="Remover Usuário da Lista" style="font-size: 25px;" class="fa fa-window-close d-inline text-danger" aria-hidden="true" href="#"></a> 
+                    <a onclick="" id="" data-provide="tooltip" data-tooltip-color="danger" title="Remover Usuário da Lista" style="font-size: 25px;" class="fa fa-window-close d-inline text-danger" aria-hidden="true" href="{% url 'social:removerLista' evento.id l.id %}"></a> 
                 </td>
 
             </tr>
