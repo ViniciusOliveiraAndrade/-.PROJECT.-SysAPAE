@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse_lazy, reverse
 
 from django.utils.dateparse import parse_time
@@ -19,7 +19,6 @@ import core.utilidades
 def index(request):
     return render(request, 'pedagogico/index.html', {})
 
-
 @login_required
 def perfil(request):
     if request.method == "POST":
@@ -31,32 +30,28 @@ def perfil(request):
         gerar_acao(request.user.funcionario, "Edição", "Funcionario", request.user.funcionario.id)
     return render(request, 'pedagogico/perfil.html')
 
-
 @login_required
 def criar_turma(request):
     professores = Funcionario.objects.filter(cargo__nome="Educador(a)")
     return render(request, 'pedagogico/criar_turmaCoordenacao.html', {"professores": professores})
-
 
 @login_required
 def cadastrar_aula(request, id_turma):
     # usuarioTurma = UsuarioTurma.objects.all()
     return render(request, 'pedagogico/cadastrar_aula.html', {"turma": id_turma})
 
-
 @login_required
 def frequencia(request, id_aula):
     # usuarios = Usuario.objects.all()
 
     aula = Aula.objects.get(pk=id_aula)
-    turma = aula.turma_set.all()[0]
+    # turma = aula.turma_set.all()[0]
 
     # aulas = Aula.objects.all()
 
     # triagens = Triagem.objects.all()
 
-    return render(request, 'pedagogico/frequencia.html', {"usuarios": turma.ususario.all(), "aula": aula})
-
+    return render(request, 'pedagogico/frequencia.html', {"aula": aula})
 
 @login_required
 def triagem_pedagogica(request, id_usuario):
@@ -64,7 +59,6 @@ def triagem_pedagogica(request, id_usuario):
     turmas = Turma.objects.all()
 
     return render(request, 'pedagogico/triagem_pedagogica.html', {"Triagem": u, "Turmas": turmas})
-
 
 @login_required
 def cadastrar_triagemP(request):
@@ -75,7 +69,6 @@ def cadastrar_triagemP(request):
 
     triagemP = TriagemPedagogica()
 
-
 @login_required
 def listar_triagemSocial(request):
     triagemSocial = Triagem.objects.filter(usuario__situacao="Ativo").exclude(usuario__triagempedagogica__isnull=False)
@@ -85,18 +78,15 @@ def listar_triagemSocial(request):
     return render(request, 'pedagogico/listar_triagemSocial.html',
                   {"triagemSocial": triagemSocial, "triagemPedagogica": pedagogica_t})
 
-
 @login_required
 def listar_turmas(request):
     listaTurmas = Turma.objects.all().order_by('nome')
     return render(request, 'pedagogico/listar_turmasCordenacao.html', {"listaTurmas": listaTurmas})
 
-
 @login_required
 def listar_aulas(request, id_turma):
     aulas = Turma.objects.get(pk=id_turma).aula.all()
     return render(request, 'pedagogico/listar_aulas.html', {"aulas": aulas, 'id_turma': id_turma})
-
 
 @login_required
 def listas_turmasProf(request):
@@ -104,13 +94,11 @@ def listas_turmasProf(request):
 
     return render(request, "pedagogico/listar_turmasProf.html", {"turmas": turmas})
 
-
 @login_required
 def detalhes_aula(request, id_aula):
     id = Aula.objects.get(pk=id_aula)
 
     return render(request, "pedagogico/aula_detalhes.html", {"idAula": id})
-
 
 @login_required
 def lista_Tpedagogica(request):
@@ -119,7 +107,6 @@ def lista_Tpedagogica(request):
 
     return render(request, 'pedagogico/listagem_pedagogica.html', {"listaPedagogica": pedagogica_t})
 
-
 @login_required
 def ver_turmaCoord(request, id_turma):
     turma = Turma.objects.get(pk=id_turma)
@@ -127,7 +114,6 @@ def ver_turmaCoord(request, id_turma):
     listaAlunos = turma.ususario.all().order_by('cid__usuario__nome')
 
     return render(request, 'pedagogico/ver_turmaCoordenacao.html', {"listaAlunos": listaAlunos, "Turma": turma})
-
 
 @login_required
 def editar_triagem(request, id_triagem):
@@ -141,7 +127,6 @@ def detalhes_triagem(request, id_triagem):
     triagem = TriagemPedagogica.objects.get(pk=id_triagem)
 
     return render(request, 'pedagogico/triagem_detalhes.html', {"Triagem": triagem})
-
 
 # --------------------------------------- | METÒDOS | ---------------------------------------
 
@@ -158,7 +143,6 @@ def cadastrar_turmas(request):
 
     return HttpResponseRedirect(reverse('pedagogico:listar_turmas'))
 
-
 def cadastrar_aulas(request):
     data = request.POST['dataAula']
     data = data.split('-')
@@ -170,15 +154,28 @@ def cadastrar_aulas(request):
     else:
         situacao = False
 
-    frequencia = Frequencia.objects.create()
     aula = Aula.objects.create(data=dataAula, situacao=situacao, conteudo=request.POST["conteudo"],
-                               titulo=request.POST["tituloAula"], frequencia=frequencia)
+                               titulo=request.POST["tituloAula"])
+
+
+
+
+
     turma = Turma.objects.get(pk=request.POST['id_turma'])
     turma.aula.add(aula)
+
+
+    usuarios = turma.ususario.all()
+    for u in usuarios:
+        print(u.nome)
+        frequencia = Frequencia(falta=False, usuario=u, desempenho="")
+        frequencia.save()
+        aula.frequencia.add(frequencia)
+
+    aula.save()
     turma.save()
 
     return HttpResponseRedirect(reverse('pedagogico:listar_aulas', args=(turma.id,)))
-
 
 def editar_aulas(request, id_aula):
     aula = get_object_or_404(Aula, pk=id_aula)
@@ -199,7 +196,6 @@ def editar_aulas(request, id_aula):
 
         return HttpResponseRedirect(reverse('pedagogico:listar_aulas', args=(turma.id,)))
     return render(request, "pedagogico/conclusao_aula.html", {"aula": aula})
-
 
 def editar_turma(request, id_turma):  # TELA e MEtÓDO tudo ao mesmo tempo
     turma = get_object_or_404(Turma, pk=id_turma)
@@ -223,13 +219,11 @@ def editar_turma(request, id_turma):  # TELA e MEtÓDO tudo ao mesmo tempo
         return HttpResponseRedirect(reverse('pedagogico:listar_turmas'))
     return render(request, "pedagogico/editar_turmaCoordenacao.html", {"turma": turma, "professores": professores})
 
-
 def deletar_turma(request, id_turma):
     turma = get_object_or_404(Turma, pk=id_turma)
     turma.delete()
     listaTurmas = Turma.objects.all()
     return HttpResponseRedirect(reverse('pedagogico:listar_turmas'))
-
 
 def deletar_aula(request, id_aula):
     aula = get_object_or_404(Aula, pk=id_aula)
@@ -240,7 +234,6 @@ def deletar_aula(request, id_aula):
     aula.delete()
 
     return HttpResponseRedirect(reverse('pedagogico:listar_aulas', args=(turma.id,)))
-
 
 def cadastrarTriagem(request):
     if request.POST['urinario'] == "sim":
@@ -417,7 +410,6 @@ def cadastrarTriagem(request):
 
     return HttpResponseRedirect(reverse('pedagogico:index'))
 
-
 def editarTriagemM(request, id_triagem):
     triagem = TriagemPedagogica.objects.get(pk=id_triagem)
 
@@ -551,3 +543,36 @@ def editarTriagemM(request, id_triagem):
     triagem.save()
 
     return HttpResponseRedirect(reverse('pedagogico:listagem_pedagogica'))
+
+def desempenho(request):
+    d = request.GET.get('d', None)
+    id = request.GET.get('id', None)
+
+    data = {'certo': False}
+    try:
+        frequencia = Frequencia.objects.get(pk=id)
+        frequencia.desempenho = d
+        frequencia.save()
+        data['certo'] = True
+        return JsonResponse(data)
+
+    except Exception as e:
+        return JsonResponse(data)
+
+def falta(request):
+    if request.GET.get('ckb', None) == "true":
+        d = True
+    else:
+        d = False
+    id = request.GET.get('id', None)
+
+    data = {'certo': False}
+    try:
+        frequencia = Frequencia.objects.get(pk=id)
+        frequencia.falta = d
+        frequencia.save()
+        data['certo'] = True
+        return JsonResponse(data)
+
+    except Exception as e:
+        return JsonResponse(data)

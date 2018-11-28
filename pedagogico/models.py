@@ -7,18 +7,15 @@ from datetime import datetime
 
 class Frequencia(models.Model):
     falta = models.BooleanField(default=False)
-    usuario = models.ManyToManyField(Usuario)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, blank=True)
     desempenho = models.CharField(max_length=100)
 
-
-    def __str__(self):
-        return "Frequência: "
 
 class Aula(models.Model):
     data = models.DateField('Data da Aula')
     conteudo = models.CharField(max_length=500)
     titulo = models.CharField(max_length=50)
-    frequencia = models.ForeignKey(Frequencia, on_delete=models.CASCADE, blank=True)
+    frequencia = models.ManyToManyField(Frequencia)
     avaliacaoAula = models.CharField(max_length=500, blank=True)
     situacao = models.BooleanField(default='True')
 

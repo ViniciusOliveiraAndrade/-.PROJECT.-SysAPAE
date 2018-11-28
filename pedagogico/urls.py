@@ -32,6 +32,8 @@ urlpatterns = [
 
     #FREQUENCIA
     path('frequencia/<int:id_aula>', views.frequencia, name='frequencia'),
+    path('desepenho/', views.desempenho, name='desempenho'),
+    path('falta/', views.falta, name='falta'),
 
     #TRIAGEM
     path('listar_triagemSocial', views.listar_triagemSocial, name='listar_triagemSocial'),
@@ -40,6 +42,6 @@ urlpatterns = [
     path('listagem_pedagogica', views.lista_Tpedagogica, name='listagem_pedagogica'),
     path('editar_triagem/<int:id_triagem>', views.editar_triagem, name='editar_triagem'),
     path('triagem_editar/<int:id_triagem>', views.editarTriagemM, name='triagem_editar'),
-    path('triagem_detalhes/<int:id_triagem>', views.detalhes_triagem, name='detalhes_triagem')
+    path('triagem_detalhes/<int:id_triagem>', views.detalhes_triagem, name='detalhes_triagem'),
 ]
 

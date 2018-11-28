@@ -29,7 +29,7 @@
                         <img width="80px" height="120px" src="
 
 
-                                {% ifequal Triagem.usuario.triagem_set.first.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{ t.usuario.imagem_url }} {% endifequal %}"
+                                {% ifequal Triagem.usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{ Triagem.usuario.imagem_url }} {% endifequal %}"
                              alt="..." class="rounded avatar-xxxl">
                     </figure>
                 </div>
@@ -319,7 +319,7 @@
 
             </div>
 
-            <br><br><br>
+            <br><br>
             {#            <hr class="hr-sm mb-2 ">#}
             <h5 class="text-uppercase mt-3 levantar" style="margin-left: 25px">Dias na APAE</h5>
             <hr class="hr-sm mb-2 no-print">

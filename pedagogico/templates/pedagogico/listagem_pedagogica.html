@@ -42,7 +42,7 @@
                                     <td class=" w-150px text-center border-dark">{{ triagem.usuario.cid }}</td>
                                     <td align="left" class="border-dark">{{ triagem.usuario.nome }}</td>
                                     <td class="w-200px text-center border-dark">{{ triagem.usuario.data_nacimento }}</td>
-                                    <td class="w-100px text-center border-dark">{{ triagem.usuario.turma_set.first }}<br>
+                                    <td class="w-100px text-center border-dark">{{ triagem.usuario.turma_set.first.nome }}<br>
                                         {% if triagem.usuario.turma_set.first.turno %} MANHÃ {% else %}
                                             TARDE {% endif %}</td>
                                     <th class="w-50px text-center no-print">

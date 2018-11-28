@@ -33,17 +33,17 @@
                 </div>
             </div>
 
-{#            <div class="col-lg-3 col-md-6 col-sm-5">#}
-{#                <div class="card-body card-round tabelaSemflow flowww">#}
-{##}
-{#                    <div class="form-group">#}
-{#                        <label>Turma</label>#}
-{#                        <input name="turma" class="form-control" type="text"#}
-{#                               id="turma" value="{{  }}">#}
-{#                    </div>#}
-{##}
-{#                </div>#}
-{#            </div>#}
+            {#            <div class="col-lg-3 col-md-6 col-sm-5">#}
+            {#                <div class="card-body card-round tabelaSemflow flowww">#}
+            {##}
+            {#                    <div class="form-group">#}
+            {#                        <label>Turma</label>#}
+            {#                        <input name="turma" class="form-control" type="text"#}
+            {#                               id="turma" value="{{ usuarios.first.turma_set.nome }}">#}
+            {#                    </div>#}
+            {##}
+            {#                </div>#}
+            {#            </div>#}
         </div>
 
 
@@ -63,37 +63,50 @@
                                 <th class="w-200px border-dark text-center"><b>Desempenho</b></th>
                                 <th class="w-150px text-center border-dark"><b>Data de Nascimento</b></th>
                                 <th class="w-90px text-center border-dark text-center"><b>Falta</b>
-                                    <label
-                                            class="form-check-label form-check-inline border-dark text-dark"><label
-                                            class="custom-control custom-control-lg custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input text-center"
-                                               name="checkboxsize"
-                                               value="falta" id="faltaTotal" checked style="background-color: #aeaeae"
-                                               onclick="checkTodos">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description"></span>
-                                    </label>
-
-                                    </label></th>
+{#                                    <label#}
+{#                                            class="form-check-label form-check-inline border-dark text-dark">#}
+{#                                        <label#}
+{#                                                class="custom-control custom-control-lg custom-checkbox">#}
+{#                                            <input type="checkbox" class="custom-control-input text-center"#}
+{#                                                   name="checkboxsize"#}
+{#                                                   value="falta" id="faltaTotal" checked#}
+{#                                                   style="background-color: #aeaeae"#}
+{#                                                   onclick="checkTodos">#}
+{#                                            <span class="custom-control-indicator"></span>#}
+{#                                            <span class="custom-control-description"></span>#}
+{#                                        </label>#}
+{##}
+{#                                    </label>#}
+                                </th>
                                 {#                                <th class="w-90px text-center border-dark"> </th>#}
                             </tr>
                             </thead>
                             <tbody>
 
 
-                            {% for usuario in usuarios %}
+                            {% for f in aula.frequencia.all %}
                                 <tr>
-                                    <td align="left" class="border-dark text-dark"></td>
-                                    <td align="left" class="border-dark text-dark">{{ usuario.nome }}</td>
-                                    <td class="w-50px text-center border-dark text-dark">{{ usuario.cid.codigo }}</td>
-                                    <td align="left" class="border-dark text-dark text-center">
+                                    <td align="left" class="border-dark text-dark"> {{ forloop.counter }}</td>
+                                    <td align="left" class="border-dark text-dark">{{ f.usuario.nome }}</td>
+                                    <td class="w-50px text-center border-dark text-dark">{{ f.usuario.cid.codigo }}</td>
+                                    <td id="c{{ f.id }}" align="left" class="border-dark text-dark text-center">
+
+                                        {% if f.desempenho == "" %}
+                                            <a class="btn btn-primary" onclick="addDesempenho(this.id)" href="#"
+                                               id="{{ f.id }}"> Adicionar
+                                            </a>
+                                        {% else %}
+                                            {{ f.desempenho }}
+                                        {% endif %}
+
+
 
 
                                         {#                                        <button class="btn btn-primary" data-toggle="modal" data-target="#modal-large">#}
                                         {#                                            Adicionar#}
                                         {#                                        </button>#}
-
-                                        <!-- Modal -->
+                                        {##}
+                                        {#                                        <!-- Modal -->#}
                                         {#                                        <div class="modal fade" id="modal-large" tabindex="-1">#}
                                         {#                                            <div class="modal-dialog modal-lg">#}
                                         {#                                                <div class="modal-content">#}
@@ -120,31 +133,32 @@
                                         {#                                            </div>#}
                                         {#                                        </div>#}
 
-
-                                        {#                                            <button class="btn btn-w-md btn-round btn-infot"#}
-                                        {#                                                    onclick="addDesempenho()"#}
-                                        {#                                            >Adicionar#}
-                                        {#                                            </button>#}
+                                        {##}
+                                        {#                                                                                    <button class="btn btn-w-md btn-round btn-infot"#}
+                                        {#                                                                                            onclick="addDesempenho()"#}
+                                        {#                                                                                    >Adicionar#}
+                                        {#                                                                                    </button>#}
                                     </td>
                                     <td align="left"
-                                        class="border-dark text-dark text-center">{{ usuario.data_nacimento }}</td>
+                                        class="border-dark text-dark text-center">{{ f.usuario.data_nacimento }}</td>
                                     </td>
 
                                     <td align="rigth" class="border-dark text-dark text-center">
                                         <nav class="nav no-gutters gap-2 fs-16 border-dark text-dark">
-{#                                            <div class="form-group">#}
+                                            {#                                            <div class="form-group">#}
                                             <label class="form-check-label form-check-inline border-dark text-dark"><label
                                                     class="custom-control custom-control-lg custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input"
-                                                       name="checkboxsize"
-                                                       value="falta" id="falta" checked
-                                                       style="background-color: #aeaeae">
+                                                <input {% if f.falta %} checked {% endif %} type="checkbox"
+                                                                        class="custom-control-input"
+                                                                        onclick="addFalta(this.name)" name="{{ f.id }}"
+                                                                        id="ckb{{ f.id }}"
+                                                                        style="background-color: #aeaeae">
                                                 <span class="custom-control-indicator"></span>
                                                 <span class="custom-control-description">Falta</span>
                                             </label>
 
                                             </label>
-{#                                            </div>#}
+                                            {#                                            </div>#}
                                         </nav>
                                     </td>
                                 </tr>
@@ -169,18 +183,45 @@
     <script type="text/javascript">
         document.getElementById('da').value = "{{aula.data.year}}-{% if aula.data.month < 10 %}0{{aula.data.month}}{% else %}{{aula.data.month}}{% endif %}-{% if aula.data.day < 10 %}0{{aula.data.day}}{% else %}{{aula.data.day}}{% endif %}";
 
-
-        function addDesempenho() {
-            var txt;
-            var desempenho = prompt("Digite o desempenho do usuário");
-            if (desempenho == null || desempenho == "") {
-                txt = "Desempenho vazio!";
-                return desempenho
+        function addDesempenho(id) {
+            var codigo = prompt("Digite o desempenho do usuário");
+            if (codigo == null || codigo == "") {
             } else {
-                return desempenho
+
+                $.ajax({
+                    url: '{% url "pedagogico:desempenho" %}',
+                    data: {'d': codigo, 'id': id},
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.certo) {
+                            var c = document.getElementById("c" + id);
+                            c.style.backgroundColor = "#0f0";
+                        } else {
+                            alert("Não foi possivel cadastrar a CID");
+                        }
+                    }
+                });
+
             }
+        }
+
+
+        function addFalta(id) {
+            var ckb = document.getElementById('ckb' + id).checked
+
+            $.ajax({
+                url: '{% url "pedagogico:falta" %}',
+                data: {'ckb': ckb, 'id': id},
+                dataType: 'json',
+                success: function (data) {
+                    if (data.certo) {
+                    } else {
+                    }
+                }
+            });
 
         }
+
 
         var checkTodos = $("#faltaTotal");
         checkTodos.click(function () {
