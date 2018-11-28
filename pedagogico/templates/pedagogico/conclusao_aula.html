@@ -8,12 +8,12 @@
                 <li class="breadcrumb-item"><a href="{% url 'pedagogico:index' %}">Home</a></li>
                 <li class="breadcrumb-item"><a href="{% url 'pedagogico:minhas_turmas' %}">Minhas Turmas</a></li>
                 <li class="breadcrumb-item"><a href="#">Minhas Aulas</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Edição da Aula</li>
+                <li class="breadcrumb-item active" aria-current="page">Conclusão da Aula</li>
             </ol>
         </nav>
 
         <br>
-        <h1 class="font-dosis fw-500 text-center">Edição da Aula</h1><br>
+        <h1 class="font-dosis fw-500 text-center">Conclusão Aula</h1><br>
         <br>
 
         <form id="formulario" class="card-body"
@@ -28,73 +28,71 @@
 
                     <div class="form-group">
                         <label>Data</label>
-                        <input name="dataAula" type="date" class="form-control" id="da" disabled>
+                        <input name="dataAula" type="date" class="form-control visivel border border-dark text-dark rounded" id="da" disabled>
                     </div>
                 </div>
 
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label>Situação</label><br>
+                        <label>Situação &nbsp;</label><i style="color: red">*</i><br>
                         <div class="form-check form-check-inline">
-                            <div class="color-selector">
+{#                            <div class="color-selector">#}
                                 <label>
-                                    <input type="radio" name="situacao" checked title="Aberto" value="aberto"
+                                    <input type="radio" name="situacao" id="s1" checked title="Aberto" value="aberto"
                                             {% if aula.situacao %} checked {% endif %}>
-                                    <span style="background-color:#48b0f7" title="Aberto"></span>
+                                    <span style="background-color:#48b0f7" title="Aberto"></span><label for="s1">ABERTO</label>
                                 </label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <label>
-                                    <input type="radio" name="situacao" value="finalizado" {% if not aula.situacao %}
+                                    <input type="radio" name="situacao" id="s2" value="finalizado" {% if not aula.situacao %}
                                            checked {% endif %}>
-                                    <span style="background-color:#f96868" title="Finalizado"></span>
+                                    <span style="background-color:#f96868" title="Finalizado"></span><label for="s2">FINALIZADO</label>
                                 </label>
-                            </div>
+{#                            </div>#}
                         </div>
                     </div>
                 </div>
 
 
                 <div class="col-lg-6 col-md-12 col-sm-12">
-                    {#                    <br>#}
-                    {#                    <h4 class="text-uppercase text-center">Conteúdo</h4>#}
-
 
                     <div class="form-group">
                         <label>Titulo</label>
-                        {#                        <div class="card-body card-round tabelaSemflow flowww">#}
-                        <input name="tituloAula" class="form-control" type="text"
+                        <input name="tituloAula" class="form-control visivel border border-dark text-dark rounded" type="text"
                                placeholder=" Nomeie suas aulas" value="{{ aula.titulo }}" disabled>
-                        {#                        </div>#}
                     </div>
                 </div>
 
                 <div class="col-lg-6 col-md-12 col-sm-12">
-                    {#                    <div class="card-body card-round tabelaSemflow flowww">#}
-
-
                     <div class="form-group">
-                        <label>Avaliação da Aula</label>
-                        {#                                <textarea name="avaliacao" class="form-control" type="text" rows="3">#}
-                        <textarea required class="form-control" id="ava" rows="2" name="avaliacao"></textarea>
+                        <label>Avaliação da Aula &nbsp;</label><i style="color: red">*</i>
+                        <textarea required class="form-control visivel border border-dark text-dark rounded" id="ava" rows="2" name="avaliacao"></textarea>
                     </div>
-                    {#                    </div>#}
                 </div>
 
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card-body card-round tabelaSemflow flowww">
                         <div class="form-group">
                             <label>Conteúdo</label>
-                            <textarea style="background-color: #e8e8e8" data-provide="summernote"
-                                      data-min-height="180" id="con" name="conteudo"
-                            >{{ aula.conteudo }}</textarea>
+{#                            <textarea  disabled required  data-provide="quill"#}
+{#                                          data-min-height="200" id="conteudoAula" name="conteudo" class="form-control visivel border border-dark text-dark rounded">{{ aula.conteudo }}</textarea>#}
+
+
+                             <div>{{ aula.conteudo }}</div>
+
+{#                            <textarea data-provide="quill"#}
+{#                                      data-min-height="180" id="con" name="conteudo"#}
+{#                            >{{ aula.conteudo }}</textarea>#}
                         </div>
                     </div>
 
                 </div>
             </div>
 
-            <footer class="card-footer text-right">
-                {#                <a href="{% url 'pedagogico:listar_aulas' aula.id %}" class="btn btn-secondary" type="reset">Cancelar</a>#}
-                <button class="btn btn-primary" type="submit">Salvar</button>
+            <footer class="card-footer text-right no-print">
+                <a onclick="window.history.back();" class="btn btn-secondary no-print"
+                   type="reset">Voltar</a>
+                <button class="btn btn-primary no-print" type="submit">Salvar</button>
             </footer>
 
         </form>

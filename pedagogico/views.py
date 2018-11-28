@@ -80,7 +80,7 @@ def cadastrar_triagemP(request):
 def listar_triagemSocial(request):
     triagemSocial = Triagem.objects.filter(usuario__situacao="Ativo").exclude(usuario__triagempedagogica__isnull=False)
 
-    pedagogica_t = TriagemPedagogica.objects.all()
+    pedagogica_t = TriagemPedagogica.objects.all().order_by('usuario__nome')
 
     return render(request, 'pedagogico/listar_triagemSocial.html',
                   {"triagemSocial": triagemSocial, "triagemPedagogica": pedagogica_t})
@@ -88,7 +88,7 @@ def listar_triagemSocial(request):
 
 @login_required
 def listar_turmas(request):
-    listaTurmas = Turma.objects.all()
+    listaTurmas = Turma.objects.all().order_by('nome')
     return render(request, 'pedagogico/listar_turmasCordenacao.html', {"listaTurmas": listaTurmas})
 
 
@@ -100,7 +100,7 @@ def listar_aulas(request, id_turma):
 
 @login_required
 def listas_turmasProf(request):
-    turmas = Turma.objects.all()
+    turmas = request.user.funcionario.turma_set.all()
 
     return render(request, "pedagogico/listar_turmasProf.html", {"turmas": turmas})
 
@@ -114,7 +114,8 @@ def detalhes_aula(request, id_aula):
 
 @login_required
 def lista_Tpedagogica(request):
-    pedagogica_t = TriagemPedagogica.objects.all()
+    pedagogica_t = TriagemPedagogica.objects.all().order_by('usuario__nome')
+    # pedagogica_t = sorted(TriagemPedagogica.usuario.nome)
 
     return render(request, 'pedagogico/listagem_pedagogica.html', {"listaPedagogica": pedagogica_t})
 
@@ -123,15 +124,23 @@ def lista_Tpedagogica(request):
 def ver_turmaCoord(request, id_turma):
     turma = Turma.objects.get(pk=id_turma)
 
-    listaAlunos = turma.ususario.all()
+    listaAlunos = turma.ususario.all().order_by('cid__usuario__nome')
 
-    return render(request, 'pedagogico/ver_turmaCoordenacao.html', {"listaAlunos": listaAlunos, "Turma":turma})
+    return render(request, 'pedagogico/ver_turmaCoordenacao.html', {"listaAlunos": listaAlunos, "Turma": turma})
+
 
 @login_required
-def editar_triagem(request, idTriagem):
-    # id = TriagemPedagogica.objects.get(pk=idTriagem)
+def editar_triagem(request, id_triagem):
+    triagem = TriagemPedagogica.objects.get(pk=id_triagem)
+    turma = Turma.objects.all()
 
-    return render(request, 'pedagogico/editar_triagem.html', {"idTriagem": idTriagem})
+    return render(request, 'pedagogico/editar_triagem.html', {"Triagem": triagem, "Turmas": turma})
+
+@login_required
+def detalhes_triagem(request, id_triagem):
+    triagem = TriagemPedagogica.objects.get(pk=id_triagem)
+
+    return render(request, 'pedagogico/triagem_detalhes.html', {"Triagem": triagem})
 
 
 # --------------------------------------- | METÒDOS | ---------------------------------------
@@ -173,23 +182,15 @@ def cadastrar_aulas(request):
 
 def editar_aulas(request, id_aula):
     aula = get_object_or_404(Aula, pk=id_aula)
-    if "tituloAula" in request.POST:
+    if request.method == "POST":
         aula = get_object_or_404(Aula, pk=id_aula)
-
-        data = request.POST['dataAula']
-        data = data.split('-')
-
-        dataAula = datetime.datetime(int(data[0]), int(data[1]), int(data[2]))
 
         if request.POST["situacao"] == "aberto":
             situacao = True
         else:
             situacao = False
 
-        aula.data = dataAula
         aula.situacao = situacao
-        aula.conteudo = request.POST["conteudo"]
-        aula.titulo = request.POST["tituloAula"]
         aula.avaliacaoAula = request.POST['avaliacao']
         aula.save()
 
@@ -197,10 +198,10 @@ def editar_aulas(request, id_aula):
         turma = turma[0]
 
         return HttpResponseRedirect(reverse('pedagogico:listar_aulas', args=(turma.id,)))
-    return render(request, "pedagogico/editar_aula.html", {"aula": aula})
+    return render(request, "pedagogico/conclusao_aula.html", {"aula": aula})
 
 
-def editar_turma(request, id_turma):
+def editar_turma(request, id_turma):  # TELA e MEtÓDO tudo ao mesmo tempo
     turma = get_object_or_404(Turma, pk=id_turma)
     professores = Funcionario.objects.filter(cargo__nome="Educador(a)")
     if "nome" in request.POST:
@@ -252,42 +253,49 @@ def cadastrarTriagem(request):
     else:
         esfincter = False
 
-    if request.POST['turno'] == "manha":
-        turno = True
-    else:
-        turno = False
-
     usuarioT = Usuario.objects.get(pk=request.POST['usuario'])
-    # municipio = request.POST['municipio']
-    # pai = request.POST['pai']
-    # mae = request.POST['mae']
 
     alimentacao = request.POST['alimentacao']
     cuidador = request.POST['cuidador']
     responsavel = request.POST['responsavel']
 
-    if request.POST['checkboxsize'] == "segunda":
-        segunda = True
+    if 'segunda' in request.POST:
+        if request.POST['segunda'] == "segunda":
+            segunda = True
+        else:
+            segunda = False
     else:
         segunda = False
 
-    if request.POST['checkboxsize'] == "terca":
-        terca = True
+    if 'terca' in request.POST:
+        if request.POST['terca'] == "terca":
+            terca = True
+        else:
+            terca = False
     else:
         terca = False
 
-    if request.POST['checkboxsize'] == "quarta":
-        quarta = True
+    if 'quarta' in request.POST:
+        if request.POST['quarta'] == "quarta":
+            quarta = True
+        else:
+            quarta = False
     else:
         quarta = False
 
-    if request.POST['checkboxsize'] == "quinta":
-        quinta = True
+    if 'quinta' in request.POST:
+        if request.POST['quinta'] == "quinta":
+            quinta = True
+        else:
+            quinta = False
     else:
         quinta = False
 
-    if request.POST['checkboxsize'] == "sexta":
-        sexta = True
+    if 'sexta' in request.POST:
+        if request.POST['sexta'] == "sexta":
+            sexta = True
+        else:
+            sexta = False
     else:
         sexta = False
 
@@ -300,6 +308,17 @@ def cadastrarTriagem(request):
 
     composicaoFamiliar = request.POST['composicaoFamiliar']
     observacao = request.POST['observacao']
+
+    # .............PEDAGOGICO...........
+
+    musica = request.POST['musica']
+    danca = request.POST['danca']
+    pintura = request.POST['pintura']
+    jiujitsu = request.POST['jiujtso']
+    edFisica = request.POST['edFisica']
+    informatica = request.POST['informatica']
+    robotica = request.POST['robotica']
+    teatro = request.POST['teatro']
 
     # .............ASPECTOS DE DESENVOLVIMENTO...........
 
@@ -361,7 +380,7 @@ def cadastrarTriagem(request):
     pessoaQuestionada = request.POST['responsavelTriagem']
 
     TriagemPedagogica.objects.create(usuario=usuarioT, controleUrinario=urinario,
-                                     controleEsfincter=esfincter, turno=turno,
+                                     controleEsfincter=esfincter,
                                      alimentacao=alimentacao, cuidador=cuidador,
                                      responsavel=responsavel, segunda=segunda, terca=terca, quarta=quarta,
                                      quinta=quinta,
@@ -386,13 +405,149 @@ def cadastrarTriagem(request):
                                      transmiteRecados=transmiteRecados, fazPedido=instrucoes,
                                      composicaoFamiliar=composicaoFamiliar,
                                      descricaoUsuario=descrisaoUsuario,
-                                     data=dataTriagem, pessoaQuestionada=pessoaQuestionada)
+                                     data=dataTriagem, pessoaQuestionada=pessoaQuestionada, musica=musica, danca=danca,
+                                     pintura=pintura, jiujitsu=jiujitsu, edFisica=edFisica, informatica=informatica,
+                                     robotica=robotica, teatro=teatro)
 
-    turma = Turma.objects.get(nome=request.POST['turmaTriagem'])
+    nomeTurma = request.POST['turmaTriagem']
+    nomeTurma = nomeTurma.split('/')
+    nomeTurma = nomeTurma[0][0:len(nomeTurma[0]) - 1]
+    turma = Turma.objects.get(nome=nomeTurma)
     turma.ususario.add(usuarioT)
 
     return HttpResponseRedirect(reverse('pedagogico:index'))
 
 
-def editarTriagem(request, id_triagem):
-    triagem = get_object_or_404(TriagemPedagogica, pk=id_triagem)
+def editarTriagemM(request, id_triagem):
+    triagem = TriagemPedagogica.objects.get(pk=id_triagem)
+
+    triagem.alimentacao = request.POST['alimentacao']
+    triagem.cuidador = request.POST['cuidador']
+    triagem.responsavel = request.POST['responsavel']
+
+    if request.POST['urinario'] == "sim":
+        triagem.controleUrinario = True
+    else:
+        triagem.controleUrinario = False
+
+    if request.POST['esfincter'] == "sim":
+        triagem.controleEsfincter = True
+    else:
+        triagem.controleEsfincter = False
+
+    if 'segunda' in request.POST:
+        if request.POST['segunda'] == "segunda":
+            triagem.segunda = True
+        else:
+            triagem.segunda = False
+    else:
+        triagem.segunda = False
+
+    if 'terca' in request.POST:
+        if request.POST['terca'] == "terca":
+            triagem.terca = True
+        else:
+            triagem.terca = False
+    else:
+        triagem.terca = False
+
+    if 'quarta' in request.POST:
+        if request.POST['quarta'] == "quarta":
+            triagem.quarta = True
+        else:
+            triagem.quarta = False
+    else:
+        triagem.quarta = False
+
+    if 'quinta' in request.POST:
+        if request.POST['quinta'] == "quinta":
+            triagem.quinta = True
+        else:
+            triagem.quinta = False
+    else:
+        triagem.quinta = False
+
+    if 'sexta' in request.POST:
+        if request.POST['sexta'] == "sexta":
+            triagem.sexta = True
+        else:
+            triagem.sexta = False
+    else:
+        triagem.sexta = False
+
+    triagem.dormeCom = request.POST['dormeCom']
+    horaDormir = request.POST['horaDormir']
+    horaAcordar = request.POST['horaAcordar']
+
+    triagem.horarioDormir = parse_time(horaDormir)
+    triagem.horarioAcordar = parse_time(horaAcordar)
+
+    triagem.composicaoFamiliar = request.POST['composicaoFamiliar']
+    triagem.observacao = request.POST['observacao']
+
+    # .............PEDAGOGICO...........
+
+    triagem.musica = request.POST['musica']
+    triagem.danca = request.POST['danca']
+    triagem.pintura = request.POST['pintura']
+    triagem.jiujitsu = request.POST['jiujtso']
+    triagem.edFisica = request.POST['edFisica']
+    triagem.informatica = request.POST['informatica']
+    triagem.robotica = request.POST['robotica']
+    triagem.teatro = request.POST['teatro']
+
+    # .............ASPECTOS DE DESENVOLVIMENTO...........
+
+    triagem.falaBem = request.POST['fala']
+    triagem.comunicacaoGestos = request.POST['gestos']
+    triagem.gagueira = request.POST['gago']
+    triagem.enxergaBem = request.POST['enxerga']
+    triagem.destro = request.POST['direita']
+    triagem.esquerda = request.POST['esquerda']
+    triagem.fazBalbucio = request.POST['balbucio']
+
+    # .............ASPECTO FISICO MOTOR...........
+
+    triagem.anda = request.POST['anda']
+    triagem.seguraLapis = request.POST['segura']
+    triagem.sentaCorretamente = request.POST['senta']
+    triagem.caiMuito = request.POST['cai']
+    triagem.cansaFacil = request.POST['cansa']
+
+    # .............ASPECTO EMOCIONAL...........
+
+    triagem.demonstraAfeto = request.POST['demonstra']
+    triagem.solicitaAfeto = request.POST['solicita']
+    triagem.medroso = request.POST['medroso']
+    triagem.agressivo = request.POST['agressivo']
+    triagem.reageContrariado = request.POST['reage']
+    triagem.tique = request.POST['tique']
+    triagem.choraFacilidade = request.POST['chora']
+
+    # .............ASPECTO SOCIAL...........
+
+    triagem.sabeEspear = request.POST['espera']
+    triagem.obedeceOrdens = request.POST['obedece']
+    triagem.fazAmizade = request.POST['amizades']
+    triagem.isolase = request.POST['isola']
+    triagem.compartilha = request.POST['divide']
+    triagem.seRelaciona = request.POST['relaciona']
+
+    # .............ASPECTO INTELECTUAL...........
+
+    triagem.pronuciaCorretamente = request.POST['pronucia']
+    triagem.expressaPensanetos = request.POST['expressa']
+    triagem.transmiteRecados = request.POST['recado']
+    triagem.fazPedido = request.POST['instrucoes']
+
+    triagem.descricaoUsuario = request.POST['descricao']
+
+    # nomeTurma = request.POST['turmaTriagem']
+    # nomeTurma = nomeTurma.split('/')
+    # nomeTurma = nomeTurma[0][0:len(nomeTurma[0]) - 1]
+    # turma = Turma.objects.get(nome=nomeTurma)
+    # turma.ususario.add(triagem.usuario)
+
+    triagem.save()
+
+    return HttpResponseRedirect(reverse('pedagogico:listagem_pedagogica'))

@@ -24,9 +24,9 @@
 
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="form-group">
-                            <label>Data</label>
+                            <label>Data &nbsp;</label><i style="color: red">*</i>
                             <div class="form-group">
-                                <input required name="dataAula" class="form-control" type="date">
+                                <input required name="dataAula" class="form-control visivel border border-dark text-dark rounded" type="date">
                             </div>
                         </div>
                     </div>
@@ -35,32 +35,29 @@
                         <div class="form-group">
                             <div class="form-check form-check-inline">
 
-                                <label>Situação</label><br>
-                                <div class="color-selector">
+                                <label>Situação &nbsp;</label><i style="color: red">*</i><br>
+{#                                <div class="color-selector">#}
+
                                     <label>
-                                        <input required type="radio" name="situacao" title="Aberto" value="aberto">
-                                        <span style="background-color:#48b0f7" title="Aberto"></span>
+                                        <input required type="radio" id="s1" name="situacao" title="Aberto" value="aberto">
+                                        <span title="Aberto"></span><label for="s1">ABERTO</label>
                                     </label>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <label>
-                                        <input required type="radio" name="situacao" value="finalizado">
-                                        <span style="background-color:#f96868" title="Finalizado"></span>
+                                        <input required type="radio" id="s2" name="situacao" value="finalizado">
+                                        <span title="Finalizado"></span><label for="s2">FINALIZADO</label>
                                     </label>
-                                </div>
+{#                                </div>#}
                             </div>
                         </div>
                     </div>
 
-
-                    {#                <div class="col-lg-12 col-md-12 col-sm-12">#}
-                    {#                    <br>#}
-                    {#                    <h4 class="text-uppercase text-center">Conteúdo</h4>#}
-                    {#                </div>#}
                     <div class="col-lg-6 col-md-6 col-sm-12">
 
                         <div class="form-group">
-                            </b><label>Titulo</label>
+                            </b><label>Titulo &nbsp;</label><i style="color: red">*</i>
 {#                            <div class="card-body card-round tabelaSemflow flowww">#}
-                                <input required name="tituloAula" class="form-control" type="text"
+                                <input required name="tituloAula" class="form-control visivel border border-dark text-dark rounded" type="text"
                                        placeholder=" Nomeie suas aulas">
 {#                            </div>#}
                         </div>
@@ -72,7 +69,7 @@
 
                                 <div class="form-group">
                                     <label>Avaliação da Aula</label>
-                                    <textarea class="form-control" id="textarea" rows="2" name="avaliacao"></textarea>
+                                    <textarea class="form-control visivel border border-dark text-dark rounded" id="textarea" rows="2" name="avaliacao"></textarea>
                                 </div>
 {#                            </div>#}
                         </div>
@@ -80,9 +77,9 @@
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="card-body card-round tabelaSemflow flowww border-dark text-dark">
                             <div class="form-group border-dark text-dark">
-                                <label>Conteúdo</label>
-                                <textarea  required style="background-color: #e8e8e8" data-provide="summernote"
-                                          data-min-height="180" id="conteudoAula" name="conteudo"></textarea>
+                                <label>Conteúdo &nbsp;</label><i style="color: red">*</i>
+                                <textarea  required  data-provide="quill"
+                                          data-min-height="200" id="conteudoAula" name="conteudo" class="form-control visivel border border-dark text-dark rounded"></textarea>
                             </div>
                         </div>
 

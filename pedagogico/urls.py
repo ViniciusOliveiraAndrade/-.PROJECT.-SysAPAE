@@ -38,6 +38,8 @@ urlpatterns = [
     path('triagem_pedagogica/<int:id_usuario>', views.triagem_pedagogica, name='triagem_pedagogica'),
     path('cadastro_triagemP', views.cadastrarTriagem, name='cadastro_triagemP'),
     path('listagem_pedagogica', views.lista_Tpedagogica, name='listagem_pedagogica'),
-    path('editar_triagem', views.editar_triagem, name='editar_triagem')
+    path('editar_triagem/<int:id_triagem>', views.editar_triagem, name='editar_triagem'),
+    path('triagem_editar/<int:id_triagem>', views.editarTriagemM, name='triagem_editar'),
+    path('triagem_detalhes/<int:id_triagem>', views.detalhes_triagem, name='detalhes_triagem')
 ]
 

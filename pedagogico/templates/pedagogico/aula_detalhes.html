@@ -16,115 +16,53 @@
         <h1 class="font-dosis fw-500 text-center">Detalhes da Aula</h1><br>
         <br>
 
-        <form id="formulario" class="card-body">
-            <div class="row">
+        <div class="row">
 
 
-                <div class="card-body card-round tabelaSemflow flowww">
-                    <div class="form-group text-uppercase">
-                        <hr style="height:2px; border:none; color:#000; background-color:#000; margin-top: 0px; margin-bottom: 0px;"
-                            class="-print"/>
-                        <br>
-                        <li style="list-style-type: none" class="text-left"><strong>Data:</strong>
-                            {{ idAula.data.day }}-{{ idAula.data.month }}-{{ idAula.data.year }}</li>
-                        <li style="list-style-type: none" class="text-left"><strong>Situação:</strong>
-                            {% if idAula.situacao %} Aberto {% else %} Fechado {% endif %}</li>
-                        <li style="list-style-type: none" class="text-left"><strong>Avaliação:</strong>
-                            {{ idAula.avaliacaoAula }}</li>
-                        <br>
-                        <hr style="height:2px; border:none; color:#000; background-color:#000; margin-top: 0px; margin-bottom: 0px;"
-                            class="-print"/>
-                        <br>
-                        <li style="list-style-type: none" class="text-center"><strong>Titulo</strong></li>
-                        <li style="list-style-type: none" class="text-center">{{ idAula.titulo }}</li>
-                        <br>
-                        <li style="list-style-type: none" class="text-center"><strong>Conteúdo</strong></li>
-                        <li style="list-style-type: none" class="text-center"> <textarea contenteditable="false"
-                                                                                         style="background-color: #e8e8e8"
-                                                                                         data-provide="summernote"
-                                                                                         data-min-height="180" id="con"
-                                                                                         name="conteudo"
-                                                                                         aria-disabled="true">{{ idAula.conteudo }}</textarea>
-                        </li>
+            <div class="card-body card-round tabelaSemflow flowww" style="margin: 50px">
+                <div class="form-group text-uppercase">
+                    <hr class="hr-sm mb-2">
+                    <br>
+                    <li style="list-style-type: none" class="text-left"><strong>Data:</strong>
+                        {{ idAula.data }}</li>
+                    <li style="list-style-type: none" class="text-left"><strong>Situação:</strong>
+                        {% if idAula.situacao %} Aberto {% else %} Finalizado {% endif %}</li>
+                    <li style="list-style-type: none" class="text-left"><strong>Avaliação:</strong>
+                        {{ idAula.avaliacaoAula }}</li>
+
+                    <strong>Titulo:</strong>
+                    {{ idAula.titulo }}
+                    <br><br>
+                    <hr class="hr-sm mb-2">
+
+                    <br>
+                    <div class="form-group">
+                        <strong>CONTEÚDO:</strong><br><br>
+
+{#                        <textarea  disabled required  data-provide="quill"#}
+{#                                          data-min-height="200" id="conteudoAula" name="conteudo"#}
+{#                                   class="form-control visivel border border-dark text-dark rounded">{{ idAula.conteudo }}</textarea>#}
+
+                        <div>{{ idAula.conteudo }}</div>
 
 
-                        {#                            <tbody>#}
-                        {##}
-                        {#                            <tr>#}
-                        {#                                <td class="w-50px text-center">{{ idAula.dtda.day }}-{{ idAula.data.month }}-{{ idAula.data.year }}</td>#}
-                        {#                                <td class="w-50px text-center">{% if idAula.situacao %} Aberto {% else %} Fechado {% endif %}</td>#}
-                        {#                                <td>{{ idAula.avaliacaoAula }}</td>#}
-                        {#                                <td>{{ idAula.titulo }}</td>#}
-                        {#                                <td> <textarea disabled style="background-color: #e8e8e8" data-provide="summernote" aria-disabled="true" data-dismiss="true"> {{ idAula.conteudo }} </textarea> </td>#}
-                        {##}
-                        {#                            </tr>#}
-                        {##}
-                        {#                            </tbody>#}
-
+{#                        <textarea disabled contenteditable="false"#}
+{#                                  style="background-color: #e8e8e8"#}
+{#                                  data-provide="summernote"#}
+{#                                  data-min-height="180" id="hh"#}
+{#                                  name="conteudo"#}
+{#                                  aria-disabled="true">{{ idAula.conteudo }}</textarea>#}
                     </div>
+
                 </div>
-
-
-                {#                <div class="col-lg-4 col-md-6 col-sm-12">#}
-                {##}
-                {#                    <div class="form-group">#}
-                {#                        <label><b>Data:</b> {{ idAula.data.day }}-{{ idAula.data.month }}-{{ idAula.data.year }}</label>#}
-                {#                    </div>#}
-                {#                </div>#}
-                {##}
-                {#                <div class="col-lg-4 col-md-6 col-sm-12">#}
-                {#                    <div class="form-group">#}
-                {#                        <label><b>Situação</b></label><br>#}
-                {#                        <div class="form-check form-check-inline">#}
-                {#                            <div class="color-selector">#}
-                {#                                <label>#}
-                {#                                    <input type="radio" name="situacao" checked title="Aberto" value="aberto"#}
-                {#                                            {% if idAula.situacao %} Aberto {% else %} Fechado {% endif %}>#}
-                {#                                    <span style="background-color:#48b0f7" title="Aberto"></span>#}
-                {#                                </label>#}
-                {#                                <label>#}
-                {#                                    <input type="radio" name="situacao" value="finalizado" {% if not idAula.situacao %}#}
-                {#                                           checked {% endif %}>#}
-                {#                                    <span style="background-color:#f96868" title="Finalizado"></span>#}
-                {#                                </label>#}
-                {#                            </div>#}
-                {#                        </div>#}
-                {#                    </div>#}
-                {#                </div>#}
-                {##}
-                {#                <div class="col-lg-4 col-md-12 col-sm-12">#}
-                {#                    <div class="form-group">#}
-                {#                        <label><b>Avaliação da Aula: </b>{{ idAula.avaliacaoAula }}</label>#}
-                {#                    </div>#}
-                {#                </div>#}
-                {##}
-                {##}
-                {#                <div class="col-lg-12 col-md-12 col-sm-12">#}
-                {##}
-                {#                    <div class="form-group">#}
-                {#                        <label><b>Titulo:</b> {{ idAula.titulo }}</label>#}
-                {#                    </div>#}
-                {#                </div>#}
-                {##}
-                {#                <div class="col-lg-12 col-md-12 col-sm-12">#}
-                {#                    <div class="card-body card-round tabelaSemflow flowww">#}
-                {#                        <div class="form-group">#}
-                {#                            <label><b>Conteúdo:</b></label>#}
-                {#                                            <textarea disabled style="background-color: #e8e8e8" data-provide="summernote"#}
-                {#                                                      data-min-height="180" id="con" name="conteudo"#}
-                {#                                            aria-disabled="true">{{ idAula.conteudo }}</textarea>#}
-                {#                        </div>#}
-                {#                    </div>#}
-                {##}
-                {#                </div>#}
             </div>
+        </div>
 
-            <footer class="card-footer text-right">
-                <a href="{% url 'pedagogico:minhas_turmas' %}" class="btn btn-secondary"
-                   type="reset">Voltar</a>
-                {#            <button class="btn btn-primary" type="submit">Salvar</button>#}
-            </footer>
-        </form>
+        <footer class="card-footer text-right no-print">
+            <a onclick="window.history.back();" class="btn btn-secondary"
+               type="reset">Voltar</a>
+        </footer>
+
     </div>
 
 {% endblock %}

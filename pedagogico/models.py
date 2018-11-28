@@ -40,13 +40,7 @@ class Turma(models.Model):
 class TriagemPedagogica(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT, blank=False)
     data = models.DateField(default=datetime.now)
-    # estuda = models.BooleanField()
-    # anoEscolar = models.IntegerField()
-    # nomeEscola = models.CharField(max_length=50, blank=True)
-    # municipio = models.CharField(max_length=50, blank=True)
-    turno = models.BooleanField(blank=True)
 
-    # Aqui fica um atributo para os dias da semana
     segunda = models.BooleanField(blank=True)
     terca = models.BooleanField(blank=True)
     quarta = models.BooleanField(blank=True)
@@ -54,11 +48,20 @@ class TriagemPedagogica(models.Model):
     sexta = models.BooleanField(blank=True)
 
     alimentacao = models.TextField(blank=True)
-    # medicacao = models.TextField()
     composicaoFamiliar = models.TextField(blank=True)
     controleUrinario = models.BooleanField(blank=True)
     controleEsfincter = models.BooleanField(blank=True)
     controleObservacao = models.TextField(blank=True)
+
+    # PEDAGOGICO
+    musica = models.CharField(max_length=1, blank=True)
+    danca = models.CharField(max_length=1, blank=True)
+    pintura = models.CharField(max_length=1, blank=True)
+    jiujitsu = models.CharField(max_length=1, blank=True)
+    edFisica = models.CharField(max_length=1, blank=True)
+    informatica = models.CharField(max_length=1, blank=True)
+    robotica = models.CharField(max_length=1, blank=True)
+    teatro = models.CharField(max_length=1, blank=True)
 
     cuidador = models.CharField(max_length=50, blank=True)
     responsavel = models.CharField(max_length=50, blank=True)
@@ -112,6 +115,7 @@ class TriagemPedagogica(models.Model):
 
     descricaoUsuario = models.TextField(blank=True)
     pessoaQuestionada = models.CharField(max_length=50, blank=True)
+
 
 
 

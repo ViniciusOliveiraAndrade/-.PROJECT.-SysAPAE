@@ -24,10 +24,11 @@
                                cellspacing="0"
                                data-provide="datatables">
                             <thead>
-                            <tr class="text-uppercase" style="background-color: black">
-                                <th class="border-dark text-dark"><b>Nome do Aluno</b></th>
+                            <tr class="text-uppercase" style="background-color: black; color: #fff;">
+                                <th class="border-dark w-400px"><b>CID</b></th>
+                                <th class="border-dark"><b>Nome do Aluno</b></th>
 {#                                <th class="border-dark text-dark"><b>Turno</b></th>#}
-                                <th class="w-50px text-center no-print border-dark text-dark text-center"><b>Ações</b>
+{#                                <th class="w-50px text-center no-print border-dark text-center"><b>Ações</b>#}
                                 </th>
                             </tr>
                             </thead>
@@ -37,17 +38,18 @@
                             {% for aluno in listaAlunos %}
 
                                 <tr>
+                                    <td class="border-dark text-dark">{{ aluno.cid }}</td>
                                     <td class="border-dark text-dark">{{ aluno.nome }}</td>
 {#                                    <td class="border-dark text-dark">{% if aluno.turno %} Manhã {% else %}#}
 {#                                        Tarde {% endif %}</td>#}
 
-                                    <th class="w-50px text-center border-dark text-dark">
-                                        <div align="center">
-                                            <a data-provide="tooltip" data-tooltip-color="primary" title="Aulas"
-                                               style="font-size: 25px;" class="fa fa-folder-open" aria-hidden="true"
-                                               href="#"></a>
-                                        </div>
-                                    </th>
+{#                                    <th class="w-50px text-center border-dark text-dark">#}
+{#                                        <div align="center">#}
+{#                                            <a data-provide="tooltip" data-tooltip-color="primary" title="Aulas"#}
+{#                                               style="font-size: 25px;" class="fa fa-folder-open" aria-hidden="true"#}
+{#                                               href="#"></a>#}
+{#                                        </div>#}
+{#                                    </th>#}
 
                                     </td>
                                 </tr>
@@ -60,6 +62,9 @@
             </div>
         </div>
 
+        <footer class="card-footer text-right no-print">
+            <a href="{% url 'pedagogico:listar_turmas' %}" class="btn btn-secondary" type="reset">Voltar</a>
+        </footer>
 
     </div>
 

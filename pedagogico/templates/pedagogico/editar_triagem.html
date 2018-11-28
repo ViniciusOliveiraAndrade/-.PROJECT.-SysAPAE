@@ -8,18 +8,18 @@
                 <li class="breadcrumb-item"><a href="{% url 'pedagogico:index' %}">Home</a></li>
                 <li class="breadcrumb-item"><a href="{% url 'pedagogico:listar_triagemSocial' %}">Triagem Social</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Triagem Pedagógica</li>
+                <li class="breadcrumb-item active" aria-current="page">Editar Triagem Pedagógica</li>
             </ol>
         </nav>
 
         <br>
-        <h1 class="font-dosis fw-500 text-center">Triagem Pedagógica</h1>
+        <h1 class="font-dosis fw-500 text-center">Edição da Triagem Pedagógica</h1>
         <br>
 
-       <div class="card-body card-round">
+        <div class="card-body card-round">
 
             <form id="formulario" class="card-body"
-                  action="{% url 'pedagogico:cadastro_triagemP' %}"
+                  action="{% url 'pedagogico:triagem_editar' Triagem.id %}"
                   method="post">
                 {% csrf_token %}
 
@@ -31,7 +31,8 @@
                         <div class="form-group">
                             <label>Usuário</label>
                             <input type="hidden" value="{{ Triagem.usuario.id }}" name="usuario"></input>
-                            <input style="color:#000;" type="text" class="form-control"
+                            <input style="color:#000;" type="text"
+                                   class="form-control visivel border border-dark text-dark rounded"
                                    value="{{ Triagem.usuario.nome }}" disabled="disabled">
                         </div>
                     </div>
@@ -42,7 +43,8 @@
                             <label>CID</label>
 
                             <input type="hidden" value="{{ Triagem.usuario.cid }}" name="cidUsuario"></input>
-                            <input style="color:#000;" type="text" class="form-control"
+                            <input style="color:#000;" type="text"
+                                   class="form-control visivel border border-dark text-dark rounded"
                                    value="{{ Triagem.usuario.cid }}" disabled="disabled">
                         </div>
                     </div>
@@ -51,8 +53,10 @@
 
                         <div class="form-group">
                             <label>Pai</label>
-                            <input style="color:#000;" type="text" class="form-control"
-                                   value="{{ Triagem.nome_pai }}" disabled="disabled" name="pai">
+                            <input style="color:#000;" type="text"
+                                   class="form-control visivel border border-dark text-dark rounded"
+                                   value="{{ Triagem.usuario.triagem_set.first.nome_pai }}" disabled="disabled"
+                                   name="pai">
                         </div>
                     </div>
 
@@ -60,8 +64,10 @@
 
                         <div class="form-group">
                             <label>Mãe</label>
-                            <input style="color:#000;" type="text" class="form-control"
-                                   value="{{ Triagem.nome_mae }}" disabled="disabled" name="mae">
+                            <input style="color:#000;" type="text"
+                                   class="form-control visivel border border-dark text-dark rounded"
+                                   value="{{ Triagem.usuario.triagem_set.first.nome_mae }}" disabled="disabled"
+                                   name="mae">
                         </div>
                     </div>
 
@@ -71,8 +77,9 @@
                             <label>Telefone</label>
 
                             <input type="hidden" value="{{ Triagem.telefone }}" name="telefoneContato"></input>
-                            <input style="color:#000;" type="text" class="form-control"
-                                   value="{{ Triagem.telefone }}" disabled="disabled">
+                            <input style="color:#000;" type="text"
+                                   class="form-control visivel border border-dark text-dark rounded"
+                                   value="{{ Triagem.usuario.triagem_set.first.telefone }}" disabled="disabled">
                         </div>
                     </div>
 
@@ -82,12 +89,14 @@
                             <label>Celular</label>
 
                             <input type="hidden" value="{{ Triagem.celular }}" name="celularContato"></input>
-                            <input style="color:#000;" type="text" class="form-control"
-                                   value="{{ Triagem.celular }}" disabled="disabled">
+                            <input style="color:#000;" type="text"
+                                   class="form-control visivel border border-dark text-dark rounded"
+                                   value="{{ Triagem.usuario.triagem_set.first.celular }}" disabled="disabled">
                         </div>
                     </div>
                 </div>
 
+                <br>
                 <br>
                 <h4 class="text-uppercase mt-3 text-left">Informações Especificas</h4>
 
@@ -96,8 +105,9 @@
 
                         <div class="form-group">
                             <label>Alimentação</label>
-                            <input class="form-control" type="text" id="alimentacao" name="alimentacao"
-                                   placeholder="Alimentação"></input>
+                            <input class="form-control visivel border border-dark text-dark rounded" type="text"
+                                   id="alimentacao" name="alimentacao"
+                                   placeholder="Alimentação" value="{{ Triagem.alimentacao }}">
                         </div>
                     </div>
 
@@ -109,13 +119,15 @@
 
                                 <div class="form-check form-check-inline">
                                     <label class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" value="sim" name="urinario">
+                                        <input type="radio" class="custom-control-input" value="sim" name="urinario"
+                                                {% if Triagem.controleUrinario %} checked {% endif %}>
                                         <span class="custom-control-indicator"></span>
                                         <span class="custom-control-description">Sim</span>
                                     </label>
 
                                     <label class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" value="nao" name="urinario">
+                                        <input type="radio" class="custom-control-input" value="nao" name="urinario"
+                                                {% if not Triagem.controleUrinario %} checked {% endif %}>
                                         <span class="custom-control-indicator"></span>
                                         <span class="custom-control-description">Não</span>
                                     </label>
@@ -132,13 +144,15 @@
 
                                 <div class="form-check form-check-inline">
                                     <label class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" value="sim" name="esfincter">
+                                        <input type="radio" class="custom-control-input" value="sim" name="esfincter"
+                                                {% if Triagem.controleEsfincter %} checked {% endif %}>
                                         <span class="custom-control-indicator"></span>
                                         <span class="custom-control-description">Sim</span>
                                     </label>
 
                                     <label class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" value="não" name="esfincter">
+                                        <input type="radio" class="custom-control-input" value="não" name="esfincter"
+                                                {% if not Triagem.controleEsfincter %} checked {% endif %}>
                                         <span class="custom-control-indicator"></span>
                                         <span class="custom-control-description">Não</span>
                                     </label>
@@ -152,43 +166,21 @@
                         <div class="form-group">
                             <label>A criança passa a maior parte do tempo com:</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="input-normal" name="cuidador"
-                                       placeholder="Cuidador">
+                                <input type="text" class="form-control visivel border border-dark text-dark rounded"
+                                       id="input-normal" name="cuidador"
+                                       placeholder="Cuidador" value="{{ Triagem.cuidador }}">
                             </div>
                         </div>
                     </div>
 
-
-                    <div class="col-lg-6 col-md-6 col-sm-12 text-left">
-                        <div class="form-group">
-                            <label>Turno na APAE</label><br>
-
-                            <div class="form-check form-check-inline">
-
-                                <div class="form-check form-check-inline">
-                                    <label class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" value="manha" name="turno">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Manhã</span>
-                                    </label>
-
-                                    <label class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" value="tarde" name="turno">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Tarde</span>
-                                    </label>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-12 text-left">
                         <div class="form-group">
                             <label>Quem toma as decisões a respeito da criança:</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="input-normal" name="responsavel"
-                                       placeholder="Responsável">
+                                <input type="text" class="form-control visivel border border-dark text-dark rounded"
+                                       id="input-normal" name="responsavel"
+                                       placeholder="Responsável" value="{{ Triagem.responsavel }}">
                             </div>
                         </div>
                     </div>
@@ -201,39 +193,39 @@
                             <div class="form-check form-check-inline">
 
                                 <label class="custom-control custom-control-lg custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" name="checkboxsize"
-                                           value="segunda" id="segunda">
+                                    <input type="checkbox" class="custom-control-input" name="segunda"
+                                           value="segunda" id="segunda" {% if Triagem.segunda %} checked {% endif %}>
                                     <span class="custom-control-indicator"></span>
                                     <span class="custom-control-description">Segunda</span>
                                 </label>
 
                                 <label class="custom-control custom-control-lg custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" name="checkboxsize"
-                                           value="terça" id="terca">
+                                    <input type="checkbox" class="custom-control-input" name="terca"
+                                           value="terca" id="terca" {% if Triagem.terca %} checked {% endif %}>
                                     <span class="custom-control-indicator"></span>
                                     <span class="custom-control-description">Terça</span>
                                 </label>
 
 
                                 <label class="custom-control custom-control-lg custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" name="checkboxsize"
-                                           value="quarta" id="quarta">
+                                    <input type="checkbox" class="custom-control-input" name="quarta"
+                                           value="quarta" id="quarta" {% if Triagem.quarta %} checked {% endif %}>
                                     <span class="custom-control-indicator"></span>
                                     <span class="custom-control-description">Quarta</span>
                                 </label>
 
 
                                 <label class="custom-control custom-control-lg custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" name="checkboxsize"
-                                           value="quinta" id="quinta">
+                                    <input type="checkbox" class="custom-control-input" name="quinta"
+                                           value="quinta" id="quinta" {% if Triagem.quinta %} checked {% endif %}>
                                     <span class="custom-control-indicator"></span>
                                     <span class="custom-control-description">Quinta</span>
                                 </label>
 
 
                                 <label class="custom-control custom-control-lg custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" name="checkboxsize"
-                                           value="sexta" id="sexta">
+                                    <input type="checkbox" class="custom-control-input" name="sexta"
+                                           value="sexta" id="sexta" {% if Triagem.sexta %} checked {% endif %}>
                                     <span class="custom-control-indicator"></span>
                                     <span class="custom-control-description">Sexta</span>
                                 </label>
@@ -246,15 +238,9 @@
 
                         <div class="form-group">
                             <label>Composição familiar:</label>
-                            <input type="text" class="form-control" id="input-normal" name="composicaoFamiliar">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-12 text-left">
-
-                        <div class="form-group">
-                            <label>Dorme com quem:</label>
-                            <input type="text" class="form-control" id="input-normal" name="dormeCom">
+                            <input type="text" class="form-control visivel border border-dark text-dark rounded"
+                                   id="input-normal" name="composicaoFamiliar"
+                                   value="{{ Triagem.composicaoFamiliar }}">
                         </div>
                     </div>
 
@@ -262,8 +248,9 @@
 
                         <div class="form-group">
                             <label>Horário de Dormir</label>
-                            <input type="text" class="form-control"
-                                   data-provide="timepicker" data-show-meridian="false" name="horaDormir">
+                            <input type="text" class="form-control visivel border border-dark text-dark rounded"
+                                   data-provide="timepicker" data-show-meridian="false" name="horaDormir"
+                                   value="{{ Triagem.horarioDormir }}">
                         </div>
                     </div>
 
@@ -271,8 +258,19 @@
 
                         <div class="form-group">
                             <label>Horário de Acordar</label>
-                            <input type="text" class="form-control"
-                                   data-provide="timepicker" data-show-meridian="false" name="horaAcordar">
+                            <input type="text" class="form-control visivel border border-dark text-dark rounded"
+                                   data-provide="timepicker" data-show-meridian="false" name="horaAcordar"
+                                   value="{{ Triagem.horarioAcordar }}">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 text-left">
+
+                        <div class="form-group">
+                            <label>Dorme com quem:</label>
+                            <input type="text" class="form-control visivel border border-dark text-dark rounded"
+                                   id="input-normal" name="dormeCom"
+                                   value="{{ Triagem.dormeCom }}">
                         </div>
                     </div>
 
@@ -280,14 +278,141 @@
                     <div class="col-lg-12 col-md-6 col-sm-12 text-left">
 
                         <div class="form-group">
-                            <label>OBS:</label>
-                            <textarea class="form-control" id="textarea" rows="3" name="observacao"></textarea>
+                            <label>Observações:</label>
+                            <textarea class="form-control visivel border border-dark text-dark rounded" id="textarea"
+                                      rows="3" name="observacao"
+                            >{{ Triagem.controleObservacao }}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+                <h4 class="text-uppercase mt-3 text-left">Pedagógico</h4>
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="form-group">
+                            <label>Música <i class="text-danger">*</i></label>
+                            <div>
+                                <select data-provide="selectpicker" name="musica"
+                                        style="color: #000; font-size: 15px; border-color: #444;"
+                                        class="visivel border border-dark text-dark rounded" required>
+
+                                    <option class="visivel text-dark" {% if Triagem.musica == "SIM"%} selected="selected" {% endif %}>SIM</option>
+                                    <option class="visivel text-dark" {% if not Triagem.musica == "SIM"%} selected="selected" {% endif %}>NÂO</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="form-group">
+                            <label>Dança <i class="text-danger">*</i></label>
+                            <div>
+                                <select data-provide="selectpicker" name="danca"
+                                        style="color: #000; font-size: 15px; border-color: #444;"
+                                        class="visivel border border-dark text-dark rounded" required>
+
+                                   <option class="visivel text-dark" {% if Triagem.danca == "SIM"%} selected="selected" {% endif %}>SIM</option>
+                                    <option class="visivel text-dark" {% if not Triagem.danca == "SIM"%} selected="selected" {% endif %}>NÂO</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="form-group">
+                            <label>Pintura <i class="text-danger">*</i></label>
+                            <div>
+                                <select data-provide="selectpicker" name="pintura"
+                                        style="color: #000; font-size: 15px; border-color: #444;"
+                                        class="visivel border border-dark text-dark rounded" required>
+
+                                    <option class="visivel text-dark" {% if Triagem.pintura == "SIM"%} selected="selected" {% endif %}>SIM</option>
+                                    <option class="visivel text-dark" {% if not Triagem.pintura == "SIM"%} selected="selected" {% endif %}>NÂO</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="form-group">
+                            <label>Jiu-Jitsu <i class="text-danger">*</i></label>
+                            <div>
+                                <select data-provide="selectpicker" name="jiujtso"
+                                        style="color: #000; font-size: 15px; border-color: #444;"
+                                        class="visivel border border-dark text-dark rounded" required>
+
+                                    <option class="visivel text-dark" {% if Triagem.jiujitsu == "SIM"%} selected="selected" {% endif %}>SIM</option>
+                                    <option class="visivel text-dark" {% if not Triagem.jiujitsu == "SIM"%} selected="selected" {% endif %}>NÂO</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="form-group">
+                            <label>Educação Física <i class="text-danger">*</i></label>
+                            <div>
+                                <select data-provide="selectpicker" name="edFisica"
+                                        style="color: #000; font-size: 15px; border-color: #444;"
+                                        class="visivel border border-dark text-dark rounded" required>
+
+                                    <option class="visivel text-dark" {% if Triagem.edFisica == "SIM"%} selected="selected" {% endif %}>SIM</option>
+                                    <option class="visivel text-dark" {% if not Triagem.edFisica == "SIM"%} selected="selected" {% endif %}>NÂO</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="form-group">
+                            <label>Informática <i class="text-danger">*</i></label>
+                            <div>
+                                <select data-provide="selectpicker" name="informatica"
+                                        style="color: #000; font-size: 15px; border-color: #444;"
+                                        class="visivel border border-dark text-dark rounded" required>
+
+                                    <option class="visivel text-dark" {% if Triagem.informatica == "SIM"%} selected="selected" {% endif %}>SIM</option>
+                                    <option class="visivel text-dark" {% if not Triagem.informatica == "SIM"%} selected="selected" {% endif %}>NÂO</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="form-group">
+                            <label>Robótica <i class="text-danger">*</i></label>
+                            <div>
+                                <select data-provide="selectpicker" name="robotica"
+                                        style="color: #000; font-size: 15px; border-color: #444;"
+                                        class="visivel border border-dark text-dark rounded" required>
+
+                                    <option class="visivel text-dark" {% if Triagem.robotica == "SIM"%} selected="selected" {% endif %}>SIM</option>
+                                    <option class="visivel text-dark" {% if not Triagem.robotica == "SIM"%} selected="selected" {% endif %}>NÂO</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="form-group">
+                            <label>Teatro <i class="text-danger">*</i></label>
+                            <div>
+                                <select data-provide="selectpicker" name="teatro"
+                                        style="color: #000; font-size: 15px; border-color: #444;"
+                                        class="visivel border border-dark text-dark rounded" required>
+
+                                    <option class="visivel text-dark" {% if Triagem.teatro == "SIM"%} selected="selected" {% endif %}>SIM</option>
+                                    <option class="visivel text-dark" {% if not Triagem.teatro == "SIM"%} selected="selected" {% endif %}>NÂO</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 
                 </div>
 
-
+                <br>
                 <br>
                 <h4 class="text-uppercase text-left">Aspectos de Desenvolvimento</h4>
                 <br>
@@ -295,9 +420,9 @@
                 <div class="form-group">
                     <table class="table table-bordered border-dark text-dark tabelaesticada">
                         <thead>
-                        <tr class="text-uppercase" style="background-color: #e5e5e5">
-                            <th class="border-dark text-dark text-center"><b>Questão</b></th>
-                            <th class="w-150px text-center border-dark text-dark"><b>Ação</b></th>
+                        <tr class="text-uppercase" style="background-color: black; color: #fff;">
+                            <th class="border-dark text-center"><b>Questão</b></th>
+                            <th class="w-150px text-center border-dark"><b>Ação</b></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -305,14 +430,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Fala Bem</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline ">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0 pr-0 ">
                                         <select class="form-control" id="select" name="fala">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.falaBem 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.falaBem 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.falaBem 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -322,14 +453,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Comunica-se utilizando gestos</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="gestos">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.comunicacaoGestos 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.comunicacaoGestos 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.comunicacaoGestos 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -339,14 +476,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Apresenta gagueira</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="gago">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.gagueira 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.gagueira 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.gagueira 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -356,14 +499,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Enxerga Bem</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="enxerga">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.enxergaBem 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.enxergaBem 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.enxergaBem 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -373,14 +522,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Usa a mão direita</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="direita">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.destro 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.destro 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.destro 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -390,13 +545,19 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Usa a mão esquerda</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="esquerda">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.esquerda 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.esquerda 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.esquerda 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -406,14 +567,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Faz balbucio</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="balbucio">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.fazBalbucio 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.fazBalbucio 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.fazBalbucio 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -429,9 +596,9 @@
                 <div class="form-group ">
                     <table class="table table-bordered border-dark text-dark tabelaesticada">
                         <thead>
-                        <tr class="text-uppercase border-dark text-dark" style="background-color: #e5e5e5">
-                            <th class="text-center border-dark text-dark"><b>Questão</b></th>
-                            <th class="w-150px text-center border-dark text-dark"><b>Ação</b></th>
+                        <tr class="text-uppercase border-dark" style="background-color: black; color: #fff;">
+                            <th class="text-center border-dark"><b>Questão</b></th>
+                            <th class="w-150px text-center border-dark "><b>Ação</b></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -439,14 +606,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Anda naturalmente</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="anda">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.anda 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.anda 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.anda 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -456,14 +629,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Segura corretamente o lápis</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="segura">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.seguraLapis 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.seguraLapis 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.seguraLapis 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
 
@@ -474,14 +653,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Senta corretamente</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="senta">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.sentaCorretamente 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.sentaCorretamente 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.sentaCorretamente 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -491,14 +676,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Cai muito</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="cai">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.caiMuito 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.caiMuito 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.caiMuito 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -508,14 +699,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Cansa facilmente</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="cansa">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.cansaFacil 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.cansaFacil 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.cansaFacil 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -531,9 +728,9 @@
                 <div class="form-group">
                     <table class="table table-bordered tabelaesticada border-dark text-dark">
                         <thead>
-                        <tr style="background-color: #e5e5e5" class="text-uppercase">
-                            <th class="border-dark text-dark text-center"><b>Questão</b></th>
-                            <th class="w-150px text-center border-dark text-dark"><b>Ação</b></th>
+                        <tr style="background-color: black; color: #fff;" class="text-uppercase">
+                            <th class="border-dark text-center"><b>Questão</b></th>
+                            <th class="w-150px text-center border-dark"><b>Ação</b></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -541,14 +738,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Demonstra afeto</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="demonstra">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.demonstraAfeto 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.demonstraAfeto 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.demonstraAfeto 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -558,14 +761,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Solicita afeto</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="solicita">
-                                            <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                           <option></option>
+                                            <option value="s" {% ifequal Triagem.solicitaAfeto 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.solicitaAfeto 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.solicitaAfeto 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -575,14 +784,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>É medroso</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="medroso">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.medroso 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.medroso 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.medroso 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -592,14 +807,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>É agressivo</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="agressivo">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.agressivo 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.agressivo 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.agressivo 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -609,14 +830,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Reage quando contrariado</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="reage">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.reageContrariado 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.reageContrariado 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.reageContrariado 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -626,14 +853,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Possui algum tique</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="tique">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.tique 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.tique 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.tique 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -643,14 +876,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Chora com facilidade</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="chora">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.choraFacilidade 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.choraFacilidade 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.choraFacilidade 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -666,9 +905,9 @@
                 <div class="form-group">
                     <table class="table table-bordered tabelaesticada border-dark text-dark">
                         <thead>
-                        <tr class="text-uppercase" style="background-color: #e5e5e5">
-                            <th class="text-center border-dark text-dark"><b>Questão</b></th>
-                            <th class="w-150px text-center border-dark text-dark"><b>Ação</b></th>
+                        <tr class="text-uppercase" style="background-color: black; color: #fff;">
+                            <th class="text-center border-dark"><b>Questão</b></th>
+                            <th class="w-150px text-center border-dark"><b>Ação</b></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -676,14 +915,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Sabe esperar sua vez</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="espera">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.sabeEspear 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.sabeEspear 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.sabeEspear 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -693,14 +938,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Obedece as ordens dadas</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="obedece">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.obedeceOrdens 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.obedeceOrdens 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.obedeceOrdens 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -710,14 +961,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Procura fazer amizades</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="amizades">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.fazAmizade 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.fazAmizade 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.fazAmizade 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -727,14 +984,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Isola-se</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="isola">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.isolase 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.isolase 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.isolase 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -744,14 +1007,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Divide suas coisas</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="divide">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.compartilha 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.compartilha 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.compartilha 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -761,14 +1030,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Se relaciona com o grupo</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="relaciona">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.seRelaciona 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.seRelaciona 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.seRelaciona 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -784,9 +1059,9 @@
                 <div class="form-group">
                     <table class="table table-bordered tabelaesticada border-dark text-dark table-responsive">
                         <thead>
-                        <tr class="border-dark text-dark text-uppercase" style="background-color: #e5e5e5">
-                            <th class="border-dark text-dark text-center"><b>Questão</b></th>
-                            <th class="w-150px text-center border-dark text-dark"><b>Ação</b></th>
+                        <tr class="border-dark text-uppercase" style="background-color: black; color: #fff;">
+                            <th class="border-dark text-center"><b>Questão</b></th>
+                            <th class="w-150px text-center border-dark"><b>Ação</b></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -794,14 +1069,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Pronucia corretamente as palavras</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="pronucia">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.pronuciaCorretamente 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.pronuciaCorretamente 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.pronuciaCorretamente 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -812,14 +1093,20 @@
                             <td align="left" class="border-dark text-dark"><b>Expressa seu pensamento de forma clara</b>
                             </td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="expressa">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.expressaPensanetos 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.expressaPensanetos 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.expressaPensanetos 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -829,14 +1116,20 @@
                         <tr>
                             <td align="left" class="border-dark text-dark"><b>Consegue transmitir recados</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="recado">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.transmiteRecados 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.transmiteRecados 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.transmiteRecados 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -847,14 +1140,20 @@
                             <td align="left" class="border-dark text-dark"><b>Atenta para instruções fazendo o que é
                                 pedido</b></td>
                             <td class="border-dark text-dark">
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline visivel border border-dark text-dark rounded">
 
                                     <div class="form-group mb-0">
                                         <select class="form-control" id="select" name="instrucoes">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s" {% ifequal Triagem.fazPedido 's' %}
+                                                    selected {% endifequal %} >SIM
+                                            </option>
+                                            <option value="n"  {% ifequal Triagem.fazPedido 'n' %}
+                                                    selected {% endifequal %}>NÃO
+                                            </option>
+                                            <option value="a"  {% ifequal Triagem.fazPedido 'a' %}
+                                                    selected {% endifequal %}>ÀS VEZES
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -873,18 +1172,21 @@
 
 
                         <div class="form-group">
-                            <label><b>Descrição do usuário</b></label>
-                            <textarea class="form-control" id="textarea" rows="4" name="descricao"></textarea>
+                            <label><b>Descrição do usuário:</b></label>
+                            <textarea class="form-control visivel border border-dark text-dark rounded" id="textarea" rows="4"
+                                      name="descricao">{{ Triagem.descricaoUsuario }}</textarea>
                         </div>
                     </div>
 
                     <div class="col-lg-4 col-md-6 col-sm-12 text-left">
 
                         <div class="form-group">
-                            <label>Turma</label>
-                            <select class="form-control" id="select" name="turmaTriagem">
+                            <label>Turma:</label>
+                            <select disabled="true" data-provide="selectpicker" class="form-control visivel border border-dark text-dark rounded" id="select" name="turmaTriagem">
                                 {% for turma in Turmas %}
-                                    <option>{{ turma.nome }}</option>
+                                    <option {% ifequal Triagem.usuario.turma_set.first.nome turma.nome %}
+                                        selected {% endifequal %}>{{ turma.nome }} / {% if turma.turno %}
+                                        Manhã {% else %} Tarde {% endif %}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -895,7 +1197,7 @@
 
                         <div class="form-group">
                             <label>Data da Triagem:</label>
-                            <input style="color:#000;" type="text" class="form-control"
+                            <input style="color:#000;" type="text" class="form-control visivel border border-dark text-dark rounded"
                                    id="dataTriagem" disabled>
                             <input type="hidden" name="data" id="data">
                         </div>
@@ -905,7 +1207,8 @@
 
                         <div class="form-group">
                             <label>Triagem realizada com:</label>
-                            <input type="text" class="form-control" name="responsavelTriagem">
+                            <input disabled type="text" class="form-control visivel border border-dark text-dark rounded" name="responsavelTriagem"
+                                   value="{{ Triagem.pessoaQuestionada }}">
                         </div>
                     </div>
 
@@ -913,8 +1216,9 @@
 
 
                 <footer class="card-footer text-right">
-                    <a href="{% url 'pedagogico:listar_triagemSocial' %}" class="btn btn-secondary" type="reset">Cancelar</a>
-                    <button class="btn btn-primary" type="submit">Realizar</button>
+                    <a href="{% url 'pedagogico:listagem_pedagogica' %}" class="btn btn-secondary"
+                       type="reset">Cancelar</a>
+                    <button class="btn btn-primary" type="submit">Salvar</button>
                 </footer>
             </form>
         </div>

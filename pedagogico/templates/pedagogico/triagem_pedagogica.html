@@ -31,7 +31,8 @@
                         <div class="form-group">
                             <label>Usuário</label>
                             <input type="hidden" value="{{ Triagem.usuario.id }}" name="usuario"></input>
-                            <input style="color:#000;" type="text" class="form-control"
+                            <input style="color:#000;" type="text"
+                                   class="form-control visivel border border-dark text-dark rounded"
                                    value="{{ Triagem.usuario.nome }}" disabled="disabled">
                         </div>
                     </div>
@@ -42,7 +43,8 @@
                             <label>CID</label>
 
                             <input type="hidden" value="{{ Triagem.usuario.cid }}" name="cidUsuario"></input>
-                            <input style="color:#000;" type="text" class="form-control"
+                            <input style="color:#000;" type="text"
+                                   class="form-control visivel border border-dark text-dark rounded"
                                    value="{{ Triagem.usuario.cid }}" disabled="disabled">
                         </div>
                     </div>
@@ -51,7 +53,8 @@
 
                         <div class="form-group">
                             <label>Pai</label>
-                            <input style="color:#000;" type="text" class="form-control"
+                            <input style="color:#000;" type="text"
+                                   class="form-control visivel border border-dark text-dark rounded"
                                    value="{{ Triagem.nome_pai }}" disabled="disabled" name="pai">
                         </div>
                     </div>
@@ -60,7 +63,8 @@
 
                         <div class="form-group">
                             <label>Mãe</label>
-                            <input style="color:#000;" type="text" class="form-control"
+                            <input style="color:#000;" type="text"
+                                   class="form-control visivel border border-dark text-dark rounded"
                                    value="{{ Triagem.nome_mae }}" disabled="disabled" name="mae">
                         </div>
                     </div>
@@ -71,7 +75,8 @@
                             <label>Telefone</label>
 
                             <input type="hidden" value="{{ Triagem.telefone }}" name="telefoneContato"></input>
-                            <input style="color:#000;" type="text" class="form-control"
+                            <input style="color:#000;" type="text"
+                                   class="form-control visivel border border-dark text-dark rounded"
                                    value="{{ Triagem.telefone }}" disabled="disabled">
                         </div>
                     </div>
@@ -82,12 +87,17 @@
                             <label>Celular</label>
 
                             <input type="hidden" value="{{ Triagem.celular }}" name="celularContato"></input>
-                            <input style="color:#000;" type="text" class="form-control"
+                            <input style="color:#000;" type="text"
+                                   class="form-control visivel border border-dark text-dark rounded"
                                    value="{{ Triagem.celular }}" disabled="disabled">
                         </div>
                     </div>
                 </div>
+                <br>
 
+{#                <hr style="height:1px; border:none; color:#000; background-color:#000; margin-top: 0px; margin-bottom: 0px;"/>#}
+
+                <br>
                 <br>
                 <h4 class="text-uppercase mt-3 text-left">Informações Especificas</h4>
 
@@ -95,27 +105,30 @@
                     <div class="col-lg-6 col-md-6 col-sm-12 text-left">
 
                         <div class="form-group">
-                            <label>Alimentação</label>
-                            <input class="form-control" type="text" id="alimentacao" name="alimentacao"
+                            <label>Alimentação &nbsp;</label><i style="color: red">*</i>
+                            <input required class="form-control visivel border border-dark text-dark rounded"
+                                   type="text" id="alimentacao" name="alimentacao"
                                    placeholder="Alimentação"></input>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-md-6 col-sm-12 text-left">
                         <div class="form-group">
-                            <label>Controle Urináro</label><br>
+                            <label>Controle Urináro &nbsp;</label><i style="color: red">*</i><br>
 
                             <div class="form-check form-check-inline">
 
                                 <div class="form-check form-check-inline">
                                     <label class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" value="sim" name="urinario">
+                                        <input required type="radio" class="custom-control-input" value="sim"
+                                               name="urinario">
                                         <span class="custom-control-indicator"></span>
                                         <span class="custom-control-description">Sim</span>
                                     </label>
 
                                     <label class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" value="nao" name="urinario">
+                                        <input required type="radio" class="custom-control-input" value="nao"
+                                               name="urinario">
                                         <span class="custom-control-indicator"></span>
                                         <span class="custom-control-description">Não</span>
                                     </label>
@@ -127,18 +140,20 @@
 
                     <div class="col-lg-3 col-md-6 col-sm-12 text-left">
                         <div class="form-group">
-                            <label>Controle Esfíncter</label><br>
+                            <label>Controle Esfíncter &nbsp;</label><i style="color: red">*</i><br>
                             <div class="form-check form-check-inline">
 
                                 <div class="form-check form-check-inline">
                                     <label class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" value="sim" name="esfincter">
+                                        <input required type="radio" class="custom-control-input" value="sim"
+                                               name="esfincter">
                                         <span class="custom-control-indicator"></span>
                                         <span class="custom-control-description">Sim</span>
                                     </label>
 
                                     <label class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" value="não" name="esfincter">
+                                        <input required type="radio" class="custom-control-input" value="não"
+                                               name="esfincter">
                                         <span class="custom-control-indicator"></span>
                                         <span class="custom-control-description">Não</span>
                                     </label>
@@ -150,9 +165,11 @@
 
                     <div class="col-lg-6 col-md-6 col-sm-12 text-left">
                         <div class="form-group">
-                            <label>A criança passa a maior parte do tempo com:</label>
+                            <label>A criança passa a maior parte do tempo com: &nbsp;</label><i style="color: red">*</i>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="input-normal" name="cuidador"
+                                <input required type="text"
+                                       class="form-control visivel border border-dark text-dark rounded"
+                                       id="input-normal" name="cuidador"
                                        placeholder="Cuidador">
                             </div>
                         </div>
@@ -161,33 +178,12 @@
 
                     <div class="col-lg-6 col-md-6 col-sm-12 text-left">
                         <div class="form-group">
-                            <label>Turno na APAE</label><br>
-
-                            <div class="form-check form-check-inline">
-
-                                <div class="form-check form-check-inline">
-                                    <label class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" value="manha" name="turno">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Manhã</span>
-                                    </label>
-
-                                    <label class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" value="tarde" name="turno">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Tarde</span>
-                                    </label>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-12 text-left">
-                        <div class="form-group">
-                            <label>Quem toma as decisões a respeito da criança:</label>
+                            <label>Quem toma as decisões a respeito da criança: &nbsp;</label><i
+                                style="color: red">*</i>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="input-normal" name="responsavel"
+                                <input required type="text"
+                                       class="form-control visivel border border-dark text-dark rounded"
+                                       id="input-normal" name="responsavel"
                                        placeholder="Responsável">
                             </div>
                         </div>
@@ -196,27 +192,27 @@
 
                     <div class="col-lg-6 col-md-6 col-sm-12 text-left">
                         <div class="form-group">
-                            <label>Dias na APAE</label><br>
+                            <label>Dias na APAE &nbsp;</label><i style="color: red">*</i><br>
 
                             <div class="form-check form-check-inline">
 
                                 <label class="custom-control custom-control-lg custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" name="checkboxsize"
+                                    <input type="checkbox" class="custom-control-input" name="segunda"
                                            value="segunda" id="segunda">
                                     <span class="custom-control-indicator"></span>
                                     <span class="custom-control-description">Segunda</span>
                                 </label>
 
                                 <label class="custom-control custom-control-lg custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" name="checkboxsize"
-                                           value="terça" id="terca">
+                                    <input type="checkbox" class="custom-control-input" name="terca"
+                                           value="terca" id="terca">
                                     <span class="custom-control-indicator"></span>
                                     <span class="custom-control-description">Terça</span>
                                 </label>
 
 
                                 <label class="custom-control custom-control-lg custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" name="checkboxsize"
+                                    <input type="checkbox" class="custom-control-input" name="quarta"
                                            value="quarta" id="quarta">
                                     <span class="custom-control-indicator"></span>
                                     <span class="custom-control-description">Quarta</span>
@@ -224,7 +220,7 @@
 
 
                                 <label class="custom-control custom-control-lg custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" name="checkboxsize"
+                                    <input type="checkbox" class="custom-control-input" name="quinta"
                                            value="quinta" id="quinta">
                                     <span class="custom-control-indicator"></span>
                                     <span class="custom-control-description">Quinta</span>
@@ -232,7 +228,7 @@
 
 
                                 <label class="custom-control custom-control-lg custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" name="checkboxsize"
+                                    <input type="checkbox" class="custom-control-input" name="sexta"
                                            value="sexta" id="sexta">
                                     <span class="custom-control-indicator"></span>
                                     <span class="custom-control-description">Sexta</span>
@@ -245,24 +241,20 @@
                     <div class="col-lg-6 col-md-6 col-sm-12 text-left">
 
                         <div class="form-group">
-                            <label>Composição familiar:</label>
-                            <input type="text" class="form-control" id="input-normal" name="composicaoFamiliar">
+                            <label>Composição familiar: &nbsp;</label><i style="color: red">*</i>
+                            <input required type="text"
+                                   class="form-control visivel border border-dark text-dark rounded" id="input-normal"
+                                   name="composicaoFamiliar">
                         </div>
                     </div>
+
 
                     <div class="col-lg-6 col-md-6 col-sm-12 text-left">
 
                         <div class="form-group">
-                            <label>Dorme com quem:</label>
-                            <input type="text" class="form-control" id="input-normal" name="dormeCom">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-12 text-left">
-
-                        <div class="form-group">
-                            <label>Horário de Dormir</label>
-                            <input type="text" class="form-control"
+                            <label>Horário de Dormir: &nbsp;</label><i style="color: red">*</i>
+                            <input required type="text"
+                                   class="form-control visivel border border-dark text-dark rounded"
                                    data-provide="timepicker" data-show-meridian="false" name="horaDormir">
                         </div>
                     </div>
@@ -270,34 +262,176 @@
                     <div class="col-lg-6 col-md-6 col-sm-12 text-left">
 
                         <div class="form-group">
-                            <label>Horário de Acordar</label>
-                            <input type="text" class="form-control"
+                            <label>Horário de Acordar: &nbsp;</label><i style="color: red">*</i>
+                            <input required type="text"
+                                   class="form-control visivel border border-dark text-dark rounded"
                                    data-provide="timepicker" data-show-meridian="false" name="horaAcordar">
                         </div>
                     </div>
 
+                    <div class="col-lg-6 col-md-6 col-sm-12 text-left">
+
+                        <div class="form-group">
+                            <label>Dorme com quem: &nbsp;</label><i style="color: red">*</i>
+                            <input required type="text"
+                                   class="form-control visivel border border-dark text-dark rounded" id="input-normal"
+                                   name="dormeCom">
+                        </div>
+                    </div>
 
                     <div class="col-lg-12 col-md-6 col-sm-12 text-left">
 
                         <div class="form-group">
-                            <label>OBS:</label>
-                            <textarea class="form-control" id="textarea" rows="3" name="observacao"></textarea>
+                            <label>Observações:</label>
+                            <textarea class="form-control visivel border border-dark text-dark rounded" id="textarea"
+                                      rows="3" name="observacao"
+                                      style="color: #000; font-size: 15px; border-color: #444;"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+
+{#                <hr style="height:1px; border:none; color:#000; background-color:#000; margin-top: 0px; margin-bottom: 0px;"/>#}
+                <br>
+                <br>
+                <h4 class="text-uppercase mt-3 text-left">Informações Pedagógicas</h4>
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="form-group">
+                            <label>Música <i class="text-danger">*</i></label>
+                            <div>
+                                <select data-provide="selectpicker" name="musica"
+                                        style="color: #000; font-size: 15px; border-color: #444;"
+                                        class="visivel border border-dark text-dark rounded" required>
+
+                                    <option class="visivel text-dark">SIM</option>
+                                    <option class="visivel text-dark" selected="selected">NÂO</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="form-group">
+                            <label>Dança <i class="text-danger">*</i></label>
+                            <div>
+                                <select data-provide="selectpicker" name="danca"
+                                        style="color: #000; font-size: 15px; border-color: #444;"
+                                        class="visivel border border-dark text-dark rounded" required>
+
+                                    <option class="visivel text-dark">SIM</option>
+                                    <option class="visivel text-dark" selected="selected">NÂO</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="form-group">
+                            <label>Pintura <i class="text-danger">*</i></label>
+                            <div>
+                                <select data-provide="selectpicker" name="pintura"
+                                        style="color: #000; font-size: 15px; border-color: #444;"
+                                        class="visivel border border-dark text-dark rounded" required>
+
+                                    <option class="visivel text-dark">SIM</option>
+                                    <option class="visivel text-dark" selected="selected">NÂO</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="form-group">
+                            <label>Jiu-Jitsu <i class="text-danger">*</i></label>
+                            <div>
+                                <select data-provide="selectpicker" name="jiujtso"
+                                        style="color: #000; font-size: 15px; border-color: #444;"
+                                        class="visivel border border-dark text-dark rounded" required>
+
+                                    <option class="visivel text-dark">SIM</option>
+                                    <option class="visivel text-dark" selected="selected">NÂO</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="form-group">
+                            <label>Educação Fisíca <i class="text-danger">*</i></label>
+                            <div>
+                                <select data-provide="selectpicker" name="edFisica"
+                                        style="color: #000; font-size: 15px; border-color: #444;"
+                                        class="visivel border border-dark text-dark rounded" required>
+
+                                    <option class="visivel text-dark">SIM</option>
+                                    <option class="visivel text-dark" selected="selected">NÂO</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="form-group">
+                            <label>Imformática <i class="text-danger">*</i></label>
+                            <div>
+                                <select data-provide="selectpicker" name="informatica"
+                                        style="color: #000; font-size: 15px; border-color: #444;"
+                                        class="visivel border border-dark text-dark rounded" required>
+
+                                    <option class="visivel text-dark">SIM</option>
+                                    <option class="visivel text-dark" selected="selected">NÂO</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="form-group">
+                            <label>ROobótica <i class="text-danger">*</i></label>
+                            <div>
+                                <select data-provide="selectpicker" name="robotica"
+                                        style="color: #000; font-size: 15px; border-color: #444;"
+                                        class="visivel border border-dark text-dark rounded" required>
+
+                                    <option class="visivel text-dark">SIM</option>
+                                    <option class="visivel text-dark" selected="selected">NÂO</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="form-group">
+                            <label>Teatro <i class="text-danger">*</i></label>
+                            <div>
+                                <select data-provide="selectpicker" name="teatro"
+                                        style="color: #000; font-size: 15px; border-color: #444;"
+                                        class="visivel border border-dark text-dark rounded" required>
+
+                                    <option class="visivel text-dark">SIM</option>
+                                    <option class="visivel text-dark" selected="selected">NÂO</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 
                 </div>
 
-
+                <br>
+                <br>
                 <br>
                 <h4 class="text-uppercase text-left">Aspectos de Desenvolvimento</h4>
                 <br>
 
                 <div class="form-group">
-                    <table class="table table-bordered border-dark text-dark tabelaesticada">
+                    <table class="table table-bordered border-dark text-dark tabelaesticada ">
                         <thead>
-                        <tr class="text-uppercase" style="background-color: #e5e5e5">
-                            <th class="border-dark text-dark text-center"><b>Questão</b></th>
-                            <th class="w-150px text-center border-dark text-dark"><b>Ação</b></th>
+                        <tr class="text-uppercase" style="background-color: black; color: #fff;">
+                            <th class="border-dark text-center"><b>Questão</b></th>
+                            <th class="w-150px text-center border-dark"><b>Ação</b></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -308,11 +442,12 @@
                                 <div class="form-check form-check-inline ">
 
                                     <div class="form-group mb-0 pr-0 ">
-                                        <select class="form-control" id="select" name="fala">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="fala"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -325,11 +460,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="gestos">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="gestos"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -342,11 +478,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="gago">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="gago"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -359,11 +496,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="enxerga">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="enxerga"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -376,11 +514,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="direita">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="direita"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -392,11 +531,12 @@
                             <td class="border-dark text-dark">
                                 <div class="form-check form-check-inline">
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="esquerda">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="esquerda"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -409,11 +549,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="balbucio">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="balbucio"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -429,9 +570,9 @@
                 <div class="form-group ">
                     <table class="table table-bordered border-dark text-dark tabelaesticada">
                         <thead>
-                        <tr class="text-uppercase border-dark text-dark" style="background-color: #e5e5e5">
-                            <th class="text-center border-dark text-dark"><b>Questão</b></th>
-                            <th class="w-150px text-center border-dark text-dark"><b>Ação</b></th>
+                        <tr class="text-uppercase border-dark" style="background-color: black; color: #fff;">
+                            <th class="text-center border-dark"><b>Questão</b></th>
+                            <th class="w-150px text-center border-dark"><b>Ação</b></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -442,11 +583,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="anda">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="anda"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -459,11 +601,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="segura">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="segura"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
 
@@ -477,11 +620,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="senta">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="senta"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -494,11 +638,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="cai">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="cai"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -511,11 +656,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="cansa">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="cansa"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -531,9 +677,9 @@
                 <div class="form-group">
                     <table class="table table-bordered tabelaesticada border-dark text-dark">
                         <thead>
-                        <tr style="background-color: #e5e5e5" class="text-uppercase">
-                            <th class="border-dark text-dark text-center"><b>Questão</b></th>
-                            <th class="w-150px text-center border-dark text-dark"><b>Ação</b></th>
+                        <tr style="background-color: black; color: #fff;" class="text-uppercase">
+                            <th class="border-dark text-center"><b>Questão</b></th>
+                            <th class="w-150px text-center border-dark"><b>Ação</b></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -544,11 +690,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="demonstra">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="demonstra"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -561,11 +708,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="solicita">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="solicita"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -578,11 +726,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="medroso">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="medroso"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -595,11 +744,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="agressivo">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="agressivo"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -612,11 +762,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="reage">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="reage"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -629,11 +780,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="tique">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="tique"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -646,11 +798,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="chora">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="chora"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -666,9 +819,9 @@
                 <div class="form-group">
                     <table class="table table-bordered tabelaesticada border-dark text-dark">
                         <thead>
-                        <tr class="text-uppercase" style="background-color: #e5e5e5">
-                            <th class="text-center border-dark text-dark"><b>Questão</b></th>
-                            <th class="w-150px text-center border-dark text-dark"><b>Ação</b></th>
+                        <tr class="text-uppercase" style="background-color: black; color: #fff;">
+                            <th class="text-center border-dark"><b>Questão</b></th>
+                            <th class="w-150px text-center border-dark"><b>Ação</b></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -679,11 +832,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="espera">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="espera"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -696,11 +850,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="obedece">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="obedece"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -713,11 +868,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="amizades">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="amizades"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -730,11 +886,13 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="isola">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="isola"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -747,11 +905,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="divide">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="divide"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -764,11 +923,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="relaciona">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="relaciona"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -784,9 +944,9 @@
                 <div class="form-group">
                     <table class="table table-bordered tabelaesticada border-dark text-dark table-responsive">
                         <thead>
-                        <tr class="border-dark text-dark text-uppercase" style="background-color: #e5e5e5">
-                            <th class="border-dark text-dark text-center"><b>Questão</b></th>
-                            <th class="w-150px text-center border-dark text-dark"><b>Ação</b></th>
+                        <tr class="border-dark text-uppercase" style="background-color: black; color: #fff;">
+                            <th class="border-dark text-center"><b>Questão</b></th>
+                            <th class="w-150px text-center border-dark"><b>Ação</b></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -797,11 +957,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="pronucia">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="pronucia"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -815,11 +976,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="expressa">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="expressa"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -832,11 +994,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="recado">
+                                        <select class="form-control visivel border border-dark text-dark rounded" id="select" name="recado"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -850,11 +1013,12 @@
                                 <div class="form-check form-check-inline">
 
                                     <div class="form-group mb-0">
-                                        <select class="form-control" id="select" name="instrucoes">
+                                        <select class="form-control rounded" id="select" name="instrucoes"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
                                             <option></option>
-                                            <option>Sim</option>
-                                            <option>Não</option>
-                                            <option>Às vezes</option>
+                                            <option value="s">SIM</option>
+                                            <option value="n">NÃO</option>
+                                            <option value="a">ÀS VEZES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -873,18 +1037,21 @@
 
 
                         <div class="form-group">
-                            <label><b>Descrição do usuário</b></label>
-                            <textarea class="form-control" id="textarea" rows="4" name="descricao"></textarea>
+                            <label>Descrição do usuário:</label>
+                            <textarea class="form-control visivel border border-dark text-dark rounded" id="textarea"
+                                      rows="4" name="descricao"></textarea>
                         </div>
                     </div>
 
                     <div class="col-lg-4 col-md-6 col-sm-12 text-left">
 
                         <div class="form-group">
-                            <label>Turma</label>
-                            <select class="form-control" id="select" name="turmaTriagem">
+                            <label>Turma:</label>
+                            <select class="form-control visivel border border-dark text-dark rounded" id="select"
+                                    name="turmaTriagem" style="color: #000; font-size: 15px; border-color: #444;">
                                 {% for turma in Turmas %}
-                                    <option>{{ turma.nome }}</option>
+                                    <option>{{ turma.nome }} / {% if turma.turno %} Manhã {% else %}
+                                        Tarde {% endif %}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -895,7 +1062,8 @@
 
                         <div class="form-group">
                             <label>Data da Triagem:</label>
-                            <input style="color:#000;" type="text" class="form-control"
+                            <input style="color:#000;" type="text"
+                                   class="form-control visivel border border-dark text-dark rounded"
                                    id="dataTriagem" disabled>
                             <input type="hidden" name="data" id="data">
                         </div>
@@ -905,12 +1073,12 @@
 
                         <div class="form-group">
                             <label>Triagem realizada com:</label>
-                            <input type="text" class="form-control" name="responsavelTriagem">
+                            <input type="text" class="form-control visivel border border-dark text-dark rounded"
+                                   name="responsavelTriagem">
                         </div>
                     </div>
 
                 </div>
-
 
                 <footer class="card-footer text-right">
                     <a href="{% url 'pedagogico:listar_triagemSocial' %}" class="btn btn-secondary" type="reset">Cancelar</a>
@@ -923,18 +1091,11 @@
     </div>
 
     <script type="text/javascript">
+
         data = new Date();
         document.getElementById('dataTriagem').value = data.toLocaleString();
         document.getElementById('data').value = data.toLocaleString();
 
-        function verificarTurno() {
-            if (document.getElementById('turno').value = "manha"){
-
-            } else {
-
-            }
-        }
-        
     </script>
 
 {% endblock %}

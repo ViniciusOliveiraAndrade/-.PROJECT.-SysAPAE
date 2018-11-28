@@ -1,0 +1,691 @@
+{% extends 'pedagogico/layout/layout_base.html' %}
+
+{% block main %}
+    {% load static %}
+
+    <div class="card">
+
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb m-15 no-print">
+                <li class="breadcrumb-item"><a href="{% url 'pedagogico:index' %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'pedagogico:listagem_pedagogica' %}">Lista Pedagógica</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Detalhes da Triagem</li>
+            </ol>
+        </nav>
+
+        <br class="no-print">
+        <h1 class="font-dosis fw-500  text-center">Triagem Pedgógica</h1>
+        <br class="no-print">
+
+        <div class="card-body card-round">
+
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 no-gutters text-center" data-provide="photoswipe"
+                     style="position: absolute; padding-left: 75%; margin-top: -100px; box-shadow: silver">
+                    <figure class="img-hov-zoomin">
+                        <img width="80px" height="120px" src="
+
+
+                                {% ifequal Triagem.usuario.triagem_set.first.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{ t.usuario.imagem_url }} {% endifequal %}"
+                             alt="..." class="rounded avatar-xxxl">
+                    </figure>
+                </div>
+            </div>
+
+            <!--  .......................................................................................................  -->
+
+            <h4 class="text-uppercase mt-3 text-left ">Informações Básicas </h4>
+
+
+            <hr class="hr-sm mb-2">
+            <h5 class="text-uppercase mt-3 levantar" style="margin-left: 25px">Usuário</h5>
+
+
+            <div class="row">
+
+                <div class="col-lg-12 col-md-12 col-sm-12 emlinha2">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Nome:</strong> {{ Triagem.usuario.nome }}</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Data de Nascimento:</strong> {{ Triagem.usuario.data_nacimento }}</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-6 col-sm-8 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>CID:</strong> {{ Triagem.usuario.cid.codigo }}</label>
+                    </div>
+                </div>
+            </div>
+
+            {#            <hr class="hr-sm mb-2 no-print">#}
+            <h5 class="text-uppercase mt-3 levantar" style="margin-left: 25px">Família</h5>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Pai:</strong> {{ Triagem.usuario.triagem_set.first.nome_pai }}</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Mãe:</strong> {{ Triagem.usuario.triagem_set.first.nome_mae }}</label>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <h5 class="text-uppercase mt-3 levantar" style="margin-left: 25px">Contato</h5>
+            <hr class="hr-sm mb-2 no-print">
+
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12 emlinha">
+
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Telefone:</strong> {{ Triagem.usuario.triagem_set.first.telefone }}</label>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Celular:</strong> {{ Triagem.usuario.triagem_set.first.celular }}</label>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>E-mail:</strong> {{ Triagem.usuario.triagem_set.first.email }}</label>
+                    </div>
+                </div>
+            </div>
+
+            <!--  .......................................................................................................  -->
+
+
+            <h5 class="text-uppercase mt-3 levantar" style="margin-left: 25px">Endereço</h5>
+            <hr class="hr-sm mb-2 no-print">
+
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Rua:</strong> {{ Triagem.usuario.triagem_set.first.rua }}</label>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>N°:</strong> {{ Triagem.usuario.triagem_set.first.numero_da_rua }}</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 emlinha2">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Cidade:</strong> {{ Triagem.usuario.triagem_set.first.cidade }}</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Bairro:</strong> {{ Triagem.usuario.triagem_set.first.bairro }}</label>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--  .......................................................................................................  -->
+
+
+            <h5 class="text-uppercase mt-3 levantar" style="margin-left: 25px">Ensino</h5>
+            <hr class="hr-sm mb-2 no-print">
+
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12 emlinha">
+
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Estuda em Ensino Regular:</strong>
+                            {% if Triagem.usuario.triagem_set.first.estuda_ensino_regular %} SIM {% else %} NÃO
+                            {% endif %}</label>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Escola:</strong> {{ Triagem.usuario.triagem_set.first.qual }}</label>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Ano: </strong>{{ Triagem.usuario.triagem_set.first.ano_estuda }}</label>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Turma:</strong> {{ Triagem.usuario.triagem_set.first.turma_estuda }}</label>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><b>Turno:</b> {{ Triagem.usuario.triagem_set.first.turno_estuda }}</label>
+                    </div>
+                </div>
+            </div>
+            <!--  .......................................................................................................  -->
+
+            <br>
+            <h4 class="text-uppercase mt-3 text-left">Informações Especificas</h4>
+            <hr class="hr-sm mb-2 ">
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Controle Urinário:</strong> {% if Triagem.controleUrinario %}
+                            SIM {% else %} NÂO {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Controle Esfíncter:</strong> {% if Triagem.controleEsfincter %}
+                            SIM {% else %} NÂO {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Cuidador:</strong> {{ Triagem.cuidador }}</label>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Responsável:</strong> {{ Triagem.responsavel }}</label>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Dorme: </strong> {{ Triagem.dormeCom }}</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Composição Familiar:</strong> {{ Triagem.composicaoFamiliar }}</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Horário Dormir:</strong> {{ Triagem.horarioDormir }}Hrs</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Horário Acordar: </strong> {{ Triagem.horarioAcordar }}Hrs</label>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 col-md-8 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Alimentação:</strong> {{ Triagem.alimentacao }}</label>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Observação: </strong> {{ Triagem.controleObservacao }}</label>
+                    </div>
+                </div>
+            </div>
+
+            <!--  .......................................................................................................  -->
+
+            <br>
+            <h4 class="text-uppercase mt-3 text-left">Pedagógico</h4>
+            <hr class="hr-sm mb-2 ">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Música:</strong> {% if Triagem.musica == "SIM" %} [X] {% else %} [&nbsp;&nbsp;
+                            ] {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Dança:</strong> {% if Triagem.danca == "SIM" %} [X] {% else %} [&nbsp;&nbsp;
+                            ] {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Pintura:</strong> {% if Triagem.pintura == "SIM" %} [X] {% else %} [&nbsp;&nbsp;
+                            ] {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Jiu-Jitsu:</strong> {% if Triagem.jiujitsu == "SIM" %} [X] {% else %} [&nbsp;
+                            &nbsp;
+                            ] {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Educação Fisíca:</strong> {% if Triagem.edFisica == "SIM" %} [X] {% else %} [
+                            &nbsp;&nbsp;
+                            ] {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Informática:</strong> {% if Triagem.informatica == "SIM" %} [X] {% else %} [
+                            &nbsp;&nbsp;
+                            ] {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Robótica:</strong> {% if Triagem.robotica == "SIM" %} [X] {% else %} [&nbsp;
+                            &nbsp;
+                            ] {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Teatro:</strong> {% if Triagem.teatro == "SIM" %} [X] {% else %} [&nbsp;&nbsp;
+                            ] {% endif %} </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <br><br><br>
+            {#            <hr class="hr-sm mb-2 ">#}
+            <h5 class="text-uppercase mt-3 levantar" style="margin-left: 25px">Dias na APAE</h5>
+            <hr class="hr-sm mb-2 no-print">
+
+            <div class="row">
+
+                <div class="col-lg-2 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Segunda-Feira</strong> {% if Triagem.segunda %} [X] {% else %} [&nbsp;&nbsp;
+                            ] {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Terça-Feira</strong> {% if Triagem.terca %} [X] {% else %} [&nbsp;&nbsp;
+                            ] {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Quarta-Feira</strong> {% if Triagem.quarta %} [X] {% else %} [&nbsp;&nbsp;
+                            ] {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Quinta-Feira</strong> {% if Triagem.quinta %} [X] {% else %} [&nbsp;&nbsp;
+                            ] {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Sexta-Feira</strong> {% if Triagem.sexta %} [X] {% else %} [&nbsp;&nbsp;
+                            ] {% endif %} </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--  .......................................................................................................  -->
+
+            <br>
+            <h4 class="text-uppercase mt-3 text-left">Aspectos de Desenvolvimento</h4>
+            <hr class="hr-sm mb-2 ">
+            <div class="row">
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Fala Bem:</strong> {% if Triagem.falaBem == "s" %}
+                            SIM {% elif Triagem.falaBem == 'n' %}
+                            NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Comunica-se utilizando gestos:</strong> {% if Triagem.comunicacaoGestos == "s" %}
+                            SIM {% elif Triagem.comunicacaoGestos == 'n' %}
+                            NÂO {% elif Triagem.comunicacaoGestos == 'a' %} ÀS VEZES {% else %} {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Apresenta gagueira:</strong> {% if Triagem.gagueira == "s" %}
+                            SIM {% elif Triagem.gagueira == 'n' %} NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Enxerga Bem:</strong> {% if Triagem.enxergaBem == "s" %}
+                            SIM {% elif Triagem.enxergaBem == 'n' %} NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Destro:</strong> {% if Triagem.destro == "s" %}
+                            SIM {% elif Triagem.destro == 'n' %} NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Canhoto:</strong> {% if Triagem.esquerda == "s" %}
+                            SIM {% elif Triagem.esquerda == 'n' %} NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Faz balbucio:</strong> {% if Triagem.fazBalbucio == "s" %}
+                            SIM {% elif Triagem.fazBalbucio == 'n' %} NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--  .......................................................................................................  -->
+
+            <br>
+            <h4 class="text-uppercase mt-3 text-left">Aspecto Fisico Motor</h4>
+            <hr class="hr-sm mb-2 ">
+            <div class="row">
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Anda naturalmente:</strong> {% if Triagem.anda == "s" %}
+                            SIM {% elif Triagem.anda == 'n' %}
+                            NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Segura corretamente o lápis:</strong> {% if Triagem.seguraLapis == "s" %}
+                            SIM {% elif Triagem.seguraLapis == 'n' %}
+                            NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Senta corretamente:</strong> {% if Triagem.sentaCorretamente == "s" %}
+                            SIM {% elif Triagem.sentaCorretamente == 'n' %}
+                            NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Cai muito:</strong> {% if Triagem.caiMuito == "s" %}
+                            SIM {% elif Triagem.caiMuito == 'n' %}
+                            NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Cansa facilmente:</strong> {% if Triagem.cansaFacil == "s" %}
+                            SIM {% elif Triagem.cansaFacil == 'n' %}
+                            NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--  .......................................................................................................  -->
+
+            <br>
+            <h4 class="text-uppercase mt-3 text-left">Aspecto Emocional</h4>
+            <hr class="hr-sm mb-2 ">
+            <div class="row">
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Demonstra afeto:</strong> {% if Triagem.demonstraAfeto == "s" %}
+                            SIM {% elif Triagem.demonstraAfeto == 'n' %}
+                            NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Solicita afeto:</strong> {% if Triagem.solicitaAfeto == "s" %}
+                            SIM {% elif Triagem.solicitaAfeto == 'n' %}
+                            NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>É medroso:</strong> {% if Triagem.medroso == "s" %}
+                            SIM {% elif Triagem.medroso == 'n' %}
+                            NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>É agressivo:</strong> {% if Triagem.agressivo == "s" %}
+                            SIM {% elif Triagem.agressivo == 'n' %}
+                            NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Reage quando contrariado:</strong> {% if Triagem.reageContrariado == "s" %}
+                            SIM {% elif Triagem.reageContrariado == 'n' %}
+                            NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Possui algum tique:</strong> {% if Triagem.tique == "s" %}
+                            SIM {% elif Triagem.tique == 'n' %}
+                            NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Chora com facilidade:</strong> {% if Triagem.choraFacilidade == "s" %}
+                            SIM {% elif Triagem.choraFacilidade == 'n' %}
+                            NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+            </div>
+
+            <!--  .......................................................................................................  -->
+
+            <br>
+            <h4 class="text-uppercase mt-3 text-left">Aspecto Social</h4>
+            <hr class="hr-sm mb-2 ">
+            <div class="row">
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Sabe esperar sua vez:</strong> {% if Triagem.sabeEspear == "s" %}
+                            SIM {% elif Triagem.sabeEspear == 'n' %}
+                            NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Obedece as ordens dadas:</strong> {% if Triagem.obedeceOrdens == "s" %}
+                            SIM {% elif Triagem.obedeceOrdens == 'n' %}
+                            NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Procura fazer amizades:</strong> {% if Triagem.fazAmizade == "s" %}
+                            SIM {% elif Triagem.fazAmizade == 'n' %}
+                            NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Isola-se:</strong> {% if Triagem.isolase == "s" %}
+                            SIM {% elif Triagem.isolase == 'n' %}
+                            NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Divide suas coisas:</strong> {% if Triagem.compartilha == "s" %}
+                            SIM {% elif Triagem.compartilha == 'n' %}
+                            NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Se relaciona com o grupo:</strong> {% if Triagem.seRelaciona == "s" %}
+                            SIM {% elif Triagem.seRelaciona == 'n' %}
+                            NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--  .......................................................................................................  -->
+
+            <br>
+            <h4 class="text-uppercase mt-3 text-left">Aspecto Intelectual</h4>
+            <hr class="hr-sm mb-2 ">
+            <div class="row">
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Pronucia corretamente as palavras:</strong>
+                            {% if Triagem.pronuciaCorretamente == "s" %}
+                                SIM {% elif Triagem.pronuciaCorretamente == 'n' %}
+                                NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Expressa seu pensamento de forma clara:</strong>
+                            {% if Triagem.expressaPensanetos == "s" %}
+                                SIM {% elif Triagem.expressaPensanetos == 'n' %}
+                                NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Consegue transmitir recados:</strong> {% if Triagem.transmiteRecados == "s" %}
+                            SIM {% elif Triagem.transmiteRecados == 'n' %}
+                            NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Atenta para instruções fazendo o que é pedido:</strong>
+                            {% if Triagem.fazPedido == "s" %}
+                                SIM {% elif Triagem.fazPedido == 'n' %}
+                                NÂO {% else %} ÀS VEZES {% endif %} </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--  .......................................................................................................  -->
+
+            <br>
+            {#            <h4 class="text-uppercase mt-3 text-left">Aspecto Intelectual</h4>#}
+            <hr class="hr-sm mb-2 ">
+            <div class="row">
+
+                <div class="col-lg-6 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Data Triagem Pedagógica:</strong> {{ Triagem.data }} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Triagem Realizada Com:</strong> {{ Triagem.pessoaQuestionada }} </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Turma:</strong> {{ Triagem.usuario.turma_set.first.nome }} /
+                            {% if Triagem.usuario.turma_set.first.turno %} Manhã {% else %} Tarde {% endif %} </label>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-6 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label><strong>Descrição do Usuário:</strong> {{ Triagem.descricaoUsuario }} </label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="card-footer text-right no-print">
+            <a onclick="window.history.back();" class="btn btn-secondary" type="reset">Voltar</a>
+            <button class="btn btn-w-md btn-round btn-info float-right mr-3 ml-3" onclick="window.print();">
+                Imprimir
+            </button>
+        </footer>
+
+
+    </div>
+
+    </div>
+
+
+
+
+{% endblock %}

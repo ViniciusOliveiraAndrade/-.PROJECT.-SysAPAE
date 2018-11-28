@@ -7,7 +7,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb m-15">
                 <li class="breadcrumb-item"><a href="{% url 'pedagogico:index' %}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Turmas - Coordenação</a></li>
+                <li class="breadcrumb-item"><a onclick="window.history.back();">Turmas - Coordenação</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Criar Turmas - Coordenação</li>
             </ol>
         </nav>
@@ -27,8 +27,9 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
 
                     <div class="form-group">
-                        <label>Nome</label>
-                        <input required name="nome" class="form-control" type="text" placeholder=" Nome da Turma">
+                        <label>Nome &nbsp;</label><i style="color: red">*</i>
+                        <input required name="nome" class="form-control visivel border border-dark text-dark rounded"
+                               type="text" placeholder=" Nome da Turma">
                     </div>
 
                 </div>
@@ -37,7 +38,8 @@
 
                     <div class="form-group">
                         <label>Professor</label><br>
-                        <select data-provide="selectpicker" name="professor">
+                        <select data-provide="selectpicker" name="professor"
+                                class="form-control visivel border border-dark text-dark rounded">
                             {% for professor in professores %}
                                 <option>{{ professor.user.first_name }} {{ professor.user.last_name }}</option>
                             {% endfor %}
@@ -49,31 +51,20 @@
 
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label>Turno</label><br>
+                        <label>Turno &nbsp;</label><i style="color: red">*</i><br>
 
                         <div class="form-check form-check-inline">
-{#                            <label class="form-check-label">#}
-{#                                <input class="form-check-input" type="radio" id="inlineCheckbox1" value="manha"#}
-{#                                       name="turno"#}
-{#                                       checked> Manhã#}
-{#                                &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#}
-{#                            </label>#}
-{#                            <label class="form-check form-check-inline">#}
-{#                                <input class="form-check-input" type="radio" id="inlineCheckbox2" value="tarde"#}
-{#                                       name="turno"> Tarde#}
-{#                            </label>#}
-
 
                             <label class="custom-control custom-radio">
                                 <input required type="radio" class="custom-control-input" value="manha"
-                                        id="inlineCheckbox1" name="turno">
+                                       id="inlineCheckbox1" name="turno">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">Manhã</span>
                             </label>
 
                             <label class="custom-control custom-radio">
                                 <input required type="radio" class="custom-control-input" value="tarde"
-                                        id="inlineCheckbox2" name="turno">
+                                       id="inlineCheckbox2" name="turno">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">Tarde</span>
                             </label>
