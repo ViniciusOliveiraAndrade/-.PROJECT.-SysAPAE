@@ -38,6 +38,8 @@ urlpatterns = [
     path('Descer_Lista/<int:evento_id>/<int:lista_id>', views.descer, name='descer'),
     path('Remover_Lista/<int:evento_id>/<int:lista_id>', views.removerLista, name='removerLista'),
     path('Adicionar_Usuario/<int:evento_id>', views.addUsuario, name='addUsuario'),
+    path('add_Lista', views.addLista, name='addLista'),
+
 
     #CID
     path('cadastrarCID', views.cadastrarCID, name='cadastrarCID'),

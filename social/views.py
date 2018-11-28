@@ -4,9 +4,9 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import loader
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
-# from django.views.generic import CreateView, FormView
 from django.utils.dateparse import parse_date
 from django.views import generic
+from django.db.models import Q
 
 from social.models import *
 from core.models import *
@@ -76,6 +76,8 @@ def triagem_listar(request):
         t.assinatura_proficinal = f
         triagens = [t]
         raise e
+    for x in triagens:
+        print(x.usuario.nome)
 
     return render(request,'social/triagem_listar.html', {'triagens' : triagens})
 
@@ -607,11 +609,38 @@ def removerLista(request,evento_id, lista_id):
 @login_required
 def addUsuario(request,evento_id):
     evento = Evento.objects.get(pk=evento_id)
-    usuarios = Usuario.objects.all()
-    return render(request,'social/evento_addUsuario.html',{'evento':evento, 'usuarios':usuarios})
+    listas = evento.lista.all()
+    usuarioListas = []
+
+    for l in listas:
+        usuarioListas.append(l.usuario)
+
+    usuarios = Triagem.objects.all()
+
+    if request.method == "POST":
+        q = request.POST['q']
+        usuarios = Triagem.objects.filter(Q(usuario__nome__contains=q) | Q(usuario__cid__codigo__contains=q) | Q(usuario__data_nacimento__contains=q) | Q(usuario__situacao__contains=q) | Q(nome_pai__contains=q) | Q(nome_mae__contains=q))
+
+
+    usuariosEnviar = []
+
+    for u in usuarios:
+        if u.usuario not in usuarioListas:
+            usuariosEnviar.append(u)
+            print(u.usuario.nome)
+
+
+    return render(request,'social/evento_addUsuario.html',{'evento':evento_id, 'usuarios':usuariosEnviar})
 
 @login_required
-def addLista(request,evento_id, usuario_id):
+def addLista(request):
+
+    evento_id = request.GET.get('evento', None)
+    usuario_id = request.GET.get('usuario', None)
+
+    print("ID do evento"+evento_id)
+    print("ID do usuario"+usuario_id)
+
     evento = Evento.objects.get(pk=evento_id)
     usuario = Usuario.objects.get(pk=usuario_id)
 
@@ -621,7 +650,8 @@ def addLista(request,evento_id, usuario_id):
     evento.save()
 
     gerar_acao(request.user.funcionario,"Edição","Evento",evento.id)
-    return HttpResponseRedirect(reverse('social:evento_editar', args=(evento.id,)))
+    data = {'adcionado': True}
+    return JsonResponse(data)
 
 #----------------------------------------------------------------------------------------------------
 # 
