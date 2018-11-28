@@ -20,7 +20,10 @@ urlpatterns = [
 
     #Usuario
     path('Listar_Usuarios/', views.usuarios_listar, name='usuarios_listar'),
+    path('InativarUsuario', views.inativar_usuario, name='inativar_usuario'),
     path('InativarUsuario/<int:user_id>', views.inativar_usuario, name='inativar_usuario'),
+    path('AtivarUsuario', views.ativar_usuario, name='ativar_usuario'),
+    path('AtivarUsuario/<int:user_id>', views.ativar_usuario, name='ativar_usuario'),
     
     #visitas
     path('Agendar_Visita/<int:usuario_id>', views.visita_agendar, name='visita_agendar'),
@@ -29,5 +32,15 @@ urlpatterns = [
 
     #Eventos
     path('Cadastrar_Eventos', views.evento_cadastrar, name='evento_cadastrar'),
+    path('Editar_Eventos/<int:evento_id>', views.evento_editar, name='evento_editar'),
+    path('Listar_Eventos', views.evento_listar, name='evento_listar'),
+    path('Subir_Lista/<int:evento_id>/<int:lista_id>', views.subir, name='subir'),
+    path('Descer_Lista/<int:evento_id>/<int:lista_id>', views.descer, name='descer'),
+    path('Remover_Lista/<int:evento_id>/<int:lista_id>', views.removerLista, name='removerLista'),
+    path('Adicionar_Usuario/<int:evento_id>', views.addUsuario, name='addUsuario'),
+    path('add_Lista', views.addLista, name='addLista'),
 
+
+    #CID
+    path('cadastrarCID', views.cadastrarCID, name='cadastrarCID'),
 ]

@@ -29,34 +29,26 @@ def criar_dados():
     
     cargo2 = Cargo.objects.create(nome = "Educador(a)")
     
-    cargo3 = Cargo.objects.create(nome = "Coordenador(a) social")
+    cargo3 = Cargo.objects.create(nome = "Coordenador(a) saúde")
+    
+    cargo4 = Cargo.objects.create(nome = "Coordenador(a) assistência social")
 
-    cargo4 = Cargo.objects.create(nome = "Assistente social")
+    cargo5 = Cargo.objects.create(nome = "Assistente social")
+
 
     #Criar usuarios e os funcionarios
     user1 = User.objects.create_user('ednaele', 'ednaele@apae.com', '123456Mm')
     user1.first_name = "Ednaele"
-    user1.last_name = "de alguma coisa"
+    user1.last_name = ""
     user1.save()
     funcionario1 = Funcionario.objects.create(user=user1, cargo=cargo1)
 
-    user2 = User.objects.create_user('cintia', 'cintia@apae.com', '123456Mm')
-    user2.first_name = "Cintia"
-    user2.last_name = "Cardoso"
-    user2.save()
-    funcionario2 = Funcionario.objects.create(user=user2, cargo=cargo2)
     
-    user3 = User.objects.create_user('marilia', 'marilia@apae.com', '123456Mm')
-    user3.first_name = "Marília"
-    user3.last_name = "Lima"
-    user3.save()
-    funcionario3 = Funcionario.objects.create(user=user3, cargo=cargo3)
-
-    user4 = User.objects.create_user('juliana', 'juliana@apae.com', '123456Mm')
-    user4.first_name = "Juliana"
-    user4.last_name = "Teles"
-    user4.save()
-    funcionario4 = Funcionario.objects.create(user=user4, cargo=cargo4)
+    user2 = User.objects.create_user('marilia', 'marilia@apae.com', '123456Mm')
+    user2.first_name = "Marília"
+    user2.last_name = "Lima"
+    user2.save()
+    funcionario2 = Funcionario.objects.create(user=user2, cargo=cargo3)
 
     #Criar as CID
     cid = CID.objects.create(codigo="F00",descricao="Demência na Doença de Alzheimer")

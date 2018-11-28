@@ -4,10 +4,10 @@
 
 {% block buscar %}
 <!-- <form class="lookup float-left no-icon gap-items">
-  <input type="text" placeholder="Buscar">
-  <button class="btn btn-primary btn-round w-64px fs-22">
-    <i class="ti-search"></i>
-  </button>
+<input type="text" placeholder="Buscar">
+<button class="btn btn-primary btn-round w-64px fs-22">
+<i class="ti-search"></i>
+</button>
 </form>
 -->
 
@@ -26,23 +26,23 @@
 {% block tabela %}
 {% load static %}
 <thead>
- <tr>
-  <th class="border-dark text-dark">ID</th>
-  <th class="no-print border-dark text-dark">Imagem</th>
-  <th class="border-dark text-dark">Usuário</th>
-  <th class="border-dark text-dark">Data de Nascimento</th>
-  <th class="border-dark text-dark">CID</th>
-  <th class="border-dark text-dark">SUS</th>
-  <th class="border-dark text-dark">Acompanhamento</th>
-  <th class="border-dark text-dark">Parentes</th>
-  <th class="border-dark text-dark">Renda Familiar</th>
-  <th class="border-dark text-dark" >Endereço</th>
-  <th class="border-dark text-dark">Contatos</th>
-  <th class="border-dark text-dark">Ensino Regular</th>
-  <th class="border-dark text-dark">Proficional</th>
-  <th class="border-dark text-dark">Data da Triagem</th>
-  <th class="no-print border-dark text-dark">Editar</th>
-</tr>
+  <tr>
+    <th class="border-dark text-dark">ID</th>
+    <th class="no-print border-dark text-dark">Imagem</th>
+    <th class="border-dark text-dark">Usuário</th>
+    <th class="border-dark text-dark">Data de Nascimento</th>
+    <th class="border-dark text-dark">CID</th>
+    <th class="border-dark text-dark">SUS</th>
+    <th class="border-dark text-dark">Acompanhamento</th>
+    <th class="border-dark text-dark">Parentes</th>
+    <th class="border-dark text-dark">Renda Familiar</th>
+    <th class="border-dark text-dark" >Endereço</th>
+    <th class="border-dark text-dark">Contatos</th>
+    <th class="border-dark text-dark">Ensino Regular</th>
+    <th class="border-dark text-dark">Proficional</th>
+    <th class="border-dark text-dark">Data da Triagem</th>
+    <th class="no-print border-dark text-dark">Editar</th>
+  </tr>
 </thead>
 <tfoot class="no-print">
   <tr>
@@ -69,11 +69,11 @@
 
   <tr>
     <th class="border-dark text-dark">{{t.id}}</th>
-    
+
     <td class="no-print border-dark text-dark">
       <div class="row no-gutters" data-provide="photoswipe">
         <figure class="img-hov-zoomin">
-          <img src="{% ifequal t.usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{t.usuario.imagem_url}} {% endifequal %}" alt="..." class="img-thumbnail">
+          <img width="220px" height="260px" src="{% ifequal t.usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{t.usuario.imagem_url}} {% endifequal %}" alt="Imagem Corrompida" class="img-thumbnail">
         </figure>
       </div>
     </td>
@@ -92,16 +92,24 @@
       {% if t.bpc or t.bolsa_familia or t.aposentadoria %}Beneficiário: {{t.benediciario}}{% endif %}
     </td>
 
-    
+
     <td class="border-dark text-dark">Rua: {{t.rua}} N°:{{t.numero_da_rua}} <br> Bairro: {{t.bairro}} Cidade: {{t.cidade}} </td>
 
     <td class="border-dark text-dark">Telefone: {{t.telefone}} <br> Celular:{{t.elular}} <br> Email: {{t.email}}</td>
 
     <td class="border-dark text-dark">{% if t.estuda_ensino_regular %} Estuda: {{t.qual}} Ano:{{t.ano_estuda}} <br> Turma: {{t.turma_estuda}} Turno: {{t.turno_estuda}} {% else %} Não informado {% endif %}</td>
-    
+
     <td class="border-dark text-dark">{{t.assinatura_proficinal.nome}}</td>
     <td class="border-dark text-dark">{{t.data_da_triagem|date:"d M Y" }}</td>
-    <td class="no-print border-dark text-dark"> <a style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true" href="{%url 'social:triagem_editar' t.id %}"></a></td>
+    <td class="no-print border-dark text-dark"> 
+
+      <a data-provide="tooltip" data-tooltip-color="primary" title="Editar Triagem" style="font-size: 25px;" class="fa fa-pencil d-inline" aria-hidden="true" href="{%url 'social:triagem_editar' t.id %}"></a>
+
+      {% ifequal t.usuario.situacao "Inativo"  %} 
+      <a onclick="ativar(this.id)" id="{{t.usuario.id}};{{t.usuario.nome}}" data-provide="tooltip" data-tooltip-color="primary" title="Ativar Usuário" style="font-size: 25px;" class="fa fa-check-square d-inline" aria-hidden="true" href="#"></a> 
+      {% endifequal %}
+
+    </td>
 
   </tr>
   {% endfor %}
@@ -113,6 +121,19 @@
 
 {% block js %}
 <script type="text/javascript">
+
+function ativar (nomeUsuario) {
+  var str = nomeUsuario;
+  var res = str.split(";");
+  id = res[0];
+  nome = res[1];
+  var r = confirm("Isto ATIVARÁ o Usuário: "+nome+"!\n Deseja continuar com a açao?");
+  if (r) {
+    ina = "{% url 'social:ativar_usuario' %}/";
+    url = ina+id;    
+    var myWindow = window.open(url, "_self");
+  }
+}
 
 document.getElementById("u").className = document.getElementById("u").className + " active open";
 document.getElementById("ut").className = document.getElementById("ut").className + " active";

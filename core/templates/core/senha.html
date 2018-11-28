@@ -1,0 +1,207 @@
+{% extends 'core/layout/layout_base_core.html' %}
+
+{% block tamanho %}class="card card-round card-shadowed px-50 py-30 w-400px mb-0"{% endblock %}
+
+{% block main %}
+
+<style>
+/* Style all input fields */
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+}
+
+/* Style the submit button */
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Style the container for inputs */
+.container {
+    background-color: #f1f1f1;
+    padding: 20px;
+}
+
+/* The message box is shown when the user clicks on the password field */
+#message {
+    display:none;
+    background: #f1f1f1;
+    color: #000;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+#message p {
+    padding: 10px 35px;
+    font-size: 18px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+    color: green;
+}
+
+.valid:before {
+    position: relative;
+    left: -35px;
+    content: "✔";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+    color: red;
+}
+
+.invalid:before {
+    position: relative;
+    left: -35px;
+    content: "✖";
+}
+</style>
+
+
+
+<h5 class="text-uppercase"></h5>
+<br>
+
+<form class="form-type-material" method="post" action="{% url 'core:alterarSenha' %}">
+  {% csrf_token %}
+  
+  {% if erro %}
+  <div class="alert alert-danger" role="alert">
+    {{msg}}
+  </div>
+  {% endif %}
+
+
+  <div class="form-group">
+    <input type="password" class="form-control" name="sa" minlength="8" required>
+    <label for="username">Senha Antiga <i class="text-danger">*</i></label>
+  </div>
+
+  <div class="form-group">
+    <input id="psw" type="password" class="form-control" name="ns" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Deve conter pelo menos um número, uma letra em caixa baixa, uma letra em caixa alta e conter pelo menos 8 caracteres." required>
+    <label for="password">Nova Senha <i class="text-danger">*</i></label>
+  </div>
+
+  <div class="form-group">
+    <input id="cs" type="password" class="form-control" name="cs" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Deve conter pelo menos um número, uma letra em caixa baixa, uma letra em caixa alta e conter pelo menos 8 caracteres." required>
+    <label for="password">Digite novamente a nova senha <i class="text-danger">*</i></label>
+  </div>
+
+  <div class="form-group">
+    <h3>A senha deve conter:</h3>
+    <p id="letter" class="invalid">Uma letra <b>MINÚSCULA</b></p>
+    <p id="capital" class="invalid">Uma letra em <b>MAIÚSCULA</b></p>
+    <p id="number" class="invalid">Um <b>NÚMERO</b></p>
+    <p id="length" class="invalid">Possuir pelo menos <b>8 CARACTERES</b></p>
+    <p id="ig" class="invalid">As novas senhas devem ser <b>IGUAIS</b></p>
+
+  </div>
+
+
+
+  <div class="form-group flexbox">
+    <a class="text-muted hover-primary fs-13" href="#">Recuperar senha</a>
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-bold btn-block btn-primary" type="submit">Alterar Senha</button>
+  </div>
+
+
+
+</form>
+{% endblock %}
+
+{% block js %}
+
+<script>
+var myInput = document.getElementById("psw");
+var letter = document.getElementById("letter");
+var capital = document.getElementById("capital");
+var number = document.getElementById("number");
+var length = document.getElementById("length");
+var cs = document.getElementById("cs");
+
+// When the user clicks on the password field, show the message box
+myInput.onfocus = function() {
+    document.getElementById("message").style.display = "block";
+}
+
+// When the user clicks outside of the password field, hide the message box
+myInput.onblur = function() {
+    document.getElementById("message").style.display = "none";
+}
+
+// When the user starts to type something inside the password field
+myInput.onkeyup = function() {
+  // Validate lowercase letters
+  var lowerCaseLetters = /[a-z]/g;
+  if(myInput.value.match(lowerCaseLetters)) {  
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+  }
+  
+  // Validate capital letters
+  var upperCaseLetters = /[A-Z]/g;
+  if(myInput.value.match(upperCaseLetters)) {  
+    capital.classList.remove("invalid");
+    capital.classList.add("valid");
+  } else {
+    capital.classList.remove("valid");
+    capital.classList.add("invalid");
+  }
+
+  // Validate numbers
+  var numbers = /[0-9]/g;
+  if(myInput.value.match(numbers)) {  
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+  }
+  
+  // Validate length
+  if(myInput.value.length >= 8) {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
+
+  if(cs.value == myInput.value) {  
+    ig.classList.remove("invalid");
+    ig.classList.add("valid");
+  } else {
+    ig.classList.remove("valid");
+    ig.classList.add("invalid");
+  }
+}
+
+cs.onkeyup = function() {
+  if(cs.value == myInput.value) {  
+    ig.classList.remove("invalid");
+    ig.classList.add("valid");
+  } else {
+    ig.classList.remove("valid");
+    ig.classList.add("invalid");
+  }
+}
+
+</script>
+
+  
+{% endblock %}

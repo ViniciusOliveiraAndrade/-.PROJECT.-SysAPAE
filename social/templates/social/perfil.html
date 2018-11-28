@@ -17,10 +17,26 @@
       <div class="row"> 
         <div class="col-lg-12 col-md-12 col-sm-12 no-gutters text-center" data-provide="photoswipe">
             <figure class="img-hov-zoomin">
-              <img src="{% ifequal request.user.funcionario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{request.user.funcionario.imagem_url}} {% endifequal %}" alt="..." class="rounded-circle">
+              <img width="220px" height="280px" src="{% ifequal request.user.funcionario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{request.user.funcionario.imagem_url}} {% endifequal %}" alt="Imagem Corrompida" class="rounded-circle">
             </figure>
         </div>
       </div>
+      <div class="col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group">
+
+
+          <label >Enviar Imagem</label>
+          <div class="input-group file-group">
+            <input type="text" name="verificaimagem" class="form-control file-value" value="{% ifequal request.user.funcionario.imagem_url None %}Sem Imagem{% else %} {{request.user.funcionario.imagem_url}} {% endifequal %}" placeholder="Choose file..." readonly>
+            <input  type="file" multiple name="imagem">
+            <span class="input-group-btn">
+              <button class="btn btn-light file-browser visivel" type="button"><i class="fa fa-upload"></i></button>
+            </span>
+          </div>
+        </div>
+      </div>
+
 
       <br>
       <br>
@@ -63,6 +79,7 @@
 
 
       <footer class="card-footer text-right no-print">
+        <a href="{% url 'core:alterarSenha'%}" class="btn btn-primary float-left">Alterar Senha</a>
         <a onclick="window.history.back();" class="btn btn-secondary" type="reset">Voltar</a>
         <button class="btn btn-primary" type="submit">Editar</button>
       </footer>

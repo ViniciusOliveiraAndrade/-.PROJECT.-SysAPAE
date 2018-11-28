@@ -9,5 +9,6 @@ urlpatterns = [
     path('Ajuda', views.help, name='help'),
     url(r'^login/$', views.login, name="login"),
     url(r'^logout/$', views.logout, name="logout"),
-    url(r'^registrar/$', views.registrar, name="registrar"),
+    url(r'^AlterarSenha/$', views.alterarSenha, name="alterarSenha"),
+    url(r'^RegistrarFuncionario/$', views.registrarFuncionario, name="registrarFuncionario"),
 ]

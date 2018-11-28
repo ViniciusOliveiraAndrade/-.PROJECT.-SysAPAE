@@ -29,6 +29,7 @@ class Triagem(models.Model):
     benediciario = models.CharField(max_length=200, blank=True)
 
     #Dados sobre o endereço
+    cep = models.CharField(max_length=10, blank=True)
     rua = models.CharField(max_length=300, blank=True)
     numero_da_rua = models.CharField(max_length=10, blank=True)
     bairro = models.CharField(max_length=200, blank=True)
@@ -79,8 +80,10 @@ class Visita(models.Model):
         return "Nome do usuário: "+self.usuario.nome+"\n Data da visita: "+str(self.data_visita.day)+"/"+str(self.data_visita.month)+"/"+str(self.data_visita.year)+"\n Nome do proficinal: "+self.funcionario.user.first_name
 
 class Lista(models.Model):
+    class Meta:
+        ordering = ['posicao']
     posicao = models.IntegerField(default=0, blank=True)
-    Usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, blank=True)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, blank=True)
 
 class Evento(models.Model):
     nome = models.CharField(max_length=100, blank=True)

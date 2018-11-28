@@ -54,13 +54,16 @@
                     <div class="form-group">
                         <label>CID <i class="text-danger">*</i></label>
                         <div>
-                            <select data-provide="selectpicker" name="cid" style="color: black; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required>
+                            <select name="cid" style="height: 35px; color: black; font-size: 15px; border-color: #444; background-color: #fff;" class="visivel border border-dark text-dark rounded col-8" id="CIDS" required>
                                 {% for cid in cids %}
-                                <option class="visivel text-dark">{{cid.codigo}}</option>                        
+                                <option class="visivel text-dark" style="color: #000;">{{cid.codigo}}</option>                        
                                 {% endfor %}
                             </select>
+                             <a onclick="addCID()" data-provide="tooltip" data-tooltip-color="warning" title="Adicionar CID" style="font-size: 25px;" class="fa fa-plus-circle d-inline text-warning" aria-hidden="true" href="#"></a>
                         </div>
+
                     </div>
+
                 </div>  
             </div>
 
@@ -196,8 +199,15 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="form-group">
+                        <label>CEP <i class="text-danger">*</i></label>
+                        <input name="cep" id="cep" value="" onblur="pesquisacep(this.value);" class="form-control" type="text" required >
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="form-group">
                         <label>Rua <i class="text-danger">*</i></label>
-                        <input name="rua" class="form-control" type="text" required >
+                        <input name="rua" type="text" id="rua" class="form-control" type="text">
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
@@ -209,7 +219,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="form-group">
                         <label>Bairro <i class="text-danger">*</i></label>
-                        <input name="bairro" class="form-control" type="text" required >
+                        <input name="bairro" id="bairro" class="form-control" type="text" required >
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
@@ -221,10 +231,12 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="form-group">
                         <label>Cidade <i class="text-danger">*</i></label>
-                        <input name="cidade" class="form-control" type="text" required >
+                        <input name="cidade" class="form-control" id="cidade" type="text" required >
                     </div>
                 </div>
 
+                <input name="uf" type="hidden" id="uf" size="2" />
+                <input name="ibge" type="hidden" id="ibge" size="8"/>
             </div>
 
             <!--  .......................................................................................................  -->
@@ -280,8 +292,8 @@
 
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="form-group">
-                        <label>Qual <i class="text-danger">*</i></label>
-                        <input name="qual" class="form-control" type="text" required >
+                        <label>Escola</label>
+                        <input name="qual" class="form-control" type="text">
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
@@ -494,7 +506,32 @@
 <script type="text/javascript">
 
 
+function addCID(){
+    var txt;
+    var codigo = prompt("Digite o código da CID", "F");
+    if (codigo == null || codigo == "") {
+    } else {
 
+        $.ajax({
+            url: '{% url "social:cadastrarCID" %}',
+            data: {'codigo': codigo},
+            dataType: 'json',
+            success: function (data) {
+                if (data.cadastrado) {
+                    var x = document.getElementById("CIDS");
+                    var option = document.createElement("option");
+                    option.text = data.codigo;
+                    x.add(option);
+                    option.selected = true;
+
+                }else {
+                    alert("Não foi possivel cadastrar a CID");
+                }
+            }
+        });
+
+    }
+}
 
 
 data = new Date();

@@ -1,12 +1,12 @@
 from django import forms
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import loader
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
-# from django.views.generic import CreateView, FormView
-
+from django.utils.dateparse import parse_date
 from django.views import generic
+from django.db.models import Q
 
 from social.models import *
 from core.models import *
@@ -28,6 +28,13 @@ def index(request):
 @login_required
 def perfil(request):
     if request.method == "POST":
+        if request.POST['verificaimagem'] != "Sem Imagem" and request.POST['verificaimagem'] != request.user.funcionario.imagem_url:
+            try:
+                request.user.funcionario.imagem.delete(save=True)
+                request.user.funcionario.imagem = request.FILES['imagem']
+                request.user.funcionario.save()   
+            except Exception as e:
+                pass
         pnome, unome = getNomeFuncionario(request.POST['nome'])
         request.user.first_name = pnome
         request.user.last_name = unome
@@ -41,14 +48,14 @@ def perfil(request):
 #Views da Triagem
 @login_required
 def triagem_realizar(request):
-    cids= CID.objects.all()
+    cids= CID.objects.all().order_by('-codigo')
     args = {'cids':cids}
     return render(request,'social/triagem_realizar.html', args)
 
 @login_required
 def triagem_editar(request,triagem_id):
     t = get_object_or_404(Triagem,pk=triagem_id)
-    cids= CID.objects.all()
+    cids= CID.objects.all().order_by('-codigo')
     args = {'cids':cids, 't':t}
     return render(request,'social/triagem_editar.html', args)
 
@@ -69,6 +76,8 @@ def triagem_listar(request):
         t.assinatura_proficinal = f
         triagens = [t]
         raise e
+    for x in triagens:
+        print(x.usuario.nome)
 
     return render(request,'social/triagem_listar.html', {'triagens' : triagens})
 
@@ -138,6 +147,7 @@ def cadastrar_triagem(request):
     triagem.benediciario = request.POST['beneficiario']
 
     #Endereco
+    triagem.cep = request.POST['cep']
     triagem.rua = request.POST['rua']
     triagem.numero_da_rua = request.POST['numero']
     triagem.bairro = request.POST['bairro']
@@ -238,6 +248,16 @@ def cadastrar_triagem(request):
 def editar_triagem(request):
     triagem = get_object_or_404(Triagem,pk=request.POST['id'])
 
+    if request.POST['verificaimagem'] != "Sem Imagem" and request.POST['verificaimagem'] != triagem.usuario.imagem_url:
+        try:
+            triagem.usuario.imagem.delete(save=True)
+            triagem.usuario.imagem = request.FILES['imagem']   
+        except Exception as e:
+            pass
+
+
+
+
     data = request.POST['datanascimento']
     data = data.split('/')
     datanascimento = datetime.datetime(int(data[2]),int(data[1]),int(data[0]))
@@ -289,6 +309,7 @@ def editar_triagem(request):
     triagem.benediciario = request.POST['beneficiario']
 
     #Endereco
+    triagem.cep = request.POST['cep']
     triagem.rua = request.POST['rua']
     triagem.numero_da_rua = request.POST['numero']
     triagem.bairro = request.POST['bairro']
@@ -398,6 +419,14 @@ def inativar_usuario(request,user_id):
     gerar_acao(request.user.funcionario,"Inativar","Usuario",u.id)
     return redirect("social:usuarios_listar")
 
+@login_required
+def ativar_usuario(request,user_id):
+    u = get_object_or_404(Usuario,pk=user_id)
+    u.situacao = "Ativo"
+    u.save()
+    gerar_acao(request.user.funcionario,"Ativar","Usuario",u.id)
+    return redirect("social:triagem_listar")
+
 #--------------------------------------------------------------------------------------------
 #views da visita
 
@@ -501,20 +530,150 @@ def visita_editar(request,visita_id):
 #Eventos
 @login_required
 def evento_cadastrar(request):
-    if "nome" in request.POST:
-        data = request.POST['datainicio']
-        data = data.split('/')
-        dataa = data[2]+"-"+data[1]+"-"+data[0]
+    if request.method == "POST":
+        dataa = parse_date(request.POST['datainicio'])
+        datab = parse_date(request.POST['datafim'])
+        e = Evento.objects.create(nome = request.POST['nome'], data_inicio = dataa, data_fim = datab)
+        gerar_acao(request.user.funcionario,"Cadastro","Evento",e.id)
+        return HttpResponseRedirect(reverse('social:evento_editar', args=(e.id,)))
+    return render(request,'social/evento_cadastrar.html',{})
 
-        data = request.POST['datafim']
-        data = data.split('/')
-        datab = data[2]+"-"+data[1]+"-"+data[0]
+@login_required
+def evento_editar(request,evento_id):
+    evento = Evento.objects.get(pk=evento_id)
+    if request.method == "POST":
+
+        dataa = parse_date(request.POST['datainicio'])
+
+        datab = parse_date(request.POST['datafim'])
+        evento.nome = request.POST['nome']
+        evento.data_inicio = dataa
+        evento.data_fim = datab
+        evento.save()
+        gerar_acao(request.user.funcionario,"Edição","Evento",evento.id)
+        return HttpResponseRedirect(reverse('social:evento_editar', args=(evento.id,)))
+    return render(request,'social/evento_editar.html',{'evento':evento})
+
+@login_required
+def evento_listar(request):
+    eventos = Evento.objects.all()
+    return render(request,'social/evento_listar.html', {'eventos' : eventos})
+
+@login_required
+def subir(request,evento_id, lista_id):
+    evento = Evento.objects.get(pk=evento_id)
+    lista = Lista.objects.get(pk=lista_id)
+    
+    listaDescer = evento.lista.get(posicao= (lista.posicao - 1))
+    listaDescer.posicao = listaDescer.posicao + 1
+    listaDescer.save()
+    
+    lista.posicao = lista.posicao - 1
+    lista.save()
+    evento.save()
+    gerar_acao(request.user.funcionario,"Edição","Evento",evento.id)
+    return HttpResponseRedirect(reverse('social:evento_editar', args=(evento.id,)))
+
+@login_required
+def descer(request,evento_id, lista_id):
+    evento = Evento.objects.get(pk=evento_id)
+    lista = Lista.objects.get(pk=lista_id)
+    
+    listaSubir = evento.lista.get(posicao= (lista.posicao + 1))
+    listaSubir.posicao = listaSubir.posicao - 1
+    listaSubir.save()
+    
+    lista.posicao = lista.posicao + 1
+    lista.save()
+    evento.save()
+    gerar_acao(request.user.funcionario,"Edição","Evento",evento.id)
+    return HttpResponseRedirect(reverse('social:evento_editar', args=(evento.id,)))
+
+@login_required
+def removerLista(request,evento_id, lista_id):
+    evento = Evento.objects.get(pk=evento_id)
+    lista = Lista.objects.get(pk=lista_id)
+    posicao_deletado = lista.posicao
+    lista.delete()
+
+    for l in evento.lista.all():
+        if l.posicao > posicao_deletado:
+            l.posicao = (l.posicao - 1)
+            l.save()
 
     
-        e = Evento(nome = request.POST['nome'], data_inicio = dataa, data_fim = datab)
-        e.save()
-        gerar_acao(request.user.funcionario,"Cadastro","Evento",e.id)
-        return HttpResponseRedirect(reverse('social:index' ))
-    return render(request,'social/evento_cadastrar.html',{})
+    evento.save()
+    gerar_acao(request.user.funcionario,"Edição","Evento",evento.id)
+    return HttpResponseRedirect(reverse('social:evento_editar', args=(evento.id,)))
+
+@login_required
+def addUsuario(request,evento_id):
+    evento = Evento.objects.get(pk=evento_id)
+    listas = evento.lista.all()
+    usuarioListas = []
+
+    for l in listas:
+        usuarioListas.append(l.usuario)
+
+    usuarios = Triagem.objects.all()
+
+    if request.method == "POST":
+        q = request.POST['q']
+        usuarios = Triagem.objects.filter(Q(usuario__nome__contains=q) | Q(usuario__cid__codigo__contains=q) | Q(usuario__data_nacimento__contains=q) | Q(usuario__situacao__contains=q) | Q(nome_pai__contains=q) | Q(nome_mae__contains=q))
+
+
+    usuariosEnviar = []
+
+    for u in usuarios:
+        if u.usuario not in usuarioListas:
+            usuariosEnviar.append(u)
+            print(u.usuario.nome)
+
+
+    return render(request,'social/evento_addUsuario.html',{'evento':evento_id, 'usuarios':usuariosEnviar})
+
+@login_required
+def addLista(request):
+
+    evento_id = request.GET.get('evento', None)
+    usuario_id = request.GET.get('usuario', None)
+
+    print("ID do evento"+evento_id)
+    print("ID do usuario"+usuario_id)
+
+    evento = Evento.objects.get(pk=evento_id)
+    usuario = Usuario.objects.get(pk=usuario_id)
+
+    lista = Lista.objects.create(posicao=(evento.lista.all().count() + 1), usuario=usuario)
+    evento.lista.add(lista)
+    lista.save()
+    evento.save()
+
+    gerar_acao(request.user.funcionario,"Edição","Evento",evento.id)
+    data = {'adcionado': True}
+    return JsonResponse(data)
+
+#----------------------------------------------------------------------------------------------------
+# 
+# AJAX
+# 
+# 
+#CID
+
+@login_required
+def cadastrarCID(request):
+    codigo = request.GET.get('codigo', None)
+   
+    data = {'cadastrado': False, 'codigo':codigo}
+    try:
+        
+        CID.objects.create(codigo=codigo,descricao="")
+        data['cadastrado']=True
+        return JsonResponse(data)
+
+    except Exception as e:
+        return JsonResponse(data)
+    
+
 
 

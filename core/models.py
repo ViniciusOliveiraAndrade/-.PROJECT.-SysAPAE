@@ -20,6 +20,8 @@ class CID(models.Model):
         return "Código: " + self.codigo + "   Descrição: " + self.descricao
 
 class Usuario(models.Model):
+    class Meta:
+        ordering = ['nome']
     imagem = models.ImageField(u'Imagem', blank=True, upload_to='usuarios/')
     nome = models.CharField(max_length=200, blank=True)
     cid = models.ForeignKey(CID, on_delete=models.PROTECT, blank=True)

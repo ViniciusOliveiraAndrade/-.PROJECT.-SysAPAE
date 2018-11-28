@@ -9,6 +9,10 @@ from core.utilidades import *
 # Create your views here.
 @login_required
 def index(request):
+    #ja verifica se tem dados no banco de dados e se não cria dados base
+    if CID.objects.all().count() == 0:
+        criar_dados()
+
     if request.user.funcionario.cargo.nome == "Coordenador(a) pedagógica" or request.user.funcionario.cargo.nome == "Educador(a)": 
         return redirect('pedagogico:index')
     else:
@@ -16,25 +20,26 @@ def index(request):
 
     return render(request,'core/index.html', dados)
 
-def registrar(request):
+@login_required
+def registrarFuncionario(request):
     if request.method == "POST":
-    	form = UserCreationForm(request.POST)
-    	if form.is_valid:
-    		form.save()
-    		return redirect('core:index')
-    else:
-    	form = UserCreationForm()
-    	return render(request,'core/registrar.html',{"form":form})
+    	
+        user = User.objects.create_user(request.POST['nomeuser'], request.POST['email'], '123456Mm')
+        pnome, unome = getNomeFuncionario(request.POST['nome'])
+        user.first_name = pnome
+        user.last_name = unome
+        user.save()
+        cargo = Cargo.objects.get(nome=request.POST['cargo'])
 
-def cadastrar_funcionario(request):
-    if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid:
-            form.save()
-            return redirect('core:index')
+        f = Funcionario.objects.create(user=user, cargo=cargo)
+        gerar_acao(request.user.funcionario,"Cadastro","Funcionario",f.id)
+        return redirect('core:index')
+        
+         
     else:
-        form = UserCreationForm()
-        return render(request,'core/registrar.html',{"form":form})    
+    	cargos = Cargo.objects.all()
+    	return render(request,'core/registrar.html',{'cargos':cargos})
+ 
 
 def login(request):
     #ja verifica se tem dados no banco de dados e se não cria dados base
@@ -62,17 +67,36 @@ def login(request):
         else:
             return redirect('core:index')
 
+@login_required
 def logout(request):
     logout_f(request)
     return render(request,'core/logout.html')
-    
+
+@login_required   
 def registro(request):
     acessos = Registro_acesso.objects.all().order_by('-data_acesso')
     acoes = Registro_acao.objects.all().order_by('-data_acao')
     dados = {"acessos":acessos, "acoes":acoes}
     return render(request,'core/registro.html',dados)
 
+@login_required
 def help(request):
     
     dados = {}
     return render(request,'core/help.html',dados)
+
+@login_required
+def alterarSenha (request):
+    if request.method == "POST":
+        if request.user.check_password(request.POST['sa']):
+            request.user.set_password(request.POST['ns'])
+            request.user.save()
+            gerar_acao(request.user.funcionario,"Edição","Funcionario",request.user.funcionario.id)
+        else:
+            return render(request,'core/senha.html',{'erro':True, 'msg':"Senha Atual Inválida!"})
+            
+        return redirect('core:index')
+        
+         
+    else:
+        return render(request,'core/senha.html',{})

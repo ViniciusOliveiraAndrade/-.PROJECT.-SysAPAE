@@ -1,0 +1,119 @@
+{% extends 'core/layout/layout_base_core.html' %}
+
+{% block tamanho %}class="card card-round card-shadowed col-lg-12 col-md-12 col-sm-12"{% endblock %}
+
+{% block main %}
+
+{% load static %}
+
+<div class="card"> 
+
+    <br class="no-print">
+    
+
+    <br class="no-print">
+
+    <div class="card-body card-round">
+
+        <div class="row">
+            <form action="{% url 'social:addUsuario' evento %}" method="post" accept-charset="utf-8">
+                {% csrf_token %}
+
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" style="color: black;font-size: 15px;border-color: #444;" placeholder="Pesquisar por...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-info" type="submit">Pesquisar</button>
+                    </span>
+                </div>
+            </form>
+
+
+
+            <a href="#" onclick="window.close();" class="btn btn-secondary" style="margin-left: 50%;" type="reset">Voltar</a>
+
+            
+
+
+        </div>
+        <br><br>
+        <div class="row">
+
+            <table  class="table table-striped table-bordered table-responsive bs-select print border-dark text-dark tabelaesticada" cellspacing="0">
+
+                <thead>
+                  <tr>
+                    <th class="border-dark text-dark">Imagem</th>
+                    <th class="border-dark text-dark">Usuário</th>
+                    <th class="no-print border-dark text-dark">Adicionar</th>
+                </tr>
+            </thead>
+            <tfoot class="no-print">
+              <tr>
+                <th class="border-dark text-dark">Imagem</th>
+                <th class="border-dark text-dark">Usuário</th>
+                <th class="no-print border-dark text-dark">Adicionar</th>
+            </tr>
+        </tfoot>
+        <tbody>
+
+            {% for usuario in usuarios %}
+
+            <tr id="linha{{usuario.usuario.id}}">
+              <td class="no-print border-dark text-dark">
+                  <div class="row no-gutters" data-provide="photoswipe">
+                    <figure class="img-hov-zoomin">
+                        <img width="120px" height="160px" src="{% ifequal usuario.usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{usuario.usuario.imagem_url}} {% endifequal %}" alt="Imagem Corrompida" class="img-thumbnail">
+                    </figure>
+                </div>
+            </td>
+            <td class="border-dark text-dark">{{usuario.usuario.nome}}</td>
+            <td class="no-print border-dark text-dark">
+                <a onclick="addUsuario(this.id)" id="{{ usuario.usuario.id }}" data-provide="tooltip" data-tooltip-color="warning" title="Adicionar Usuário" style="font-size: 25px;" class="fa fa-plus-circle d-inline text-warning" aria-hidden="true" href="#"></a>
+            </td>
+
+        </tr>
+        {% endfor %}
+
+    </tbody>
+
+
+
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+{% endblock %}
+
+
+
+{% block js %}
+<script type="text/javascript">
+
+function addUsuario(id){
+    $.ajax({
+        url: '{% url "social:addLista" %}',
+        data: {'evento': "{{evento}}", 'usuario':id},
+        dataType: 'json',
+        success: function (data) {
+            if (data.adcionado) {
+                // document.getElementById("linha"+id).
+                $('#linha'+id).hide();
+
+            }else {
+                alert("Não foi possivel cadastrar a CID");
+            }
+        }
+    });
+
+    
+}
+
+</script>
+{% endblock %}
+

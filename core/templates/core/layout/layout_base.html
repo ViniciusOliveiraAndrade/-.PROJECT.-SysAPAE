@@ -97,7 +97,27 @@
             <span class="topbar-btn" data-toggle="dropdown"><img class="avatar" src="{% ifequal request.user.funcionario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{request.user.funcionario.imagem_url}} {% endifequal %}" alt="..."></span>
             <div class="dropdown-menu dropdown-menu-right">
               <a class="dropdown-item" href=" {% block perfil %}{% endblock %}"><i class="ti-user"></i> Perfil</a>
+              
+              {% if request.user.funcionario.cargo.nome == "Coordenador(a) pedagógica" or request.user.funcionario.cargo.nome == "Coordenador(a) saúde" or request.user.funcionario.cargo.nome == "Coordenador(a) assistência social" %}
+                
+              
+                
+              
+
+ 
+            
+             <span class="dropdown-item-left" data-toggle="dropdown"><a class="dropdown-item" href="#"><i class="ti-menu-alt"></i> Funcionarios</a></span>
+            
+            <div class="dropdown-menu">
+              
+              <a class="dropdown-item" href=" {% url 'core:registrarFuncionario' %}"><i class="ti-id-badge"></i> Cadastrar</a>
               <a class="dropdown-item" href=" {% url 'core:registro' %}"><i class="ti-bookmark-alt"></i> Registros</a>
+
+            </div>
+
+            {% endif %}
+              
+              <div class="dropdown-divider"></div>
               <a class="dropdown-item" href=" {% url 'core:help' %}"><i class="ti-help-alt"></i> Ajuda</a>
              
 
@@ -209,12 +229,18 @@ Menu para Trocar
 
 <!-- Scripts -->
 
-{% block js %}
-{% endblock %}
+
+<script src="{% static 'assets/js/meuscript.js' %}"></script>
 <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
 <script src="{% static 'assets/js/core.min.js' %}"></script>
 <script src="{% static 'assets/js/app.min.js' %}"></script>
 <script src="{% static 'assets/js/script.min.js' %}"></script>
+
+
+{% block js %}
+{% endblock %}
+
+
 
 </body>
 </html>

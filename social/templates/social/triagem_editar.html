@@ -15,7 +15,7 @@
 
     <form id="formmm" class="card text-dark" action="{% url 'social:editar_triagem'%}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
-   
+
       <input type="hidden" name="id" value="{{ t.id }}">
       <!--  .......................................................................................................  -->  
       <h5 class="text-uppercase">Usuário</h5>
@@ -24,16 +24,35 @@
       <div class="row"> 
         <div class="col-lg-12 col-md-12 col-sm-12 no-gutters text-center" data-provide="photoswipe">
           <figure class="img-hov-zoomin">
-            <img src="{% ifequal t.usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{t.usuario.imagem_url}} {% endifequal %}" alt="..." class="rounded avatar-xxxl">
+            <img width="120px" height="160px" src="{% ifequal t.usuario.imagem_url None %}{% static 'assets/img/avatar/default.jpg' %}{% else %} {{t.usuario.imagem_url}} {% endifequal %}" alt="Imagem Corrompida" class="rounded avatar-xxxl">
           </figure>
         </div>
       </div>
 
 
+      
+
 
 
 
       <div class="row"> 
+
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+
+          <div class="form-group">
+
+
+            <label >Enviar Imagem</label>
+            <div class="input-group file-group">
+              <input type="text" name="verificaimagem" class="form-control file-value" value="{% ifequal t.usuario.imagem_url None %}Sem Imagem{% else %} {{t.usuario.imagem_url}} {% endifequal %}" placeholder="Choose file..." readonly>
+              <input  type="file" multiple name="imagem">
+              <span class="input-group-btn">
+                <button class="btn btn-light file-browser visivel" type="button"><i class="fa fa-upload"></i></button>
+              </span>
+            </div>
+          </div>
+        </div>
 
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="form-group">
@@ -63,11 +82,12 @@
           <div class="form-group">
             <label>CID <i class="text-danger">*</i></label>
             <div>
-              <select data-provide="selectpicker" name="cid" style="color: #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
+              <select name="cid" style="height: 35px; color: black; font-size: 15px; border-color: #444; background-color: #fff;" class="visivel border border-dark text-dark rounded col-8" id="CIDS" required>
                 {% for cid in cids %}
                 <option class="visivel text-dark" style="color:#000;" {% if t.usuario.cid.codigo == cid.codigo %}selected="selected"{% endif %}>{{cid.codigo}}</option>                        
                 {% endfor %}
               </select>
+               <a onclick="addCID()" data-provide="tooltip" data-tooltip-color="warning" title="Adicionar CID" style="font-size: 25px;" class="fa fa-plus-circle d-inline text-warning" aria-hidden="true" href="#"></a>
             </div>
           </div>
         </div>  
@@ -205,11 +225,22 @@
       <h5 class="text-uppercase mt-3">Endereço</h5>
       <hr class="hr-sm mb-2">
 
+
+
+
+
       <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="form-group">
+            <label>CEP <i class="text-danger">*</i></label>
+            <input name="cep" id="cep" onblur="pesquisacep(this.value);" class="form-control" value="{{t.cep}}" type="text" required >
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
             <label>Rua <i class="text-danger">*</i></label>
-            <input name="rua" class="form-control" type="text"  value="{{t.rua}}" required >
+            <input name="rua" type="text" id="rua" class="form-control" value="{{t.rua}}" type="text">
           </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -221,23 +252,27 @@
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="form-group">
             <label>Bairro <i class="text-danger">*</i></label>
-            <input name="bairro" class="form-control" type="text"  value="{{t.bairro}}" required >
+            <input name="bairro" id="bairro" class="form-control" value="{{t.bairro}}" type="text" required >
           </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="form-group">
             <label>Ponto de Referência</label>
-            <input name="ponto" class="form-control" type="text"  value="{{t.ponto_de_referencia}}">
+            <input name="ponto" class="form-control" type="text" value="{{t.ponto_de_referencia}}">
           </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="form-group">
             <label>Cidade <i class="text-danger">*</i></label>
-            <input name="cidade" class="form-control" type="text"  value="{{t.cidade}}" required >
+            <input name="cidade" class="form-control" id="cidade" value="{{t.cidade}}" type="text" required >
           </div>
         </div>
 
+        <input name="uf" type="hidden" id="uf" size="2" />
+        <input name="ibge" type="hidden" id="ibge" size="8"/>
       </div>
+
+
 
       <!--  .......................................................................................................  -->
 
@@ -293,8 +328,8 @@
 
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="form-group">
-            <label>Qual <i class="text-danger">*</i></label>
-            <input name="qual" class="form-control" type="text" value="{{t.qual}}" required >
+            <label>Escola</label>
+            <input name="qual" class="form-control" type="text" value="{{t.qual}}">
           </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -378,7 +413,7 @@
                 {% if t.e_i_fono %} selected="selected" {% endif %} >SIM</option>                        
                 <option class="visivel text-dark"
                 {% if not t.e_i_fono %} selected="selected" {% endif %} >NÂO</option>  
-                                  
+
               </select>
             </div>
           </div>
@@ -394,7 +429,7 @@
                 {% if t.e_i_to %} selected="selected" {% endif %} >SIM</option>                        
                 <option class="visivel text-dark"
                 {% if not t.e_i_to %} selected="selected" {% endif %} >NÂO</option>  
-                              
+
               </select>
             </div>
           </div>
@@ -410,7 +445,7 @@
                 {% if t.e_i_psi %} selected="selected" {% endif %} >SIM</option>                        
                 <option class="visivel text-dark"
                 {% if not t.e_i_psi %} selected="selected" {% endif %} >NÂO</option>  
-                                  
+
               </select>
             </div>
           </div>
@@ -422,11 +457,11 @@
             <div>
               <select data-provide="selectpicker" name="ondonto" style="color #000; font-size: 15px; border-color: #444;" class="visivel border border-dark text-dark rounded" required >
 
-               <option class="visivel text-dark" 
+                <option class="visivel text-dark" 
                 {% if t.e_i_ondonto %} selected="selected" {% endif %} >SIM</option>                        
                 <option class="visivel text-dark"
                 {% if not t.e_i_ondonto %} selected="selected" {% endif %} >NÂO</option>  
-                                   
+
               </select>
             </div>
           </div>
@@ -442,7 +477,7 @@
                 {% if t.e_i_medico %} selected="selected" {% endif %} >SIM</option>                        
                 <option class="visivel text-dark"
                 {% if not t.e_i_medico %} selected="selected" {% endif %} >NÂO</option>  
-                                 
+
               </select>
             </div>
           </div>
@@ -458,7 +493,7 @@
                 {% if t.e_i_psicopedagoga %} selected="selected" {% endif %} >SIM</option>                        
                 <option class="visivel text-dark"
                 {% if not t.e_i_psicopedagoga %} selected="selected" {% endif %} >NÂO</option>  
-                                  
+
               </select>
             </div>
           </div>
@@ -474,7 +509,7 @@
                 {% if t.e_i_pedagogia %} selected="selected" {% endif %} >SIM</option>                        
                 <option class="visivel text-dark"
                 {% if not t.e_i_pedagogia %} selected="selected" {% endif %} >NÂO</option>  
-                                        
+
               </select>
             </div>
           </div>
@@ -527,6 +562,36 @@
 
 {% block js %}
 <script type="text/javascript">
+
+function addCID(){
+    var txt;
+    var codigo = prompt("Digite o código da CID", "F");
+    if (codigo == null || codigo == "") {
+    } else {
+
+        $.ajax({
+            url: '{% url "social:cadastrarCID" %}',
+            data: {'codigo': codigo},
+            dataType: 'json',
+            success: function (data) {
+                if (data.cadastrado) {
+                    var x = document.getElementById("CIDS");
+                    var option = document.createElement("option");
+                    option.text = data.codigo;
+                    x.add(option);
+                    option.selected = true;
+
+                }else {
+                    alert("Não foi possivel cadastrar a CID");
+                }
+            }
+        });
+
+    }
+}
+
+
+
 document.getElementById("obs").value = "{{t.observacoes}}";
 
 document.getElementById("u").className = document.getElementById("u").className + " active open";
