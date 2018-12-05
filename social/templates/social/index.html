@@ -13,7 +13,7 @@
 			<br>
 
 			<div class="card-body card-round">
-				<table>
+				<table width="100%">
 					<thead>
 						<tr>
 							<th class="text-center">Usuário</th>
@@ -26,42 +26,71 @@
 					<tbody>
 						{% for visita in visitas %}
 						
-							<tr>
-								<td >{{visita.usuario.nome}}</td>
-								<td class="pl-2">{{visita.data_visita}}</td>
-								<td class="pl-2">{{visita.funcionario}}</td>
-								<td class="pl-2"><a style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true" href="{%url 'social:visita_editar' visita.id %}"></td>
+						<tr>
+							<td >{{visita.usuario.nome}}</td>
+							<td class="pl-2">{{visita.data_visita}}</td>
+							<td class="pl-2">{{visita.funcionario}}</td>
+							<td class="pl-2"><a style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true" href="{%url 'social:visita_editar' visita.id %}"></a></td>
 							</tr>
 
-						{% endfor %}
-						
-					</tbody>
-				</table>
+							{% endfor %}
+
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
-	</div>
 
 
-	<div class="col-lg-6 col-md-6 col-sm-12"> 
+		<div class="col-lg-6 col-md-6 col-sm-12"> 
 
-		<div class="card ">
-			<br>
-			<h1 class="font-dosis fw-500 text-center">Eventos</h1>
-			<br>
+			<div class="card ">
+				<br>
+				<h1 class="font-dosis fw-500 text-center">Eventos</h1>
+				<br>
 
-			<div class="card-body card-round">
+				<div class="card-body card-round">
+					<table width="100%">
+						<thead>
+							<tr>
+								<th class="border-dark text-dark">Evento</th>
+								<th class="border-dark text-dark">Data de Início</th>
+								<th class="border-dark text-dark">Data de Término</th>
+								<th class="text-center">-</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							{% for evento in eventos %}
+
+							<tr>
+								<td class="border-dark text-dark">{{evento.nome}}</td>
+								<td class="border-dark text-dark">{{evento.data_inicio|date:"d M Y" }}</td>
+								<td class="border-dark text-dark">{{evento.data_fim|date:"d M Y" }}</td>
+
+								<td class="no-print border-dark text-dark"> 
+									<a data-provide="tooltip" data-tooltip-color="primary" title="Editar Triagem" style="font-size: 25px;" class="fa fa-pencil d-inline" aria-hidden="true" href="{%url 'social:evento_editar' evento.id %}"></a>
+								</td>
+							</tr>
+
+								{% endfor %}
+
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+
+
+
+
+
 
 			</div>
-
-		</div>
-
-	</div>
-
 
 
 </div>
 
+		</div>
 
-
-
-{% endblock %}
+		{% endblock %}

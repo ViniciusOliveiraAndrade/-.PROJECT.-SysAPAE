@@ -39,6 +39,8 @@ urlpatterns = [
     path('Remover_Lista/<int:evento_id>/<int:lista_id>', views.removerLista, name='removerLista'),
     path('Adicionar_Usuario/<int:evento_id>', views.addUsuario, name='addUsuario'),
     path('add_Lista', views.addLista, name='addLista'),
+    path('salvarData', views.salvarData, name='salvarData'),
+    path('salvarHora', views.salvarHora, name='salvarHora'),
 
 
     #CID

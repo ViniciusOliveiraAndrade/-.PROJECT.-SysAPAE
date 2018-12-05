@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import loader
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
-from django.utils.dateparse import parse_date
+from django.utils.dateparse import parse_date, parse_time
 from django.views import generic
 from django.db.models import Q
 
@@ -20,7 +20,8 @@ import datetime
 @login_required
 def index(request):
     visitas = Visita.objects.filter(realizada=False)
-    dados = {"visitas":visitas}
+    eventos = Evento.objects.all()[:5]
+    dados = {"visitas":visitas, 'eventos':eventos}
     return render(request,'social/index.html', dados)
 
 #----------------------------------------------------------------------------------------
@@ -632,32 +633,33 @@ def addUsuario(request,evento_id):
 
     return render(request,'social/evento_addUsuario.html',{'evento':evento_id, 'usuarios':usuariosEnviar})
 
-@login_required
-def addLista(request):
+# @login_required
+# def addLista(request):
 
-    evento_id = request.GET.get('evento', None)
-    usuario_id = request.GET.get('usuario', None)
+#     evento_id = request.GET.get('evento', None)
+#     usuario_id = request.GET.get('usuario', None)
 
-    print("ID do evento"+evento_id)
-    print("ID do usuario"+usuario_id)
+#     print("ID do evento"+evento_id)
+#     print("ID do usuario"+usuario_id)
 
-    evento = Evento.objects.get(pk=evento_id)
-    usuario = Usuario.objects.get(pk=usuario_id)
+#     evento = Evento.objects.get(pk=evento_id)
+#     usuario = Usuario.objects.get(pk=usuario_id)
 
-    lista = Lista.objects.create(posicao=(evento.lista.all().count() + 1), usuario=usuario)
-    evento.lista.add(lista)
-    lista.save()
-    evento.save()
+#     lista = Lista.objects.create(posicao=(evento.lista.all().count() + 1), usuario=usuario)
+#     evento.lista.add(lista)
+#     lista.save()
+#     evento.save()
 
-    gerar_acao(request.user.funcionario,"Edição","Evento",evento.id)
-    data = {'adcionado': True}
-    return JsonResponse(data)
+#     gerar_acao(request.user.funcionario,"Edição","Evento",evento.id)
+#     data = {'adcionado': True}
+#     return JsonResponse(data)
 
 #----------------------------------------------------------------------------------------------------
 # 
 # AJAX
 # 
 # 
+#----------------------------------------------------------------------------------------------------
 #CID
 
 @login_required
@@ -676,4 +678,54 @@ def cadastrarCID(request):
     
 
 
+#----------------------------------------------------------------------------------------------------
+#Evento
 
+@login_required
+def addLista(request):
+
+    evento_id = request.GET.get('evento', None)
+    usuario_id = request.GET.get('usuario', None)
+
+    evento = Evento.objects.get(pk=evento_id)
+    usuario = Usuario.objects.get(pk=usuario_id)
+
+    lista = Lista.objects.create(posicao=(evento.lista.all().count() + 1), usuario=usuario)
+    evento.lista.add(lista)
+    lista.save()
+    evento.save()
+
+    gerar_acao(request.user.funcionario,"Edição","Evento",evento.id)
+    data = {'adcionado': True}
+    return JsonResponse(data)
+
+
+@login_required
+def salvarData(request):
+
+    listaID = request.GET.get('lista', None)
+    data = parse_date(request.GET.get('data', None))
+
+    lista = Lista.objects.get(pk=listaID)
+    lista.data = data
+    lista.save()
+
+    gerar_acao(request.user.funcionario,"Edição","Lista", listaID)
+    data = {'erro': False}
+    return JsonResponse(data)
+
+
+@login_required
+def salvarHora(request):
+
+    listaID = request.GET.get('lista', None)
+    hora = parse_time(request.GET.get('hora', None))
+
+
+    lista = Lista.objects.get(pk=listaID)
+    lista.hora = hora
+    lista.save()
+
+    gerar_acao(request.user.funcionario,"Edição","Lista", listaID)
+    data = {'erro': False}
+    return JsonResponse(data)
