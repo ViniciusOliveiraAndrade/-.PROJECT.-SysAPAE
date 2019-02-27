@@ -448,7 +448,7 @@ def visita_listar(request):
 @login_required
 def visita_agendar(request,usuario_id):
     u = Usuario.objects.get(pk=usuario_id)
-    f = Funcionario.objects.filter(cargo__nome="Assistente social")
+    f = Funcionario.objects.filter(Q(cargo__nome="Assistente social") | Q(cargo__nome="Coordenador(a) saúde") | Q(cargo__nome="Coordenador(a) assistência social") )
     t = Triagem.objects.get(usuario=u)
     local = "Rua: "+t.rua+", N° "+t.numero_da_rua+"  |Bairro: "+t.bairro+"   |Ponto de Referencia: "+t.ponto_de_referencia+"   |Cidade: "+t.cidade
 
