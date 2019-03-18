@@ -49,7 +49,7 @@ table, th, td {
     display: inline-block;
     font-size: 16px;
     color: black;
-    line-height: 6px;
+    line-height: 13px;
 }
 
 .emlinha2{
@@ -58,7 +58,7 @@ table, th, td {
     border-left: 1px black solid;
     font-size: 16px;
     color: black;
-    line-height: 6px;
+    line-height: 13px;
 }
 
 .emlinha3{
@@ -68,7 +68,7 @@ table, th, td {
     display: inline-block;
     font-size: 16px;
     color: black;
-    line-height: 12px;
+    line-height: 13px;
 }
 
 /* mechaa aqui---------------------------------------------------------------------------------- */

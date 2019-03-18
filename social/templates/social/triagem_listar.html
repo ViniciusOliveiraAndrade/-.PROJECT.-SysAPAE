@@ -103,7 +103,10 @@
     <td class="border-dark text-dark">{{t.data_da_triagem|date:"d M Y" }}</td>
     <td class="no-print border-dark text-dark"> 
 
+
       <a data-provide="tooltip" data-tooltip-color="primary" title="Editar Triagem" style="font-size: 25px;" class="fa fa-pencil d-inline" aria-hidden="true" href="{%url 'social:triagem_editar' t.id %}"></a>
+
+      <a data-provide="tooltip" data-tooltip-color="primary" title="Detalhes" style="font-size: 25px;" class="fa fa-eye d-inline" aria-hidden="true" href="{%url 'social:triagem_detalhe' t.id %}"></a>
 
       {% ifequal t.usuario.situacao "Inativo"  %} 
       <a onclick="ativar(this.id)" id="{{t.usuario.id}};{{t.usuario.nome}}" data-provide="tooltip" data-tooltip-color="primary" title="Ativar Usuário" style="font-size: 25px;" class="fa fa-check-square d-inline" aria-hidden="true" href="#"></a> 

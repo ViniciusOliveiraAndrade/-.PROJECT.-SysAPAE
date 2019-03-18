@@ -82,6 +82,8 @@ class Visita(models.Model):
 class Lista(models.Model):
     class Meta:
         ordering = ['posicao']
+    data = models.DateField('Data', blank=True, default=datetime.now)
+    hora = models.TimeField('Hora', blank=True, default=datetime.now)
     posicao = models.IntegerField(default=0, blank=True)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, blank=True)
 

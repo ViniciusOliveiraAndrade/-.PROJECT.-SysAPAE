@@ -88,6 +88,8 @@
                         <th class="no-print border-dark text-dark">Movimentar</th>
                         <th class="border-dark text-dark">Posição</th>
                         <th class="border-dark text-dark">Usuário</th>
+                        <th class="border-dark text-dark">Data</th>
+                        <th class="border-dark text-dark">Hora</th>
                         <th class="no-print border-dark text-dark">Remover</th>
                     </tr>
                 </thead>
@@ -96,6 +98,8 @@
                     <th class="no-print border-dark text-dark">Movimentar</th>
                     <th class="border-dark text-dark">Posição</th>
                     <th class="border-dark text-dark">Usuário</th>
+                    <th class="border-dark text-dark">Data</th>
+                    <th class="border-dark text-dark">Hora</th>
                     <th class="no-print border-dark text-dark">Remover</th>
                 </tr>
             </tfoot>
@@ -125,12 +129,29 @@
                 </td>
                 <td class="border-dark text-dark">{{l.posicao}}°</td>
                 <td class="border-dark text-dark">{{l.usuario.nome}}</td>
+                <td class="border-dark text-dark">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <input id="{{l.id}}" onblur="atualizarData(this.id, this.value);" type="date" class="form-control" value="{{l.data.year}}-{% if l.data.month < 10 %}0{{l.data.month}}{% else %}{{l.data.month}}{% endif %}-{% if l.data.day < 10 %}0{{l.data.day}}{% else %}{{l.data.day}}{% endif %}">
+                        </div>
+                    </div>
+                </td>
+
+                <td class="border-dark text-dark">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <input id="{{l.id}}" onblur="atualizarHora(this.id, this.value);" type="time" class="form-control" value="{{l.hora}}">
+                        </div>
+                    </div>
+                </td>
                 <td class="no-print border-dark text-dark">
 
                     <a onclick="" id="" data-provide="tooltip" data-tooltip-color="danger" title="Remover Usuário da Lista" style="font-size: 25px;" class="fa fa-window-close d-inline text-danger" aria-hidden="true" href="{% url 'social:removerLista' evento.id l.id %}"></a> 
                 </td>
 
             </tr>
+
+
             {% endfor %}
 
         </tbody>
@@ -179,10 +200,41 @@ function addUsuario(){
     var w = screen.availWidth;
     var h = screen.availHeight;
     var myWindow = window.open(url, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width="+w+",height="+h+"");
+}
+
+function atualizarData(id, value){
+$.ajax({
+            url: '{% url "social:salvarData" %}',
+            data: {'data': value, 'lista':id},
+            dataType: 'json',
+            success: function (data) {
+               if (data.erro) {
+                    alert("Não foi possivel cadastrar alterar a Hora");
+                   
+                }
+            }
+        });
+
 
 }
 
 
+function atualizarHora(id, value){
+
+
+$.ajax({
+            url: '{% url "social:salvarHora" %}',
+            data: {'hora': value, 'lista':id},
+            dataType: 'json',
+            success: function (data) {
+                if (data.erro) {
+                    alert("Não foi possivel cadastrar alterar a Hora");
+                   
+                }
+            }
+        });
+
+}
 </script>
 {% endblock %}
 
