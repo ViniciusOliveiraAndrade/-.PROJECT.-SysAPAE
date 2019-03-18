@@ -1,0 +1,562 @@
+{% extends 'pedagogico/layout/layout_base.html' %}
+
+{% block main %}
+    {% load static %}
+
+    <div class="card">
+
+
+        <nav class="no-print" aria-label="breadcrumb">
+            <ol class="breadcrumb m-15">
+                <li class="breadcrumb-item"><a href="{% url 'pedagogico:index' %}">Home</a></li>
+                <li class="breadcrumb-item"><a a onclick="window.history.back();">Minhas Turmas</a></li>
+                <li class="breadcrumb-item active" aria-current="page">PEI - Detalhes</li>
+            </ol>
+        </nav>
+
+        <br class="no-print">
+        <h1 class="font-dosis fw-500  text-center">Planejamento Educacional Individualizado - PEI</h1>
+        <br class="no-print">
+
+        <div class="card-body card-round">
+            <h5 class="text-uppercase mt-3 levantar" style="margin-left: 25px">Usuário</h5>
+
+            <div class="row">
+
+                <div class="col-lg-12 col-md-12 col-sm-12 emlinha2">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label>
+                            <strong>Nome:</strong>
+                                {{ PEI.usuario.nome }}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-6 col-sm-12 emlinha">
+                    <div class="form-group" style="margin-left: 40px">
+                        <label>
+                            <strong>Data de Nascimento:</strong>
+                                                        {{ PEI.usuario.data_nacimento}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <h4 class="text-uppercase mt-3 text-left">Comunicação Oral</h4>
+            <hr class="hr-sm mb-2 ">
+            <div class="row">
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>1. Relata acontecimentos simples de modo compreensível:</strong>
+
+                            {% ifequal PEI.relataAcontecimentos 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.relataAcontecimentos 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.relataAcontecimentos 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.relataAcontecimentos 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>2. Lembra-se de dar recados após, aproximadamente, dez minutos:</strong>
+                            {% ifequal PEI.lembraRecados 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.lembraRecados 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.lembraRecados 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.lembraRecados 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>3. Comunica-se com outras pessoas usando um
+                            tipo de linguagem (gestos, comunicação alternativa) que não a oral:</strong>
+                            {% ifequal PEI.comunicacaoAlternativa 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.comunicacaoAlternativa 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.comunicacaoAlternativa 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.comunicacaoAlternativa 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>4. Utiliza a linguagem oral para se
+                            comunicar:</strong>
+                            {% ifequal PEI.linguagemOral 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.linguagemOral 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.linguagemOral 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.linguagemOral 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <h4 class="text-uppercase mt-3 text-left">Leitura e Escrita</h4>
+            <hr class="hr-sm mb-2 ">
+            <div class="row">
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>5. Reconhece as letras do alfabeto:</strong>
+                            {% ifequal PEI.letrasNumeros 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.letrasNumeros 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.letrasNumeros 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.letrasNumeros 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha3">
+                    <div class="form-group">
+                        <label><strong>6. Reconhece a diferença entre leras e
+                            números:</strong>
+                            {% ifequal PEI.reconheceDiferenca 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.reconheceDiferenca 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.reconheceDiferenca 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.reconheceDiferenca 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>7. Domina silabas simples:</strong>
+                            {% ifequal PEI.domina 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.domina 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.domina 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.domina 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>8. Ouve histórias com atenção:</strong>
+                            {% ifequal PEI.ouve 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.ouve 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.ouve 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.ouve 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>9. Consegue compreender e reproduzir
+                            histórias:</strong>
+                            {% ifequal PEI.compreende 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.compreende 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.compreende 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.compreende 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>10. Participa de jogos, atendendo as
+                            regras:</strong>
+                            {% ifequal PEI.participa 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.participa 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.participa 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.participa 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>11. Utiliza vocabulário adequado para a faixa
+                            etária:</strong>
+                            {% ifequal PEI.vocabulario 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.vocabulario 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.vocabulario 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.vocabulario 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>12. Sabe soletrar:</strong>
+                            {% ifequal PEI.soletrar 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.soletrar 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.soletrar 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.soletrar 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>13. Consegue escrever palavras simples:</strong>
+                            {% ifequal PEI.palavrasSimples 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.palavrasSimples 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.palavrasSimples 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.palavrasSimples 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>14. É capaz de assinar o nome:</strong>
+                            {% ifequal PEI.assinar 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.assinar 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.assinar 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.assinar 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>15. Escreve endereços (com o objetivo de saber
+                            onde chegar):</strong>
+                            {% ifequal PEI.escreveEnd 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.escreveEnd 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.escreveEnd 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.escreveEnd 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>16. Escreve pequenos textos e/ou bilhetes:</strong>
+                            {% ifequal PEI.ecrevePequnosTextos 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.ecrevePequnosTextos 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.ecrevePequnosTextos 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.ecrevePequnosTextos 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>17. Escreve sob ditado:</strong>
+                            {% ifequal PEI.ditado 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.ditado 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.ditado 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.ditado 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>18. Lê com compreensão pequenos textos:</strong>
+                            {% ifequal PEI.leTextos 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.leTextos 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.leTextos 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.leTextos 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>19. Lê e segue instruções impressas, por
+                            exemplo em transportes públicos:</strong>
+                            {% ifequal PEI.instrucoes 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.instrucoes 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.instrucoes 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.instrucoes 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>20. Utiliza habilidades de leitura para obter
+                            informações, por exemplo, em jornais ou revistas:</strong>
+                            {% ifequal PEI.habilidades 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.habilidades 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.habilidades 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.habilidades 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <h4 class="text-uppercase mt-3 text-left">Raciocínio Lógico-Matemático</h4>
+            <hr class="hr-sm mb-2 ">
+            <div class="row">
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>21. Relaciona quantidade ao número:</strong>
+                            {% ifequal PEI.relacionaQuantidade 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.relacionaQuantidade 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.relacionaQuantidade 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.relacionaQuantidade 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>22. Soluciona problemas simples:</strong>
+                            {% ifequal PEI.problemasSimples 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.problemasSimples 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.problemasSimples 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.problemasSimples 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>23. Reconhece os valores dos preços dos
+                                produtos:</strong>
+                            {% ifequal PEI.reconheceValores 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.reconheceValores 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.reconheceValores 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.reconheceValores 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>24. Identifica o valor do dinheiro:</strong>
+                            {% ifequal PEI.identificaValor 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.identificaValor 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.identificaValor 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.identificaValor 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>25. Diferencia notas e moedas:</strong>
+                            {% ifequal PEI.diferenciaNotasM 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.diferenciaNotasM 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.diferenciaNotasM 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.diferenciaNotasM 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>26. Sabe agrupar dinheiro para formar
+                                valores:</strong>
+                            {% ifequal PEI.agrupardinheiro 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.agrupardinheiro 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.agrupardinheiro 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.agrupardinheiro 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>27. Dá troco, quando necessário, nas
+                                atividades realizadas em sala de aula:</strong>
+                            {% ifequal PEI.daTroco 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.daTroco 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.daTroco 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.daTroco 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>28. Possui conceitos como cor, tamanho, formas
+                                geométricas, posição direita e esquerda, antecessor e sucessor:</strong>
+                            {% ifequal PEI.possuiConceitos 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.possuiConceitos 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.possuiConceitos 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.possuiConceitos 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>29. Reconhece a relação entre número e dias no
+                                mês (localização temporal):</strong>
+                            {% ifequal PEI.relacaoNumeroDia 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.relacaoNumeroDia 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.relacaoNumeroDia 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.relacaoNumeroDia 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>30. Identifica dias da semana:</strong>
+                            {% ifequal PEI.identificaDia 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.identificaDia 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.identificaDia 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.identificaDia 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>31. Reconhece horas:</strong>
+                            {% ifequal PEI.reconheceHoras 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.reconheceHoras 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.reconheceHoras 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.reconheceHoras 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>32. Reconhece horas no relógio digital:</strong>
+                            {% ifequal PEI.horasDigital 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.horasDigital 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.horasDigital 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.horasDigital 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>33. Reconhece horas exatas em relógio com
+                                ponteiros:</strong>
+                            {% ifequal PEI.horasExatasPonteiros 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.horasExatasPonteiros 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.horasExatasPonteiros 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.horasExatasPonteiros 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>34. Reconhece horas não exatas (meia hora ou
+                                sente minutos, por exemplo) em relógio digital:</strong>
+                            {% ifequal PEI.horasExatasDigital 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.horasExatasDigital 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.horasExatasDigital 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.horasExatasDigital 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>35. Reconhece horas não exatas em relógio com
+                                ponteiros:</strong>
+                            {% ifequal PEI.horasNaoExatasPonteiros 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.horasNaoExatasPonteiros 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.horasNaoExatasPonteiros 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.horasNaoExatasPonteiros 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>36. Associa horários aos acontecimentos:</strong>
+                            {% ifequal PEI.horarioAcontecimentos 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.horarioAcontecimentos 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.horarioAcontecimentos 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.horarioAcontecimentos 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>37. Reconhece as medidas de tempo (ano, mês,
+                                semana, dia, hora, minuto etc):</strong>
+                            {% ifequal PEI.reconheceMedidas 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.reconheceMedidas 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.reconheceMedidas 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.reconheceMedidas 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>38. Compreende conceitos matemáticos, como
+                                dobro e metade:</strong>
+                            {% ifequal PEI.conceitosMatematicos 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.conceitosMatematicos 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.conceitosMatematicos 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.conceitosMatematicos 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>39. Resolve operações matemáticas (adição ou
+                                subtração) com apoio de material concreto:</strong>
+                            {% ifequal PEI.resolveOperacoes 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.resolveOperacoes 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.resolveOperacoes 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.resolveOperacoes 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>40. Demonstra curiosidade. Pergunta sobre o
+                                funcionamento das coisas:</strong>
+                            {% ifequal PEI.demonstraCuriosidade 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.demonstraCuriosidade 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.demonstraCuriosidade 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.demonstraCuriosidade 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>41. Gosta de jogos envolvendo lógica, como
+                                quebra-cabeças e charadas, entre outros:</strong>
+                            {% ifequal PEI.gostaJogas 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.gostaJogas 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.gostaJogas 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.gostaJogas 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-3 col-sm-12 emlinha">
+                    <div class="form-group">
+                        <label><strong>42. Organiza figuras em ordem lógica:</strong>
+                            {% ifequal PEI.organizaOrdemLogica 'rs' %}REALIZA SEM SUPORTE {% endifequal %}
+                            {% ifequal PEI.organizaOrdemLogica 'rc' %}REALIZA COM SUPORTE {% endifequal %}
+                            {% ifequal PEI.organizaOrdemLogica 'nr' %}NÃO REALIZA {% endifequal %}
+                            {% ifequal PEI.organizaOrdemLogica 'nf' %}NÃO FOI OBSERVADO {% endifequal %}
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <footer class="card-footer text-right no-print">
+                <a onclick="window.history.back();" class="btn btn-secondary" type="reset">Voltar</a>
+{#                <a class="btn btn-w-md btn-round btn-danger float-right mr-3 ml-3" href="{% url 'pedagogico:pei_editar' %}">#}
+{#                    Editar#}
+{#                </a>#}
+                <button class="btn btn-w-md btn-round btn-info float-right  ml-3" onclick="window.print();">
+                    Imprimir
+                </button>
+            </footer>
+
+        </div>
+    </div>
+
+{% endblock %}

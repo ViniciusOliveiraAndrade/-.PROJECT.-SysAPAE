@@ -26,7 +26,7 @@
                                data-provide="datatables">
                             <thead>
                             <tr class="text-uppercase" style="background-color: black; color: #fff;">
-                                <th class="border-dark w-250px">CID</th>
+                                <th class="border-dark w-50px">CID</th>
                                 <th class="border-dark"><b>Nome Completo</b></th>
                                 <th class="border-dark text-center w-80px"><b>Data de Nascimento</b></th>
                                 <th class="border-dark text-center w-20px"><b>Turma</b></th>
@@ -39,7 +39,7 @@
 
                             {% for triagem in listaPedagogica %}
                                 <tr>
-                                    <td class=" w-150px text-center border-dark">{{ triagem.usuario.cid }}</td>
+                                    <td class=" text-center border-dark" title="{{  triagem.usuario.cid.descricao }}">{{ triagem.usuario.cid.codigo }}</td>
                                     <td align="left" class="border-dark">{{ triagem.usuario.nome }}</td>
                                     <td class="w-200px text-center border-dark">{{ triagem.usuario.data_nacimento }}</td>
                                     <td class="w-100px text-center border-dark">{{ triagem.usuario.turma_set.first.nome }}<br>
@@ -69,6 +69,9 @@
                 </div>
             </div>
         </div>
+
+
+
         <footer class="card-footer text-right">
             <a href="{% url 'pedagogico:index' %}" class="btn btn-secondary no-print" type="reset">Voltar</a>
         </footer>

@@ -1,0 +1,1257 @@
+{% extends 'pedagogico/layout/layout_base.html' %}
+
+{% block main %}
+    <div class="card">
+
+        <nav class="no-print" aria-label="breadcrumb">
+            <ol class="breadcrumb m-15">
+                <li class="breadcrumb-item"><a href="{% url 'pedagogico:index' %}">Home</a></li>
+                <li class="breadcrumb-item"><a a onclick="window.history.back();">Minhas Turmas</a></li>
+                <li class="breadcrumb-item active" aria-current="page">PEI</li>
+            </ol>
+        </nav>
+
+        <br>
+        <h1 class="font-dosis fw-500 text-center">Planejamento Educacional Individualizado - PEI</h1>
+        <br>
+
+        <div class="card-body card-round">
+
+            <form id="formulario" class="card-body"
+                  action="{% url 'pedagogico:registrar_pei' %}"
+                  method="post">
+                {% csrf_token %}
+
+                <div class="row">
+
+                    <div class="col-lg-10 col-md-6 col-sm-12 text-left">
+                        <div class="form-group">
+                            <label>Usuário</label>
+                            <input type="hidden" value="{{ PEI.id }}" name="pei"></input>
+                            <input style="color:#000;" type="text"
+                                   class="form-control visivel border border-dark text-dark rounded"
+                                   value="{{ PEI.usuario.nome }}" disabled="disabled">
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-2 col-md-6 col-sm-12 text-left">
+                        <div class="form-group">
+                            <label>Idade</label>
+                            <input style="color:#000;" type="text"
+                                   class="form-control visivel border border-dark text-dark rounded"
+                                   id="idade" disabled>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <br>
+                <h4 class="text-uppercase text-left">Comunicação Oral</h4>
+                <br>
+
+                <div class="form-group">
+                    <table class="table table-bordered border-dark text-dark tabelaesticada ">
+                        <thead>
+                        <tr class="text-uppercase" style="background-color: black; color: #fff;">
+                            <th class="border-dark text-center"><b>Questão</b></th>
+                            <th class="w-220px text-center border-dark"><b>Ação</b></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Relata acontecimentos simples de modo
+                                compreensível.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline ">
+
+                                    <div class="form-group mb-0 pr-0 ">
+                                        <select class="text-center form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="relataAcontecimentos"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.relataAcontecimentos 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.relataAcontecimentos 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.relataAcontecimentos 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.relataAcontecimentos 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Lembra-se de dar recados após,
+                                aproximadamente, dez minutos.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="lembraRecados"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.lembraRecados 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.lembraRecados 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.lembraRecados 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.lembraRecados 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Comunica-se com outras pessoas usando um
+                                tipo de linguagem (gestos, comunicação alternativa) que não a oral.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="comunicacaoAlternativa"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.comunicacaoAlternativa 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.comunicacaoAlternativa 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.comunicacaoAlternativa 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.comunicacaoAlternativa 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Utiliza a linguagem oral para se
+                                comunicar.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="linguagemOral"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.linguagemOral 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.linguagemOral 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.linguagemOral 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.linguagemOral 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <br>
+                <br>
+                <h4 class="text-uppercase text-left">Leitura e Escrita</h4>
+                <br>
+
+                <div class="form-group">
+                    <table class="table table-bordered border-dark text-dark tabelaesticada ">
+                        <thead>
+                        <tr class="text-uppercase" style="background-color: black; color: #fff;">
+                            <th class=" border-dark text-center"><b>Questão</b></th>
+                            <th class="w-220px text-center border-dark"><b>Ação</b></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Reconhece as letras do alfabeto.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline ">
+
+                                    <div class="form-group mb-0 pr-0 ">
+                                        <select class="text-center form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="letrasNumeros"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.letrasNumeros 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.letrasNumeros 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.letrasNumeros 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.letrasNumeros 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Reconhece a diferença entre leras e
+                                números.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="reconheceDiferenca"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.reconheceDiferenca 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.reconheceDiferenca 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.reconheceDiferenca 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.reconheceDiferenca 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Domina silabas simples.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="domina"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.domina 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.domina 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.domina 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.domina 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Ouve histórias com atenção.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="ouve"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.ouve 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.ouve 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.ouve 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.ouve 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Consegue compreender e reproduzir
+                                histórias.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline ">
+
+                                    <div class="form-group mb-0 pr-0 ">
+                                        <select class="text-center form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="compreende"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.compreende 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.compreende 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.compreende 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.compreende 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Participa de jogos, atendendo as
+                                regras.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="participa"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.participa 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.participa 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.participa 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.participa 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Utiliza vocabulário adequado para a faixa
+                                etária.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="vocabulario"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.vocabulario 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.vocabulario 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.vocabulario 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.vocabulario 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Sabe soletrar.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="soletrar"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.soletrar 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.soletrar 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.soletrar 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.soletrar 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Consegue escrever palavras simples.</b>
+                            </td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="palavrasSimples"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.palavrasSimples 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.palavrasSimples 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.palavrasSimples 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.palavrasSimples 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>É capaz de assinar o nome.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="assinar"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.assinar 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.assinar 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.assinar 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.assinar 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Escreve endereços (com o objetivo de saber
+                                onde chegar).</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="escreveEnd"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.escreveEnd 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.escreveEnd 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.escreveEnd 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.escreveEnd 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Escreve pequenos textos e/ou bilhetes.</b>
+                            </td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="ecrevePequnosTextos"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.ecrevePequnosTextos 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.ecrevePequnosTextos 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.ecrevePequnosTextos 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.ecrevePequnosTextos 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Escreve sob ditado.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="ditado"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.ditado 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.ditado 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.ditado 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.ditado 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Lê com compreensão pequenos textos.</b>
+                            </td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="leTextos"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.leTextos 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.leTextos 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.leTextos 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.leTextos 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Lê e segue instruções impressas, por
+                                exemplo em transportes públicos.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="instrucoes"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.instrucoes 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.instrucoes 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.instrucoes 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.instrucoes 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Utiliza habilidades de leitura para obter
+                                informações, por exemplo, em jornais ou revistas.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="habilidades"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.habilidades 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.habilidades 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.habilidades 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.habilidades 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <br>
+                <br>
+                <h4 class="text-uppercase text-left">Raciocínio Lógico-Matemático</h4>
+                <br>
+
+                <div class="form-group">
+                    <table class="table table-bordered border-dark text-dark tabelaesticada ">
+                        <thead>
+                        <tr class="text-uppercase" style="background-color: black; color: #fff;">
+                            <th class="border-dark text-center"><b>Questão</b></th>
+                            <th class="w-220px text-center border-dark"><b>Ação</b></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Relaciona quantidade ao número.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline ">
+
+                                    <div class="form-group mb-0 pr-0 ">
+                                        <select class="text-center form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="relacionaQuantidade"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.relacionaQuantidade 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.relacionaQuantidade 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.relacionaQuantidade 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.relacionaQuantidade 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Soluciona problemas simples.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="problemasSimples"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.problemasSimples 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.problemasSimples 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.problemasSimples 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.problemasSimples 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Reconhece os valores dos preços dos
+                                produtos.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="reconheceValores"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.reconheceValores 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.reconheceValores 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.reconheceValores 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.reconheceValores 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Identifica o valor do dinheiro.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="identificaValor"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.identificaValor 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.identificaValor 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.identificaValor 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.identificaValor 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Diferencia notas e moedas.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline ">
+
+                                    <div class="form-group mb-0 pr-0 ">
+                                        <select class="text-center form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="diferenciaNotasM"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.diferenciaNotasM 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.diferenciaNotasM 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.diferenciaNotasM 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.diferenciaNotasM 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Sabe agrupar dinheiro para formar
+                                valores.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="agrupardinheiro"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.agrupardinheiro 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.agrupardinheiro 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.agrupardinheiro 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.agrupardinheiro 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Dá troco, quando necessário, nas
+                                atividades realizadas em sala de aula.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="daTroco"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.daTroco 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.daTroco 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.daTroco 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.daTroco 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Possui conceitos como cor, tamanho, formas
+                                geométricas, posição direita e esquerda, antecessor e sucessor.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="possuiConceitos"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.possuiConceitos 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.possuiConceitos 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.possuiConceitos 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.possuiConceitos 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Reconhece a relação entre número e dias no
+                                mês (localização temporal).</b>
+                            </td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="relacaoNumeroDia"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.relacaoNumeroDia 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.relacaoNumeroDia 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.relacaoNumeroDia 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.relacaoNumeroDia 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Identifica dias da semana.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="identificaDia"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.identificaDia 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.identificaDia 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.identificaDia 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.identificaDia 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Reconhece horas.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="reconheceHoras"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.reconheceHoras 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.reconheceHoras 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.reconheceHoras 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.reconheceHoras 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Reconhece horas no relógio digital.</b>
+                            </td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="horasDigital"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.horasDigital 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.horasDigital 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.horasDigital 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.horasDigital 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Reconhece horas exatas em relógio com
+                                ponteiros.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="horasExatasPonteiros"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.horasExatasPonteiros 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.horasExatasPonteiros 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.horasExatasPonteiros 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.horasExatasPonteiros 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Reconhece horas não exatas (meia hora ou
+                                sente minutos, por exemplo) em relógio digital.</b>
+                            </td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="horasExatasDigital"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.horasExatasDigital 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.horasExatasDigital 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.horasExatasDigital 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.horasExatasDigital 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Reconhece horas não exatas em relógio com
+                                ponteiros.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="horasNaoExatasPonteiros"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.horasNaoExatasPonteiros 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.horasNaoExatasPonteiros 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.horasNaoExatasPonteiros 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.horasNaoExatasPonteiros 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Associa horários aos acontecimentos.</b>
+                            </td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="horarioAcontecimentos"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.horarioAcontecimentos 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.horarioAcontecimentos 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.horarioAcontecimentos 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.horarioAcontecimentos 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Reconhece as medidas de tempo (ano, mês,
+                                semana, dia, hora, minuto etc).</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="reconheceMedidas"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.reconheceMedidas 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.reconheceMedidas 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.reconheceMedidas 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.reconheceMedidas 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Compreende conceitos matemáticos, como
+                                dobro e metade.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="conceitosMatematicos"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.conceitosMatematicos 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.conceitosMatematicos 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.conceitosMatematicos 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.conceitosMatematicos 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Resolve operações matemáticas (adição ou
+                                subtração) com apoio de material concreto.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="resolveOperacoes"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.resolveOperacoes 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.resolveOperacoes 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.resolveOperacoes 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.resolveOperacoes 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Demonstra curiosidade. Pergunta sobre o
+                                funcionamento das coisas.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="demonstraCuriosidade"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.demonstraCuriosidade 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.demonstraCuriosidade 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.demonstraCuriosidade 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.demonstraCuriosidade 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Gosta de jogos envolvendo lógica, como
+                                quebra-cabeças e charadas, entre outros.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="gostaJogas"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                           <option></option>
+                                            <option value="rs" {% ifequal PEI.gostaJogas 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.gostaJogas 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.gostaJogas 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.gostaJogas 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Organiza figuras em ordem lógica.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="organizaOrdemLogica"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.organizaOrdemLogica 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.organizaOrdemLogica 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.organizaOrdemLogica 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.organizaOrdemLogica 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <br>
+                <br>
+                <h4 class="text-uppercase text-left">Informática na Escola</h4>
+                <br>
+
+                <div class="form-group">
+                    <table class="table table-bordered border-dark text-dark tabelaesticada ">
+                        <thead>
+                        <tr class="text-uppercase" style="background-color: black; color: #fff;">
+                            <th class="border-dark text-center"><b>Questão</b></th>
+                            <th class="w-220px text-center border-dark"><b>Ação</b></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Usa o computador com relativa autonomia
+                                (liga, desliga, acessa arquivos e programas).</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline ">
+
+                                    <div class="form-group mb-0 pr-0 ">
+                                        <select class="text-center form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="usaPcAutonomia"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.usaPcAutonomia 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.usaPcAutonomia 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.usaPcAutonomia 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.usaPcAutonomia 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Sabe usar o computador e a internet quando
+                                disponibilizados na escola.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="sabeUsarPcNet"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="rs" {% ifequal PEI.sabeUsarPcNet 'rs' %}
+                                                    selected {% endifequal %} >REALIZA SEM SUPORTE</option>
+                                            <option value="rc" {% ifequal PEI.sabeUsarPcNet 'rc' %}
+                                                    selected {% endifequal %}>REALIZA COM SUPORTE</option>
+                                            <option value="nr" {% ifequal PEI.sabeUsarPcNet 'nr' %}
+                                                    selected {% endifequal %}>NÃO REALIZA</option>
+                                            <option value="nf" {% ifequal PEI.sabeUsarPcNet 'nf' %}
+                                                    selected {% endifequal %}>NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <footer class="card-footer text-right no-print">
+                    <a onclick="window.history.back();" class="btn btn-secondary" type="reset">Voltar</a>
+                    <button class="btn btn-primary" type="submit">Salvar</button>
+                </footer>
+
+            </form>
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+
+        function idade(ano_aniversario, mes_aniversario, dia_aniversario) {
+            var d = new Date,
+                ano_atual = d.getFullYear(),
+                mes_atual = d.getMonth() + 1,
+                dia_atual = d.getDate(),
+
+                ano_aniversario = +ano_aniversario,
+                mes_aniversario = +mes_aniversario,
+                dia_aniversario = +dia_aniversario,
+
+                quantos_anos = ano_atual - ano_aniversario;
+
+            if (mes_atual < mes_aniversario || mes_atual == mes_aniversario && dia_atual < dia_aniversario) {
+                quantos_anos--;
+            }
+
+            var idade = quantos_anos < 0 ? 0 : quantos_anos;
+            document.getElementById('idade').value = idade;
+        }
+
+        window.onload = function () {
+            idade({{ PEI.usuario.data_nacimento.year }}, {{ PEI.usuario.data_nacimento.month }}, {{ PEI.usuario.data_nacimento.day }});
+        };
+
+    </script>
+
+{% endblock %}
+

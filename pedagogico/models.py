@@ -27,11 +27,63 @@ class Turma(models.Model):
     turno = models.BooleanField()
     ususario = models.ManyToManyField(Usuario, blank=True)
     professor = models.ForeignKey(Funcionario,on_delete=models.PROTECT)
-    aula = models.ManyToManyField(Aula)
+    aula = models.ManyToManyField(Aula, blank=True)
 
     def __str__(self):
         return "Turma: "+self.nome
 
+class PEI(models.Model):
+    turma = models.ForeignKey(Turma, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT)
+
+    relataAcontecimentos = models.CharField(max_length=2, blank=True)
+    lembraRecados = models.CharField(max_length=2, blank=True)
+    comunicacaoAlternativa = models.CharField(max_length=2, blank=True)
+    linguagemOral = models.CharField(max_length=2, blank=True)
+
+
+    letrasNumeros = models.CharField(max_length=2, blank=True)
+    reconheceDiferenca = models.CharField(max_length=2, blank=True)
+    domina = models.CharField(max_length=2, blank=True)
+    ouve = models.CharField(max_length=2, blank=True)
+    compreende = models.CharField(max_length=2, blank=True)
+    participa = models.CharField(max_length=2, blank=True)
+    vocabulario = models.CharField(max_length=2, blank=True)
+    soletrar = models.CharField(max_length=2, blank=True)
+    palavrasSimples = models.CharField(max_length=2, blank=True)
+    assinar = models.CharField(max_length=2, blank=True)
+    escreveEnd = models.CharField(max_length=2, blank=True)
+    ecrevePequnosTextos = models.CharField(max_length=2, blank=True)
+    ditado = models.CharField(max_length=2, blank=True)
+    leTextos = models.CharField(max_length=2, blank=True)
+    instrucoes = models.CharField(max_length=2, blank=True)
+    habilidades = models.CharField(max_length=2, blank=True)
+
+    relacionaQuantidade = models.CharField(max_length=2, blank=True)
+    problemasSimples = models.CharField(max_length=2, blank=True)
+    reconheceValores = models.CharField(max_length=2, blank=True)
+    identificaValor = models.CharField(max_length=2, blank=True)
+    diferenciaNotasM = models.CharField(max_length=2, blank=True)
+    agrupardinheiro = models.CharField(max_length=2, blank=True)
+    daTroco = models.CharField(max_length=2, blank=True)
+    possuiConceitos = models.CharField(max_length=2, blank=True)
+    relacaoNumeroDia = models.CharField(max_length=2, blank=True)
+    identificaDia = models.CharField(max_length=2, blank=True)
+    reconheceHoras = models.CharField(max_length=2, blank=True)
+    horasDigital = models.CharField(max_length=2, blank=True)
+    horasExatasPonteiros = models.CharField(max_length=2, blank=True)
+    horasExatasDigital = models.CharField(max_length=2, blank=True)
+    horasNaoExatasPonteiros = models.CharField(max_length=2, blank=True)
+    horarioAcontecimentos = models.CharField(max_length=2, blank=True)
+    reconheceMedidas = models.CharField(max_length=2, blank=True)
+    conceitosMatematicos = models.CharField(max_length=2, blank=True)
+    resolveOperacoes = models.CharField(max_length=2, blank=True)
+    demonstraCuriosidade = models.CharField(max_length=2, blank=True)
+    gostaJogas = models.CharField(max_length=2, blank=True)
+    organizaOrdemLogica = models.CharField(max_length=2, blank=True)
+
+    usaPcAutonomia = models.CharField(max_length=2, blank=True)
+    sabeUsarPcNet = models.CharField(max_length=2, blank=True)
 
 
 class TriagemPedagogica(models.Model):

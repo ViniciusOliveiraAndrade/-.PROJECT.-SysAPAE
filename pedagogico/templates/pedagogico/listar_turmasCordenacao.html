@@ -57,19 +57,22 @@
                                         <th class="w-50px text-center no-print">
                                             <div align="center">
                                                 <a data-provide="tooltip" data-tooltip-color="primary"
-                                                   title="Visualizar Turma"
+                                                   title="Aulas"
                                                    style="font-size: 25px;" class="fa fa-folder-open-o"
                                                    aria-hidden="true"
                                                    href="{% url 'pedagogico:ver_turma' turma.id %}"></a>
                                             </div>
                                         </th>
-                                                                                <th class="w-50px text-center no-print">
-                                                                                    <div align="center">
-                                                                                        <a data-provide="tooltip" data-tooltip-color="primary" title="Editar"
-                                                                                           style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true"
-                                                                                           href="{% url 'pedagogico:editar_turma' turma.id %}"></a>
-                                                                                    </div>
-                                                                                </th>
+
+{#                                       #}
+
+                                        <th class="w-50px text-center no-print">
+                                            <div align="center">
+                                                <a data-provide="tooltip" data-tooltip-color="primary" title="Editar"
+                                                   style="font-size: 25px;" class="fa fa-pencil" aria-hidden="true"
+                                                   href="{% url 'pedagogico:editar_turma' turma.id %}"></a>
+                                            </div>
+                                        </th>
                                     </tr>
                                 {% endfor %}
 

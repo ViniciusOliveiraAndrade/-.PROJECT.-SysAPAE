@@ -8,33 +8,11 @@
 
 {% block menu_lateral %}
 
-<ul class="menu">
+    <ul class="menu">
 
-            {% ifequal request.user.funcionario.cargo.nome "Coordenador(a) pedagógica" %}
+        {% ifequal request.user.funcionario.cargo.nome "Coordenador(a) pedagógica" %}
 
             <li class="menu-category">Coordenação</li>
-            <li class="menu-item">
-                <a class="menu-link" href="#">
-                    <span class="icon fa fa-group"></span>
-                    <span class="title">Triagens</span>
-                    <span class="arrow"></span>
-                </a>
-
-                <ul class="menu-submenu">
-                    <li class="menu-item">
-                        <a class="menu-link" href="{% url 'pedagogico:listar_triagemSocial' %}">
-                            <span class="dot"></span>
-                            <span class="title">Não Realizadas</span>
-                        </a>
-                    </li>
-
-                    <li class="menu-item">
-                        <a class="menu-link" href="{% url 'pedagogico:listagem_pedagogica' %}">
-                            <span class="dot"></span>
-                            <span class="title">Realizadas</span>
-                        </a>
-                    </li>
-                </ul>
 
             <li class="menu-item">
                 <a class="menu-link" href="#">
@@ -52,8 +30,33 @@
                     </li>
                 </ul>
             </li>
-            {% else %}
-{#    ------------------------------------------------------------------------------------------------#}
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <span class="icon fa fa-group"></span>
+                    <span class="title">Triagens</span>
+                    <span class="arrow"></span>
+                </a>
+
+                <ul class="menu-submenu">
+                    <li class="menu-item">
+                        <a class="menu-link" href="{% url 'pedagogico:listar_triagemSocial' %}">
+                            <span class="dot"></span>
+                            <span class="title">Listar</span>
+                        </a>
+                    </li>
+
+{#                    <li class="menu-item">#}
+{#                        <a class="menu-link" href="{% url 'pedagogico:listagem_pedagogica' %}">#}
+{#                            <span class="dot"></span>#}
+{#                            <span class="title">Realizadas</span>#}
+{#                        </a>#}
+{#                    </li>#}
+                </ul>
+            </li>
+
+
+        {% else %}
+            {#    ------------------------------------------------------------------------------------------------#}
 
             <li class="menu-category">Educador(a)</li>
             <li class="menu-item">
@@ -71,8 +74,8 @@
                     </li>
                 </ul>
             </li>
-            {% endifequal %}
-        </ul>
+        {% endifequal %}
+    </ul>
 
 {% endblock %}
 

@@ -1,0 +1,1053 @@
+{% extends 'pedagogico/layout/layout_base.html' %}
+
+{% block main %}
+    <div class="card">
+
+        <nav class="no-print" aria-label="breadcrumb">
+            <ol class="breadcrumb m-15">
+                <li class="breadcrumb-item"><a href="{% url 'pedagogico:index' %}">Home</a></li>
+                <li class="breadcrumb-item"><a a onclick="window.history.back();">Minhas Turmas</a></li>
+                <li class="breadcrumb-item"><a a onclick="window.history.back();">Detalhes - PEI</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Edição PEI</li>
+            </ol>
+        </nav>
+
+        <br>
+        <h1 class="font-dosis fw-500 text-center"> Edição do Planejamento Educacional Individualizado - PEI</h1>
+        <br>
+
+        <div class="card-body card-round">
+
+            <form id="formulario" class="card-body"
+                  action="#"
+                  method="post">
+                {% csrf_token %}
+
+                <div class="row">
+
+                    <div class="col-lg-10 col-md-6 col-sm-12 text-left">
+                        <div class="form-group">
+                            <label>Usuário</label>
+                            <input type="hidden" value="{{ Triagem.usuario.id }}" name="usuario"></input>
+                            <input style="color:#000;" type="text"
+                                   class="form-control visivel border border-dark text-dark rounded"
+                                   value="{{ Usuario.nome }}" disabled="disabled">
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-2 col-md-6 col-sm-12 text-left">
+                        <div class="form-group">
+                            <label>Idade</label>
+                            <input style="color:#000;" type="text"
+                                   class="form-control visivel border border-dark text-dark rounded"
+                                   value="{{ Usuario.data_nacimento.year }}" disabled="disabled">
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <br>
+                <h4 class="text-uppercase text-left">Comunicação Oral</h4>
+                <br>
+
+                <div class="form-group">
+                    <table class="table table-bordered border-dark text-dark tabelaesticada ">
+                        <thead>
+                        <tr class="text-uppercase" style="background-color: black; color: #fff;">
+                            <th class="border-dark text-center"><b>Questão</b></th>
+                            <th class="w-220px text-center border-dark"><b>Ação</b></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Relata acontecimentos simples de modo
+                                compreensível.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline ">
+
+                                    <div class="form-group mb-0 pr-0 ">
+                                        <select class="text-center form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="relataAcontecimentos"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Lembra-se de dar recados após,
+                                aproximadamente, dez minutos.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="lembraRecados"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Comunica-se com outras pessoas usando um
+                                tipo de linguagem (gestos, comunicação alternativa) que não a oral.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="comunicacaoAlternativa"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Utiliza a linguagem oral para se
+                                comunicar.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="linguagemOral"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <br>
+                <br>
+                <h4 class="text-uppercase text-left">Leitura e Escrita</h4>
+                <br>
+
+                <div class="form-group">
+                    <table class="table table-bordered border-dark text-dark tabelaesticada ">
+                        <thead>
+                        <tr class="text-uppercase" style="background-color: black; color: #fff;">
+                            <th class=" border-dark text-center"><b>Questão</b></th>
+                            <th class="w-220px text-center border-dark"><b>Ação</b></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Reconhece as letras do alfabeto.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline ">
+
+                                    <div class="form-group mb-0 pr-0 ">
+                                        <select class="text-center form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="letrasNumeros"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Reconhece a diferença entre leras e
+                                números.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="reconheceDiferenca"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Domina silabas simples.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="domina"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Ouve histórias com atenção.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="ouve"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Consegue compreender e reproduzir
+                                histórias.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline ">
+
+                                    <div class="form-group mb-0 pr-0 ">
+                                        <select class="text-center form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="compreende"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Participa de jogos, atendendo as
+                                regras.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="participa"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Utiliza vocabulário adequado para a faixa
+                                etária.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="vocabulario"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Sabe soletrar.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="soletrar"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Consegue escrever palavras simples.</b>
+                            </td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="palavrasSimples"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>É capaz de assinar o nome.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="assinar"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Escreve endereços (com o objetivo de saber
+                                onde chegar).</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="escreveEnd"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Escreve pequenos textos e/ou bilhetes.</b>
+                            </td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="ecrevePequnosTextos"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Escreve sob ditado.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="ditado"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Lê com compreensão pequenos textos.</b>
+                            </td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="le"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Lê e segue instruções impressas, por
+                                exemplo em transportes públicos.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="instrucoes"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Utiliza habilidades de leitura para obter
+                                informações, por exemplo, em jornais ou revistas.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="habilidades"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <br>
+                <br>
+                <h4 class="text-uppercase text-left">Raciocínio Lógico-Matemático</h4>
+                <br>
+
+                <div class="form-group">
+                    <table class="table table-bordered border-dark text-dark tabelaesticada ">
+                        <thead>
+                        <tr class="text-uppercase" style="background-color: black; color: #fff;">
+                            <th class="border-dark text-center"><b>Questão</b></th>
+                            <th class="w-220px text-center border-dark"><b>Ação</b></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Relaciona quantidade ao número.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline ">
+
+                                    <div class="form-group mb-0 pr-0 ">
+                                        <select class="text-center form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="relacionaQuantidade"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Soluciona problemas simples.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="problemasSimples"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Reconhece os valores dos preços dos
+                                produtos.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="reconheceValores"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Identifica o valor do dinheiro.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="identificaValor"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Diferencia notas e moedas.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline ">
+
+                                    <div class="form-group mb-0 pr-0 ">
+                                        <select class="text-center form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="diferenciaNotasM"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Sabe agrupar dinheiro para formar
+                                valores.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="agrupardinheiro"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Dá troco, quando necessário, nas
+                                atividades realizadas em sala de aula.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="daTroco"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Possui conceitos como cor, tamanho, formas
+                                geométricas, posição direita e esquerda, antecessor e sucessor.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="possuiConceitos"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Reconhece a relação entre número e dias no
+                                mês (localização temporal).</b>
+                            </td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="relacaoNumeroDia"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Identifica dias da semana.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="identificaDia"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Reconhece horas.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="reconheceHoras"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Reconhece horas no relógio digital.</b>
+                            </td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="horasDigital"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Reconhece horas exatas em relógio com
+                                ponteiros.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="horasExatasPonteiros"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Reconhece horas não exatas (meia hora ou
+                                sente minutos, por exemplo) em relógio digital.</b>
+                            </td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="horasExatasDigital"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Reconhece horas não exatas em relógio com
+                                ponteiros.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="horasNaoExatasPonteiros"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Associa horários aos acontecimentos.</b>
+                            </td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="horarioAcontecimentos"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Reconhece as medidas de tempo (ano, mês,
+                                semana, dia, hora, minuto etc).</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="reconheceMedidas"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Compreende conceitos matemáticos, como
+                                dobro e metade.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="conceitosMatematicos"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Resolve operações matemáticas (adição ou
+                                subtração) com apoio de material concreto.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="resolveOperacoes"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Demonstra curiosidade. Pergunta sobre o
+                                funcionamento das coisas.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="demonstraCuriosidade"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Gosta de jogos envolvendo lógica, como
+                                quebra-cabeças e charadas, entre outros.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="gostaJogas"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Organiza figuras em ordem lógica.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="organizaOrdemLogica"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <br>
+                <br>
+                <h4 class="text-uppercase text-left">Informática na Escola</h4>
+                <br>
+
+                <div class="form-group">
+                    <table class="table table-bordered border-dark text-dark tabelaesticada ">
+                        <thead>
+                        <tr class="text-uppercase" style="background-color: black; color: #fff;">
+                            <th class="border-dark text-center"><b>Questão</b></th>
+                            <th class="w-220px text-center border-dark"><b>Ação</b></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Usa o computador com relativa autonomia
+                                (liga, desliga, acessa arquivos e programas).</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline ">
+
+                                    <div class="form-group mb-0 pr-0 ">
+                                        <select class="text-center form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="usaPcAutonomia"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" class="border-dark text-dark"><b>Sabe usar o computador e a internet quando
+                                disponibilizados na escola.</b></td>
+                            <td class="border-dark text-dark">
+                                <div class="form-check form-check-inline">
+
+                                    <div class="form-group mb-0">
+                                        <select class="form-control visivel border border-dark text-dark rounded"
+                                                id="select" name="sabeUsarPcNet"
+                                                style="color: #000; font-size: 15px; border-color: #444;">
+                                            <option></option>
+                                            <option value="s">REALIZA SEM SUPORTE</option>
+                                            <option value="n">REALIZA COM SUPORTE</option>
+                                            <option value="a">NÃO REALIZA</option>
+                                            <option value="a">NÃO FOI OBSERVADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </form>
+        </div>
+        <footer class="card-footer text-right no-print">
+            <a onclick="window.history.back();" class="btn btn-secondary" type="reset">Voltar</a>
+            <button class="btn btn-primary" type="submit">Salvar</button>
+        </footer>
+    </div>
+
+{% endblock %}

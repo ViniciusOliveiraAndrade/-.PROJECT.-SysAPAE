@@ -25,9 +25,11 @@
                                data-provide="datatables">
                             <thead>
                             <tr class="text-uppercase" style="background-color: black; color: #fff;">
+                                <th class="border-dark w-50px"><b>#</b></th>
                                 <th class="border-dark"><b>Turma</b></th>
                                 <th class="border-dark"><b>Turno</b></th>
-                                <th class="w-50px text-center no-print border-dark text-center"><b>Ações</b></th>
+                                <th class="w-50px text-center no-print border-dark text-center" colspan="2"><b>Ações</b>
+                                </th>
                             </tr>
                             </thead>
 
@@ -36,14 +38,24 @@
                             {% for turma in turmas %}
 
                                 <tr>
+                                    <td class="border-dark text-dark text-center">{{ forloop.counter }}</td>
                                     <td class="border-dark text-dark">{{ turma.nome }}</td>
-                                    <td class="border-dark text-dark">{% if turma.turno %} Manhã {% else %} Tarde {% endif %}</td>
+                                    <td class="border-dark text-dark">{% if turma.turno %} Manhã {% else %}
+                                        Tarde {% endif %}</td>
 
-                                    <th class="w-50px text-center border-dark text-dark">
+                                    <th class="w-50px text-center  text-dark">
                                         <div align="center">
                                             <a data-provide="tooltip" data-tooltip-color="primary" title="Aulas"
                                                style="font-size: 25px;" class="fa fa-folder-open" aria-hidden="true"
                                                href="{% url 'pedagogico:listar_aulas' turma.id %}"></a>
+                                        </div>
+                                    </th>
+
+                                    <th class="w-50px text-center  text-dark">
+                                        <div align="center">
+                                            <a data-provide="tooltip" data-tooltip-color="primary" title="Lista de Alunos"
+                                               style="font-size: 25px;" class="fa fa-list-ol" aria-hidden="true"
+                                               href="{% url 'pedagogico:lista_alunos' turma.id  %}"></a>
                                         </div>
                                     </th>
 

@@ -1,0 +1,183 @@
+{% extends "pedagogico/layout/layout_base.html" %}
+{% block main %}
+    <div class="card">
+
+        <nav class="no-print" aria-label="breadcrumb">
+            <ol class="breadcrumb m-15 ">
+                <li class="breadcrumb-item"><a href="{% url 'pedagogico:index' %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'pedagogico:minhas_turmas' %}">Minhas Turmas</a></li>
+                <li class="breadcrumb-item"><a href="#">Minhas Aulas</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Frequência</li>
+            </ol>
+        </nav>
+
+        <br>
+        <h1 class="font-dosis fw-500 text-center">Frequência | {{ aula.turma_set.first.nome }}</h1>
+
+
+        <div class="row ">
+
+            <div class="col-lg-4 col-md-6 col-sm-5">
+                <div class="card-body card-round ">
+
+                    <div class="form-group">
+                        <label>Data</label>
+                        <input disabled name="dataFrequencia" class="form-control" type="date"
+                               id="da">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-5">
+                <div class="card-body card-round ">
+
+                    <div class="form-group">
+                        <label>Aula</label>
+                        <input disabled name="turma" class="form-control" type="text"
+                               id="turma" value="{{ aula.titulo }}">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-5">
+                <div class="card-body card-round ">
+
+                    <div class="form-group">
+                        <label>Educador(a)</label>
+                        <input disabled name="turma" class="form-control" type="text"
+                               id="turma" value="{{ aula.turma_set.first.professor }}">
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-lg-12 col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="card-body card-round tabelaSemflow flowww">
+                        <table class="table table-striped table-bordered table-responsive bs-select print border-dark text-dark tabelaesticada visivel border border-dark text-dark rounded"
+                               cellspacing="0"
+                               data-provide="datatables">
+                            <thead>
+                            <tr class="text-uppercase" style="background-color: black; color: #fff;">
+                                <th class="border-dark text-center w-30px"><b>Nº</b></th>
+                                <th class="border-dark"><b>Nome</b></th>
+                                <th class="border-dark w-50px text-center">CID</th>
+                                <th class="w-200px border-dark text-center"><b>Desempenho</b></th>
+                                <th class="w-150px text-center border-dark"><b>Data de Nascimento</b></th>
+                                <th class="w-90px text-center border-dark text-center"><b>Falta</b>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+                            {% for f in aula.frequencia.all %}
+                                <tr>
+                                    <td align="left"
+                                        class="border-dark text-dark text-center"> {{ forloop.counter }}</td>
+                                    <td align="left" class="border-dark text-dark">{{ f.usuario.nome }}</td>
+                                    <td class="w-50px text-center border-dark text-dark" title="{{ f.usuario.cid.descricao }}">{{ f.usuario.cid.codigo }}</td>
+                                    <td id="c{{ f.id }}" align="left" class="border-dark text-dark text-center">
+
+                                        {% if f.desempenho == "" %}
+                                            <a class="btn btn-primary" onclick="addDesempenho(this.id)" href="#"
+                                               id="{{ f.id }}"> Adicionar
+                                            </a>
+                                        {% else %}
+                                            {{ f.desempenho }}
+                                        {% endif %}
+                                         </button>
+                                    </td>
+                                    <td align="left"
+                                        class="border-dark text-dark text-center">{{ f.usuario.data_nacimento }}</td>
+                                    </td>
+
+                                    <td align="rigth" class="border-dark text-dark text-center">
+                                        <nav class="nav no-gutters gap-2 fs-16 border-dark text-dark">
+                                            {#                                            <div class="form-group">#}
+                                            <label class="form-check-label form-check-inline border-dark text-dark"><label
+                                                    class="custom-control custom-control-lg custom-checkbox">
+                                                <input {% if f.falta %} checked {% endif %} type="checkbox"
+                                                                        class="custom-control-input"
+                                                                        onclick="addFalta(this.name)" name="{{ f.id }}"
+                                                                        id="ckb{{ f.id }}"
+                                                                        style="background-color: #aeaeae">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description">Falta</span>
+                                            </label>
+
+                                            </label>
+                                            {#                                            </div>#}
+                                        </nav>
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <footer class="card-footer text-right no-print">
+            <a onclick="window.history.back();" class="btn btn-secondary" type="reset">Voltar</a>
+{#                        <button class="btn btn-primary" type="reset">Registrar</button>#}
+        </footer>
+        {#        </form>#}
+    </div>
+
+    <script type="text/javascript">
+        document.getElementById('da').value = "{{aula.data.year}}-{% if aula.data.month < 10 %}0{{aula.data.month}}{% else %}{{aula.data.month}}{% endif %}-{% if aula.data.day < 10 %}0{{aula.data.day}}{% else %}{{aula.data.day}}{% endif %}";
+
+        function addDesempenho(id) {
+            var codigo = prompt("Digite o desempenho do usuário");
+            if (codigo == null || codigo == "") {
+            } else {
+
+                $.ajax({
+                    url: '{% url "pedagogico:desempenho" %}',
+                    data: {'d': codigo, 'id': id},
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.certo) {
+                            var c = document.getElementById("c" + id);
+                            c.style.backgroundColor = "#0f0";
+                        } else {
+                            alert("Não foi possivel cadastrar o desempeno do usuário");
+                        }
+                    }
+                });
+
+            }
+        }
+
+
+        function addFalta(id) {
+            var ckb = document.getElementById('ckb' + id).checked
+
+            $.ajax({
+                url: '{% url "pedagogico:falta" %}',
+                data: {'ckb': ckb, 'id': id},
+                dataType: 'json',
+                success: function (data) {
+                    if (data.certo) {
+                    } else {
+                    }
+                }
+            });
+
+        }
+
+    </script>
+
+{% endblock %}

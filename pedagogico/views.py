@@ -22,6 +22,14 @@ def index(request):
 @login_required
 def perfil(request):
     if request.method == "POST":
+        if request.POST['verificaimagem'] != "Sem Imagem" and request.POST[
+            'verificaimagem'] != request.user.funcionario.imagem_url:
+            try:
+                request.user.funcionario.imagem.delete(save=True)
+                request.user.funcionario.imagem = request.FILES['imagem']
+                request.user.funcionario.save()
+            except Exception as e:
+                pass
         pnome, unome = getNomeFuncionario(request.POST['nome'])
         request.user.first_name = pnome
         request.user.last_name = unome
@@ -37,21 +45,19 @@ def criar_turma(request):
 
 @login_required
 def cadastrar_aula(request, id_turma):
-    # usuarioTurma = UsuarioTurma.objects.all()
     return render(request, 'pedagogico/cadastrar_aula.html', {"turma": id_turma})
 
 @login_required
 def frequencia(request, id_aula):
-    # usuarios = Usuario.objects.all()
-
     aula = Aula.objects.get(pk=id_aula)
-    # turma = aula.turma_set.all()[0]
 
-    # aulas = Aula.objects.all()
+    return render(request, 'pedagogico/frequencia_AlunosEducador.html', {"aula": aula})
 
-    # triagens = Triagem.objects.all()
+@login_required
+def frequencia_Coordenacao(request, id_aula):
+    aula = Aula.objects.get(pk=id_aula)
 
-    return render(request, 'pedagogico/frequencia.html', {"aula": aula})
+    return render(request, 'pedagogico/frequencia_AlunosCoord.html', {"aula": aula})
 
 @login_required
 def triagem_pedagogica(request, id_usuario):
@@ -76,17 +82,20 @@ def listar_triagemSocial(request):
     pedagogica_t = TriagemPedagogica.objects.all().order_by('usuario__nome')
 
     return render(request, 'pedagogico/listar_triagemSocial.html',
-                  {"triagemSocial": triagemSocial, "triagemPedagogica": pedagogica_t})
+                  {"triagemSocial": triagemSocial, "listaPedagogica": pedagogica_t})
+
 
 @login_required
 def listar_turmas(request):
     listaTurmas = Turma.objects.all().order_by('nome')
     return render(request, 'pedagogico/listar_turmasCordenacao.html', {"listaTurmas": listaTurmas})
 
+
 @login_required
 def listar_aulas(request, id_turma):
     aulas = Turma.objects.get(pk=id_turma).aula.all()
     return render(request, 'pedagogico/listar_aulas.html', {"aulas": aulas, 'id_turma': id_turma})
+
 
 @login_required
 def listas_turmasProf(request):
@@ -94,11 +103,13 @@ def listas_turmasProf(request):
 
     return render(request, "pedagogico/listar_turmasProf.html", {"turmas": turmas})
 
+
 @login_required
 def detalhes_aula(request, id_aula):
     id = Aula.objects.get(pk=id_aula)
 
     return render(request, "pedagogico/aula_detalhes.html", {"idAula": id})
+
 
 @login_required
 def lista_Tpedagogica(request):
@@ -107,13 +118,13 @@ def lista_Tpedagogica(request):
 
     return render(request, 'pedagogico/listagem_pedagogica.html', {"listaPedagogica": pedagogica_t})
 
+
 @login_required
 def ver_turmaCoord(request, id_turma):
     turma = Turma.objects.get(pk=id_turma)
 
-    listaAlunos = turma.ususario.all().order_by('cid__usuario__nome')
+    return render(request, 'pedagogico/aulas_turmaCoordenacao.html', {"Turma": turma})
 
-    return render(request, 'pedagogico/ver_turmaCoordenacao.html', {"listaAlunos": listaAlunos, "Turma": turma})
 
 @login_required
 def editar_triagem(request, id_triagem):
@@ -122,11 +133,41 @@ def editar_triagem(request, id_triagem):
 
     return render(request, 'pedagogico/editar_triagem.html', {"Triagem": triagem, "Turmas": turma})
 
+
 @login_required
 def detalhes_triagem(request, id_triagem):
     triagem = TriagemPedagogica.objects.get(pk=id_triagem)
 
     return render(request, 'pedagogico/triagem_detalhes.html', {"Triagem": triagem})
+
+
+@login_required
+def lista_alunos(request, id_turma):
+    turma = Turma.objects.get(pk=id_turma)
+
+    return render(request, 'pedagogico/lista_alunosTurma.html', {"Turmas": turma})
+
+
+@login_required
+def realizar_pei(request, id_usuario):
+    turma = Turma.objects.get(ususario__id=id_usuario)
+    pei = PEI.objects.get(usuario__id=id_usuario, turma=turma)
+
+    return render(request, 'pedagogico/realizar_pei.html', {"PEI": pei})
+
+
+@login_required
+def pei_detalhes(request, id_usuario):
+    turma = Turma.objects.get(ususario__id=id_usuario)
+    pei = PEI.objects.get(usuario__id=id_usuario, turma=turma)
+
+    return render(request, 'pedagogico/pei_detalhes.html', {"PEI": pei})
+
+
+@login_required
+def editar_pei(request):
+    return render(request, 'pedagogico/editar_pei.html')
+
 
 # --------------------------------------- | METÒDOS | ---------------------------------------
 
@@ -143,6 +184,7 @@ def cadastrar_turmas(request):
 
     return HttpResponseRedirect(reverse('pedagogico:listar_turmas'))
 
+
 def cadastrar_aulas(request):
     data = request.POST['dataAula']
     data = data.split('-')
@@ -157,13 +199,8 @@ def cadastrar_aulas(request):
     aula = Aula.objects.create(data=dataAula, situacao=situacao, conteudo=request.POST["conteudo"],
                                titulo=request.POST["tituloAula"])
 
-
-
-
-
     turma = Turma.objects.get(pk=request.POST['id_turma'])
     turma.aula.add(aula)
-
 
     usuarios = turma.ususario.all()
     for u in usuarios:
@@ -176,6 +213,7 @@ def cadastrar_aulas(request):
     turma.save()
 
     return HttpResponseRedirect(reverse('pedagogico:listar_aulas', args=(turma.id,)))
+
 
 def editar_aulas(request, id_aula):
     aula = get_object_or_404(Aula, pk=id_aula)
@@ -196,6 +234,7 @@ def editar_aulas(request, id_aula):
 
         return HttpResponseRedirect(reverse('pedagogico:listar_aulas', args=(turma.id,)))
     return render(request, "pedagogico/conclusao_aula.html", {"aula": aula})
+
 
 def editar_turma(request, id_turma):  # TELA e MEtÓDO tudo ao mesmo tempo
     turma = get_object_or_404(Turma, pk=id_turma)
@@ -219,11 +258,13 @@ def editar_turma(request, id_turma):  # TELA e MEtÓDO tudo ao mesmo tempo
         return HttpResponseRedirect(reverse('pedagogico:listar_turmas'))
     return render(request, "pedagogico/editar_turmaCoordenacao.html", {"turma": turma, "professores": professores})
 
+
 def deletar_turma(request, id_turma):
     turma = get_object_or_404(Turma, pk=id_turma)
     turma.delete()
     listaTurmas = Turma.objects.all()
     return HttpResponseRedirect(reverse('pedagogico:listar_turmas'))
+
 
 def deletar_aula(request, id_aula):
     aula = get_object_or_404(Aula, pk=id_aula)
@@ -234,6 +275,7 @@ def deletar_aula(request, id_aula):
     aula.delete()
 
     return HttpResponseRedirect(reverse('pedagogico:listar_aulas', args=(turma.id,)))
+
 
 def cadastrarTriagem(request):
     if request.POST['urinario'] == "sim":
@@ -408,7 +450,10 @@ def cadastrarTriagem(request):
     turma = Turma.objects.get(nome=nomeTurma)
     turma.ususario.add(usuarioT)
 
-    return HttpResponseRedirect(reverse('pedagogico:index'))
+    PEI.objects.create(usuario=usuarioT, turma=turma)
+
+    return HttpResponseRedirect(reverse('pedagogico:listar_triagemSocial'))
+
 
 def editarTriagemM(request, id_triagem):
     triagem = TriagemPedagogica.objects.get(pk=id_triagem)
@@ -544,6 +589,7 @@ def editarTriagemM(request, id_triagem):
 
     return HttpResponseRedirect(reverse('pedagogico:listagem_pedagogica'))
 
+
 def desempenho(request):
     d = request.GET.get('d', None)
     id = request.GET.get('id', None)
@@ -558,6 +604,7 @@ def desempenho(request):
 
     except Exception as e:
         return JsonResponse(data)
+
 
 def falta(request):
     if request.GET.get('ckb', None) == "true":
@@ -576,3 +623,111 @@ def falta(request):
 
     except Exception as e:
         return JsonResponse(data)
+
+
+def registrar_pei(request):
+    pei = PEI.objects.get(pk=request.POST['pei'])
+    # Comunicação Oral
+
+    relataAcontecimentos = request.POST['relataAcontecimentos']
+    lembraRecados = request.POST['lembraRecados']
+    comunicacaoAlternativa = request.POST['comunicacaoAlternativa']
+    linguagemOral = request.POST['linguagemOral']
+
+    # Leitura e Escrita
+
+    letrasNumeros = request.POST['letrasNumeros']
+    reconheceDiferenca = request.POST['reconheceDiferenca']
+    domina = request.POST['domina']
+    ouve = request.POST['ouve']
+    compreende = request.POST['compreende']
+    participa = request.POST['participa']
+    vocabulario = request.POST['vocabulario']
+    soletrar = request.POST['soletrar']
+    palavrasSimples = request.POST['palavrasSimples']
+    assinar = request.POST['assinar']
+    escreveEnd = request.POST['escreveEnd']
+    ecrevePequnosTextos = request.POST['ecrevePequnosTextos']
+    ditado = request.POST['ditado']
+    leTextos = request.POST['leTextos']
+    instrucoes = request.POST['instrucoes']
+    habilidades = request.POST['habilidades']
+
+    # Raciocínio Lógico-Matemático
+
+    relacionaQuantidade = request.POST['relacionaQuantidade']
+    problemasSimples = request.POST['problemasSimples']
+    reconheceValores = request.POST['reconheceValores']
+    identificaValor = request.POST['identificaValor']
+    diferenciaNotasM = request.POST['diferenciaNotasM']
+    agrupardinheiro = request.POST['agrupardinheiro']
+    daTroco = request.POST['daTroco']
+    possuiConceitos = request.POST['possuiConceitos']
+    relacaoNumeroDia = request.POST['relacaoNumeroDia']
+    identificaDia = request.POST['identificaDia']
+    reconheceHoras = request.POST['reconheceHoras']
+    horasDigital = request.POST['horasDigital']
+    horasExatasPonteiros = request.POST['horasExatasPonteiros']
+    horasExatasDigital = request.POST['horasExatasDigital']
+    horasNaoExatasPonteiros = request.POST['horasNaoExatasPonteiros']
+    horarioAcontecimentos = request.POST['horarioAcontecimentos']
+    reconheceMedidas = request.POST['reconheceMedidas']
+    conceitosMatematicos = request.POST['conceitosMatematicos']
+    resolveOperacoes = request.POST['resolveOperacoes']
+    demonstraCuriosidade = request.POST['demonstraCuriosidade']
+    gostaJogas = request.POST['gostaJogas']
+    organizaOrdemLogica = request.POST['organizaOrdemLogica']
+
+    # Informática na Escola
+
+    usaPcAutonomia = request.POST['usaPcAutonomia']
+    sabeUsarPcNet = request.POST['sabeUsarPcNet']
+
+    pei.relataAcontecimentos = relataAcontecimentos
+    pei.lembraRecados = lembraRecados
+    pei.comunicacaoAlternativa = comunicacaoAlternativa
+    pei.linguagemOral = linguagemOral
+    pei.letrasNumeros = letrasNumeros
+    pei.reconheceDiferenca = reconheceDiferenca
+    pei.domina = domina
+    pei.ouve = ouve
+    pei.compreende = compreende
+    pei.participa = participa
+    pei.vocabulario = vocabulario
+    pei.soletrar = soletrar
+    pei.palavrasSimples = palavrasSimples
+    pei.assinar = assinar
+    pei.escreveEnd = escreveEnd
+    pei.ecrevePequnosTextos = ecrevePequnosTextos
+    pei.ditado = ditado
+    pei.leTextos = leTextos
+    pei.instrucoes = instrucoes
+    pei.habilidades = habilidades
+    pei.relacionaQuantidade = relacionaQuantidade
+    pei.problemasSimples = problemasSimples
+    pei.reconheceValores = reconheceValores
+    pei.identificaValor = identificaValor
+    pei.diferenciaNotasM = diferenciaNotasM
+    pei.agrupardinheiro = agrupardinheiro
+    pei.daTroco = daTroco
+    pei.possuiConceitos = possuiConceitos
+    pei.relacaoNumeroDia = relacaoNumeroDia
+    pei.identificaDia = identificaDia
+    pei.reconheceHoras = reconheceHoras
+    pei.horasDigital = horasDigital
+    pei.horasExatasPonteiros = horasExatasPonteiros
+    pei.horasExatasDigital = horasExatasDigital
+    pei.horasNaoExatasPonteiros = horasNaoExatasPonteiros
+    pei.horarioAcontecimentos = horarioAcontecimentos
+    pei.reconheceMedidas = reconheceMedidas
+    pei.conceitosMatematicos = conceitosMatematicos
+    pei.resolveOperacoes = resolveOperacoes
+    pei.demonstraCuriosidade = demonstraCuriosidade
+    pei.gostaJogas = gostaJogas
+    pei.organizaOrdemLogica = organizaOrdemLogica
+    pei.usaPcAutonomia = usaPcAutonomia
+    pei.sabeUsarPcNet = sabeUsarPcNet
+
+    pei.save()
+
+    return HttpResponseRedirect(reverse('pedagogico:lista_alunos', args=[pei.turma.id, ]))
