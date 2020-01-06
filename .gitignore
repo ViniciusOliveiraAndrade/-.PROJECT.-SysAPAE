@@ -1,14 +1,10 @@
 .idea/
-.idea/workspace.xml
-./sysapae/local.py
-./sysapae/productions.py
-*.sqlite3
-core/media/
-core/migrations/
-core/__pycache__/
-social/migrations/
-social/__pycache__/
-pedagogico/migrations/
-pedagogico/__pycache__/
-sysapae/__pycache__/
 
+local.py
+
+productions.py
+
+*.sqlite3
+
+migrations/
+__pycache__/
